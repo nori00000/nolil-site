@@ -1,0 +1,10 @@
+# OMC 세션 상태 — 로컬 경로·세션 ID가 들어 있다. 공개 금지.
+.omc/
+
+# macOS
+.DS_Store
+
+# 로컬 실험물
+probe.html
+p2.html
+*.local.js

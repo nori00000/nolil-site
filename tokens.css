@@ -1,0 +1,41 @@
+/* ============================================================
+ * Nature Community Design Tokens v1 (2026-07-12)
+ * Base: urban-jungle-tokens.css v2 (moss/cream/ink 상속)
+ * Signature: campfire ember (amber) — 네이처커뮤니티 전용 포인트
+ *
+ * USAGE
+ *   <link rel="stylesheet" href="tokens.css">
+ *   .foo { color: var(--moss-900); background: var(--ember-100); }
+ *
+ * RULES (urban-jungle v2 계승)
+ *   - 보라 그라데이션 금지, 스톡사진 금지, 실제 공간 사진만
+ *   - 본문 텍스트는 --ink 직접 사용 금지 → --moss-900 or --ink-mid
+ *   - ember는 포인트로만 (버튼·강조·불씨 모티프), 면적 지배 금지
+ * ============================================================ */
+
+:root {
+  /* ---------- moss (base, urban-jungle 상속) ---------- */
+  --moss-900: oklch(0.22 0.06 150);   /* ≈ #16311F */
+  --moss-700: oklch(0.36 0.09 148);   /* ≈ #2B5237 */
+  --moss-500: oklch(0.52 0.13 145);   /* ≈ #457A52 */
+  --moss-300: oklch(0.78 0.06 142);   /* ≈ #A3C4A8 */
+  --moss-100: oklch(0.94 0.025 140);  /* ≈ #E7F0E7 */
+  --moss-50:  oklch(0.975 0.012 138); /* ≈ #F4F8F3 */
+
+  /* ---------- ember (signature: campfire amber) ---------- */
+  --ember-700: oklch(0.55 0.16 45);   /* ≈ #A85A22 · 딥 앰버 */
+  --ember-500: oklch(0.68 0.17 55);   /* ≈ #D97B2E · 메인 시그니처 */
+  --ember-300: oklch(0.82 0.11 65);   /* ≈ #F0B173 · 라이트 */
+  --ember-100: oklch(0.94 0.05 70);   /* ≈ #FBE8D2 · 배경 틴트 */
+
+  /* ---------- surface / ink (urban-jungle 상속) ---------- */
+  --cream:    oklch(0.97 0.013 85);   /* ≈ #F7F3E8 */
+  --paper:    oklch(0.987 0.005 90);  /* ≈ #FCFAF4 */
+  --ink:      oklch(0.20 0.025 145);  /* ≈ #1E2B22 */
+  --ink-mid:  oklch(0.38 0.01 145);
+  --ink-soft: oklch(0.55 0.008 145);
+  --rule:     oklch(0.86 0.008 140);
+
+  /* ---------- type ---------- */
+  --font-sans: "Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+}
