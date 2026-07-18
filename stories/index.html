@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사람 이야기 — 놀일</title>
+<meta name="description" content="놀일에서 만나는 사람, 질문, 농장 기록이 쌓이는 아카이브입니다.">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  :root{
+    --teal:#015e5c;
+    --teal-deep:#014140;
+    --mint:#eef6ef;
+    --yellow:#f5e578;
+    --coral:#d0573b;
+    --text:#173535;
+    --body:#4e5c54;
+    --soft:#6e827a;
+    --line:rgba(59,74,54,.16);
+    --pad:clamp(22px,4vw,48px);
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--text);font-family:var(--font-sans);font-size:17px;line-height:1.8;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible{outline:3px solid rgba(208,87,59,.86);outline-offset:4px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px var(--pad);color:var(--teal)}
+  .brand{display:inline-flex;align-items:center;min-height:44px;font-weight:900;letter-spacing:.12em}
+  .nav a:last-child{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;font-size:14px;font-weight:900;color:var(--coral)}
+  .hero{background:var(--mint);padding:96px 0 82px}
+  .kicker{display:inline-block;color:var(--teal);font-size:12px;font-weight:900;letter-spacing:.24em;margin-bottom:16px}
+  h1{max-width:780px;margin:0 0 18px;font-size:clamp(38px,6vw,68px);line-height:1.08;letter-spacing:0}
+  section{padding:84px 0}
+  h2{margin:0 0 18px;font-size:clamp(30px,4vw,46px);line-height:1.22}
+  p{margin:0 0 16px;color:var(--body)}
+  .hero p{max-width:700px;margin:0;color:var(--body);font-size:19px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .story-card{display:flex;flex-direction:column;min-height:260px;border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden}
+  .story-art{min-height:118px;background:linear-gradient(135deg,#dcefe0,#eef6ef 58%,#f5e578)}
+  .story-body{display:flex;flex:1;flex-direction:column;padding:24px}
+  .story-card small{display:block;color:var(--teal);font-weight:900;letter-spacing:.1em;margin-bottom:8px}
+  .story-card strong{display:block;color:var(--text);font-size:22px;line-height:1.4;margin-bottom:10px}
+  .story-card p{font-size:15px;line-height:1.7}
+  .story-card span{margin-top:auto;color:var(--coral);font-weight:900}
+  .question-band{background:#062c2a;color:#dcefe0}
+  .question-band h2{color:#dcefe0}
+  .question-band p{color:rgba(220,239,224,.8)}
+  .questions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .question{border:1px solid rgba(220,239,224,.18);border-radius:18px;padding:22px}
+  .question strong{display:block;color:#fff;font-size:19px;line-height:1.45}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;background:var(--coral);color:#fff;padding:14px 24px;font-weight:900;margin-top:24px}
+  footer{padding:38px var(--pad);border-top:1px solid #eef0ec;color:var(--body)}
+  @media (max-width:820px){
+    .grid,.questions{grid-template-columns:1fr}
+    section{padding:68px 0}
+    .hero{padding:82px 0 68px}
+  }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="페이지 이동">
+  <a class="brand" href="../">PLAY WORK GROW</a>
+  <a href="../">놀일 홈</a>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">PEOPLE AND QUESTIONS</span>
+    <h1>사람을 꾸며내지 않고, 질문부터 쌓습니다</h1>
+    <p>놀일의 이야기는 후기처럼 포장하지 않습니다. 농장에서 만난 사람, 꺼낸 질문, 다음에 해볼 작은 일을 그대로 남깁니다.</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>처음 쌓을 이야기</h2>
+      <div class="grid">
+        <article class="story-card"><div class="story-art" aria-hidden="true"></div><div class="story-body"><small>시작</small><strong>왜 놀일을 시작했나</strong><p>네이처커뮤니티의 새 브랜드로 놀일을 여는 이유. 공간보다 사람과 콘텐츠가 중심이라는 선언.</p><span>곧 공개</span></div></article>
+        <article class="story-card"><div class="story-art" aria-hidden="true"></div><div class="story-body"><small>사람</small><strong>놀일이 기다리는 사람들</strong><p>퇴직 후 첫 프로젝트를 찾는 분, 손으로 만드는 분, AI 실무자, 기록자를 위한 초대장.</p><span>곧 공개</span></div></article>
+        <article class="story-card"><div class="story-art" aria-hidden="true"></div><div class="story-body"><small>모임</small><strong>첫 무료 모임에서는 무엇을 하나요</strong><p>농장에 도착해서 돌아보기, 차 마시기, 서로의 관심사를 꺼내는 흐름을 미리 보여줍니다.</p><span>곧 공개</span></div></article>
+        <article class="story-card"><div class="story-art" aria-hidden="true"></div><div class="story-body"><small>체험</small><strong>화면 끄는 하루의 하루</strong><p>휴대폰을 잠시 내려놓고 루페, 이끼, 짧은 기록, 저녁 대화로 이어지는 하루를 설명합니다.</p><span>곧 공개</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="question-band">
+    <div class="wrap">
+      <h2>다음 모임에서 꺼낼 질문</h2>
+      <p>처음 만난 사람도 말문을 열 수 있도록, 놀일은 질문을 준비합니다.</p>
+      <div class="questions">
+        <div class="question"><strong>내가 오래 해왔지만 아직 이름 붙이지 못한 경험은 무엇일까요?</strong></div>
+        <div class="question"><strong>혼자 하면 취미인데, 사람을 만나면 일이 될 수 있는 것은 무엇일까요?</strong></div>
+        <div class="question"><strong>AI에게 맡기기 전에 내가 다시 보고 싶은 일의 기준은 무엇일까요?</strong></div>
+      </div>
+      <a class="btn" href="../letter/">이 질문들을 편지로 받기</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  NOLIL · PLAY WORK GROW<br>
+  운영: 네이처커뮤니티 · 이상민
+</footer>
+</body>
+</html>

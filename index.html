@@ -1,231 +1,570 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>놀일 — PLAY WORK GROW</title>
-<meta name="description" content="PLAY WORK GROW. 놀일은 공간을 매개로 사람과 콘텐츠가 만나고 자라는 농장 기반 커뮤니티 플랫폼입니다.">
-
-<!-- 카톡·당근에 링크 붙일 때 보이는 카드 -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="놀일 — PLAY WORK GROW">
-<meta property="og:description" content="공간을 매개로 사람과 콘텐츠가 만나고 자라는 농장 기반 커뮤니티 플랫폼.">
-<meta property="og:image" content="https://playworkgrow.club/og.jpg">
-<meta name="theme-color" content="#16311F">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="description" content="PLAY WORK GROW. 놀일은 농장을 매개로 사람과 이야기가 만나고 자라는 커뮤니티입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <style>
-  /* ============================================================
-     놀일 홈
-     - 모바일 퍼스트, moim/index.html과 동일한 idiom을 계승
-     - 스크롤 = 온도 하강: 위(감성, moss-900) → 아래(사업 근거, paper)
-     - 5060 타깃: 본문 17px 기준, 버튼 최소 52px, 흐린 회색 글씨 금지
-     ============================================================ */
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
+  :root{
+    --teal:#015e5c;
+    --teal-deep:#014140;
+    --mint:#eef6ef;
+    --mint-strong:#dcefe0;
+    --yellow:#f5e578;
+    --coral:#d0573b;
+    --text:#173535;
+    --body:#4e5c54;
+    --soft:#6e827a;
+    --line:rgba(59,74,54,.16);
+    --pad:clamp(22px,4vw,48px);
+    --max:1180px;
+    --photo-veil:rgba(1,65,64,.54);
+    --serif:"Noto Serif KR",serif;
+    --eyebrow:"Cormorant Garamond",serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
+    margin:0;
+    background:#fff;
+    color:var(--text);
     font-family:var(--font-sans);
-    background:var(--paper); color:var(--moss-900);
-    font-size:17px; line-height:1.7; word-break:keep-all;
+    font-size:17px;
+    line-height:1.8;
+    word-break:keep-all;
     -webkit-font-smoothing:antialiased;
   }
-  img{max-width:100%}
-  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
-  section{padding:44px 0;border-bottom:1px solid var(--rule)}
-  section:last-of-type{border-bottom:0}
-
-  h2{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:18px;line-height:1.35}
-  section p{font-size:17px;line-height:1.8;margin-bottom:14px}
-  section p:last-child{margin-bottom:0}
-  b{color:var(--ember-700);font-weight:800}
-
-  /* ---------- 어두운 섹션(moss-900) ---------- */
-  .dark{background:var(--moss-900);color:var(--cream);border-bottom:0}
-  .dark h2{color:var(--cream)}
-  .dark p{color:rgba(247,243,232,.92)}
-  .dark b{color:var(--ember-300)}
-
-  /* ---------- 히어로 ---------- */
+  a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible{
+    outline:3px solid rgba(208,87,59,.86);
+    outline-offset:4px;
+  }
+  img,svg{max-width:100%}
+  button{font:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+  .narrow{max-width:820px;margin:0 auto}
+  .nav{
+    position:fixed;
+    inset:0 0 auto;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    padding:18px var(--pad);
+    color:#fff;
+    transition:background .24s ease, color .24s ease, box-shadow .24s ease, backdrop-filter .24s ease;
+  }
+  .nav.scrolled{
+    background:rgba(255,255,255,.92);
+    color:var(--teal);
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+    backdrop-filter:blur(12px);
+  }
+  .brand{
+    font-family:var(--font-sans);
+    letter-spacing:.12em;
+    font-size:18px;
+    font-weight:800;
+  }
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:800;letter-spacing:.05em}
+  .nav-links a{opacity:.92}
+  .nav-links a:hover{opacity:.62}
+  .nav-cta{
+    padding:10px 20px;
+    border-radius:999px;
+    background:var(--teal);
+    color:#fff;
+  }
+  .nav:not(.scrolled) .nav-cta{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.56)}
   .hero{
-    background:var(--moss-900); color:var(--cream);
-    padding:56px 0 46px; border-bottom:0; position:relative; overflow:hidden;
+    min-height:620px;
+    position:relative;
+    display:grid;
+    align-items:end;
+    padding:112px 0 64px;
+    overflow:hidden;
+    color:#fff;
+    background:#062c2a;
   }
   .hero::before{
-    content:""; position:absolute; inset:0; opacity:.30;
-    background-image:url('hero.jpg'); background-size:cover; background-position:center;
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url("hero.jpg") center bottom/cover no-repeat;
+    opacity:.84;
+    transform:scale(1.01);
   }
   .hero::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(14,33,21,.86) 0%, rgba(14,33,21,.62) 60%, rgba(14,33,21,.42) 100%);
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg,rgba(0,94,92,.10) 0%,rgba(0,94,92,.08) 42%,rgba(0,94,92,.78) 100%),
+      linear-gradient(90deg,rgba(0,94,92,.82) 0%,rgba(0,94,92,.34) 56%,rgba(0,94,92,.12) 100%);
   }
-  .hero .wrap{position:relative;z-index:2}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0,780px);
+    gap:0;
+    align-items:end;
+  }
   .kicker{
-    display:inline-block; font-size:13px; font-weight:800; letter-spacing:.22em;
-    color:var(--ember-300); margin-bottom:16px;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:7px 14px;
+    border-radius:999px;
+    background:rgba(245,229,120,.94);
+    color:var(--teal);
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:26px;
   }
-  .hero h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.35;margin-bottom:18px}
-  .hero p{font-size:18px;color:rgba(247,243,232,.94);line-height:1.75;margin-bottom:28px}
-
-  /* ---------- 버튼 ---------- */
-  .btn{
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    min-height:56px;min-width:0;padding:14px 20px;border-radius:12px;
-    font-size:18px;font-weight:800;text-decoration:none;
-    border:2px solid transparent;cursor:pointer;font-family:inherit;
-    transition:filter .15s; text-align:center;line-height:1.35;
-  }
-  .btn:active{filter:brightness(.93)}
-  .btn-primary{background:var(--ember-500);color:#fff}
-  .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
-  .btn-line:hover{border-color:var(--cream)}
-  .btn-telegram{background:#229ED9;color:#fff}
-  /* 밝은 섹션 위에 올라가는 line 버튼(어두운 배경 버전과 색 반전) */
-  .btn-line-light{background:#fff;color:var(--moss-900);border-color:var(--moss-900)}
-  .btn-copy{background:#FEE500;color:#191600}
-
-  .cta-row{display:flex;flex-direction:column;gap:10px}
-
-  /* ---------- 정의문 ---------- */
-  .statement{
-    font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.55;
-    color:var(--cream);
-  }
-  .statement b{color:var(--ember-300)}
-
-  /* ---------- 왜 지금 (근거) ---------- */
-  .cite{font-size:13px;color:var(--ink-soft);margin-top:16px;line-height:1.6}
-
-  /* ---------- 어떻게 시작하나 ---------- */
-  .steps{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
-  .step{
-    display:flex;gap:16px;align-items:flex-start;
-    border:1px solid var(--rule);border-radius:14px;
-    padding:18px 20px;background:#fff;
-  }
-  .step-num{
-    flex:0 0 auto;width:34px;height:34px;border-radius:50%;
-    background:var(--moss-900);color:var(--cream);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:800;font-size:16px;
-  }
-  .step-body{flex:1 1 auto;min-width:0}
-  .step-title{font-size:18px;font-weight:800;margin-bottom:4px;color:var(--moss-900)}
-  .step-body p{font-size:16px;color:var(--ink-mid);line-height:1.7;margin-bottom:0}
-
-  /* ---------- 프로그램 디렉토리 ---------- */
-  .h2sub{font-size:16px;color:var(--ink-mid);line-height:1.7;margin-top:-8px;margin-bottom:28px}
-  .prog-group{margin-bottom:30px}
-  .prog-group:last-child{margin-bottom:0}
-  .prog-label{
-    font-size:13px;font-weight:800;letter-spacing:.14em;
-    color:var(--ink-soft);margin-bottom:14px;
-  }
-  .prog-grid{display:grid;grid-template-columns:1fr;gap:12px}
-  .prog-card{
-    display:block;border:1px solid var(--rule);border-left:3px solid var(--moss-500);
-    border-radius:12px;padding:18px 20px;background:#fff;
-    text-decoration:none;color:inherit;
-  }
-  a.prog-card{transition:border-color .15s,background-color .15s}
-  a.prog-card:hover,a.prog-card:focus-visible{border-left-color:var(--ember-500);background:var(--moss-50)}
-  .prog-title{font-size:18px;font-weight:800;color:var(--moss-900);margin-bottom:6px}
-  .prog-desc{font-size:15px;color:var(--ink-mid);line-height:1.65;margin-bottom:10px}
-  .prog-card .prog-desc:last-of-type{margin-bottom:0}
-  .prog-tag{
-    display:inline-block;font-size:12px;font-weight:800;
-    color:var(--moss-700);background:var(--moss-100);
-    padding:4px 10px;border-radius:999px;letter-spacing:.01em;
-  }
-  .prog-card.free{border-left-color:var(--ember-500)}
-  .prog-card.free .prog-tag{color:var(--ember-700);background:var(--ember-100)}
-
-  /* ---------- 증거 진열장 (placeholder) ---------- */
-  .placeholder{text-align:center;padding:8px 0}
-  .placeholder h2{margin-bottom:10px}
-  .placeholder p{color:var(--ink-mid);font-size:16px}
-
-  /* ---------- 세계관 teaser ---------- */
-  .quote{
-    border-left:3px solid var(--ember-500);padding-left:18px;
-    font-size:18px;line-height:1.9;color:rgba(247,243,232,.94);
-  }
-  .quote p{margin-bottom:16px}
-  .quote p:last-child{margin-bottom:0}
-
-  /* ---------- 무료모임 카드 ---------- */
-  .moim-card{text-align:center}
-  .moim-card h2{margin-bottom:12px}
-  .moim-card p{color:var(--ink-mid);margin-bottom:24px}
-
-  /* ---------- 문의 · 오시는 길 ---------- */
-  .contact-btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
-  .contact-note{flex-basis:100%;margin:0 0 6px;color:var(--ink-mid);font-size:15px;line-height:1.65;text-align:center}
-  .btn-kakao{background:#FEE500;color:#191600}
-  .addr{
-    background:var(--moss-50); border:1px solid var(--moss-300); border-radius:10px;
-    padding:16px 18px; font-size:16px; line-height:1.7;
-  }
-  .addr b{color:var(--moss-900)}
-
-  .family{background:var(--moss-50)}
-  .family-label{
-    font-size:13px;font-weight:800;letter-spacing:.14em;
-    color:var(--ink-soft);margin-bottom:16px;
-  }
-  .family-links{display:flex;flex-direction:column;gap:12px}
-  .family-link{
-    display:block;border:1px solid var(--moss-300);border-radius:12px;
-    padding:16px 18px;background:#fff;text-decoration:none;color:inherit;
-    transition:border-color .15s;
-  }
-  .family-link:hover,.family-link:focus-visible{border-color:var(--moss-500)}
-  .family-name{
-    font-size:17px;font-weight:800;color:var(--moss-900);
-    display:flex;align-items:center;gap:6px;margin-bottom:4px;
-  }
-  .family-name .ext{font-size:13px;color:var(--ink-soft);font-weight:700}
-  .family-desc{font-size:14px;color:var(--ink-mid);line-height:1.6;margin-bottom:0}
-
-  footer{padding:32px 0 44px;text-align:center;color:var(--ink-soft);font-size:14px;line-height:1.8}
-  footer b{color:var(--moss-900)}
-
-  @media (min-width:560px){
-    .hero h1{font-size:44px}
-    .statement{font-size:30px}
-    .cta-row{flex-direction:row}
-    .cta-row .btn{flex:1}
-    .contact-btns{flex-direction:row}
-    .contact-btns .btn{flex:1}
-    .prog-grid{grid-template-columns:1fr 1fr}
-    .family-links{flex-direction:row}
-    .family-links .family-link{flex:1}
-  }
-  :root{
-    --solso-teal:#005e5c;
-    --solso-mint:#e6f2e7;
-    --solso-sun:#f5e578;
-    --content-max:960px;
-  }
-  body{background:#fff;color:#111}
-  .wrap{max-width:var(--content-max);padding:0 22px}
-  section{padding:72px 0;border-bottom:0}
-  h2{
-    font-size:clamp(28px,4vw,42px);
-    line-height:1.18;
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+  h1{
+    margin:0;
+    max-width:780px;
+    font-size:clamp(48px,7vw,84px);
+    line-height:.96;
     letter-spacing:0;
+    font-weight:900;
+  }
+  .hero-title{
+    margin-top:28px;
+    font-family:var(--serif);
+    font-size:clamp(30px,3.6vw,46px);
+    font-weight:400;
+    line-height:1.32;
+    color:#fff;
+  }
+  .hero-copy{
+    max-width:620px;
+    margin:20px 0 0;
+    color:rgba(255,255,255,.92);
+    font-size:18px;
+    line-height:1.85;
+  }
+  p{color:var(--body);margin:0 0 16px}
+  .hero-card{
+    display:none;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:24px;
+    padding:28px;
+    background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.1));
+    backdrop-filter:blur(14px);
+    box-shadow:0 24px 80px rgba(0,0,0,.18);
+  }
+  .hero-card strong{display:block;margin-bottom:10px;color:#fff}
+  .hero-card p{margin:0;color:rgba(255,255,255,.78);font-size:15px;line-height:1.75}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .btn{
+    display:inline-flex;
+    min-height:56px;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 28px;
+    border-radius:999px;
+    border:1px solid transparent;
+    font-weight:800;
+    cursor:pointer;
+    transition:transform .16s ease, background .16s ease, border-color .16s ease;
     text-align:center;
-    margin-bottom:24px;
   }
-  h2::before{
-    content:"PLAY WORK GROW";
-    display:block;
-    margin-bottom:12px;
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--teal);color:#fff}
+  .btn-primary:hover{background:var(--teal-deep)}
+  .btn-hero{background:var(--ember-500);color:#fff}
+  .btn-line{background:#fff;color:var(--teal);border-color:var(--line)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.64)}
+  .btn-kakao,.btn-copy{background:#fee500;color:#191600}
+  .btn-telegram{background:#229ed9;color:#fff}
+  section{padding:104px 0}
+  .eyebrow{
+    font-family:var(--eyebrow);
+    font-size:15px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:600;
+  }
+  .bar{
+    width:34px;
+    height:3px;
+    border-radius:2px;
+    background:var(--coral);
+    margin:0 0 18px;
+  }
+  .center{text-align:center}
+  .center .bar{margin-left:auto;margin-right:auto}
+  h2{
+    margin:16px 0 18px;
+    color:var(--text);
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(34px,4.4vw,56px);
+    line-height:1.3;
+    letter-spacing:0;
+  }
+  h3{
+    margin:0 0 10px;
+    font-family:var(--serif);
+    font-weight:500;
+    color:var(--text);
+    font-size:24px;
+    line-height:1.35;
+  }
+  .yellow{background:var(--yellow)}
+  .yellow .statement{
+    max-width:980px;
+    margin:0 auto 26px;
+    font-family:var(--serif);
+    font-size:clamp(30px,4vw,48px);
+    line-height:1.58;
+    font-weight:300;
+    color:var(--text);
+  }
+  .proof{font-size:18px;color:var(--body)}
+  .proof strong{color:var(--teal);font-weight:900}
+  .cite{display:block;margin-top:8px;color:var(--soft);font-size:13px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    min-height:34px;
+    padding:6px 14px;
+    border-radius:999px;
+    background:var(--mint-strong);
+    color:#3e6f56;
+    font-size:14px;
+    font-weight:800;
+  }
+  .next-box{
+    display:flex;
+    justify-content:space-between;
+    gap:18px;
+    align-items:center;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px 22px;
+    margin:0 0 26px;
+  }
+  .next-box small{display:block;color:var(--soft);font-size:12px;letter-spacing:.12em;margin-bottom:5px}
+  .badge{
+    flex:0 0 auto;
+    border-radius:999px;
+    background:var(--coral);
+    color:#fff;
+    padding:6px 13px;
     font-size:12px;
-    line-height:1.2;
-    letter-spacing:.18em;
-    color:var(--solso-teal);
+    font-weight:800;
   }
+  .photo-panel,.illo-panel{
+    min-height:420px;
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--mint);
+    border:1px solid rgba(59,74,54,.08);
+  }
+  .photo-panel{
+    background:
+      linear-gradient(180deg,rgba(238,246,239,.04),rgba(1,94,92,.1)),
+      url("hero.jpg") center/cover no-repeat;
+  }
+  .mint{background:var(--mint)}
+  .choice-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin:34px auto 8px;
+    max-width:980px;
+  }
+  .choice{
+    border:1px solid rgba(59,74,54,.1);
+    border-radius:16px;
+    background:rgba(255,255,255,.66);
+    padding:18px 18px 17px;
+    text-align:left;
+  }
+  .choice small{
+    display:block;
+    color:var(--teal);
+    font-weight:900;
+    margin-bottom:4px;
+  }
+  .choice strong{display:block;color:var(--text);font-size:18px;line-height:1.45}
+  .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:42px}
+  .program-card{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    border:1px solid rgba(59,74,54,.08);
+    border-radius:16px;
+    background:#fff;
+    transition:transform .16s ease,border-color .16s ease;
+  }
+  .program-card:hover{transform:translateY(-4px);border-color:var(--coral)}
+  .program-art{
+    aspect-ratio:5/3;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(170deg,#e8f2ef,#e2ecd3 62%,#dce6cc);
+  }
+  .program-body{padding:25px;display:flex;flex:1;flex-direction:column}
+  .tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+  .tag{border-radius:999px;background:#d2ead6;color:#3e8a6e;padding:4px 10px;font-size:12px;font-weight:800}
+  .program-lead{font-size:18px;color:var(--text);font-weight:800;line-height:1.6;margin-bottom:16px}
+  .program-facts{display:grid;gap:12px;margin:8px 0 22px}
+  .fact{border-top:1px solid rgba(59,74,54,.11);padding-top:12px}
+  .fact small{display:block;color:var(--soft);font-size:12px;font-weight:900;letter-spacing:.08em;margin-bottom:2px}
+  .fact span{display:block;color:var(--body);font-size:15px;line-height:1.62}
+  .program-action{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--teal);
+    font-weight:900;
+    border-top:1px solid rgba(59,74,54,.11);
+    padding-top:16px;
+  }
+  .program-action::after{content:"→";font-size:20px}
+  .program-action.primary-action{color:var(--coral)}
+  .section-head{
+    max-width:820px;
+    margin:0 auto 38px;
+    text-align:center;
+  }
+  .section-head p{font-size:18px;line-height:1.8}
+  .choice .next{
+    display:block;
+    margin-top:10px;
+    color:var(--coral);
+    font-weight:900;
+    font-size:14px;
+  }
+  .people-grid,.outcome-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:34px;
+  }
+  .person-card,.outcome-card{
+    border:1px solid rgba(59,74,54,.1);
+    border-radius:18px;
+    background:#fff;
+    padding:24px;
+  }
+  .person-card small,.outcome-card small{
+    display:block;
+    margin-bottom:10px;
+    color:var(--teal);
+    font-weight:900;
+    letter-spacing:.08em;
+  }
+  .person-card strong,.outcome-card strong{
+    display:block;
+    color:var(--text);
+    font-size:20px;
+    line-height:1.45;
+    margin-bottom:10px;
+  }
+  .person-card p,.outcome-card p{font-size:15px;line-height:1.72}
+  .person-card .next,.outcome-card .next{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    margin-top:6px;
+    color:var(--coral);
+    font-size:14px;
+    font-weight:900;
+  }
+  .program-price{
+    display:inline-flex;
+    align-items:center;
+    min-height:36px;
+    border-radius:999px;
+    background:#fff2db;
+    color:#9a3f21;
+    padding:6px 12px;
+    font-weight:900;
+    font-size:14px;
+    margin:0 0 15px;
+  }
+  .host-panel{
+    display:grid;
+    grid-template-columns:.82fr 1.18fr;
+    gap:42px;
+    align-items:center;
+    margin-top:34px;
+  }
+  .host-photo{
+    min-height:360px;
+    border-radius:22px;
+    background:
+      linear-gradient(180deg,rgba(238,246,239,.12),rgba(1,94,92,.18)),
+      url("hero.jpg?v=20260718") center bottom/cover no-repeat;
+    border:1px solid rgba(220,239,224,.16);
+  }
+  .host-list{
+    display:grid;
+    gap:14px;
+    margin-top:24px;
+  }
+  .host-list div{
+    border:1px solid rgba(220,239,224,.18);
+    border-radius:14px;
+    padding:16px 18px;
+    color:rgba(220,239,224,.86);
+  }
+  .soon{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:48px}
+  .soon span{border:1px solid rgba(59,74,54,.18);border-radius:999px;padding:10px 18px;color:var(--body);font-weight:800;background:rgba(255,255,255,.52)}
+  .dark{
+    background:#061f1e;
+    color:#dcefe0;
+  }
+  .dark h2,.dark h3{color:#dcefe0}
+  .dark p{color:rgba(220,239,224,.76)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:42px 0 52px}
+  .stat{
+    border:1px solid rgba(220,239,224,.18);
+    border-radius:16px;
+    padding:22px 18px;
+    text-align:center;
+  }
+  .stat strong{
+    display:block;
+    color:#5ec0b2;
+    font-family:var(--eyebrow);
+    font-size:34px;
+    line-height:1;
+    margin-bottom:8px;
+  }
+  .asset-links{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+  .asset-link{border:1px solid rgba(220,239,224,.2);border-radius:14px;padding:17px;color:#dcefe0}
+  .story-note{
+    max-width:760px;
+    margin:32px auto 0;
+    border:1px solid rgba(59,74,54,.12);
+    border-radius:18px;
+    background:rgba(255,255,255,.56);
+    padding:28px;
+  }
+  .subscribe{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(245,229,120,.5), transparent 28%),
+      linear-gradient(135deg,#fff 0%,#eef6ef 48%,#dcefe0 100%);
+  }
+  .subscribe-panel{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:42px;
+    align-items:center;
+    border:1px solid rgba(59,74,54,.12);
+    border-radius:22px;
+    background:rgba(255,255,255,.72);
+    padding:34px;
+    box-shadow:0 24px 72px rgba(1,94,92,.12);
+  }
+  .subscribe-copy h2{margin-top:10px}
+  .subscribe-copy p{font-size:18px;line-height:1.8}
+  .subscribe-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:26px;
+  }
+  .subscribe-card{
+    display:grid;
+    gap:12px;
+    border-radius:18px;
+    background:#fff;
+    border:1px solid rgba(59,74,54,.1);
+    padding:24px;
+  }
+  .subscribe-card strong{
+    color:var(--text);
+    font-size:20px;
+    line-height:1.45;
+  }
+  .subscribe-card span{
+    color:var(--body);
+    font-size:15px;
+    line-height:1.65;
+  }
+  .interest-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .interest-pills span{
+    border-radius:999px;
+    background:var(--mint);
+    color:var(--teal);
+    padding:6px 10px;
+    font-size:13px;
+    font-weight:900;
+  }
+  .hero-note{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    margin-top:14px;
+    color:rgba(247,243,232,.92);
+    font-size:15px;
+    font-weight:800;
+    text-decoration:underline;
+    text-underline-offset:5px;
+  }
+  .contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:start}
+  .map-card{
+    min-height:340px;
+    border-radius:20px;
+    background:var(--mint);
+    border:1px solid rgba(59,74,54,.08);
+    overflow:hidden;
+  }
+  .addr-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px}
+  .addr-row strong{display:block;color:var(--text);margin-bottom:6px}
+  .contact-buttons{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+  .contact-buttons .btn{width:100%;justify-content:space-between;border-radius:14px;padding:16px 22px}
+  .contact-buttons .btn::after{content:"→";font-weight:900}
+  .contact-buttons .btn-line::after{content:""}
+  footer{padding:42px var(--pad);border-top:1px solid #eef0ec;color:var(--body)}
+  footer .brand{display:block;color:var(--teal);margin-bottom:8px}
+  .compare-strip{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:60;
+    display:flex;
+    gap:8px;
+  }
+  .compare-strip a{
+    border-radius:999px;
+    background:rgba(1,94,92,.92);
+    color:#fff;
+    padding:9px 13px;
+    font-size:13px;
+    font-weight:800;
+    box-shadow:0 8px 22px rgba(0,0,0,.16);
+  }
+  [data-reveal]{opacity:1;transform:none;transition:opacity .72s ease,transform .72s ease}
+  .js [data-reveal]{opacity:1;transform:none}
+  [data-reveal].show{opacity:1;transform:none}
+  /* v1 top parity: keep the opening screen exactly in the current site idiom. */
   .site-nav{
     position:absolute;
     z-index:5;
@@ -240,11 +579,15 @@
     color:#fff;
   }
   .site-brand{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
     color:#fff;
     text-decoration:none;
     font-size:18px;
     font-weight:800;
     letter-spacing:.12em;
+    line-height:1.7;
   }
   .site-links{
     display:none;
@@ -252,161 +595,192 @@
     gap:18px;
   }
   .site-links a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    min-width:44px;
     color:rgba(255,255,255,.86);
     text-decoration:none;
     font-size:12px;
     font-weight:800;
     letter-spacing:.12em;
   }
-  .site-links a:focus-visible,.site-links a:hover{color:var(--solso-sun)}
+  .site-links a:focus-visible,.site-links a:hover{color:var(--yellow)}
   .hero{
     min-height:560px;
     display:flex;
     align-items:flex-end;
     padding:96px 0 54px;
-    background:var(--solso-teal);
+    background:#005e5c;
+    color:var(--cream);
+    line-height:1.7;
+    border-bottom:0;
+    position:relative;
+    overflow:hidden;
   }
   .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
     opacity:.78;
+    background-image:url("hero.jpg?v=20260718");
+    background-size:cover;
     background-position:center bottom;
+    transform:none;
+    z-index:0;
+  }
+  .hero-photo{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center bottom;
+    opacity:.78;
+    z-index:0;
+    display:block;
   }
   .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
     background:
       linear-gradient(180deg, rgba(0,94,92,.12) 0%, rgba(0,94,92,.08) 42%, rgba(0,94,92,.78) 100%),
       linear-gradient(90deg, rgba(0,94,92,.82) 0%, rgba(0,94,92,.34) 56%, rgba(0,94,92,.12) 100%);
+    z-index:1;
   }
-  .hero .wrap{width:100%}
+  .hero .wrap{position:relative;z-index:2;width:100%;max-width:960px;padding:0 22px}
   .kicker{
-    color:var(--solso-sun);
+    display:inline-block;
+    padding:0;
+    border-radius:0;
+    background:transparent;
+    color:var(--yellow);
     font-size:12px;
+    font-weight:800;
     letter-spacing:.24em;
+    line-height:1.7;
+    margin-bottom:16px;
   }
+  .kicker::before{content:none}
   .hero h1{
     max-width:780px;
+    margin:0 0 18px;
     font-size:clamp(40px,7vw,76px);
+    font-weight:800;
     line-height:.96;
     letter-spacing:.02em;
     text-transform:uppercase;
   }
   .hero p{
     max-width:620px;
+    margin:0 0 28px;
     font-size:20px;
+    color:rgba(247,243,232,.94);
+    line-height:1.75;
   }
-  .btn{
-    border-radius:999px;
+  .hero .cta-row{display:flex;flex-direction:column;gap:10px;margin-top:0}
+  .hero .btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
     min-height:58px;
-    transition:transform .16s ease-out,filter .16s ease-out,border-color .16s ease-out,background-color .16s ease-out;
-  }
-  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
-  .btn:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
-  .btn-primary{background:var(--ember-500)}
-  .btn-line-light{border-color:var(--solso-teal);color:var(--solso-teal)}
-  section:nth-of-type(1),section:nth-of-type(2){background:#fff}
-  section:nth-of-type(3){background:var(--solso-mint)}
-  .dark{
-    background:var(--solso-teal);
-    color:#fff;
-  }
-  .dark h2::before{color:var(--solso-sun)}
-  .statement{
-    max-width:820px;
-    margin:0 auto;
-    font-size:clamp(30px,4.5vw,52px);
-    line-height:1.25;
-    text-align:center;
-  }
-  .steps{
-    max-width:880px;
-    margin:0 auto 30px;
-  }
-  .step{
-    border:0;
-    border-radius:0;
-    background:var(--solso-mint);
-    padding:22px;
-  }
-  .step-num{
-    background:var(--solso-teal);
-    color:#fff;
-  }
-  .programs{
-    background:var(--solso-mint);
-    padding:86px 0;
-  }
-  .h2sub{
-    max-width:560px;
-    margin:0 auto 42px;
-    text-align:center;
-  }
-  .prog-label{
-    color:var(--solso-teal);
-    text-align:center;
-    margin-bottom:16px;
-  }
-  .prog-card{
-    min-height:168px;
-    border:1px solid rgba(0,94,92,.18);
-    border-left:0;
-    border-radius:0;
-    padding:24px;
-    background:#fff;
-  }
-  a.prog-card:hover,a.prog-card:focus-visible{
-    border-color:var(--solso-teal);
-    background:#fff;
-    transform:translateY(-2px);
-    outline:0;
-  }
-  .prog-title{font-size:19px}
-  .prog-tag{
+    min-width:0;
+    padding:14px 20px;
     border-radius:999px;
-    background:var(--solso-mint);
-    color:var(--solso-teal);
-  }
-  .placeholder{padding:40px 0}
-  .moim-card{
-    background:var(--solso-sun);
-    margin:0;
-    padding:76px 22px;
-  }
-  .moim-card .wrap{max-width:680px}
-  #contact{background:#fff}
-  .addr{
-    border:0;
-    border-radius:0;
-    background:var(--solso-mint);
-    padding:24px;
-  }
-  .family{background:var(--solso-teal);color:#fff}
-  .family-label{
-    color:var(--solso-sun);
+    font-size:18px;
+    font-weight:800;
+    text-decoration:none;
+    border:2px solid transparent;
+    cursor:pointer;
+    font-family:inherit;
+    transition:transform .16s ease-out,filter .16s ease-out,border-color .16s ease-out,background-color .16s ease-out;
     text-align:center;
+    line-height:1.35;
   }
-  .family-link{
-    border:1px solid rgba(255,255,255,.32);
-    border-radius:0;
-    background:rgba(255,255,255,.08);
-    color:#fff;
-  }
-  .family-name{color:#fff}
-  .family-desc{color:rgba(255,255,255,.78)}
-  footer{
+  .hero .btn:hover,.hero .btn:focus-visible{transform:translateY(-2px)}
+  .hero .btn-primary{background:var(--ember-500);color:#fff}
+  .hero .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
+  .hero .btn-line:hover{border-color:var(--cream)}
+  .story-intro{
+    padding:72px 0;
+    border-bottom:0;
     background:#fff;
+  }
+  .story-intro .wrap{max-width:960px;padding:0 22px}
+  .story-intro h2{
+    font-family:var(--font-sans);
+    font-size:clamp(28px,4vw,42px);
+    font-weight:800;
+    line-height:1.18;
+    letter-spacing:0;
+    text-align:center;
+    margin:0 0 24px;
     color:#111;
-    border-top:1px solid #f2f2f2;
+  }
+  .story-intro h2::before{
+    content:"PLAY WORK GROW";
+    display:block;
+    margin-bottom:12px;
+    font-size:12px;
+    line-height:1.2;
+    letter-spacing:.18em;
+    color:var(--teal);
+  }
+  .story-intro p{
+    font-size:17px;
+    line-height:1.8;
+    margin:0 0 14px;
+    color:var(--body);
+  }
+  .story-intro p:last-child{margin-bottom:0}
+  @media (max-width:860px){
+    .nav{padding:15px 22px}
+    .nav-links{display:none}
+    .hero{min-height:560px;padding:96px 0 54px}
+    .hero-grid,.g2,.contact-grid{grid-template-columns:1fr;gap:42px}
+    .hero-card{display:none}
+    h1{font-size:54px}
+    .hero-title{font-size:34px}
+    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel{grid-template-columns:1fr}
+    .choice{padding:16px}
+    .choice strong{font-size:17px}
+    .person-card,.outcome-card{padding:20px}
+    .program-grid{gap:20px}
+    .program-art{aspect-ratio:2.35/1}
+    .program-body{padding:20px}
+    .program-lead{font-size:17px;line-height:1.55;margin-bottom:12px}
+    .program-facts{gap:8px;margin:6px 0 18px}
+    .fact{padding-top:9px}
+    .fact span{font-size:14px;line-height:1.55}
+    .program-price{margin-bottom:12px}
+    .subscribe-panel{padding:24px}
+    .subscribe-actions .btn{width:100%}
+    .host-photo{min-height:260px}
+    section{padding:78px 0}
+    .yellow .statement{font-size:31px}
+    .photo-panel,.illo-panel,.map-card{min-height:300px}
+    .compare-strip{
+      position:static;
+      justify-content:center;
+      padding:18px 14px 26px;
+      background:#fff;
+      border-top:1px solid #eef0ec;
+    }
   }
   @media (min-width:560px){
-    section{padding:108px 0}
     .hero{min-height:620px;padding-bottom:72px}
+    .hero .cta-row{flex-direction:row}
+    .hero .cta-row .btn{flex:1}
     .site-links{display:flex}
-    .prog-grid{gap:16px}
-    .programs .prog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .story-intro{padding:108px 0}
   }
 </style>
 </head>
 <body>
-
-<nav class="site-nav" aria-label="주요 이동">
+<nav class="site-nav" id="nav" aria-label="주요 이동">
   <a class="site-brand" href="./">PLAY WORK GROW</a>
   <div class="site-links">
     <a href="#programs">PROGRAM</a>
@@ -415,254 +789,179 @@
   </div>
 </nav>
 
-<!-- ══════════ ① 히어로 ══════════ -->
 <header class="hero">
+  <img class="hero-photo" src="hero.jpg" alt="놀일 농장의 이끼 사진" width="1600" height="1128" fetchpriority="high">
   <div class="wrap">
     <span class="kicker">놀일 NOLIL</span>
     <h1 aria-label="PLAY WORK GROW">PLAY<br>WORK<br>GROW</h1>
     <p>공간은 매개입니다. 놀일의 중심은 서로를 발견하는 사람들, 그리고 그 만남에서 자라는 콘텐츠입니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#" id="ctaHero">메시지로 먼저 문의하기</a>
+      <a class="btn btn-primary js-cta-consult" href="#contact" id="ctaHero">메시지로 먼저 문의하기</a>
       <a class="btn btn-line" href="#programs">사람과 콘텐츠 보기</a>
     </div>
+    <a class="hero-note js-lead-link" href="letter/">다음 모임 알림만 받아도 됩니다</a>
   </div>
 </header>
 
-<!-- ══════════ ② 당신 이야기인가요 ══════════ -->
-<section>
-  <div class="wrap">
-    <h2>혹시 당신 이야기인가요</h2>
-    <p>평생 무언가를 쌓아왔는데, 이제 그걸 나눌 자리와 함께 만들 사람이 필요한 분들이 있습니다.</p>
-    <p>재능은 혼자 있으면 취미로 끝납니다. <b>사람을 만나고 콘텐츠가 될 때 다시 일이 됩니다.</b></p>
-  </div>
-</section>
+<main>
+  <section class="story-intro">
+    <div class="wrap">
+      <h2>혹시 당신 이야기인가요</h2>
+      <p>평생 무언가를 쌓아왔는데, 이제 그걸 나눌 자리와 함께 만들 사람이 필요한 분들이 있습니다.</p>
+      <p>재능은 혼자 있으면 취미로 끝납니다. <b>사람을 만나고 콘텐츠가 될 때 다시 일이 됩니다.</b></p>
+    </div>
+  </section>
 
-<!-- ══════════ ③ 정의문 ══════════ -->
-<section class="dark">
-  <div class="wrap">
-    <p class="statement">놀일은, 공간을 매개로 <b>사람과 콘텐츠가 만나고 자라는 커뮤니티 플랫폼</b>입니다.</p>
-  </div>
-</section>
-
-<!-- ══════════ ④ 왜 지금, 늦지 않았나 ══════════ -->
-<section>
-  <div class="wrap">
-    <h2>늦지 않았습니다</h2>
-    <p>가장 빠르게 큰 기업들, 창업자 평균 나이가 <b>마흔다섯</b>이었습니다.</p>
-    <p>50대는 30대보다 초고속으로 성장하는 기업을 만들 확률이 <b>1.8배</b> 높았습니다.</p>
-    <div class="cite">출처: Azoulay et al. (2020), 미국 창업자 270만 명 분석</div>
-  </div>
-</section>
-
-<!-- ══════════ ⑤ 무엇이 곁에 있나 ══════════ -->
-<section>
-  <div class="wrap">
-    <h2>혼자 하지 않습니다</h2>
-    <p>농장은 배경이고, 중심에는 사람이 있습니다. 인터뷰, 모임, 강의, 기록이 쌓여 다음 콘텐츠와 다음 일을 만듭니다.</p>
-    <p><b>먼저 창업해 본 사람이 곁에서 묻고 기록하고 연결하는 것</b> — 그게 놀일이 드리는 것입니다.</p>
-  </div>
-</section>
-
-<!-- ══════════ ⑥ 어떻게 시작하나 ══════════ -->
-<section>
-  <div class="wrap">
-    <h2>천천히 시작하셔도 됩니다</h2>
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">1</span>
-        <span class="step-body">
-          <span class="step-title">이야기 한번</span>
-          <p>30분, 무료. 뭘 해오셨고 뭘 하고 싶은지 편하게 듣습니다.</p>
-        </span>
+  <section id="chooser" class="mint" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">처음 오시면 이렇게 고르세요</div>
+        <h2>내 상황에 가까운 문을 하나 고르세요</h2>
+        <p>처음이라면 가볍게 와보셔도 됩니다. 조금 더 깊이 경험하고 싶다면 하루 체험이나 1:1 이야기로 시작하실 수 있습니다.</p>
       </div>
-      <div class="step">
-        <span class="step-num">2</span>
-        <span class="step-body">
-          <span class="step-title">콘텐츠로 만나기</span>
-          <p>무료 모임과 인터뷰에서 사람을 만나고, 이야기를 콘텐츠로 남깁니다.</p>
-        </span>
-      </div>
-      <div class="step">
-        <span class="step-num">3</span>
-        <span class="step-body">
-          <span class="step-title">같이 자라기</span>
-          <p>만남과 콘텐츠가 쌓이면 프로그램, 강좌, 공동사업으로 키웁니다.</p>
-        </span>
+      <div class="choice-strip">
+        <a class="choice" href="moim/"><small>무료로 한번 와보기</small><strong>농장과 사람을 직접 보고, 나와 맞는지 확인합니다.</strong><span class="next">무료 일정 보기</span></a>
+        <a class="choice" href="program/screen-off-day.html"><small>하루 동안 휴대폰 내려놓기</small><strong>루페로 이끼와 흙을 보고, 짧은 기록을 남깁니다.</strong><span class="next">3.9만원 체험 보기</span></a>
+        <a class="choice js-cta-consult" href="#contact"><small>내 경험으로 뭘 할 수 있을지 묻기</small><strong>30분 동안 해온 일과 관심사를 꺼내 방향을 잡습니다.</strong><span class="next">1:1 시간 예약</span></a>
+        <a class="choice" href="program/builders-camp.html"><small>우리 회사 업무 하나를 AI로 바꾸기</small><strong>막힌 업무 하나를 들고 와서 실제 흐름을 만듭니다.</strong><span class="next">캠프 보기</span></a>
       </div>
     </div>
-    <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#" id="ctaSteps">메시지로 먼저 문의하기</a>
-      <a class="btn btn-line-light" href="moim/">무료 모임 보기</a>
+  </section>
+
+  <section id="people" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">커뮤니티의 사람들</div>
+        <h2>놀일에는 이런 사람들을 기다립니다</h2>
+        <p>놀일은 같은 취향의 사람만 모으는 곳이 아닙니다. 서로 다른 경험이 만나 새 이야기가 되는 자리를 만듭니다.</p>
+      </div>
+      <div class="people-grid">
+        <div class="person-card"><small>제2인생</small><strong>퇴직 후 첫 프로젝트를 찾는 분</strong><p>혼자 준비하던 경험을 농장 모임에서 말로 꺼냅니다. 잘 팔릴지부터 묻기 전에, 함께 해볼 작은 실험을 찾습니다.</p><a class="next js-lead-link" href="letter/">이런 사람 이야기 받기</a></div>
+        <div class="person-card"><small>손과 취향</small><strong>손으로 만드는 걸 사람 만나는 일로 바꾸고 싶은 분</strong><p>이끼, 나무, 흙, 글쓰기, 사진처럼 혼자 하던 취향을 작은 수업이나 모임의 씨앗으로 바꿔봅니다.</p><a class="next" href="moim/">먼저 모임 보기</a></div>
+        <div class="person-card"><small>실무자</small><strong>AI를 업무에 붙여야 하는 분</strong><p>교육은 들었지만 실제 업무 적용이 막힌 분이 반복 업무 하나를 들고 와서 작동하는 흐름을 만듭니다.</p><a class="next" href="program/builders-camp.html">캠프 보기</a></div>
+        <div class="person-card"><small>기록자</small><strong>사람의 이야기를 남기고 싶은 분</strong><p>인터뷰, 사진, 짧은 글로 농장에서 만난 사람의 경험을 콘텐츠로 정리하고 다음 사람에게 전합니다.</p><a class="next" href="stories/">이야기 아카이브 보기</a></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════ ⑦ 프로그램 디렉토리 ══════════ -->
-<section class="programs" id="programs">
-  <div class="wrap">
-    <h2>사람과 콘텐츠가 자라는 방식</h2>
-    <p class="h2sub">농장은 무대입니다. 놀일의 본체는 사람, 이야기, 기록, 그리고 함께 만드는 프로그램입니다.</p>
+  <section id="programs" class="mint" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">지금 참여할 수 있는 것</div>
+        <h2>가볍게 와도 좋고, 깊이 들어와도 좋습니다</h2>
+        <p>무료 모임으로 먼저 분위기를 보고, 맞는다고 느껴지면 하루 체험·1:1 이야기·AI 캠프로 더 깊이 참여하실 수 있습니다.</p>
+      </div>
+      <div class="program-grid">
+        <a class="program-card" href="moim/"><div class="program-art" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 360 240" width="100%" height="100%"><ellipse cx="180" cy="202" rx="146" ry="32" fill="#c3ddc8"></ellipse><rect x="78" y="70" width="204" height="106" rx="18" fill="#eef6ef" stroke="#9db585" stroke-width="4"></rect><path d="M112 112h136M112 142h96" stroke="#015e5c" stroke-width="8" stroke-linecap="round"></path><circle cx="104" cy="186" r="18" fill="#d0573b"></circle><circle cx="150" cy="186" r="18" fill="#4e9068"></circle><circle cx="196" cy="186" r="18" fill="#f5e578"></circle><circle cx="242" cy="186" r="18" fill="#4e9068"></circle></svg></div><div class="program-body"><div class="tag-row"><span class="tag">무료</span><span class="tag">첫 방문</span></div><h3>무료 모임</h3><span class="program-price">0원</span><p class="program-lead">토요일 오전, 농장을 한 바퀴 돌고 처음 만난 사람들과 차를 마십니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>놀일이 어떤 곳인지 직접 보고 싶은 분</span></div><div class="fact"><small>당일 무엇을 하나요</small><span>농장 둘러보기, 짧은 자기소개, 관심 주제별 대화</span></div><div class="fact"><small>시간·비용</small><span>일정 페이지에서 확인 · 무료 · 정원형 예약</span></div></div><span class="program-action primary-action">무료 일정 보고 신청</span></div></a>
+        <a class="program-card" href="program/screen-off-day.html"><div class="program-art" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 360 240" width="100%" height="100%"><ellipse cx="180" cy="198" rx="142" ry="30" fill="#c3ddc8"></ellipse><g transform="translate(136 120) rotate(-18)"><path d="M0 0C-24-42 12-91 55-85 67-36 36 12 0 0Z" fill="#4e9068"></path><path d="M5-5C18-36 35-61 52-78" stroke="#4e6a3a" stroke-width="4" fill="none"></path></g><g transform="translate(220 112)"><circle r="48" fill="#dcebf0" opacity=".65" stroke="#015e5c" stroke-width="7"></circle><line x1="34" y1="34" x2="70" y2="70" stroke="#015e5c" stroke-width="11" stroke-linecap="round"></line></g></svg></div><div class="program-body"><div class="tag-row"><span class="tag">당일</span><span class="tag">입문</span></div><h3>화면 끄는 하루</h3><span class="program-price">3.9만원 예정</span><p class="program-lead">휴대폰을 잠시 맡기고 루페로 이끼와 흙을 봅니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>머리가 복잡하고, 자연 속에서 하루를 다시 느끼고 싶은 분</span></div><div class="fact"><small>당일 무엇을 하나요</small><span>폰 보관, 산책, 관찰, 짧은 기록, 저녁 대화</span></div><div class="fact"><small>시간·비용</small><span>당일 프로그램 · 3.9만원 예정 · 소그룹</span></div></div><span class="program-action">프로그램 보기</span></div></a>
+        <a class="program-card js-cta-consult" href="#contact"><div class="program-art" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 360 240" width="100%" height="100%"><ellipse cx="180" cy="202" rx="150" ry="32" fill="#c3ddc8"></ellipse><path d="M76 172V94q104-88 208 0v78Z" fill="#eaf0e6" stroke="#7c9a5e" stroke-width="4"></path><path d="M118 172V76q62-55 124 0v96M180 38v134" fill="none" stroke="#9db585" stroke-width="4"></path><path d="M104 166q28-17 45 0M156 166q28-17 45 0M208 166q28-17 45 0" stroke="#4e9068" stroke-width="7" fill="none"></path><path d="M263 72C245 40 274 2 308 7c8 34-18 72-45 65Z" fill="#3e8a6e"></path><path d="M266 68c14-27 26-41 38-55" stroke="#cfe0b8" stroke-width="3" fill="none"></path></svg></div><div class="program-body"><div class="tag-row"><span class="tag">상담</span><span class="tag">제2인생</span></div><h3>1:1 이야기</h3><span class="program-price">30분 무료</span><p class="program-lead">내가 해온 일을 30분 동안 꺼내놓고, 함께 해볼 작은 방향을 찾습니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>퇴직 후 역할, 경험의 재사용, 작은 사업화가 궁금한 분</span></div><div class="fact"><small>무엇을 하나요</small><span>경험, 관심사, 가능한 시간, 맞는 프로그램을 정리합니다</span></div><div class="fact"><small>다음 단계</small><span>나에게 맞는 모임이나 프로그램이 있으면 천천히 안내드립니다</span></div></div><span class="program-action primary-action">1:1 시간 예약하기</span></div></a>
+        <a class="program-card" href="program/builders-camp.html"><div class="program-art" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 360 240" width="100%" height="100%"><ellipse cx="180" cy="202" rx="146" ry="32" fill="#c3ddc8"></ellipse><rect x="108" y="76" width="144" height="98" rx="18" fill="#eaf0e6" stroke="#9db585" stroke-width="4"></rect><path d="M132 144h96M132 122h72" stroke="#015e5c" stroke-width="8" stroke-linecap="round"></path><path d="M233 56C213 20 247-18 286-11c9 39-22 80-53 67Z" fill="#3e8a6e"></path><path d="M238 50c17-30 29-47 43-61" stroke="#dcefe0" stroke-width="3" fill="none"></path><circle cx="224" cy="146" r="9" fill="#d0573b"></circle><circle cx="249" cy="146" r="9" fill="#d0573b"></circle></svg></div><div class="program-body"><div class="tag-row"><span class="tag">1박 2일</span><span class="tag">실무자</span></div><h3>AI 빌더스 캠프</h3><span class="program-price">20만 / 25만원</span><p class="program-lead">조직에서 실제로 막힌 업무 하나를 들고 와서, AI로 돌아가는 흐름을 만들어 갑니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>AI 교육은 들었지만 우리 회사 업무에 어떻게 붙일지 막힌 실무자</span></div><div class="fact"><small>무엇을 하나요</small><span>반복 업무 하나를 고르고, 프롬프트/자동화/보고 흐름을 현장에서 만듭니다</span></div><div class="fact"><small>시간·비용</small><span>1박 2일 · 초대석 무료 / 얼리버드 20만 / 정가 25만</span></div></div><span class="program-action">캠프 내용 보기</span></div></a>
+      </div>
+      <div class="soon"><span>공방 · 이끼 화분</span><span>정원창업스쿨</span><span>아그리 AI 빌리지</span><span>놀일 멤버십</span><span>품 잼 · 1박 2일</span></div>
+    </div>
+  </section>
 
-    <div class="prog-group">
-      <div class="prog-label">오래 함께</div>
-      <div class="prog-grid">
-        <a class="prog-card" href="program/agri-village.html">
-          <div class="prog-title">아그리 AI 빌리지</div>
-          <p class="prog-desc">전문성과 이야기를 모아 실험하고, 되는 것은 함께 사업으로 키웁니다.</p>
-          <span class="prog-tag">연 단위 · 상주</span>
-        </a>
-        <div class="prog-card">
-          <div class="prog-title">정원창업스쿨</div>
-          <p class="prog-desc">책과 함께 여는 강좌와 컨설팅.</p>
-          <span class="prog-tag">준비 중</span>
+  <section id="letter" class="subscribe" data-reveal>
+    <div class="wrap">
+      <div class="subscribe-panel">
+        <div class="subscribe-copy">
+          <div class="bar"></div>
+          <div class="eyebrow">Stay Connected</div>
+          <h2>다음 모임과 사람 이야기를 받아보세요</h2>
+          <p>놀일은 한 번 보고 결정하는 곳이 아닙니다. 농장에서 열리는 모임, 새로 만나는 사람들, 함께 만들 수 있는 작은 일을 한 주에 한 번만 보내드립니다.</p>
+          <div class="subscribe-actions">
+            <a class="btn btn-primary js-lead-link" href="letter/">놀일 편지 받기</a>
+            <a class="btn btn-line js-lead-link" href="letter/">다음 모임 알림 받기</a>
+          </div>
         </div>
-        <div class="prog-card">
-          <div class="prog-title">놀일 멤버십</div>
-          <p class="prog-desc">사람, 모임, 기록이 시즌 단위로 이어지는 멤버 프로그램.</p>
-          <span class="prog-tag">8월 예정</span>
+        <div class="subscribe-card">
+          <strong>남겨주실 것은 이름과 관심사면 충분합니다.</strong>
+          <span>아직 신청하지 않아도 괜찮습니다. 관심 있는 주제를 남겨두면 맞는 일정과 사람 이야기를 먼저 보내드립니다.</span>
+          <div class="interest-pills">
+            <span>무료 모임</span><span>화면 끄는 하루</span><span>1:1 이야기</span><span>AI 캠프</span><span>사람 이야기</span>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="prog-group">
-      <div class="prog-label">와서 겪는</div>
-      <div class="prog-grid">
-        <a class="prog-card" href="program/screen-off-day.html">
-          <div class="prog-title">화면 끄는 하루</div>
-          <p class="prog-desc">폰 대신 루페. 하루의 경험을 관찰과 대화의 콘텐츠로 남깁니다.</p>
-          <span class="prog-tag">당일</span>
-        </a>
-        <div class="prog-card">
-          <div class="prog-title">공방</div>
-          <p class="prog-desc">목공·이끼·화분. 만드신 건 가져가십니다.</p>
-          <span class="prog-tag">당일</span>
-        </div>
-        <div class="prog-card">
-          <div class="prog-title">품 잼</div>
-          <p class="prog-desc">1박 2일 팀 대회. 몸으로 번 '품'으로 겨루는 느린 해커톤.</p>
-          <span class="prog-tag">1박 2일</span>
-        </div>
-        <a class="prog-card" href="program/builders-camp.html">
-          <div class="prog-title">AI 빌더스 캠프</div>
-          <p class="prog-desc">실무자가 와서 회사에 바로 쓸 AX를 세팅해 갑니다.</p>
-          <span class="prog-tag">1박 2일 · 실무자</span>
-        </a>
+  <section id="remains" data-reveal>
+    <div class="wrap">
+      <div class="section-head"><div class="bar"></div><div class="eyebrow">다녀가면 남는 것</div><h2>사진보다 중요한 것은 다음 약속입니다</h2><p>놀일의 결과물은 예쁜 풍경 하나가 아닙니다. 사람, 기록, 작은 실험, 다음 약속이 남아야 합니다.</p></div>
+      <div class="outcome-grid">
+        <div class="outcome-card"><small>01</small><strong>사람</strong><p>혼자 생각하던 일을 말로 꺼내고, 비슷한 고민을 가진 사람을 만납니다.</p></div>
+        <div class="outcome-card"><small>02</small><strong>기록</strong><p>하루의 관찰, 인터뷰, 대화가 짧은 글이나 영상의 씨앗으로 남습니다.</p></div>
+        <div class="outcome-card"><small>03</small><strong>작은 실험</strong><p>바로 창업하지 않아도 작은 수업, 체험, 상품을 시험해볼 수 있습니다.</p></div>
+        <div class="outcome-card"><small>04</small><strong>다음 약속</strong><p>혼자 준비하다 멈추는 대신, 다음에 만날 날짜와 함께할 일을 정합니다.</p></div>
       </div>
     </div>
+  </section>
 
-    <div class="prog-group">
-      <div class="prog-label">먼저 들어오는 입구 (무료)</div>
-      <div class="prog-grid">
-        <a class="prog-card free" href="moim/">
-          <div class="prog-title">무료 모임</div>
-          <p class="prog-desc">AI 특강 · 오픈데이 · 인터뷰. 사람을 만나고 이야기를 모으는 입구입니다.</p>
-          <span class="prog-tag">무료</span>
-        </a>
-        <a class="prog-card free js-cta-consult" href="#">
-          <div class="prog-title">메시지 문의</div>
-          <p class="prog-desc">전화부터 하지 않아도 됩니다. 먼저 편한 채널로 남겨주세요.</p>
-          <span class="prog-tag">무료 · 1:1</span>
-        </a>
+  <section id="host" class="dark" data-reveal>
+    <div class="wrap">
+      <div class="section-head"><div class="bar"></div><div class="eyebrow">함께 여는 사람</div><h2>처음 오신 분의 이야기를 먼저 듣습니다</h2><p>놀일은 시설을 설명하기보다 사람의 이야기를 듣는 곳입니다. 농장에서 만나고, 묻고, 기록하며 다음에 함께할 일을 찾아갑니다.</p></div>
+      <div class="host-panel">
+        <div class="host-photo" role="img" aria-label="놀일 농장 이끼 사진"></div>
+        <div><h3>혼자 오셔도 괜찮습니다</h3><p>처음부터 뭔가를 잘해야 하는 자리가 아닙니다. 하고 싶은 말, 해온 일, 궁금한 것을 가지고 오시면 됩니다. 이야기를 나누다 보면 같이 해볼 작은 일이 보입니다.</p><div class="host-list"><div>농장과 자연을 좋아하는 분을 환영합니다.</div><div>AI가 어렵지만 배워보고 싶은 분도 괜찮습니다.</div><div>내 경험을 누군가에게 전하고 싶은 분을 기다립니다.</div></div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════ ⑦ 증거 (진열장) ══════════ -->
-<section>
-  <div class="wrap placeholder">
-    <h2>곧, 이곳에 첫 이야기들을 담습니다</h2>
-    <p>모임과 인터뷰가 시작되면, 다녀가신 분들의 이야기를 여기에 모읍니다.</p>
-  </div>
-</section>
-
-<!-- ══════════ ⑧ 세계관 teaser ══════════ -->
-<section class="dark">
-  <div class="wrap">
-    <h2>놀일이 왜 이렇게 생각하냐면</h2>
-    <div class="quote">
-      <p>5억 년쯤 전, 첫 식물이 물과 흙의 경계에서 뭍에 올랐습니다. 뿌리도 없이, 혼자가 아니라 땅속 균과 함께.</p>
-      <p>새로운 것은 언제나 경계에서 태어납니다.</p>
-      <p><b>일은 AI에게, 놀이는 인간에게.</b></p>
+  <section id="contact" data-reveal>
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="bar"></div>
+          <h2>오시는 길</h2>
+          <div class="map-card" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 600 360" width="100%" height="100%"><rect width="600" height="360" fill="#e8f4e9"></rect><path d="M0 185h600M300 0v360" stroke="#fff" stroke-width="14"></path><path d="M0 185h600M300 0v360" stroke="#c8bea6" stroke-width="2" stroke-dasharray="12 16"></path><rect x="70" y="48" width="140" height="86" rx="12" fill="#cfebd6"></rect><rect x="402" y="68" width="138" height="88" rx="12" fill="#cfebd6"></rect><rect x="80" y="234" width="160" height="86" rx="12" fill="#cfebd6"></rect><circle cx="300" cy="184" r="22" fill="#fff"></circle><path d="M300 112c-44 0-62 50-34 83l34 48 34-48c28-33 10-83-34-83Z" fill="#015e5c"></path><circle cx="300" cy="160" r="16" fill="#fff"></circle><path d="M98 304c92-46 149-65 202-120 48-49 90-78 156-79" fill="none" stroke="#d0573b" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"></path></svg></div>
+          <div class="addr-row"><p><strong>주소</strong>신청하시면 오시는 길을 문자로 보내드립니다.</p><p><strong>주차</strong>농장 안에 주차하실 수 있습니다.</p></div>
+        </div>
+        <div><div class="bar"></div><h2>문의</h2><div class="contact-buttons" id="contactBtns"></div></div>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- ══════════ ⑨ 무료모임 안내 카드 ══════════ -->
-<section>
-  <div class="wrap moim-card">
-    <h2>먼저 오셔서 보세요 — 무료 모임</h2>
-    <p>AI 특강, 공방, 오픈데이, 인터뷰. 공간에 오지만 남는 것은 사람과 이야기입니다.</p>
-    <a class="btn btn-line-light" href="moim/">무료 모임 일정 보기</a>
-  </div>
-</section>
-
-<!-- ══════════ ⑩ 오시는 길 · 문의 ══════════ -->
-<section id="contact">
-  <div class="wrap">
-    <h2>오시는 길</h2>
-    <div class="addr" id="addr"></div>
-
-    <h2 style="margin-top:36px">문의</h2>
-    <div class="contact-btns" id="contactBtns"></div>
-  </div>
-</section>
-
-<section class="family">
-  <div class="wrap">
-    <div class="family-label">이상민이 이어온 자산</div>
-    <div class="family-links">
-      <a class="family-link" href="https://www.urban-jungle.kr" target="_blank" rel="noopener">
-        <div class="family-name">소셜가드닝 <span class="ext">↗</span></div>
-        <p class="family-desc">가드닝 뉴스와 계절 가이드 — 정원을 가꾸는 이야기</p>
-      </a>
-      <a class="family-link" href="https://sociai.org" target="_blank" rel="noopener">
-        <div class="family-name">sociai <span class="ext">↗</span></div>
-        <p class="family-desc">소셜섹터를 위한 AI — 뉴스·교육·컨설팅</p>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
-  <div class="wrap">
-    <b>놀일 NOLIL</b> · 놀고, 일하고, 자란다<br>
-    운영: 네이처커뮤니티 · 이상민
-  </div>
+  <span class="brand">NOLIL</span>
+  놀고, 일하고, 자란다<br>
+  운영: 네이처커뮤니티 · 이상민
 </footer>
 
 <script src="config.js"></script>
 <script>
 (() => {
   "use strict";
+  document.documentElement.classList.add("js");
   const C = window.NOLIL_CONFIG || {};
-  const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
     {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
-  // ---------- 1:1 이야기 CTA ----------
-  const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
-  const hasMessageChannel = Boolean(C.kakaoUrl || C.kakaoId || C.telegramUrl);
+  const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
   const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || "#contact";
+  const leadUrl = C.leadFormUrl || "letter/";
   document.querySelectorAll(".js-cta-consult").forEach(a => {
-    if (contactUrl) {
-      a.href = contactUrl;
-    }
+    a.href = contactUrl;
     if (C.consultUrl || C.kakaoUrl || C.telegramUrl) {
       a.target = "_blank";
       a.rel = "noopener";
     }
   });
-
-  // ---------- 연락처 버튼 ----------
-  const btns = [];
-  if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);
-  if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
-  else if (C.kakaoId) btns.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
-  if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
-  if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
-  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">급한 문의 전화하기</a>`);
-  $("contactBtns").innerHTML = btns.join("");
+  document.querySelectorAll(".js-lead-link").forEach(a => {
+    a.href = leadUrl;
+    if (C.leadFormUrl) {
+      a.target = "_blank";
+      a.rel = "noopener";
+    }
+  });
+  const buttons = [];
+  if (C.kakaoUrl) buttons.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
+  else if (C.kakaoId) buttons.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
+  if (C.telegramUrl) buttons.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
+  if (C.phone) buttons.push(`<a class="btn btn-line" href="${esc(telHref)}">급한 문의 전화하기</a>`);
+  document.getElementById("contactBtns").innerHTML = buttons.join("");
   document.querySelectorAll(".js-copy-kakao").forEach(btn => {
     btn.addEventListener("click", async () => {
       const value = btn.dataset.copy || "";
@@ -675,21 +974,32 @@
       setTimeout(() => { btn.textContent = "카카오톡 ID 보기"; }, 1800);
     });
   });
-
-  // ---------- 오시는 길 ----------
-  const addrEl = $("addr");
-  if (C.address) {
-    addrEl.innerHTML =
-      `<b>${esc(C.address)}</b><br>${esc(C.parkingNote || "")}<br>` +
-      `<a href="https://map.naver.com/p/search/${encodeURIComponent(C.address)}"
-          target="_blank" rel="noopener"
-          style="color:var(--ember-700);font-weight:800">네이버 지도에서 보기 →</a>`;
-  } else if (C.areaLabel) {
-    addrEl.innerHTML =
-      `<b>${esc(C.areaLabel)}</b><br>정확한 주소와 오시는 길은 신청하시면 문자로 보내드립니다.<br>` +
-      `${esc(C.parkingNote || "")}`;
+  const nav = document.getElementById("nav");
+  const setNav = () => nav.classList.toggle("scrolled", window.scrollY > 34);
+  setNav();
+  window.addEventListener("scroll", setNav, { passive: true });
+  const reveal = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .08, rootMargin: "0px 0px -6% 0px" });
+    reveal.forEach(el => {
+      io.observe(el);
+    });
+    setTimeout(() => {
+      reveal.forEach(el => {
+        el.classList.add("show");
+      });
+    }, 2400);
   } else {
-    addrEl.innerHTML = `신청하시면 오시는 길을 문자로 보내드립니다.<br>${esc(C.parkingNote || "")}`;
+    reveal.forEach(el => {
+      el.classList.add("show");
+    });
   }
 })();
 </script>
