@@ -97,6 +97,7 @@
   .btn-line:hover{border-color:var(--cream)}
   .btn-line-light{background:#fff;color:var(--moss-900);border-color:var(--moss-900)}
   .btn-kakao{background:#FEE500;color:#191600}
+  .btn-copy{background:#FEE500;color:#191600}
   .btn-telegram{background:#229ED9;color:#fff}
   .cta-row{display:flex;flex-direction:column;gap:10px}
 
@@ -398,7 +399,7 @@
   const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
 
   // ---------- 1:1 이야기 CTA ----------
-  const hasMessageChannel = Boolean(C.kakaoUrl || C.telegramUrl);
+  const hasMessageChannel = Boolean(C.kakaoUrl || C.kakaoId || C.telegramUrl);
   const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || "#contact";
   document.querySelectorAll(".js-cta-consult").forEach(a => {
     if (contactUrl) {
@@ -419,11 +420,24 @@
   const btns = [];
   if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);
   if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
+  else if (C.kakaoId) btns.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
   if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
   if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">급한 문의 전화하기</a>`);
   const cb = $("contactBtns");
   if (cb) cb.innerHTML = btns.join("");
+  document.querySelectorAll(".js-copy-kakao").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const value = btn.dataset.copy || "";
+      try {
+        await navigator.clipboard.writeText(value);
+        btn.textContent = `복사됨: ${value}`;
+      } catch {
+        btn.textContent = `카카오톡 ID: ${value}`;
+      }
+      setTimeout(() => { btn.textContent = "카카오톡 ID 보기"; }, 1800);
+    });
+  });
 })();
 </script>
 </body>

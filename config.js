@@ -8,6 +8,7 @@ window.NOLIL_CONFIG = {
   // ---------- ① 연락처 (지금 바로 채우세요) ----------
   phone: "010-2295-7100",          // 전화 문의
   kakaoUrl: "",                    // 카카오톡 채널/오픈채팅 링크. 없으면 빈칸 → 버튼 숨겨짐
+  kakaoId: "mrleesangmin",
   telegramUrl: "https://t.me/playworkgrow_bot",
   daangnUrl: "",                   // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
   consultUrl: "",                  // 1:1 이야기(상담) 예약 링크. 홈의 "이야기 한번 나눠보실래요" 버튼이 씁니다.
