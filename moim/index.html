@@ -142,6 +142,7 @@
 
   /* ---------- 문의 ---------- */
   .contact-btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .contact-note{flex-basis:100%;margin:0 0 6px;color:var(--ink-mid);font-size:15px;line-height:1.65;text-align:center}
   .btn{
     display:flex;align-items:center;justify-content:center;gap:8px;
     min-height:56px;padding:0 20px;border-radius:12px;
@@ -387,7 +388,7 @@
     </details>
     <details>
       <summary>못 가게 되면 어떻게 하나요?</summary>
-      <p>전화 한 통이면 됩니다. 열 자리뿐이라, 안 오실 것 같으면 미리 알려주시면
+      <p>메시지 하나면 됩니다. 열 자리뿐이라, 안 오실 것 같으면 미리 알려주시면
          다른 분이 오실 수 있습니다.</p>
     </details>
   </div>
@@ -400,7 +401,7 @@
     <div class="addr" id="addr"></div>
 
     <h2 style="margin-top:36px">문의</h2>
-    <p class="h2sub">전화가 제일 빠릅니다. 편하게 주세요.</p>
+    <p class="h2sub">가능하면 메시지로 편하게 문의 주세요.</p>
     <div class="contact-btns" id="contactBtns"></div>
   </div>
 </section>
@@ -469,11 +470,13 @@
 
   // ---------- 연락처 ----------
   const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
+  const hasMessageChannel = Boolean(C.kakaoUrl || C.telegramUrl);
   const btns = [];
+  if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);
   if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
   if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
-  if (C.phone)     btns.push(`<a class="btn btn-line" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line" href="${esc(telHref)}">급한 문의 전화하기</a>`);
   $("contactBtns").innerHTML = btns.join("");
 
   // ---------- 오시는 길 ----------
@@ -504,7 +507,7 @@
 
   function render(rows) {
     if (!rows.length) {
-      slotsEl.innerHTML = `<div class="loading">예정된 일정이 없습니다. 전화로 문의해 주세요.</div>`;
+      slotsEl.innerHTML = `<div class="loading">예정된 일정이 없습니다. 문의 채널로 확인해 주세요.</div>`;
       return;
     }
     slotsEl.innerHTML = rows.map(r => {
@@ -599,15 +602,17 @@
     $("btnSubmit").textContent = "신청하기";
     $("btnSubmit").disabled = false;
 
-    // Supabase 미연결 → 폼 대신 전화로
+    // Supabase 미연결 → 폼 대신 문의 채널로
     if (!live || !ds.id) {
       $("formFields").style.display = "none";
       msg.className = "msg ok";
-      msg.innerHTML = `신청은 카카오톡이나 텔레그램으로 편하게 문의 주세요.`;
+      msg.innerHTML = hasMessageChannel
+        ? `신청은 카카오톡이나 텔레그램으로 편하게 문의 주세요.`
+        : `카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.`;
       const contactButton =
         C.kakaoUrl ? `<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>` :
         C.telegramUrl ? `<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>` :
-        C.phone ? `<a class="btn btn-primary" href="${esc(telHref)}">전화하기</a>` : "";
+        C.phone ? `<a class="btn btn-line" href="${esc(telHref)}">급한 문의 전화하기</a>` : "";
       $("mActions").innerHTML =
         `<button type="button" class="btn btn-ghost" id="btnClose2">닫기</button>` +
         contactButton;
@@ -679,13 +684,13 @@
         $("btnDone").addEventListener("click", () => { dlg.close(); location.reload(); });
       } else {
         msg.className = "msg err";
-        msg.textContent = ERRORS[r.error] || "신청에 실패했습니다. 전화로 문의해 주세요.";
+        msg.textContent = ERRORS[r.error] || "신청에 실패했습니다. 문의 채널로 확인해 주세요.";
         btn.disabled = false; btn.textContent = "신청하기";
       }
     } catch (e) {
       console.error("[놀일] 예약 실패:", e);
       msg.className = "msg err";
-      msg.innerHTML = `일시적인 오류입니다. 전화로 신청해 주세요.<br><b>${esc(C.phone || "")}</b>`;
+      msg.innerHTML = `일시적인 오류입니다. 문의 채널로 확인해 주세요.`;
       btn.disabled = false; btn.textContent = "신청하기";
     }
   });

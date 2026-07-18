@@ -159,6 +159,7 @@
 
   /* ---------- 문의 · 오시는 길 ---------- */
   .contact-btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .contact-note{flex-basis:100%;margin:0 0 6px;color:var(--ink-mid);font-size:15px;line-height:1.65;text-align:center}
   .btn-kakao{background:#FEE500;color:#191600}
   .addr{
     background:var(--moss-50); border:1px solid var(--moss-300); border-radius:10px;
@@ -420,7 +421,7 @@
     <h1 aria-label="PLAY WORK GROW">PLAY<br>WORK<br>GROW</h1>
     <p>공간은 매개입니다. 놀일의 중심은 서로를 발견하는 사람들, 그리고 그 만남에서 자라는 콘텐츠입니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#" id="ctaHero">이야기 한번 나눠보실래요 — 30분, 무료</a>
+      <a class="btn btn-primary js-cta-consult" href="#" id="ctaHero">메시지로 먼저 문의하기</a>
       <a class="btn btn-line" href="#programs">사람과 콘텐츠 보기</a>
     </div>
   </div>
@@ -489,7 +490,7 @@
       </div>
     </div>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#" id="ctaSteps">이야기 한번 나눠보실래요 — 30분, 무료</a>
+      <a class="btn btn-primary js-cta-consult" href="#" id="ctaSteps">메시지로 먼저 문의하기</a>
       <a class="btn btn-line-light" href="moim/">무료 모임 보기</a>
     </div>
   </div>
@@ -557,8 +558,8 @@
           <span class="prog-tag">무료</span>
         </a>
         <a class="prog-card free js-cta-consult" href="#">
-          <div class="prog-title">이야기 한번</div>
-          <p class="prog-desc">30분, 무료. 뭘 해오셨고 뭘 하고 싶은지 편하게 듣습니다.</p>
+          <div class="prog-title">메시지 문의</div>
+          <p class="prog-desc">전화부터 하지 않아도 됩니다. 먼저 편한 채널로 남겨주세요.</p>
           <span class="prog-tag">무료 · 1:1</span>
         </a>
       </div>
@@ -640,7 +641,8 @@
 
   // ---------- 1:1 이야기 CTA ----------
   const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
-  const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || (C.phone ? telHref : "");
+  const hasMessageChannel = Boolean(C.kakaoUrl || C.telegramUrl);
+  const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || "#contact";
   document.querySelectorAll(".js-cta-consult").forEach(a => {
     if (contactUrl) {
       a.href = contactUrl;
@@ -653,10 +655,11 @@
 
   // ---------- 연락처 버튼 ----------
   const btns = [];
+  if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);
   if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
   if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
-  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">급한 문의 전화하기</a>`);
   $("contactBtns").innerHTML = btns.join("");
 
   // ---------- 오시는 길 ----------
