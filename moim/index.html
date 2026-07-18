@@ -153,6 +153,7 @@
   .btn-primary{background:var(--ember-500);color:#fff}
   .btn-line{background:#fff;color:var(--moss-900);border-color:var(--moss-900)}
   .btn-kakao{background:#FEE500;color:#191600}
+  .btn-telegram{background:#229ED9;color:#fff}
   .btn-block{width:100%}
 
   .addr{
@@ -469,9 +470,10 @@
   // ---------- 연락처 ----------
   const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
   const btns = [];
-  if (C.phone)     btns.push(`<a class="btn btn-primary" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
   if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
+  if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
   $("contactBtns").innerHTML = btns.join("");
 
   // ---------- 오시는 길 ----------
@@ -601,10 +603,14 @@
     if (!live || !ds.id) {
       $("formFields").style.display = "none";
       msg.className = "msg ok";
-      msg.innerHTML = `신청은 전화로 받고 있습니다.<br><b>${esc(C.phone || "")}</b>`;
+      msg.innerHTML = `신청은 카카오톡이나 텔레그램으로 편하게 문의 주세요.`;
+      const contactButton =
+        C.kakaoUrl ? `<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>` :
+        C.telegramUrl ? `<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>` :
+        C.phone ? `<a class="btn btn-primary" href="${esc(telHref)}">전화하기</a>` : "";
       $("mActions").innerHTML =
         `<button type="button" class="btn btn-ghost" id="btnClose2">닫기</button>` +
-        (C.phone ? `<a class="btn btn-primary" href="${esc(telHref)}">전화하기</a>` : "");
+        contactButton;
       $("btnClose2")?.addEventListener("click", () => dlg.close());
     }
     dlg.showModal();

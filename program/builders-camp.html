@@ -97,6 +97,7 @@
   .btn-line:hover{border-color:var(--cream)}
   .btn-line-light{background:#fff;color:var(--moss-900);border-color:var(--moss-900)}
   .btn-kakao{background:#FEE500;color:#191600}
+  .btn-telegram{background:#229ED9;color:#fff}
   .cta-row{display:flex;flex-direction:column;gap:10px}
 
   /* ---------- 좌석 (퍼널 아닌 안내 카드) ---------- */
@@ -371,14 +372,14 @@
   const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
 
   // ---------- 1:1 이야기 CTA ----------
-  // consultUrl 있으면 그리로(새 탭), 없으면 전화로 폴백.
+  const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || (C.phone ? telHref : "");
   document.querySelectorAll(".js-cta-consult").forEach(a => {
-    if (C.consultUrl) {
-      a.href = C.consultUrl;
+    if (contactUrl) {
+      a.href = contactUrl;
+    }
+    if (C.consultUrl || C.kakaoUrl || C.telegramUrl) {
       a.target = "_blank";
       a.rel = "noopener";
-    } else if (C.phone) {
-      a.href = telHref;
     }
   });
 
@@ -389,9 +390,10 @@
 
   // ---------- 연락처 버튼 ----------
   const btns = [];
-  if (C.phone)     btns.push(`<a class="btn btn-primary" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
   if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
+  if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">전화하기 ${esc(C.phone)}</a>`);
   const cb = $("contactBtns");
   if (cb) cb.innerHTML = btns.join("");
 })();
