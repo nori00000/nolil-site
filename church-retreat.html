@@ -204,6 +204,42 @@
   }
   .fee-note strong{display:block;font-size:24px;line-height:1.25;color:var(--ember)}
   .fee-note p{margin:8px 0 0;color:var(--muted)}
+  .about-grid{
+    display:grid;
+    grid-template-columns:minmax(0,.85fr) minmax(320px,1.15fr);
+    gap:34px;
+    align-items:start;
+  }
+  .about-panel{
+    border-radius:28px;
+    background:var(--teal);
+    color:#fff;
+    padding:30px;
+  }
+  .about-panel h2{
+    margin:0;
+    font-size:clamp(32px,5vw,58px);
+    line-height:1.08;
+  }
+  .about-panel p{margin:20px 0 0;color:rgba(255,255,255,.86)}
+  .about-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .about-actions .btn.secondary{border-color:rgba(255,255,255,.34)}
+  .about-cards{display:grid;gap:14px}
+  .about-card{
+    border:1px solid rgba(0,94,92,.14);
+    border-radius:22px;
+    background:white;
+    padding:22px;
+  }
+  .about-card small{
+    display:block;
+    margin-bottom:8px;
+    color:var(--teal);
+    font-weight:900;
+    letter-spacing:.12em;
+  }
+  .about-card h3{margin:0 0 8px;font-size:22px;line-height:1.25}
+  .about-card p{margin:0;color:var(--muted)}
   .mint{background:var(--mint)}
   .schedule{
     display:grid;
@@ -292,6 +328,7 @@
     .hero{min-height:auto}
     .hero-grid,.apply-grid{grid-template-columns:1fr;gap:34px;padding:54px 0}
     .program-grid,.schedule{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr}
     .activity-list{grid-template-columns:1fr}
     .schedule-item{grid-template-columns:1fr}
     section{padding:64px 0}
@@ -377,6 +414,37 @@
       <div class="fee-note">
         <strong>참가비 20,000원</strong>
         <p>교회 모임 식비 등으로 사용하며, 계좌이체로 받을 예정입니다. 계좌와 입금 안내는 신청자에게 따로 보내드립니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap about-grid">
+      <div class="about-panel">
+        <p class="eyebrow">WHAT IS NOLIL</p>
+        <h2>놀일은 사람과 콘텐츠가 자라는 농장 커뮤니티입니다.</h2>
+        <p>공간은 매개입니다. 놀일은 농장에서 사람들이 서로를 발견하고, 각자의 재능과 이야기가 모임·기록·작은 일로 자라도록 돕습니다.</p>
+        <div class="about-actions">
+          <a class="btn secondary" href="https://playworkgrow.club/">놀일 홈페이지 보기</a>
+          <a class="btn" href="#apply">리트릿 신청하기</a>
+        </div>
+      </div>
+      <div class="about-cards">
+        <article class="about-card">
+          <small>PEOPLE</small>
+          <h3>사람을 발견합니다</h3>
+          <p>퇴직 후의 경험, 교인의 재능, 가족의 취미처럼 혼자 있으면 지나가는 것을 함께 할 수 있는 모임으로 엮습니다.</p>
+        </article>
+        <article class="about-card">
+          <small>CONTENT</small>
+          <h3>이야기를 콘텐츠로 남깁니다</h3>
+          <p>모임에서 나온 경험과 배움을 사진, 글, 인터뷰, 짧은 기록으로 남겨 다음 사람에게 이어지게 합니다.</p>
+        </article>
+        <article class="about-card">
+          <small>COMMUNITY</small>
+          <h3>함께 여는 프로그램을 만듭니다</h3>
+          <p>조각, 목공, 식물, 테라리움, 주제 강연처럼 참여자가 가진 것을 나누고 필요한 것을 서로 지원하는 구조를 실험합니다.</p>
+        </article>
       </div>
     </div>
   </section>
