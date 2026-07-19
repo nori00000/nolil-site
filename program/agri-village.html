@@ -10,8 +10,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="아그리 AI 빌리지 — 놀일">
 <meta property="og:description" content="구획 텃밭과 장비, 그리고 AI·창업 어드바이스. 되는 것은 함께 사업으로 키웁니다.">
-<meta property="og:image" content="../og.jpg">
+<meta property="og:image" content="https://playworkgrow.club/og.jpg">
+<meta property="og:url" content="https://playworkgrow.club/program/agri-village.html">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#16311F">
+<link rel="canonical" href="https://playworkgrow.club/program/agri-village.html">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="../tokens.css">
@@ -281,7 +284,7 @@
     <h1>아그리 AI 빌리지</h1>
     <p>구획 텃밭과 장비, 그리고 AI·창업 어드바이스. 되는 것은 함께 사업으로 키웁니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#">메시지로 먼저 문의하기</a>
+      <a class="btn btn-primary js-cta-consult" href="#contact">메시지로 먼저 문의하기</a>
     </div>
     <div class="badges">
       <span class="badge">연 단위</span>
@@ -345,7 +348,7 @@
     <h2>먼저 메시지로 문의 주세요</h2>
     <p>프로그램 설명이 필요하시면 편한 채널로 남겨주세요.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#">메시지로 먼저 문의하기</a>
+      <a class="btn btn-primary js-cta-consult" href="#contact">메시지로 먼저 문의하기</a>
     </div>
     <div class="contact-btns" id="contactBtns"></div>
   </div>
@@ -370,7 +373,7 @@
 <footer>
   <div class="wrap">
     <b>놀일 NOLIL</b> · 놀고, 일하고, 자란다<br>
-    운영: 네이처커뮤니티 · 이상민<br>
+    운영: 네이처커뮤니티 · 이상민 · <a href="../privacy.html">개인정보 처리방침</a><br>
     <a href="../">← 놀일 홈으로</a>
   </div>
 </footer>
@@ -383,7 +386,7 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
     {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
+  const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
 
   // ---------- 1:1 이야기 CTA ----------
   const hasMessageChannel = Boolean(C.kakaoUrl || C.kakaoId || C.telegramUrl);

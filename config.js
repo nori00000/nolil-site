@@ -9,10 +9,11 @@ window.NOLIL_CONFIG = {
 	kakaoUrl: "", // 카카오톡 채널/오픈채팅 링크. 없으면 빈칸 → 버튼 숨겨짐
 	kakaoId: "mrleesangmin",
 	telegramUrl: "https://t.me/playworkgrow_bot",
+	instagramUrl: "https://instagram.com/nolil.growfarm",
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
 	consultUrl: "https://app.playworkgrow.club/meetings",
-	leadFormUrl: "https://app.playworkgrow.club/#next-notice",
+	leadFormUrl: "letter/",
 
 	// ---------- ② 위치 ----------
 	// 당근마켓은 동네 기반이라 지역은 밝히는 게 낫습니다.

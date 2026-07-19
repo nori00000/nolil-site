@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>놀일 편지 — PLAY WORK GROW</title>
 <meta name="description" content="놀일에서 열리는 모임, 농장에서 만난 사람들, 함께 만들 수 있는 작은 일을 한 주에 한 번 받아보세요.">
+<link rel="canonical" href="https://playworkgrow.club/letter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="놀일 편지 — PLAY WORK GROW">
+<meta property="og:description" content="다음 모임과 농장에서 만난 사람 이야기를 이메일로 받아보세요.">
+<meta property="og:image" content="https://playworkgrow.club/og.jpg">
+<meta property="og:url" content="https://playworkgrow.club/letter/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../tokens.css">
 <style>
   :root{
@@ -107,19 +114,22 @@
       </div>
       <div class="form-card">
         <h2>관심사를 남겨주세요</h2>
-        <p>정식 구독 폼이 연결되기 전에는 아래 내용을 카카오톡이나 텔레그램으로 보내주시면 됩니다.</p>
-        <form id="leadForm">
+        <p>소식만 받을 때는 이메일만 남기셔도 됩니다. 실제 농장 방문을 신청할 때만 휴대폰 번호를 받습니다.</p>
+        <form id="leadForm" action="https://app.playworkgrow.club/subscribers" method="post">
+          <input type="hidden" name="subscriber[source]" value="letter">
+          <input type="hidden" name="subscriber[utm_source]" value="playworkgrow.club">
+          <input type="hidden" name="subscriber[utm_campaign]" value="nolil_letter">
           <label>이름
-            <input id="name" name="name" autocomplete="name" required>
+            <input id="name" name="subscriber[name]" autocomplete="name" placeholder="선택">
           </label>
-          <label>연락받고 싶은 방법
-            <input id="channel" name="channel" placeholder="예: 카카오톡, 텔레그램, 이메일" required>
+          <label>이메일
+            <input id="email" name="subscriber[email]" type="email" autocomplete="email" placeholder="you@example.com" required>
           </label>
           <label>관심 있는 것
-            <textarea id="interest" name="interest" placeholder="예: 무료 모임, 화면 끄는 하루, 제2인생 1:1 이야기"></textarea>
+            <textarea id="interest" name="subscriber[interests]" maxlength="500" placeholder="예: 무료 모임, 교회 리트릿, 화면 끄는 하루, 제2인생 1:1 이야기"></textarea>
           </label>
-          <label class="check"><input id="consent" type="checkbox" required> 놀일 소식과 모임 안내를 받기 위해 위 내용을 남기는 데 동의합니다.</label>
-          <button class="btn" type="submit">보낼 메시지 만들기</button>
+          <label class="check"><input name="subscriber[privacy_consent]" value="1" type="checkbox" required> (필수) 소식 발송을 위한 개인정보 수집·이용에 동의합니다. 항목: 이름(선택), 이메일, 관심사. 보유: 수신거부 또는 해지 시 즉시 파기. <a href="../privacy.html" target="_blank" rel="noopener">개인정보 처리방침</a></label>
+          <button class="btn" type="submit">소식 받기</button>
         </form>
         <div class="result" id="result">
           <strong>아래 메시지를 복사해서 보내주세요.</strong>
@@ -145,42 +155,14 @@
 
 <footer>
   NOLIL · PLAY WORK GROW<br>
-  운영: 네이처커뮤니티 · 이상민
+  운영: 네이처커뮤니티 · 이상민 · <a href="../privacy.html">개인정보 처리방침</a>
 </footer>
 
 <script src="../config.js"></script>
 <script>
 (() => {
   "use strict";
-  const C = window.NOLIL_CONFIG || {};
-  const form = document.getElementById("leadForm");
-  const result = document.getElementById("result");
-  const message = document.getElementById("message");
-  const actions = document.getElementById("resultActions");
-  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
-    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (C.leadFormUrl) {
-      window.open(C.leadFormUrl, "_blank", "noopener");
-      return;
-    }
-    const name = document.getElementById("name").value.trim();
-    const channel = document.getElementById("channel").value.trim();
-    const interest = document.getElementById("interest").value.trim() || "놀일 소식과 다음 모임";
-    message.value = `안녕하세요. 놀일 소식을 받고 싶습니다.\n이름: ${name}\n연락 방법: ${channel}\n관심사: ${interest}`;
-    const encoded = encodeURIComponent(message.value);
-    const buttons = [];
-    if (C.telegramUrl) buttons.push(`<a class="btn" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램으로 보내기</a>`);
-    if (C.kakaoId) buttons.push(`<button class="btn btn-line" type="button" id="copyKakao">카카오톡 ID: ${esc(C.kakaoId)}</button>`);
-    buttons.push(`<a class="btn btn-line" href="mailto:?subject=${encodeURIComponent("놀일 소식받기")}&body=${encoded}">이메일 앱으로 보내기</a>`);
-    actions.innerHTML = buttons.join("");
-    result.classList.add("show");
-    document.getElementById("copyKakao")?.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(C.kakaoId);
-    });
-  });
+  void (window.NOLIL_CONFIG || {});
 })();
 </script>
 </body>

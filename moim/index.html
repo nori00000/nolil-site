@@ -10,8 +10,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="놀일 — 같이 놀 일 있어요">
 <meta property="og:description" content="농장에서 여는 무료 모임. 월 AI 특강 · 수 공방 · 주말 오픈데이. 회당 열 분.">
-<meta property="og:image" content="../og.jpg">
+<meta property="og:image" content="https://playworkgrow.club/og.jpg">
+<meta property="og:url" content="https://playworkgrow.club/moim/">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#16311F">
+<link rel="canonical" href="https://playworkgrow.club/moim/">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="../tokens.css">
@@ -410,7 +413,7 @@
 <footer>
   <div class="wrap">
     <b>놀일 NOLIL</b> · 놀고, 일하고, 자란다<br>
-    운영: 네이처커뮤니티 · 이상민
+    운영: 네이처커뮤니티 · 이상민 · <a href="../privacy.html">개인정보 처리방침</a>
   </div>
 </footer>
 
@@ -470,7 +473,7 @@
   const live = Boolean(C.supabaseUrl && C.supabaseAnonKey);
 
   // ---------- 연락처 ----------
-  const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
+  const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
   const hasMessageChannel = Boolean(C.kakaoUrl || C.kakaoId || C.telegramUrl);
   const btns = [];
   if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);

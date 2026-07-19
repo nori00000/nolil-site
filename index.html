@@ -3,12 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>놀일 — PLAY WORK GROW</title>
-<meta name="description" content="PLAY WORK GROW. 놀일은 농장을 매개로 사람과 이야기가 만나고 자라는 커뮤니티입니다.">
+<title>놀일 — 고양 일산 농장 커뮤니티 | PLAY WORK GROW</title>
+<meta name="description" content="고양 일산 농장에서 여는 단체 워크샵, 교회 리트릿, 무료 모임과 사람 이야기. 공간은 매개이고 중심은 사람과 콘텐츠입니다.">
+<link rel="canonical" href="https://playworkgrow.club/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="놀일 — 고양 일산 농장 커뮤니티">
+<meta property="og:description" content="PLAY WORK GROW. 단체 모임과 농장 커뮤니티가 사람과 콘텐츠로 자라는 곳입니다.">
+<meta property="og:image" content="https://playworkgrow.club/og.jpg">
+<meta property="og:url" content="https://playworkgrow.club/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","name":"놀일","alternateName":"NOLIL","url":"https://playworkgrow.club","sameAs":["https://instagram.com/nolil.growfarm"]},
+    {"@type":"LocalBusiness","name":"놀일 농장","url":"https://playworkgrow.club","address":{"@type":"PostalAddress","addressLocality":"고양시 일산서구","addressRegion":"경기도","addressCountry":"KR"},"description":"고양 일산 농장에서 여는 단체 워크샵, 교회 리트릿, 무료 모임과 사람 이야기."}
+  ]
+}
+</script>
 <style>
   :root{
     --teal:#015e5c;
@@ -301,6 +317,15 @@
     margin-bottom:4px;
   }
   .choice strong{display:block;color:var(--text);font-size:18px;line-height:1.45}
+  .wedge-banner{background:#062c2a;color:#fff;padding:54px 0}
+  .wedge-panel{display:grid;grid-template-columns:1.1fr auto;gap:24px;align-items:center;border:1px solid rgba(220,239,224,.18);border-radius:22px;background:rgba(255,255,255,.08);padding:30px}
+  .wedge-panel h2{color:#fff;margin:8px 0 12px}
+  .wedge-panel p{color:rgba(255,255,255,.78);font-size:18px;line-height:1.75}
+  .week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+  .week-card{border:1px solid rgba(59,74,54,.1);border-radius:16px;background:#fff;padding:20px}
+  .week-card small{display:block;color:var(--teal);font-weight:900;margin-bottom:8px}
+  .week-card strong{display:block;color:var(--text);font-size:19px;line-height:1.4;margin-bottom:8px}
+  .week-card span{display:block;color:var(--body);font-size:14px;line-height:1.55}
   .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:42px}
   .program-card{
     display:flex;
@@ -546,6 +571,11 @@
     font-size:13px;
     font-weight:900;
   }
+  .channel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .channel-card{border:1px solid rgba(59,74,54,.1);border-radius:16px;background:#fff;padding:22px}
+  .channel-card small{display:block;color:var(--teal);font-weight:900;letter-spacing:.12em;margin-bottom:8px}
+  .channel-card strong{display:block;font-size:20px;margin-bottom:8px}
+  .channel-card p{font-size:15px;line-height:1.65}
   .hero-note{
     display:inline-flex;
     align-items:center;
@@ -773,7 +803,7 @@
     .hero-card{display:none}
     h1{font-size:54px}
     .hero-title{font-size:34px}
-    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel{grid-template-columns:1fr}
+    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel,.wedge-panel,.week-grid,.channel-grid{grid-template-columns:1fr}
     .choice{padding:16px}
     .choice strong{font-size:17px}
     .person-card,.outcome-card{padding:20px}
@@ -833,6 +863,36 @@
 </header>
 
 <main>
+  <section class="wedge-banner" data-reveal>
+    <div class="wrap">
+      <div class="wedge-panel">
+        <div>
+          <div class="eyebrow">GROUP RETREAT</div>
+          <h2>교회·회사·모임이 하루를 함께 보내는 농장</h2>
+          <p>농장 체험, 만들기 테이블, 품 경제 팀빌딩, 바베큐와 캠프파이어를 목적에 맞게 조합합니다.</p>
+        </div>
+        <a class="btn btn-primary" href="group.html">단체 모임 문의하기</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="weekly" class="mint" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">이번 주와 다음 주</div>
+        <h2>지금 실제로 열리는 모임부터 보세요</h2>
+        <p>무료 모임으로 먼저 분위기를 보고, 맞는다고 느껴지면 하루 체험이나 단체 모임으로 이어갈 수 있습니다.</p>
+      </div>
+      <div class="week-grid">
+        <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>7/22 수 · 무료</small><strong>공방 — 목공·이끼·화분</strong><span>14:00–17:00 · 정원 10명</span></a>
+        <a class="week-card" href="church-retreat.html"><small>7/26 일 · 교회</small><strong>주말 리트릿</strong><span>오후 도착 · 재능 나눔과 바베큐</span></a>
+        <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>7/28 월 · 무료</small><strong>AI 특강</strong><span>스마트폰으로 시작하는 AI</span></a>
+        <a class="week-card" href="group.html"><small>단체 문의</small><strong>팀 워크샵·수련회</strong><span>인원과 구성에 따라 함께 설계</span></a>
+      </div>
+    </div>
+  </section>
+
   <section class="story-intro">
     <div class="wrap">
       <h2>혹시 당신 이야기인가요</h2>
@@ -931,6 +991,22 @@
     </div>
   </section>
 
+  <section id="channels" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">OFFICIAL CHANNELS</div>
+        <h2>놀일의 장면과 소식이 쌓이는 곳</h2>
+        <p>운영하는 채널만 연결합니다. 자세한 안내는 메일로, 오늘의 장면은 인스타그램으로, 빠른 문의는 텔레그램으로 받습니다.</p>
+      </div>
+      <div class="channel-grid">
+        <a class="channel-card" href="https://instagram.com/nolil.growfarm" target="_blank" rel="noopener"><small>INSTAGRAM</small><strong>@nolil.growfarm</strong><p>농장 사진과 오늘의 장면을 남깁니다.</p></a>
+        <a class="channel-card" href="letter/"><small>LETTER</small><strong>놀일 편지</strong><p>다음 모임과 사람 이야기를 이메일로 받습니다.</p></a>
+        <a class="channel-card" href="https://t.me/playworkgrow_bot" target="_blank" rel="noopener"><small>TELEGRAM</small><strong>빠른 문의</strong><p>단체 일정과 모임 문의를 메시지로 남깁니다.</p></a>
+      </div>
+    </div>
+  </section>
+
   <section id="remains" data-reveal>
     <div class="wrap">
       <div class="section-head"><div class="bar"></div><div class="eyebrow">다녀가면 남는 것</div><h2>사진보다 중요한 것은 다음 약속입니다</h2><p>놀일의 결과물은 예쁜 풍경 하나가 아닙니다. 사람, 기록, 작은 실험, 다음 약속이 남아야 합니다.</p></div>
@@ -971,7 +1047,7 @@
 <footer>
   <span class="brand">NOLIL</span>
   놀고, 일하고, 자란다<br>
-  운영: 네이처커뮤니티 · 이상민
+  운영: 네이처커뮤니티 · 이상민 · <a href="privacy.html">개인정보 처리방침</a> · <a href="https://instagram.com/nolil.growfarm" target="_blank" rel="noopener">Instagram</a>
 </footer>
 
 <script src="config.js"></script>
@@ -994,7 +1070,7 @@
   });
   document.querySelectorAll(".js-lead-link").forEach(a => {
     a.href = leadUrl;
-    if (C.leadFormUrl) {
+    if (/^https?:\/\//.test(leadUrl)) {
       a.target = "_blank";
       a.rel = "noopener";
     }
