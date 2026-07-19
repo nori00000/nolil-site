@@ -156,6 +156,58 @@
   const params = new URLSearchParams(location.search);
   if (params.has("submitted")) document.body.classList.add("submitted");
   if (params.has("error")) document.body.classList.add("error");
+
+  // ── 초안 자동 저장 ──────────────────────────────────────────────
+  // 농장은 전파가 약하다. 제출이 실패하면 쓴 글이 그 자리에서 사라지고,
+  // 대부분 다시 쓰지 않는다. 그래서 입력하는 동안 로컬에 남긴다.
+  //
+  // 저장하지 않는 것 (의도적):
+  //  · 이메일·전화 — 리트릿에선 기기를 빌려 쓰기도 한다. 연락처를 남의 폰에 남기지 않는다.
+  //  · 동의 체크박스 — 동의는 매번 본인이 직접 하는 행위여야 한다. 복원하지 않는다.
+  const form = document.querySelector("form.form-card");
+  if (!form || !window.localStorage) return;
+
+  const KEY = "nolil-retreat-feedback-draft";
+  const FIELDS = [
+    "feedback[best_moment]",
+    "feedback[next_interest]",
+    "feedback[share_offer]",
+    "feedback[name]",
+  ];
+
+  const read = (n) => form.elements[n];
+
+  if (params.has("submitted")) {
+    localStorage.removeItem(KEY);           // 접수됐으면 초안은 역할이 끝났다
+  } else {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+      let restored = false;
+      FIELDS.forEach((n) => {
+        const el = read(n);
+        if (el && !el.value && saved[n]) { el.value = saved[n]; restored = true; }
+      });
+      if (restored) {
+        const note = document.createElement("p");
+        note.className = "status";
+        note.style.cssText = "display:block;opacity:.75;font-size:.9em";
+        note.textContent = "이전에 쓰시던 내용을 불러왔습니다. 이어서 쓰시면 됩니다.";
+        form.insertBefore(note, form.firstChild);
+      }
+    } catch (_) {
+      localStorage.removeItem(KEY);         // 깨진 초안은 조용히 버린다
+    }
+  }
+
+  let timer;
+  form.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const draft = {};
+      FIELDS.forEach((n) => { const el = read(n); if (el && el.value) draft[n] = el.value; });
+      try { localStorage.setItem(KEY, JSON.stringify(draft)); } catch (_) {}
+    }, 400);
+  });
 })();
 </script>
 </body>
