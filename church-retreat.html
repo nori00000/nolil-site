@@ -375,6 +375,41 @@
 </header>
 
 <main>
+  <section id="apply" class="apply">
+    <div class="wrap apply-grid">
+      <div>
+        <p class="eyebrow">APPLY</p>
+        <h2>신청은 먼저 간단하게 받겠습니다.</h2>
+        <p>이름, 연락처, 메일만 남겨주세요. 실제 농장 주소, 주차 안내, 카카오뱅크 입금 계좌와 선택 숙박 안내는 신청자에게 따로 보내드립니다.</p>
+        <a class="btn secondary" href="#program">프로그램 내용 보기</a>
+      </div>
+      <form class="form-card" action="https://app.playworkgrow.club/retreat_signups" method="post">
+        <p class="form-status ok" id="okMessage">신청이 접수되었습니다. 안내 메시지를 보내드릴게요.</p>
+        <p class="form-status bad" id="badMessage">입력값을 확인해 주세요. 휴대폰은 010으로 시작하는 번호를 넣어주세요.</p>
+        <input type="hidden" name="return_to" value="https://playworkgrow.club/church-retreat.html">
+        <input type="hidden" name="retreat_signup[source]" value="church_retreat">
+        <input type="hidden" name="retreat_signup[program_key]" value="church_weekend_retreat_2026_07_25">
+
+        <label for="retreat_name">이름</label>
+        <input id="retreat_name" name="retreat_signup[name]" autocomplete="name" required placeholder="홍길동">
+
+        <label for="retreat_phone">연락처</label>
+        <input id="retreat_phone" name="retreat_signup[phone]" autocomplete="tel" inputmode="numeric" pattern="010[0-9]{8}" required placeholder="01012345678">
+        <p class="help">하이픈 없이 입력해도 되고, 입력하신 번호로 농장 오시는 길을 안내합니다.</p>
+
+        <label for="retreat_email">메일</label>
+        <input id="retreat_email" name="retreat_signup[email]" type="email" autocomplete="email" required placeholder="you@example.com">
+
+        <label for="retreat_note">나눌 수 있는 것 / 받고 싶은 것</label>
+        <textarea id="retreat_note" name="retreat_signup[note]" maxlength="500" placeholder="예: 조각 체험을 열 수 있어요. 집에서 김밥을 가져갈 수 있어요. 아이들이 쓸 보드게임을 빌리고 싶어요. 자고 갈 수 있는지도 궁금해요."></textarea>
+        <p class="help">재능, 주제 강연, 음식, 물건, 차량, 준비 지원처럼 나눌 수 있는 것과 필요한 것을 자유롭게 적어주세요.</p>
+
+        <button class="btn" type="submit">주말 리트릿 신청하기</button>
+        <p class="consent">신청 버튼을 누르면 리트릿 안내, 식비 계좌이체 확인, 나눔 준비 조율을 위해 이름, 연락처, 메일과 신청 메모를 수집하는 데 동의한 것으로 기록합니다. 안내 목적 외에는 사용하지 않습니다.</p>
+      </form>
+    </div>
+  </section>
+
   <section id="program">
     <div class="wrap">
       <div class="section-head">
@@ -413,7 +448,7 @@
       </ul>
       <div class="fee-note">
         <strong>참가비 20,000원</strong>
-        <p>교회 모임 식비 등으로 사용하며, 계좌이체로 받을 예정입니다. 계좌와 입금 안내는 신청자에게 따로 보내드립니다.</p>
+        <p>교회 모임 식비 등으로 사용합니다. 카카오뱅크 3333-09-0759769 이상민 계좌로 이체해 주세요.</p>
       </div>
     </div>
   </section>
@@ -477,40 +512,6 @@
     </div>
   </section>
 
-  <section id="apply" class="apply">
-    <div class="wrap apply-grid">
-      <div>
-        <p class="eyebrow">APPLY</p>
-        <h2>신청은 간단하게 받겠습니다.</h2>
-        <p>이름, 연락처, 메일만 남겨주세요. 실제 농장 주소, 주차 안내, 식비 20,000원 계좌이체 안내와 선택 숙박 안내는 신청자에게 따로 보내드립니다.</p>
-        <a class="btn secondary" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">QR 다시 크게 보기</a>
-      </div>
-      <form class="form-card" action="https://app.playworkgrow.club/retreat_signups" method="post">
-        <p class="form-status ok" id="okMessage">신청이 접수되었습니다. 안내 메시지를 보내드릴게요.</p>
-        <p class="form-status bad" id="badMessage">입력값을 확인해 주세요. 휴대폰은 010으로 시작하는 번호를 넣어주세요.</p>
-        <input type="hidden" name="return_to" value="https://playworkgrow.club/church-retreat.html">
-        <input type="hidden" name="retreat_signup[source]" value="church_retreat">
-        <input type="hidden" name="retreat_signup[program_key]" value="church_weekend_retreat_2026_07_25">
-
-        <label for="retreat_name">이름</label>
-        <input id="retreat_name" name="retreat_signup[name]" autocomplete="name" required placeholder="홍길동">
-
-        <label for="retreat_phone">연락처</label>
-        <input id="retreat_phone" name="retreat_signup[phone]" autocomplete="tel" inputmode="numeric" pattern="010[0-9]{8}" required placeholder="01012345678">
-        <p class="help">하이픈 없이 입력해도 되고, 입력하신 번호로 농장 오시는 길을 안내합니다.</p>
-
-        <label for="retreat_email">메일</label>
-        <input id="retreat_email" name="retreat_signup[email]" type="email" autocomplete="email" required placeholder="you@example.com">
-
-        <label for="retreat_note">나눌 수 있는 것 / 받고 싶은 것</label>
-        <textarea id="retreat_note" name="retreat_signup[note]" maxlength="500" placeholder="예: 조각 체험을 열 수 있어요. 집에서 김밥을 가져갈 수 있어요. 아이들이 쓸 보드게임을 빌리고 싶어요. 자고 갈 수 있는지도 궁금해요."></textarea>
-        <p class="help">재능, 주제 강연, 음식, 물건, 차량, 준비 지원처럼 나눌 수 있는 것과 필요한 것을 자유롭게 적어주세요.</p>
-
-        <button class="btn" type="submit">주말 리트릿 신청하기</button>
-        <p class="consent">신청 버튼을 누르면 리트릿 안내, 식비 계좌이체 안내, 나눔 준비 조율을 위해 이름, 연락처, 메일과 신청 메모를 수집하는 데 동의한 것으로 기록합니다. 안내 목적 외에는 사용하지 않습니다.</p>
-      </form>
-    </div>
-  </section>
 </main>
 
 <footer>
