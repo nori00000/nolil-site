@@ -314,10 +314,32 @@
   .program-card:hover{transform:translateY(-4px);border-color:var(--coral)}
   .program-art{
     aspect-ratio:5/3;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(170deg,#e8f2ef,#e2ecd3 62%,#dce6cc);
+    position:relative;
+    overflow:hidden;
+    background:#dcefe0;
+    background-size:cover;
+    background-position:center;
   }
+  .program-art svg{display:none}
+  .program-art img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .28s ease;
+  }
+  .program-card:hover .program-art img{
+    transform:scale(1.035);
+  }
+  #programs .program-grid:nth-of-type(2) .program-card:nth-child(1) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.08),rgba(1,65,64,.22)),url("images/program-free-meeting.jpg")}
+  #programs .program-grid:nth-of-type(2) .program-card:nth-child(2) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.08),rgba(1,65,64,.22)),url("images/program-retreat.jpg")}
+  #programs .program-grid:nth-of-type(2) .program-card:nth-child(3) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.04),rgba(1,65,64,.16)),url("images/program-screen-off.jpg")}
+  #programs .program-grid:nth-of-type(2) .program-card:nth-child(4) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.04),rgba(1,65,64,.18)),url("images/program-consult.jpg")}
+  #programs .program-grid:nth-of-type(2) .program-card:nth-child(5) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.06),rgba(1,65,64,.2)),url("images/program-builders.jpg")}
+  #programs .program-grid:nth-of-type(4) .program-card:nth-child(1) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-craft.jpg")}
+  #programs .program-grid:nth-of-type(4) .program-card:nth-child(2) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-builders.jpg")}
+  #programs .program-grid:nth-of-type(4) .program-card:nth-child(3) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-free-meeting.jpg")}
+  #programs .program-grid:nth-of-type(4) .program-card:nth-child(4) .program-art{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-craft.jpg")}
   .program-body{padding:25px;display:flex;flex:1;flex-direction:column}
   .tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
   .tag{border-radius:999px;background:#d2ead6;color:#3e8a6e;padding:4px 10px;font-size:12px;font-weight:800}
