@@ -10,9 +10,9 @@ window.NOLIL_CONFIG = {
 	kakaoId: "mrleesangmin",
 	telegramUrl: "https://t.me/playworkgrow_bot",
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
-	consultUrl: "", // 1:1 이야기(상담) 예약 링크. 홈의 "이야기 한번 나눠보실래요" 버튼이 씁니다.
-	// (나중에 whattime-solo 1:1 예약 페이지가 열리면 여기에 그 주소를 넣으세요.)
-	leadFormUrl: "",
+	meetingsUrl: "https://app.playworkgrow.club/meetings",
+	consultUrl: "https://app.playworkgrow.club/meetings",
+	leadFormUrl: "https://app.playworkgrow.club/#next-notice",
 
 	// ---------- ② 위치 ----------
 	// 당근마켓은 동네 기반이라 지역은 밝히는 게 낫습니다.

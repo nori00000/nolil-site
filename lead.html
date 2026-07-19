@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>함께 이끌 분을 찾습니다 — 놀일</title>
+<meta name="description" content="당신의 재능으로 사람들을 모아보세요. 놀일은 재능 있는 분들이 함께 이끄는 길드하우스입니다.">
+
+<!-- 카톡·당근에 링크 붙일 때 보이는 카드 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="함께 이끌 분을 찾습니다 — 놀일">
+<meta property="og:description" content="당신의 재능으로 사람들을 모아보세요. 놀일은 재능 있는 분들이 함께 이끄는 길드하우스입니다.">
+<meta property="og:image" content="og.jpg">
+<meta name="theme-color" content="#16311F">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* ============================================================
+     놀일 리더 모집 페이지 — 공유 템플릿(원본, moss+ember) 계승
+     - program/agri-village.html의 solso 오버라이드 이전 원본 레이어를 그대로 씀
+     - 상단 미니바 → 히어로(dark) → 라이트 섹션들 → dark 특화 섹션 →
+       CTA 마무리 → 패밀리 푸터 → footer
+     - 5060 포함 전층 타깃: 버튼 52~56px, word-break:keep-all, 최대폭 680px
+     ============================================================ */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font-sans);
+    background:var(--paper); color:var(--moss-900);
+    font-size:17px; line-height:1.7; word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  section{padding:44px 0;border-bottom:1px solid var(--rule)}
+  section:last-of-type{border-bottom:0}
+
+  h2{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:18px;line-height:1.35}
+  section p{font-size:17px;line-height:1.8;margin-bottom:14px}
+  section p:last-child{margin-bottom:0}
+  b{color:var(--ember-700);font-weight:800}
+
+  /* ---------- 어두운 섹션 ---------- */
+  .dark{background:var(--moss-900);color:var(--cream);border-bottom:0}
+  .dark h2{color:var(--cream)}
+  .dark p{color:rgba(247,243,232,.92)}
+  .dark b{color:var(--ember-300)}
+
+  /* ---------- ① 상단 미니바 ---------- */
+  .topbar{background:var(--moss-900);padding:12px 0}
+  .home-link{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:14px;font-weight:700;color:rgba(247,243,232,.75);
+    text-decoration:none;
+  }
+  .home-link:hover{color:var(--cream)}
+
+  /* ---------- ② 히어로 ---------- */
+  .hero{
+    background:var(--moss-900); color:var(--cream);
+    padding:8px 0 46px; border-bottom:0; position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0; opacity:.30;
+    background-image:url('hero.jpg'); background-size:cover; background-position:center;
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(14,33,21,.86) 0%, rgba(14,33,21,.62) 60%, rgba(14,33,21,.42) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2;padding-top:36px}
+  .kicker{
+    display:inline-block; font-size:13px; font-weight:800; letter-spacing:.22em;
+    color:var(--ember-300); margin-bottom:16px;
+  }
+  .hero h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.3;margin-bottom:16px}
+  .hero p{font-size:18px;color:rgba(247,243,232,.94);line-height:1.75;margin-bottom:26px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .badge{
+    background:rgba(247,243,232,.14); border:1px solid rgba(240,177,115,.45);
+    color:var(--ember-300); font-size:14px; font-weight:800;
+    padding:8px 14px; border-radius:999px;
+  }
+  .guild-badges{margin-top:0;margin-bottom:14px}
+  .guild-badges .badge{background:var(--moss-100);border-color:var(--moss-300);color:var(--moss-700)}
+  .guild-note{color:var(--ink-mid);font-size:15px}
+
+  /* ---------- 버튼 ---------- */
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    min-height:56px;min-width:0;padding:14px 20px;border-radius:12px;
+    font-size:18px;font-weight:800;text-decoration:none;
+    border:2px solid transparent;cursor:pointer;font-family:inherit;
+    transition:filter .15s; text-align:center;line-height:1.35;
+  }
+  .btn:active{filter:brightness(.93)}
+  .btn-primary{background:var(--ember-500);color:#fff}
+  .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
+  .btn-line:hover{border-color:var(--cream)}
+  .btn-line-light{background:#fff;color:var(--moss-900);border-color:var(--moss-900)}
+  .btn-kakao{background:#FEE500;color:#191600}
+  .btn-copy{background:#FEE500;color:#191600}
+  .btn-telegram{background:#229ED9;color:#fff}
+  .cta-row{display:flex;flex-direction:column;gap:10px}
+
+  /* ---------- 무엇을 이끄나 (단계) ---------- */
+  .steps{display:flex;flex-direction:column;gap:12px}
+  .step{
+    display:flex;gap:16px;align-items:flex-start;
+    border:1px solid var(--rule);border-radius:14px;
+    padding:18px 20px;background:#fff;
+  }
+  .step-num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+    background:var(--moss-900);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;
+  }
+  .step-body{flex:1 1 auto;min-width:0}
+  .step-title{display:block;font-size:17px;font-weight:800;margin-bottom:4px;color:var(--moss-900)}
+  .step-body p{font-size:16px;color:var(--ink-mid);line-height:1.7;margin-bottom:0}
+
+  /* ---------- 문의 ---------- */
+  .contact-btns{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+  .contact-note{flex-basis:100%;margin:0 0 6px;color:var(--ink-mid);font-size:15px;line-height:1.65;text-align:center}
+
+  .family{background:var(--moss-50)}
+  .family-label{
+    font-size:13px;font-weight:800;letter-spacing:.14em;
+    color:var(--ink-soft);margin-bottom:16px;
+  }
+  .family-links{display:flex;flex-direction:column;gap:12px}
+  .family-link{
+    display:block;border:1px solid var(--moss-300);border-radius:12px;
+    padding:16px 18px;background:#fff;text-decoration:none;color:inherit;
+    transition:border-color .15s;
+  }
+  .family-link:hover,.family-link:focus-visible{border-color:var(--moss-500)}
+  .family-name{
+    font-size:17px;font-weight:800;color:var(--moss-900);
+    display:flex;align-items:center;gap:6px;margin-bottom:4px;
+  }
+  .family-name .ext{font-size:13px;color:var(--ink-soft);font-weight:700}
+  .family-desc{font-size:14px;color:var(--ink-mid);line-height:1.6;margin-bottom:0}
+
+  footer{padding:32px 0 44px;text-align:center;color:var(--ink-soft);font-size:14px;line-height:1.8}
+  footer b{color:var(--moss-900)}
+  footer a{color:var(--ink-soft)}
+
+  @media (min-width:560px){
+    .hero h1{font-size:44px}
+    .cta-row{flex-direction:row}
+    .cta-row .btn{flex:1}
+    .contact-btns{flex-direction:row}
+    .contact-btns .btn{flex:1}
+    .family-links{flex-direction:row}
+    .family-links .family-link{flex:1}
+  }
+
+  /* ============================================================
+     teal/solso 스킨 오버라이드 (2026-07-19)
+     - program/agri-village.html·screen-off-day.html·builders-camp.html·
+       moim/index.html과 동일한 기법: 원본(moss) 레이어는 그대로 두고
+       이 블록만 덧붙여 재정의한다. 마크업·인라인 스크립트는 무변경.
+     ============================================================ */
+  :root{
+    --solso-teal:#005e5c;
+    --solso-mint:#e6f2e7;
+    --solso-sun:#f5e578;
+    --content-max:960px;
+  }
+  body{background:#fff;color:#111}
+  .wrap{max-width:var(--content-max);padding:0 22px}
+  section{padding:72px 0;border-bottom:0}
+  h2{
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.18;
+    letter-spacing:0;
+    text-align:center;
+    margin-bottom:24px;
+  }
+  h2::before{
+    content:"NOLIL GUILD";
+    display:block;
+    margin-bottom:12px;
+    font-size:12px;
+    line-height:1.2;
+    letter-spacing:.18em;
+    color:var(--solso-teal);
+  }
+  .topbar{
+    position:absolute;
+    z-index:5;
+    left:0;
+    right:0;
+    top:0;
+    background:transparent;
+    padding:18px 0;
+  }
+  .home-link{
+    color:#fff;
+    font-size:13px;
+    letter-spacing:.12em;
+  }
+  .hero{
+    min-height:520px;
+    display:flex;
+    align-items:flex-end;
+    padding:96px 0 58px;
+    background:var(--solso-teal);
+  }
+  .hero .wrap{min-width:0}
+  .hero::before{
+    opacity:.76;
+    background-position:center bottom;
+  }
+  .hero::after{
+    background:
+      linear-gradient(180deg, rgba(0,94,92,.1) 0%, rgba(0,94,92,.16) 38%, rgba(0,94,92,.82) 100%),
+      linear-gradient(90deg, rgba(0,94,92,.82) 0%, rgba(0,94,92,.36) 60%, rgba(0,94,92,.12) 100%);
+  }
+  .hero h1{
+    max-width:780px;
+    font-size:clamp(42px,7vw,76px);
+    line-height:1.08;
+    letter-spacing:0;
+  }
+  .hero p{max-width:620px;font-size:20px}
+  .kicker{
+    color:var(--solso-sun);
+    font-size:12px;
+    letter-spacing:.24em;
+  }
+  .btn{
+    border-radius:999px;
+    min-height:58px;
+    transition:transform .16s ease-out,filter .16s ease-out,border-color .16s ease-out,background-color .16s ease-out;
+  }
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
+  .btn-line-light{border-color:var(--solso-teal);color:var(--solso-teal)}
+  .badge{
+    border-color:rgba(245,229,120,.56);
+    color:var(--solso-sun);
+  }
+  .guild-badges .badge{
+    background:#dcefe0;
+    border-color:transparent;
+    color:#3e6f56;
+  }
+  .step{
+    border:0;
+    border-radius:0;
+    background:var(--solso-mint);
+    padding:22px;
+  }
+  .step-num{background:var(--solso-teal)}
+  .dark{background:var(--solso-teal)}
+  .dark h2::before{color:var(--solso-sun)}
+  .family{
+    background:var(--solso-teal);
+    color:#fff;
+  }
+  .family-label{
+    color:var(--solso-sun);
+    text-align:center;
+  }
+  .family-link{
+    border:1px solid rgba(255,255,255,.32);
+    border-radius:0;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+  }
+  .family-name{color:#fff}
+  .family-desc{color:rgba(255,255,255,.78)}
+  footer{
+    background:#fff;
+    color:#111;
+    border-top:1px solid #f2f2f2;
+  }
+  @media (min-width:560px){
+    section{padding:108px 0}
+    .hero{min-height:620px;padding-bottom:72px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ ① 상단 미니바 ══════════ -->
+<div class="topbar"><div class="wrap"><a class="home-link" href="index.html">← 놀일</a></div></div>
+
+<!-- ══════════ ② 히어로 ══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">함께 이끌 분을 찾습니다</span>
+    <h1>당신의 재능으로,<br>여기서 사람들을 모아보시겠어요?</h1>
+    <p>놀일은 재능 있는 분들이 함께 이끄는 길드하우스입니다. 혼자 키우는 곳이 아니라, 참여자가 함께 키우는 농장입니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-cta-consult" href="#">이야기 한번 나눠보실래요 — 30분, 무료</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ ③ 이런 분께 ══════════ -->
+<section>
+  <div class="wrap">
+    <h2>이런 분께</h2>
+    <p>남들이 자꾸 물어보는, 잘하는 게 있는 분.</p>
+    <p>혼자보다 같이 할 때 더 즐거운 분.</p>
+    <p>한 달에 한 번, 사람들을 모아 그걸 해보고 싶은 분.</p>
+  </div>
+</section>
+
+<!-- ══════════ ④ 무엇을 이끄나 ══════════ -->
+<section>
+  <div class="wrap">
+    <h2>무엇을 이끄나</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-body"><p>자기 주제의 클래스·모임을 엽니다(월 1회쯤).</p></span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-body"><p>자기 파트의 채팅방을 돌봅니다.</p></span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-body"><p>클래스 뒤 기록·후기를 남깁니다 — AI가 초안을 도와드립니다.</p></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ⑤ 무엇을 드리나 ══════════ -->
+<section class="dark">
+  <div class="wrap">
+    <h2>무엇을 드리나</h2>
+    <p>온보딩 세션 · 운영 매뉴얼 · 나만의 리더 페이지 · 1:1 소통 채널 · AI 봇 보조.</p>
+    <p><b>역할만 드리고 방치하지 않습니다.</b></p>
+  </div>
+</section>
+
+<!-- ══════════ ⑤-2 보상 ══════════ -->
+<section>
+  <div class="wrap">
+    <h2>보상</h2>
+    <p>보상은 사람과 상황에 맞게 함께 정합니다 — 품(놀일의 리추얼 화폐), 활동비, 멤버십 면제, 수익 배분, 콘텐츠 크레딧 중에서. 지금은 놀일다움을 함께 실험하는 중입니다.</p>
+  </div>
+</section>
+
+<!-- ══════════ ⑤-3 지금 열리는 길드 ══════════ -->
+<section>
+  <div class="wrap">
+    <h2>지금 열리는 길드</h2>
+    <div class="badges guild-badges">
+      <span class="badge">전자제품 수리공방</span>
+      <span class="badge">목공</span>
+      <span class="badge">사진</span>
+      <span class="badge">조각</span>
+    </div>
+    <p class="guild-note">첫 장인들이 문을 엽니다.</p>
+  </div>
+</section>
+
+<!-- ══════════ ⑥ CTA 마무리 ══════════ -->
+<section id="contact">
+  <div class="wrap" style="text-align:center">
+    <h2>이야기 한번 나눠보실래요</h2>
+    <p>급하지 않아도 괜찮습니다. 편한 채널로 먼저 남겨주세요.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-cta-consult" href="#">이야기 한번 나눠보실래요 — 30분, 무료</a>
+    </div>
+    <div class="contact-btns" id="contactBtns"></div>
+  </div>
+</section>
+
+<section class="family">
+  <div class="wrap">
+    <div class="family-label">이상민이 이어온 자산</div>
+    <div class="family-links">
+      <a class="family-link" href="https://www.urban-jungle.kr" target="_blank" rel="noopener">
+        <div class="family-name">소셜가드닝 <span class="ext">↗</span></div>
+        <p class="family-desc">가드닝 뉴스와 계절 가이드 — 정원을 가꾸는 이야기</p>
+      </a>
+      <a class="family-link" href="https://sociai.org" target="_blank" rel="noopener">
+        <div class="family-name">sociai <span class="ext">↗</span></div>
+        <p class="family-desc">소셜섹터를 위한 AI — 뉴스·교육·컨설팅</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>놀일 NOLIL</b> · 놀고, 일하고, 자란다<br>
+    운영: 네이처커뮤니티 · 이상민<br>
+    <a href="index.html">← 놀일 홈으로</a>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(() => {
+  "use strict";
+  const C = window.NOLIL_CONFIG || {};
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
+    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const telHref = "tel:" + String(C.phone || "").replace(/[^0-9+]/g, "");
+
+  // ---------- 1:1 이야기 CTA ----------
+  const hasMessageChannel = Boolean(C.kakaoUrl || C.kakaoId || C.telegramUrl);
+  const contactUrl = C.consultUrl || C.kakaoUrl || C.telegramUrl || "#contact";
+  document.querySelectorAll(".js-cta-consult").forEach(a => {
+    if (contactUrl) {
+      a.href = contactUrl;
+    }
+    if (C.consultUrl || C.kakaoUrl || C.telegramUrl) {
+      a.target = "_blank";
+      a.rel = "noopener";
+    }
+  });
+
+  // ---------- 보조 CTA ----------
+  document.querySelectorAll(".js-cta-tel").forEach(a => {
+    a.href = contactUrl;
+  });
+
+  // ---------- 연락처 버튼 ----------
+  const btns = [];
+  if (!hasMessageChannel) btns.push(`<p class="contact-note">카카오톡·텔레그램 채널 연결 전입니다. 급한 문의만 전화로 가능합니다.</p>`);
+  if (C.kakaoUrl)  btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
+  else if (C.kakaoId) btns.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
+  if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
+  if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">급한 문의 전화하기</a>`);
+  const cb = $("contactBtns");
+  if (cb) cb.innerHTML = btns.join("");
+  document.querySelectorAll(".js-copy-kakao").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const value = btn.dataset.copy || "";
+      try {
+        await navigator.clipboard.writeText(value);
+        btn.textContent = `복사됨: ${value}`;
+      } catch {
+        btn.textContent = `카카오톡 ID: ${value}`;
+      }
+      setTimeout(() => { btn.textContent = "카카오톡 ID 보기"; }, 1800);
+    });
+  });
+})();
+</script>
+</body>
+</html>
