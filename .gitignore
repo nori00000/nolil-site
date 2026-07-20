@@ -8,3 +8,6 @@
 probe.html
 p2.html
 *.local.js
+
+# 도구 로컬 상태 (Serena MCP가 세션마다 재생성)
+.serena/
