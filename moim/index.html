@@ -9,7 +9,7 @@
 <!-- 카톡·당근에 링크 붙일 때 보이는 카드 -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="놀일 — 같이 놀 일 있어요">
-<meta property="og:description" content="농장에서 여는 무료 모임. 월 AI 특강 · 수 공방 · 주말 오픈데이. 회당 열 분.">
+<meta property="og:description" content="농장에서 여는 무료 모임. 화 AI 특강 · 목 공방 · 주말 오픈데이. 회당 열 분.">
 <meta property="og:image" content="https://playworkgrow.club/og.jpg">
 <meta property="og:url" content="https://playworkgrow.club/moim/">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,9 @@
   }
   .msg.err{background:#FDECEC;color:#8E2020;border:1px solid #F3C0C0;display:block}
   .msg.ok{background:var(--moss-100);color:var(--moss-900);border:1px solid var(--moss-300);display:block}
-  .modal-actions{display:flex;gap:10px;margin-top:20px}
+  /* 3버튼(닫기·앱신청·카톡)이 360px에서 가로로 터진다. .contact-btns와 동일하게 세로. */
+  .modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .modal-actions #btnClose{order:9}
   .modal-actions .btn{flex:1}
   .btn-ghost{background:transparent;color:var(--ink-mid);border-color:var(--rule)}
 
@@ -339,7 +341,7 @@
 <section id="schedule">
   <div class="wrap">
     <h2>언제 오시겠어요?</h2>
-    <p class="h2sub">날짜를 누르시면 신청하실 수 있습니다.</p>
+    <p class="h2sub">날짜를 누르시면 앱에서 신청하실 수 있습니다. 남은 자리는 앱에서 확인됩니다.</p>
     <div class="slots" id="slots">
       <div class="loading">일정을 불러오는 중…</div>
     </div>
@@ -455,8 +457,10 @@
     <div class="modal-body">
       <div class="msg" id="msg"></div>
       <div class="modal-actions" id="mActions">
-        <button type="button" class="btn btn-ghost" id="btnClose">닫기</button>
+        <!-- 세로 배치이므로 순서 = 우선순위. 1순위 신청, 2순위 문의(JS 주입), 마지막 닫기.
+             btnClose는 CSS order로 맨 아래 고정 — 카톡 버튼이 beforeend로 붙어도 밀리지 않는다. -->
         <a class="btn btn-primary" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener">앱에서 신청하기</a>
+        <button type="button" class="btn btn-ghost" id="btnClose">닫기</button>
       </div>
     </div>
   </form>
