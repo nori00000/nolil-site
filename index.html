@@ -390,6 +390,19 @@
   .prog-group-sub{margin:6px 0 0;color:var(--soft);font-size:15px}
   .prog-static-card{cursor:default}
   .prog-static-card:hover{transform:none;border-color:rgba(59,74,54,.08)}
+  .program-art.art-talent{background:linear-gradient(135deg,var(--ember-100,#FBE8D2),var(--moss-100,#E7F0E7))}
+  .prog-talent-host{margin:0 0 12px;color:var(--teal);font-size:14px;font-weight:800}
+  .prog-talent-meta{margin:0 0 10px}
+  .prog-talent-meta small{display:block;color:var(--soft);font-size:12px;font-weight:900;letter-spacing:.06em;margin-bottom:2px}
+  .prog-talent-meta span{display:block;color:var(--body);font-size:14px;line-height:1.55}
+  .prog-reactions{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(59,74,54,.11);padding-top:16px}
+  .prog-react-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--text);font-family:inherit;font-size:13px;font-weight:800;line-height:1.3;padding:7px 12px;cursor:pointer;transition:border-color .14s ease,background .14s ease}
+  .prog-react-btn:hover{border-color:var(--coral)}
+  .prog-react-btn[disabled]{cursor:default}
+  .prog-react-btn.is-pressed{background:var(--ember-100,#FBE8D2);border-color:var(--ember-500,#D97B2E);color:var(--teal)}
+  .prog-react-count:not(:empty){color:var(--soft);font-weight:700}
+  .prog-react-count:not(:empty)::before{content:"·";margin:0 2px 0 0;color:var(--soft)}
+  .prog-react-note{flex-basis:100%;margin:4px 0 0;color:var(--soft);font-size:12px;line-height:1.5}
   .prog-group-note{margin:22px 0 0;color:var(--soft);font-size:15px}
   .prog-group-note a{color:var(--coral);font-weight:800;text-decoration:none}
   .prog-group-note a:hover,.prog-group-note a:focus-visible{text-decoration:underline}
@@ -855,10 +868,10 @@
     <h1 aria-label="PLAY WORK GROW">PLAY<br>WORK<br>GROW</h1>
     <p>공간은 매개입니다. 놀일의 중심은 서로를 발견하는 사람들, 그리고 그 만남에서 자라는 콘텐츠입니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-cta-consult" href="#contact" id="ctaHero">메시지로 먼저 문의하기</a>
+      <a class="btn btn-primary" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener" id="ctaHero">무료로 한번 와보기</a>
       <a class="btn btn-line" href="#programs">사람과 콘텐츠 보기</a>
     </div>
-    <a class="hero-note js-lead-link" href="letter/">다음 모임 알림만 받아도 됩니다</a>
+    <a class="hero-note" href="lead.html">농장에서 직접 열어볼 재능 주제가 있으세요? →</a>
   </div>
 </header>
 
@@ -915,6 +928,7 @@
         <a class="choice js-cta-consult" href="#contact"><small>내 경험으로 뭘 할 수 있을지 묻기</small><strong>30분 동안 해온 일과 관심사를 꺼내 방향을 잡습니다.</strong><span class="next">1:1 시간 예약</span></a>
         <a class="choice" href="program/builders-camp.html"><small>우리 회사 업무 하나를 AI로 바꾸기</small><strong>막힌 업무 하나를 들고 와서 실제 흐름을 만듭니다.</strong><span class="next">캠프 보기</span></a>
       </div>
+      <p class="prog-group-note" style="margin-top:22px">혹시 직접 열어보고 싶은 게 있으세요? <a href="lead.html">내 재능으로 열어보기 →</a></p>
     </div>
   </section>
 
@@ -952,8 +966,8 @@
       </div>
 
       <div class="prog-group-head">
-        <div class="eyebrow">재능 클래스·길드</div>
-        <p class="prog-group-sub">농장에서 잘 사는 삶을 손으로 배우는 작은 모임들</p>
+        <div class="eyebrow">농장 사람들이 여는 것</div>
+        <p class="prog-group-sub">재능 있는 분들이 직접 여는 첫 모임들입니다. 다음은 당신 차례일 수 있습니다.</p>
       </div>
       <div class="program-grid">
         <div class="program-card prog-static-card"><div class="program-art art-repair" role="img" aria-label="나무 상자 위에 놓인 오래된 라디오"></div><div class="program-body"><div class="tag-row"><span class="tag">재능인이 리드</span></div><h3>전자제품 수리공방</h3><p class="program-lead">농장에서 고쳐 쓰는 삶을 배웁니다. 오래된 소형 전자제품을 함께 열어보고, 버리기 전에 다시 쓸 방법을 찾습니다.</p></div></div>
@@ -961,7 +975,8 @@
         <div class="program-card prog-static-card"><div class="program-art art-record" role="img" aria-label="나무 테이블 위에 놓인 필름 카메라와 펼쳐진 노트"></div><div class="program-body"><div class="tag-row"><span class="tag">클래스</span></div><h3>사진·기록 클래스</h3><p class="program-lead">농장의 빛, 손, 사람의 표정을 찍고 짧은 글로 남깁니다. 혼자 본 장면을 다음 모임의 콘텐츠로 바꾸는 연습입니다.</p></div></div>
         <div class="program-card prog-static-card"><div class="program-art art-object" role="img" aria-label="나무 테이블에서 손으로 작은 식물 오브제를 만드는 모습"></div><div class="program-body"><div class="tag-row"><span class="tag">클래스</span></div><h3>조각·식물 오브제</h3><p class="program-lead">이끼, 나무, 작은 돌을 만지며 농장 네이처 오브제를 만듭니다. 완성품보다 손으로 집중하는 시간이 중심입니다.</p></div></div>
       </div>
-      <p class="prog-group-note"><a href="lead.html">재능 있는 분이 직접 여는 모임입니다. 함께 이끌 분을 찾고 있어요 →</a></p>
+      <p class="prog-group-note"><b>다음 모임은 당신이 열 수 있습니다.</b> 7/26 리트릿에서 함께 열어볼 재능 주제를 모읍니다 — 잘하는 것 하나, 한 줄이면 시작입니다.</p>
+      <p style="text-align:center;margin-top:14px"><a class="btn btn-primary" href="lead.html">내 재능 주제 남기기 →</a></p>
 
       <div class="soon"><span>공방 · 이끼 화분</span><span>정원창업스쿨</span><span>아그리 AI 빌리지</span><span>놀일 멤버십</span><span>품 잼 · 저녁 이후 문의</span></div>
     </div>
@@ -1118,6 +1133,124 @@
       el.classList.add("show");
     });
   }
+})();
+</script>
+<script id="talent-cards">
+(() => {
+  "use strict";
+  const API_BASE = "https://app.playworkgrow.club";
+  const staticCard = document.querySelector(".prog-static-card");
+  if (!staticCard) return;
+  const grid = staticCard.closest(".program-grid");
+  if (!grid) return;
+
+  const REACTIONS = [
+    { kind: "want_to_learn",  label: "🌱 나도 배우고 싶어요" },
+    { kind: "can_cohost",     label: "🤝 같이 열 수 있어요" },
+    { kind: "can_support",    label: "🧰 장소·도구 도울게요" },
+    { kind: "contact_later",  label: "📮 다음에 연락 주세요" },
+  ];
+  const DONE_LABEL = "고마워요";
+
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  };
+
+  const setCount = (span, n) => {
+    const v = Number(n);
+    span.textContent = (Number.isFinite(v) && v > 0) ? v + "명" : "";
+  };
+
+  const sendReaction = (slug, kind, btn, labelSpan, countSpan) => {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    btn.setAttribute("aria-pressed", "true");
+    const body = new URLSearchParams();
+    body.set("interest_reaction[kind]", kind);
+    fetch(`${API_BASE}/api/public/talent_cards/${encodeURIComponent(slug)}/interest_reactions`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(new Error("HTTP " + res.status)))
+      .then(data => {
+        if (!data || data.ok !== true) throw new Error("bad response");
+        btn.classList.add("is-pressed");
+        labelSpan.textContent = DONE_LABEL;
+        setCount(countSpan, (data.counts || {})[kind]);
+      })
+      .catch(err => {
+        console.warn("talent reaction failed:", err);
+        btn.disabled = false;
+        btn.setAttribute("aria-pressed", "false");
+      });
+  };
+
+  const buildReactions = (card) => {
+    const wrap = el("div", "prog-reactions");
+    const counts = (card.reaction_counts && typeof card.reaction_counts === "object") ? card.reaction_counts : {};
+    REACTIONS.forEach(r => {
+      const btn = el("button", "prog-react-btn");
+      btn.type = "button";
+      btn.setAttribute("aria-pressed", "false");
+      const labelSpan = el("span", "prog-react-label", r.label);
+      const countSpan = el("span", "prog-react-count");
+      setCount(countSpan, counts[r.kind]);
+      btn.appendChild(labelSpan);
+      btn.appendChild(countSpan);
+      btn.addEventListener("click", () => sendReaction(card.slug, r.kind, btn, labelSpan, countSpan));
+      wrap.appendChild(btn);
+    });
+    wrap.appendChild(el("p", "prog-react-note", "운영자가 다음 모임 소식을 이 페이지에 올려요."));
+    return wrap;
+  };
+
+  const buildCard = (card) => {
+    const cardEl = el("div", "program-card prog-static-card prog-talent-card");
+    const art = el("div", "program-art art-talent");
+    art.setAttribute("role", "img");
+    art.setAttribute("aria-label", card.topic ? card.topic + " 재능 모임" : "재능 모임");
+    const bodyEl = el("div", "program-body");
+    const tagRow = el("div", "tag-row");
+    tagRow.appendChild(el("span", "tag", "재능인이 리드"));
+    bodyEl.appendChild(tagRow);
+    if (card.topic) bodyEl.appendChild(el("h3", null, card.topic));
+    if (card.display_name) bodyEl.appendChild(el("p", "prog-talent-host", card.display_name + " 님이 엽니다"));
+    if (card.body) bodyEl.appendChild(el("p", "program-lead", card.body));
+    if (card.first_meeting_idea) {
+      const meta = el("p", "prog-talent-meta");
+      meta.appendChild(el("small", null, "첫 모임 아이디어"));
+      meta.appendChild(el("span", null, card.first_meeting_idea));
+      bodyEl.appendChild(meta);
+    }
+    if (card.help_needed) {
+      const meta = el("p", "prog-talent-meta");
+      meta.appendChild(el("small", null, "필요한 도움"));
+      meta.appendChild(el("span", null, card.help_needed));
+      bodyEl.appendChild(meta);
+    }
+    bodyEl.appendChild(buildReactions(card));
+    cardEl.appendChild(art);
+    cardEl.appendChild(bodyEl);
+    return cardEl;
+  };
+
+  fetch(`${API_BASE}/api/public/talent_cards`, { credentials: "include" })
+    .then(res => res.ok ? res.json() : Promise.reject(new Error("HTTP " + res.status)))
+    .then(data => {
+      const cards = (data && Array.isArray(data.cards)) ? data.cards : [];
+      if (!cards.length) return;
+      const frag = document.createDocumentFragment();
+      cards.forEach(card => {
+        if (card && card.slug) frag.appendChild(buildCard(card));
+      });
+      grid.appendChild(frag);
+    })
+    .catch(err => console.warn("talent cards fetch failed:", err));
 })();
 </script>
 </body>
