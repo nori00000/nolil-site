@@ -477,7 +477,7 @@
 <script>
 (() => {
   "use strict";
-  // 동료 신청 제출 결과 표시 (feedbacks 엔드포인트가 ?submitted=1 / ?error=1 로 돌아옴)
+  // 동료 신청 제출 결과 표시 (join_applications 가 ?submitted=1 / ?error=1 로 돌려보냄)
   const ap = new URLSearchParams(location.search);
   if (ap.has("submitted")) { document.body.classList.add("submitted");
     const t = document.getElementById("thanks"); if (t) t.scrollIntoView(); }
