@@ -12,6 +12,7 @@ window.NOLIL_CONFIG = {
 	instagramUrl: "https://instagram.com/nolil.growfarm",
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
+	meetingPollsUrl: "https://app.playworkgrow.club/host/meeting_polls",
 	consultUrl: "https://app.playworkgrow.club/meetings",
 	leadFormUrl: "letter/",
 	visitorChat: {

@@ -123,6 +123,12 @@
   }
 
   .loading{padding:28px 0;text-align:center;color:var(--ink-mid);font-size:16px}
+  .poll-cta{
+    margin-top:18px;padding:18px;border:1px solid var(--moss-300);border-radius:12px;
+    background:var(--moss-50);display:grid;gap:12px;
+  }
+  .poll-cta strong{font-size:18px;color:var(--moss-900)}
+  .poll-cta p{font-size:15px;line-height:1.65;color:var(--ink-mid)}
 
   /* ---------- 프로그램 ---------- */
   .progs{display:flex;flex-direction:column;gap:14px}
@@ -345,6 +351,11 @@
     <div class="slots" id="slots">
       <div class="loading">일정을 불러오는 중…</div>
     </div>
+    <div class="poll-cta">
+      <strong>카톡방 멤버들과 날짜부터 맞춰야 하나요?</strong>
+      <p>모임장이 후보 시간을 만들고, 멤버들이 가능한 시간을 남기면 추천 순위가 정리됩니다.</p>
+      <a class="btn btn-line btn-block" id="meetingPollsLink" href="https://app.playworkgrow.club/host/meeting_polls" target="_blank" rel="noopener">단체 일정 조율하기</a>
+    </div>
   </div>
 </section>
 
@@ -507,6 +518,9 @@
       setTimeout(() => { btn.textContent = "카카오톡 ID 보기"; }, 1800);
     });
   });
+
+  const meetingPollsLink = $("meetingPollsLink");
+  if (meetingPollsLink && C.meetingPollsUrl) meetingPollsLink.href = C.meetingPollsUrl;
 
   // ---------- 오시는 길 ----------
   const addrEl = $("addr");
