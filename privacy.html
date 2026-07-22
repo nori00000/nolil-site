@@ -22,8 +22,8 @@
   a:focus-visible{outline:3px solid rgba(208,87,59,.86);outline-offset:4px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
   .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px var(--pad);color:var(--teal)}
-  .brand{font-weight:900;letter-spacing:.12em;text-decoration:none}
-  .nav a:last-child{font-size:14px;font-weight:900;color:var(--coral)}
+  .brand{display:inline-flex;align-items:center;min-height:44px;font-weight:900;letter-spacing:.12em;text-decoration:none}
+  .nav a:last-child{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;font-size:14px;font-weight:900;color:var(--coral)}
   .hero{background:var(--mint);padding:86px 0 70px}
   .kicker{display:inline-block;color:var(--teal);font-size:12px;font-weight:900;letter-spacing:.22em;margin-bottom:14px}
   h1{margin:0 0 16px;font-size:clamp(38px,6vw,64px);line-height:1.08;letter-spacing:0}
@@ -39,6 +39,7 @@
   .row strong,.row span{padding:16px}
   .row strong{background:var(--mint);color:var(--teal)}
   footer{padding:38px var(--pad);border-top:1px solid #eef0ec;color:var(--body)}
+  footer a{display:inline-flex;align-items:center;min-height:44px}
   @media(max-width:720px){.row{grid-template-columns:1fr}.row strong{padding-bottom:4px}.row span{padding-top:4px}}
 </style>
 </head>
