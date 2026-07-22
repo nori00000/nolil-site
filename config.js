@@ -14,6 +14,12 @@ window.NOLIL_CONFIG = {
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
 	consultUrl: "https://app.playworkgrow.club/meetings",
 	leadFormUrl: "letter/",
+	visitorChat: {
+		enabled: true,
+		scriptUrl: "https://app.playworkgrow.club/visitor-chat.js",
+		chatUrl: "https://app.playworkgrow.club/chat",
+		label: "문의",
+	},
 
 	// ---------- ② 위치 ----------
 	// 당근마켓은 동네 기반이라 지역은 밝히는 게 낫습니다.

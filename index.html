@@ -1133,6 +1133,16 @@
       el.classList.add("show");
     });
   }
+  const visitorChat = C.visitorChat || {};
+  if (visitorChat.enabled && visitorChat.scriptUrl && !document.getElementById("nolilVisitorChatScript")) {
+    const chatScript = document.createElement("script");
+    chatScript.id = "nolilVisitorChatScript";
+    chatScript.src = visitorChat.scriptUrl;
+    chatScript.defer = true;
+    if (visitorChat.chatUrl) chatScript.dataset.chatUrl = visitorChat.chatUrl;
+    if (visitorChat.label) chatScript.dataset.label = visitorChat.label;
+    document.body.appendChild(chatScript);
+  }
 })();
 </script>
 <script id="talent-cards">
