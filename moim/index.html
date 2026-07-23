@@ -125,10 +125,12 @@
   .loading{padding:28px 0;text-align:center;color:var(--ink-mid);font-size:16px}
   .poll-cta{
     margin-top:18px;padding:18px;border:1px solid var(--moss-300);border-radius:12px;
-    background:var(--moss-50);display:grid;gap:12px;
+    background:var(--moss-50);display:grid;gap:12px;width:100%;max-width:760px;
+    margin-left:auto;margin-right:auto;
   }
   .poll-cta strong{font-size:18px;color:var(--moss-900)}
   .poll-cta p{font-size:15px;line-height:1.65;color:var(--ink-mid)}
+  .poll-cta .btn{min-width:0;max-width:100%}
 
   /* ---------- 프로그램 ---------- */
   .progs{display:flex;flex-direction:column;gap:14px}
@@ -140,6 +142,7 @@
   .prog .pname{font-size:19px;font-weight:800;margin-bottom:2px}
   .prog .ptag{font-size:14px;font-weight:800;color:var(--ember-700);margin-bottom:8px}
   .prog p{font-size:16px;color:var(--ink-mid);line-height:1.7}
+  .poll-cta p,.prog p{word-break:normal;overflow-wrap:anywhere}
 
   /* ---------- 소개 ---------- */
   .about{background:var(--moss-900);color:var(--cream);border-bottom:0}
@@ -292,7 +295,7 @@
   .hero p{max-width:620px;font-size:20px}
   .kicker,.badge{color:var(--solso-sun)}
   .badge{border-color:rgba(245,229,120,.56)}
-  .slots,.progs{max-width:760px;margin:0 auto}
+  .slots,.progs{width:100%;max-width:760px;margin:0 auto}
   .slot,.prog,details{
     border:1px solid rgba(0,94,92,.18);
     border-radius:0;
