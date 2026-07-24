@@ -298,7 +298,7 @@
   .mint{background:var(--mint)}
   .choice-strip{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:14px;
     margin:34px auto 8px;
     max-width:980px;
@@ -359,6 +359,7 @@
   .program-art.art-free{background-image:linear-gradient(180deg,rgba(1,65,64,.08),rgba(1,65,64,.22)),url("images/program-free-meeting.jpg")}
   .program-art.art-retreat{background-image:linear-gradient(180deg,rgba(1,65,64,.08),rgba(1,65,64,.22)),url("images/program-retreat.jpg")}
   .program-art.art-screen{background-image:linear-gradient(180deg,rgba(1,65,64,.04),rgba(1,65,64,.16)),url("images/program-screen-off.jpg")}
+  .program-art.art-map{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-screen-off.jpg")}
   .program-art.art-consult{background-image:linear-gradient(180deg,rgba(1,65,64,.04),rgba(1,65,64,.18)),url("images/program-consult.jpg")}
   .program-art.art-builders{background-image:linear-gradient(180deg,rgba(1,65,64,.06),rgba(1,65,64,.2)),url("images/program-builders.jpg")}
   .program-art.art-craft{background-image:linear-gradient(180deg,rgba(1,65,64,.05),rgba(1,65,64,.18)),url("images/program-craft.jpg")}
@@ -616,6 +617,11 @@
   .contact-buttons .btn-line::after{content:""}
   footer{padding:42px var(--pad);border-top:1px solid #eef0ec;color:var(--body)}
   footer .brand{display:block;color:var(--teal);margin-bottom:8px}
+  footer a,.prog-group-note a{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+  }
   .compare-strip{
     position:fixed;
     right:18px;
@@ -920,11 +926,12 @@
         <div class="bar"></div>
         <div class="eyebrow">처음 오시면 이렇게 고르세요</div>
         <h2>내 상황에 가까운 문을 하나 고르세요</h2>
-        <p>처음이라면 가볍게 와보셔도 됩니다. 조금 더 깊이 경험하고 싶다면 하루 체험이나 1:1 이야기로 시작하실 수 있습니다.</p>
+        <p>처음이라면 가볍게 와보셔도 됩니다. 조금 더 깊이 경험하고 싶다면 하루 체험, 고민 흐름 지도, 1:1 이야기로 시작하실 수 있습니다.</p>
       </div>
       <div class="choice-strip">
         <a class="choice" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>무료로 한번 와보기</small><strong>농장과 사람을 직접 보고, 나와 맞는지 확인합니다.</strong><span class="next">무료 일정 보기</span></a>
         <a class="choice" href="program/screen-off-day.html"><small>하루 동안 휴대폰 내려놓기</small><strong>루페로 이끼와 흙을 보고, 짧은 기록을 남깁니다.</strong><span class="next">3.9만원 체험 보기</span></a>
+        <a class="choice" href="program/being-map.html"><small>반복되는 고민을 지도처럼 보기</small><strong>진단보다 관찰이 먼저 필요할 때, 내 안의 압력과 선택 흐름을 그립니다.</strong><span class="next">파일럿 보기</span></a>
         <a class="choice js-cta-consult" href="#contact"><small>내 경험으로 뭘 할 수 있을지 묻기</small><strong>30분 동안 해온 일과 관심사를 꺼내 방향을 잡습니다.</strong><span class="next">1:1 시간 예약</span></a>
         <a class="choice" href="program/builders-camp.html"><small>우리 회사 업무 하나를 AI로 바꾸기</small><strong>막힌 업무 하나를 들고 와서 실제 흐름을 만듭니다.</strong><span class="next">캠프 보기</span></a>
       </div>
@@ -955,12 +962,13 @@
         <div class="bar"></div>
         <div class="eyebrow">지금 참여할 수 있는 것</div>
         <h2>농장에서 잘 사는 삶을 조금씩 경험합니다</h2>
-        <p>네이처한 공간에서 사람을 만나고, 손으로 만들고, 이야기를 콘텐츠로 남깁니다. 처음엔 무료 모임으로 와도 좋고, 맞는다고 느끼면 하루 체험·1:1 이야기·AI 캠프로 깊이 들어올 수 있습니다.</p>
+        <p>네이처한 공간에서 사람을 만나고, 손으로 만들고, 이야기를 콘텐츠로 남깁니다. 처음엔 무료 모임으로 와도 좋고, 맞는다고 느끼면 하루 체험·고민 흐름 지도·1:1 이야기·AI 캠프로 깊이 들어올 수 있습니다.</p>
       </div>
       <div class="program-grid">
         <a class="program-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><div class="program-art art-free" role="img" aria-label="농장 커뮤니티 공간에서 원탁에 둘러앉아 차를 마시며 이야기하는 동아시아 사람들"></div><div class="program-body"><div class="tag-row"><span class="tag">무료</span><span class="tag">첫 방문</span></div><h3>무료 모임</h3><span class="program-price">0원</span><p class="program-lead">농장 안 원탁에 둘러앉아 차를 마시며, 놀일의 사람과 분위기를 먼저 만나봅니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>농장에서 잘 사는 삶이 어떤 느낌인지 가볍게 보고 싶은 분</span></div><div class="fact"><small>당일 무엇을 하나요</small><span>네이처 공간 둘러보기, 짧은 자기소개, 관심 주제별 원탁 대화</span></div><div class="fact"><small>시간·비용</small><span>일정 페이지에서 확인 · 무료 · 정원형 예약</span></div></div><span class="program-action primary-action">무료 일정 보고 신청</span></div></a>
         <a class="program-card" href="church-retreat.html"><div class="program-art art-retreat" role="img" aria-label="농장 마당에서 함께 모인 동아시아 단체 리트릿 참가자들"></div><div class="program-body"><div class="tag-row"><span class="tag">단체</span><span class="tag">교회·모임</span></div><h3>교회·단체 리트릿</h3><span class="program-price">맞춤 구성</span><p class="program-lead">교회나 단체가 농장에서 함께 먹고 쉬며, 각자의 재능과 이야기를 자연스럽게 나누는 하루입니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>교회 소그룹, 가족 모임, 공동체 리트릿을 준비하는 분</span></div><div class="fact"><small>무엇을 하나요</small><span>식물 체험, 목공 소도구, 바베큐, 캠프파이어, 보드게임, 주제 강연</span></div><div class="fact"><small>신청 방식</small><span>전용 신청 페이지에서 이름, 연락처, 나눌 재능과 필요한 도움을 받습니다</span></div></div><span class="program-action primary-action">교회 리트릿 보기</span></div></a>
         <a class="program-card" href="program/screen-off-day.html"><div class="program-art art-screen" role="img" aria-label="농장 테이블에서 휴대폰을 내려놓고 이끼와 식물을 관찰하는 동아시아 사람들"></div><div class="program-body"><div class="tag-row"><span class="tag">당일</span><span class="tag">입문</span></div><h3>화면 끄는 하루</h3><span class="program-price">39,000원</span><p class="program-lead">휴대폰을 잠시 내려놓고, 루페로 이끼와 흙을 보며 자연의 속도로 하루를 다시 느낍니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>머리가 복잡하고, 네이처한 농장 안에서 쉬는 법을 다시 찾고 싶은 분</span></div><div class="fact"><small>당일 무엇을 하나요</small><span>폰 보관, 이끼 관찰, 산책, 짧은 기록, 저녁 대화</span></div><div class="fact"><small>시간·비용</small><span>당일 프로그램 · 39,000원 · 소그룹</span></div></div><span class="program-action">프로그램 보기</span></div></a>
+        <a class="program-card" href="program/being-map.html"><div class="program-art art-map" role="img" aria-label="농장 테이블 위에 펼쳐진 기록지와 식물을 관찰하는 손"></div><div class="program-body"><div class="tag-row"><span class="tag">워크숍</span><span class="tag">개인 링크</span></div><h3>고민 흐름 지도</h3><span class="program-price">파일럿 모집</span><p class="program-lead">반복되는 고민을 진단하지 않고, 내 안의 압력과 선택의 흐름으로 천천히 그려봅니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>머릿속 고민이 반복되지만 조언보다 관찰이 먼저 필요한 분</span></div><div class="fact"><small>무엇을 하나요</small><span>50분 워크숍으로 첫 지도를 만들고, 개인 링크로 주간 기록을 이어갑니다</span></div><div class="fact"><small>참여 방식</small><span>파일럿 개인 링크 발급 · 청소년은 14세 이상 기관 경유</span></div></div><span class="program-action">프로그램 보기</span></div></a>
         <a class="program-card js-cta-consult" href="#contact"><div class="program-art art-consult" role="img" aria-label="농장 찻자리에서 일대일로 차를 마시며 이야기하는 동아시아 사람들"></div><div class="program-body"><div class="tag-row"><span class="tag">상담</span><span class="tag">제2인생</span></div><h3>1:1 이야기</h3><span class="program-price">30분 무료</span><p class="program-lead">차 한 잔을 앞에 두고 내가 해온 일, 좋아하는 것, 농장에서 함께 해볼 작은 일을 꺼내봅니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>퇴직 후 역할, 경험의 재사용, 작은 사업화가 궁금한 분</span></div><div class="fact"><small>무엇을 하나요</small><span>경험, 관심사, 가능한 시간, 맞는 모임과 콘텐츠 방향을 정리합니다</span></div><div class="fact"><small>다음 단계</small><span>농장 모임, 네이처 클래스, 기록 프로젝트 중 맞는 길을 안내드립니다</span></div></div><span class="program-action primary-action">1:1 시간 예약하기</span></div></a>
         <a class="program-card" href="program/builders-camp.html"><div class="program-art art-builders" role="img" aria-label="농장 워크숍에서 노트북으로 AI를 함께 사용하는 동아시아 팀"></div><div class="program-body"><div class="tag-row"><span class="tag">집중 워크숍</span><span class="tag">실무자</span></div><h3>AI 빌더스 캠프</h3><span class="program-price">앱에서 확인</span><p class="program-lead">농장 워크숍에서 업무 하나를 들고 와, 자연의 리듬 속에서 AI로 실제 돌아가는 흐름을 만듭니다.</p><div class="program-facts"><div class="fact"><small>이런 분께</small><span>AI 교육은 들었지만 우리 회사 업무에 어떻게 붙일지 막힌 실무자</span></div><div class="fact"><small>무엇을 하나요</small><span>반복 업무 하나를 고르고, 프롬프트·자동화·보고 흐름을 팀으로 만듭니다</span></div><div class="fact"><small>시간·비용</small><span>세부 일정과 좌석은 앱에서 확인</span></div></div><span class="program-action">캠프 내용 보기</span></div></a>
       </div>
@@ -1011,7 +1019,7 @@
           <strong>남겨주실 것은 이메일과 관심사면 충분합니다.</strong>
           <span>아직 신청하지 않아도 괜찮습니다. 관심 있는 주제를 남겨두면 맞는 일정과 사람 이야기를 먼저 보내드립니다.</span>
           <div class="interest-pills">
-            <span>무료 모임</span><span>화면 끄는 하루</span><span>1:1 이야기</span><span>AI 캠프</span><span>사람 이야기</span>
+            <span>무료 모임</span><span>화면 끄는 하루</span><span>고민 흐름 지도</span><span>1:1 이야기</span><span>AI 캠프</span><span>사람 이야기</span>
           </div>
         </div>
       </div>
