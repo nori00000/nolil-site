@@ -1,5 +1,29 @@
 window.NOLIL_DECKS=[
   {
+    title:'현금확보 첫 바퀴 전략',
+    tag:'전략',
+    desc:'B2B 공간+프로그램과 공방 제조 상품으로 먼저 현금 흐름을 만드는 내부 전략 덱입니다.',
+    href:'files/cashflow-strategy.html'
+  },
+  {
+    title:'B2B 공간+프로그램 제안',
+    tag:'B2B',
+    desc:'공공기관, 학교, 교회, 기업에 농장 워크숍과 리트릿을 제안하는 영업용 발표자료입니다.',
+    href:'files/b2b-program-sales.html'
+  },
+  {
+    title:'이끼 상패·기념품 제안',
+    tag:'제조 상품',
+    desc:'이끼 상패, 감사패, 기념패, 단체 기념품을 공공과 민간에 판매하기 위한 상품 덱입니다.',
+    href:'files/moss-awards-gifts.html'
+  },
+  {
+    title:'30-40대 여성 커뮤니티 빌더 초대',
+    tag:'빌더 포섭',
+    desc:'공간 운영을 함께할 30-40대 여성 환대·진행·기록 파트너를 초대하는 덱입니다.',
+    href:'files/women-community-builders.html'
+  },
+  {
     title:'대표 발표자료',
     tag:'현장 발표',
     desc:'농장 방문자와 동료 후보에게 놀일의 이유, 신뢰, 합류 메시지를 전하는 메인 버전입니다.',

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>놀일 — B2B 공간+프로그램 제안</title>
+<style>
+  :root{--bgc:#015E5C;--accent:#F2DF6A;--cream:#F7F3E8;--ink:#142019;--font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+  *{box-sizing:border-box} html,body{margin:0;height:100%;background:#070c09;color:var(--cream);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow:hidden}
+  .deck{height:100vh;width:100vw;position:relative;overflow:hidden}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:min(8vh,78px) min(7vw,92px);background-image:linear-gradient(102deg,rgba(7,12,9,.88),rgba(7,12,9,.56) 48%,rgba(7,12,9,.18)),var(--bg);background-size:cover;background-position:center;opacity:0;visibility:hidden;transition:opacity .35s ease}
+  .slide.on{opacity:1;visibility:visible}
+  .slide>*{max-width:min(980px,92vw)}
+  .k{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.22em;text-transform:uppercase}
+  .k:before{content:"";width:30px;height:2px;background:var(--accent)}
+  h1,h2{margin:0;font-weight:900;line-height:1.08;letter-spacing:0}
+  h1{font-size:clamp(42px,6.4vw,86px)} h2{font-size:clamp(34px,5vw,64px)}
+  .lead{margin:22px 0 0;color:#efe9d8;font-size:clamp(19px,2.25vw,30px);line-height:1.55;font-weight:700}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:28px;max-width:1060px}
+  .card{min-height:122px;border:1px solid rgba(255,255,255,.17);border-radius:14px;background:rgba(255,255,255,.075);padding:17px 18px}
+  .card strong{display:block;color:var(--accent);font-size:clamp(18px,2.2vw,28px);line-height:1.2;margin-bottom:9px}
+  .card span{display:block;color:#e9e0cd;font-size:15px;line-height:1.5;font-weight:650}
+  .note{margin-top:22px;color:#d8c9a4;font-size:clamp(16px,1.7vw,22px);font-weight:760;line-height:1.5}
+  .return{position:fixed;top:18px;left:18px;z-index:20;color:#fff;background:rgba(10,13,11,.64);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:10px 13px;text-decoration:none;font-weight:900;font-size:13px;backdrop-filter:blur(12px)}
+  .count{position:fixed;right:22px;bottom:18px;color:rgba(255,255,255,.62);font-weight:850;font-size:14px;z-index:20}
+  .hint{position:fixed;left:22px;bottom:18px;color:rgba(255,255,255,.44);font-weight:750;font-size:12px;z-index:20}
+  .nav{position:fixed;inset:0;z-index:10;display:flex}.nav button{flex:1;border:0;background:transparent;cursor:pointer}
+  @media(max-width:720px){.slide{padding:62px 24px 76px}.grid{grid-template-columns:1fr;gap:10px}.card{min-height:auto}h1{font-size:38px}h2{font-size:30px}.lead{font-size:17px}}
+</style>
+</head>
+<body>
+<a class="return" href="../">목록</a>
+<div class="deck" id="deck">
+
+    <section class="slide on" style="--bg:url('assets/open-field.jpg')">
+      <div class="k">B2B PROGRAM</div>
+      <h1>회의실 밖에서<br>팀이 다시 연결되는 하루.</h1>
+      <p class="lead">공공기관, 학교, 교회, 기업이 바로 구매할 수 있는 농장 기반 공간+프로그램 제안입니다.</p>
+    </section>
+    <section class="slide" style="--bg:url('assets/open-field.jpg')">
+      <div class="k">고객</div>
+      <h2>공공기관·학교·교회가 사는 것은 농장이 아니라 준비된 하루입니다.</h2>
+      <p class="lead">담당자가 원하는 것은 장소 하나가 아니라, 안전하고 의미 있고 사진과 후기가 남는 프로그램입니다.</p>
+      <div class="grid"><div class="card"><strong>공공기관</strong><span>생태·공동체·사회적경제·중장년 전환 프로그램</span></div><div class="card"><strong>학교</strong><span>진로·생태·손작업·팀 발표가 있는 체험</span></div><div class="card"><strong>교회</strong><span>예배당 밖에서 먹고 만들고 나누는 공동체 리트릿</span></div></div>
+      
+    </section>
+    <section class="slide" style="--bg:url('assets/open-field.jpg')">
+      <div class="k">상품 1</div>
+      <h2>반나절 농장 워크숍</h2>
+      <p class="lead">회의실 밖에서 서로를 다시 보는 3-4시간 패키지입니다.</p>
+      <div class="grid"><div class="card"><strong>구성</strong><span>농장 투어, 이끼/식물 만들기, 팀 대화, 차와 사진</span></div><div class="card"><strong>가격</strong><span>10명 35-60만원, 20명 70-120만원</span></div><div class="card"><strong>대상</strong><span>학교, 공공기관, 교회 소그룹, 사회적경제 조직</span></div></div>
+      
+    </section>
+    <section class="slide" style="--bg:url('assets/open-field.jpg')">
+      <div class="k">상품 2</div>
+      <h2>하루 리트릿</h2>
+      <p class="lead">팀이 하루를 맡기고 관계를 회복하는 고단가 패키지입니다.</p>
+      <div class="grid"><div class="card"><strong>구성</strong><span>웰컴 커피, 미션, 공방, 식사, 불 앞 회고</span></div><div class="card"><strong>가격</strong><span>15명 120-200만원, 30명 250-450만원</span></div><div class="card"><strong>성과</strong><span>담당자 준비 부담 감소, 사진 기록, 후기 확보</span></div></div>
+      
+    </section>
+    <section class="slide" style="--bg:url('assets/open-field.jpg')">
+      <div class="k">영업</div>
+      <h2>첫 제안은 길게 설명하지 말고 일정과 예산을 묻습니다.</h2>
+      <p class="lead">“올해 워크숍이나 리트릿 일정이 있으실까요?”가 핵심 질문입니다.</p>
+      <div class="grid"><div class="card"><strong>1장 제안서</strong><span>대상·구성·가격·사진·문의</span></div><div class="card"><strong>전화/방문</strong><span>하루 20곳 메시지, 5곳 전화</span></div><div class="card"><strong>후속</strong><span>샘플 사진, 견적서, 가능한 날짜 제시</span></div></div>
+      
+    </section>
+</div>
+<div class="nav"><button id="prev" aria-label="이전"></button><button id="next" aria-label="다음"></button></div>
+<div class="hint">← → 또는 클릭 · F 전체화면</div><div class="count" id="count">1 / 5</div>
+<script>
+  if(sessionStorage.getItem('nolilDeckUnlocked')!=='1') location.replace('../');
+  const slides=[...document.querySelectorAll('.slide')], count=document.getElementById('count'); let i=0;
+  function go(n){n=Math.max(0,Math.min(slides.length-1,n));slides[i].classList.remove('on');i=n;slides[i].classList.add('on');count.textContent=(i+1)+' / '+slides.length;}
+  document.getElementById('next').onclick=()=>go(i+1);document.getElementById('prev').onclick=()=>go(i-1);
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);else if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}});
+</script>
+</body>
+</html>
