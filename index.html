@@ -776,6 +776,8 @@
   .hero .btn-primary{background:var(--ember-500);color:#fff}
   .hero .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
   .hero .btn-line:hover{border-color:var(--cream)}
+  .hero .btn-deck{background:var(--yellow);color:#143b34;border-color:var(--yellow)}
+  .hero .btn-deck:hover{filter:brightness(1.03)}
   .story-intro{
     padding:72px 0;
     border-bottom:0;
@@ -857,6 +859,7 @@
   <div class="site-links">
     <a href="#programs">PROGRAM</a>
     <a href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener">MOIM</a>
+    <a href="deck/?mode=board">DECK</a>
     <a href="#contact">ACCESS</a>
   </div>
 </nav>
@@ -869,6 +872,7 @@
     <p>공간은 매개입니다. 놀일의 중심은 서로를 발견하는 사람들, 그리고 그 만남에서 자라는 콘텐츠입니다.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener" id="ctaHero">무료로 한번 와보기</a>
+      <a class="btn btn-deck" href="deck/?mode=board">발표자료 열기</a>
       <a class="btn btn-line" href="#programs">사람과 콘텐츠 보기</a>
     </div>
     <a class="hero-note" href="lead.html">농장에서 직접 열어볼 재능 주제가 있으세요? →</a>
@@ -1132,16 +1136,6 @@
     reveal.forEach(el => {
       el.classList.add("show");
     });
-  }
-  const visitorChat = C.visitorChat || {};
-  if (visitorChat.enabled && visitorChat.scriptUrl && !document.getElementById("nolilVisitorChatScript")) {
-    const chatScript = document.createElement("script");
-    chatScript.id = "nolilVisitorChatScript";
-    chatScript.src = visitorChat.scriptUrl;
-    chatScript.defer = true;
-    if (visitorChat.chatUrl) chatScript.dataset.chatUrl = visitorChat.chatUrl;
-    if (visitorChat.label) chatScript.dataset.label = visitorChat.label;
-    document.body.appendChild(chatScript);
   }
 })();
 </script>
