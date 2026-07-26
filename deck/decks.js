@@ -1,3 +1,4 @@
+// Curated active deck list. Obsolete draft decks are intentionally removed from the selector.
 window.NOLIL_DECKS=[
   {
     title:'대표 발표자료',
