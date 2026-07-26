@@ -1,6 +1,12 @@
 // Curated active deck list. Obsolete draft decks are intentionally removed from the selector.
 window.NOLIL_DECKS=[
   {
+    title:'교회 피드백 발표',
+    tag:'교회',
+    desc:'교인들 앞에서 왜 이 일을 시작했는지, 어디까지 왔는지 나누고 구체적인 도움·소개·공간 보완 피드백을 받는 발표자료입니다.',
+    href:'files/church-feedback.html'
+  },
+  {
     title:'대표 발표자료',
     tag:'현장 발표',
     desc:'농장 방문자, 후원자, 협력자에게 놀일의 이유와 신뢰, 현금 첫 바퀴 전략까지 한 번에 보여주는 메인 덱입니다.',
