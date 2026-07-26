@@ -1,6 +1,12 @@
 // Curated active deck list. Obsolete draft decks are intentionally removed from the selector.
 window.NOLIL_DECKS=[
   {
+    title:'LET’S 세션 진행 장표',
+    tag:'워크숍',
+    desc:'교회 피드백 모임에서 Look, Empathize, Target, Shape 흐름으로 의견을 모으고 실행표까지 만드는 진행용 장표입니다.',
+    href:'files/lets-session.html'
+  },
+  {
     title:'교회 피드백 발표',
     tag:'교회',
     desc:'교인들 앞에서 왜 이 일을 시작했는지, 어디까지 왔는지 나누고 구체적인 도움·소개·공간 보완 피드백을 받는 발표자료입니다.',
