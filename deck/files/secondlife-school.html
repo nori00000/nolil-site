@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>놀일 — 5060 제2인생·정원창업스쿨 초대</title>
+<style>
+  :root{
+    --teal:#015e5c;
+    --teal-deep:#014140;
+    --coral:#d0573b;
+    --yellow:#f5e578;
+    --mint:#eef6ef;
+    --cream:#F7F3E8;
+    --paper:#FCFAF4;
+    --ink:#173535;
+    --body:#4e5c54;
+    --soft:#6e827a;
+    --line:rgba(23,53,53,.14);
+    --font:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    --serif:"Noto Serif KR","Nanum Myeongjo",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--ink);
+    font-family:var(--font);
+    font-size:18px;
+    line-height:1.75;
+    color:var(--ink);
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  b{font-weight:800}
+
+  .deck{height:100vh;width:100vw;overflow:hidden;position:relative;background:var(--paper)}
+  .slide{
+    position:absolute;inset:0;
+    display:flex;align-items:center;
+    padding:min(6.5vh,58px) min(6.5vw,84px);
+    opacity:0;visibility:hidden;transition:opacity .55s ease;
+    background:var(--paper);
+    overflow-y:auto;
+  }
+  .slide.on{opacity:1;visibility:visible}
+  .slide-inner{width:100%;max-width:1180px;margin:0 auto}
+
+  /* section background variants */
+  .slide.mint{background:linear-gradient(180deg,var(--mint) 0%,var(--paper) 100%)}
+  .slide.cream{background:var(--cream)}
+
+  /* two-column split with framed photo */
+  .split{display:grid;grid-template-columns:1.12fr .88fr;gap:min(6vw,64px);align-items:center}
+  .split.rev{grid-template-columns:.88fr 1.12fr}
+  .split.rev .visual{order:-1}
+  .visual{
+    position:relative;border-radius:28px;overflow:hidden;
+    aspect-ratio:4/5;background-size:cover;background-position:center;
+    border:7px solid #fff;box-shadow:0 34px 70px rgba(1,65,64,.18);
+  }
+  .visual::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(200deg,rgba(1,65,64,0) 55%,rgba(1,65,64,.28) 100%)}
+  .visual .chip{
+    position:absolute;left:16px;bottom:16px;z-index:2;
+    background:rgba(255,255,255,.94);color:var(--teal-deep);
+    font-weight:800;font-size:13px;letter-spacing:.02em;
+    padding:9px 15px;border-radius:999px;box-shadow:0 8px 18px rgba(1,65,64,.14);
+  }
+
+  /* kicker pill */
+  .kicker{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:9px 17px;border-radius:999px;
+    background:var(--mint);color:var(--teal);
+    font-weight:800;font-size:13.5px;letter-spacing:.04em;
+    margin-bottom:22px;
+  }
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+  .kicker.coral{background:rgba(208,87,59,.12);color:var(--coral)}
+  .kicker.coral::before{background:var(--teal)}
+  .kicker.on-dark{background:rgba(255,255,255,.14);color:#fff}
+  .kicker.on-dark::before{background:var(--yellow)}
+
+  h1{font-size:clamp(32px,4.6vw,56px);color:var(--teal-deep);font-weight:800;line-height:1.2;letter-spacing:-.01em}
+  h2{font-size:clamp(27px,3.7vw,42px);color:var(--teal-deep);font-weight:800;line-height:1.26;letter-spacing:-.01em}
+  h1 i,h2 i{color:var(--coral);font-style:normal;font-family:var(--serif)}
+
+  .eyebrow-serif{font-family:var(--serif);font-weight:500;font-size:clamp(18px,2vw,23px);color:var(--coral);margin-top:14px}
+
+  .lead{font-size:clamp(18px,1.7vw,21px);color:var(--body);line-height:1.8;margin-top:22px;font-weight:500;max-width:640px}
+  .sub{font-size:18px;color:var(--body);line-height:1.8;margin-top:16px;max-width:640px}
+  .note{font-size:14.5px;color:var(--soft);margin-top:16px;line-height:1.65;max-width:640px}
+  .note.strong{color:var(--teal);font-weight:700}
+
+  /* fact / cell grid */
+  .cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
+  .cell{background:#fff;border:1px solid var(--line);border-radius:18px;padding:21px 23px;box-shadow:0 12px 28px rgba(1,65,64,.06)}
+  .cell .t{color:var(--teal);font-weight:800;font-size:14.5px;margin-bottom:8px;letter-spacing:.01em}
+  .cell .d{color:var(--body);font-size:15.5px;line-height:1.65}
+
+  /* trio quote lines */
+  .trio{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+  .trio div{font-size:clamp(18px,2.1vw,25px);font-weight:800;color:var(--teal-deep);line-height:1.4}
+  .trio div:last-child{color:var(--coral)}
+
+  /* big stat card */
+  .stat-box{
+    margin-top:30px;background:linear-gradient(135deg,var(--mint),#fff);
+    border:1px solid var(--line);border-radius:26px;padding:clamp(26px,3vw,42px);
+    max-width:720px;
+  }
+  .stat-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .stat-num{font-family:var(--serif);font-weight:600;font-size:clamp(46px,6.2vw,72px);color:var(--coral);line-height:1}
+  .stat-label{font-size:17px;color:var(--ink);font-weight:700;line-height:1.55;max-width:420px}
+  .stat-box .foot{margin-top:16px;font-size:15px;color:var(--body);line-height:1.7}
+
+  /* guild ladder */
+  .ladder{display:flex;flex-direction:column;gap:13px;margin-top:30px;max-width:760px}
+  .rung{display:grid;grid-template-columns:112px 1fr;gap:20px;align-items:center;
+    background:#fff;border-radius:18px;padding:17px 22px;
+    border-left:7px solid var(--teal);box-shadow:0 12px 26px rgba(1,65,64,.06)}
+  .rung .n{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--teal-deep)}
+  .rung .x b{color:var(--teal-deep)}
+  .rung .x{font-size:15.5px;color:var(--body);line-height:1.6}
+  .rung:nth-child(2){border-color:#4f9490}
+  .rung:nth-child(3){border-color:var(--coral)}
+  .rung:nth-child(4){border-color:var(--teal-deep)}
+
+  /* nav chrome */
+  .dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;
+    display:flex;gap:7px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);
+    padding:9px 15px;border-radius:999px;box-shadow:0 10px 24px rgba(1,65,64,.14)}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(1,65,64,.28);cursor:pointer;transition:.2s}
+  .dot.on{background:var(--coral);width:22px;border-radius:99px}
+  .count{position:fixed;bottom:20px;right:24px;z-index:30;background:rgba(255,255,255,.75);
+    backdrop-filter:blur(8px);padding:7px 15px;border-radius:999px;color:var(--teal-deep);
+    font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;box-shadow:0 10px 24px rgba(1,65,64,.1)}
+  .hint{position:fixed;bottom:20px;left:24px;z-index:30;color:var(--teal-deep);
+    background:rgba(255,255,255,.75);backdrop-filter:blur(8px);padding:7px 13px;border-radius:999px;
+    font-size:12px;font-weight:700;opacity:.85}
+  .nav{position:fixed;inset:0;z-index:10;display:flex}
+  .nav a{flex:1;cursor:pointer}
+
+  /* CTA closing slide */
+  .slide.cta{
+    background:
+      linear-gradient(120deg,rgba(1,65,64,.92),rgba(1,94,92,.88)),
+      var(--cta-bg,none);
+    background-size:cover;background-position:center;
+    color:#fff;
+  }
+  .slide.cta h1{color:#fff}
+  .slide.cta .lead,.slide.cta .sub{color:rgba(255,255,255,.9)}
+  .apply{
+    margin-top:30px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);
+    border-radius:22px;padding:22px 26px;max-width:680px;
+  }
+  .qr{
+    flex:none;width:104px;height:104px;border-radius:14px;background:#fff;
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .qr::before{content:"";position:absolute;inset:10px;border:2.5px dashed var(--teal);border-radius:6px;opacity:.35}
+  .qr span{font-family:var(--serif);font-weight:700;color:var(--teal);font-size:14px;letter-spacing:.06em;position:relative}
+  .apply-k{font-size:15px;font-weight:800;color:var(--yellow);margin-bottom:6px;letter-spacing:.02em}
+  .apply-url{font-size:clamp(19px,2.3vw,25px);font-weight:800;color:#fff}
+  .apply-sub{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.82);margin-top:8px;line-height:1.6;max-width:400px}
+  .btn-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .pill-btn{
+    display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;
+    font-weight:800;font-size:15px;
+  }
+  .pill-btn.primary{background:var(--coral);color:#fff}
+  .pill-btn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.4)}
+
+  @media (max-width:760px){
+    .split,.split.rev{grid-template-columns:1fr;gap:26px}
+    .split .visual,.split.rev .visual{order:0;aspect-ratio:16/10}
+    .slide{padding:34px 22px 90px;align-items:flex-start}
+    .stat-num{font-size:44px}
+    .rung{grid-template-columns:70px 1fr}
+  }
+</style>
+
+<style>
+  .deck-return{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:999px;background:rgba(10,13,11,.62);color:#fff;text-decoration:none;font:800 13px "Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px)}
+  .deck-return:hover{background:rgba(10,13,11,.78)}
+</style>
+<script>if(sessionStorage.getItem('nolilDeckUnlocked')!=='1')location.replace('../');</script>
+</head>
+<body>
+<a class="deck-return" href="../">목록</a>
+
+<div class="deck" id="deck">
+
+  <!-- 1. 표지 -->
+  <section class="slide on" id="s1">
+    <div class="slide-inner">
+      <div class="split">
+        <div>
+          <div class="kicker">5060 제2인생 · 정원창업스쿨 초대</div>
+          <h1>재능은,<br><i>AI가 못 가져갑니다.</i></h1>
+          <div class="eyebrow-serif">인생 2막, 혼자 짓지 않아도 됩니다.</div>
+          <p class="lead">고양 일산 농장에서, 재능을 다시 일로 만드는 사람들을 만납니다 — 놀일(NOLIL).</p>
+          <p class="note">이 자리는 설명회 초대입니다. 오늘 무언가를 결정하지 않으셔도 됩니다.</p>
+        </div>
+        <div class="visual" style="background-image:url('assets/open-field.jpg')">
+          <div class="chip">놀일 · 고양 일산 농장</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 지금 왜 -->
+  <section class="slide mint" id="s2">
+    <div class="slide-inner">
+      <div class="split">
+        <div>
+          <div class="kicker coral">지금, 왜 이 이야기를</div>
+          <h2>AI가 <i>일</i>을 가져가는 시대,<br>남는 건 재능과 관계입니다.</h2>
+          <p class="lead">AI는 정답을 최적화합니다. 그러나 오랜 경험, 손의 감각, 사람과 사람 사이의 신뢰는 대신하지 못합니다.</p>
+          <div class="trio">
+            <div>일은 AI에게, 놀이는 인간에게.</div>
+            <div>답은 AI에게, 질문은 인간에게.</div>
+            <div>지식은 AI에게, 경험은 서로에게.</div>
+          </div>
+          <p class="sub">당신이 평생 쌓아온 것 — 그건 지금, 오히려 더 귀해졌습니다.</p>
+        </div>
+        <div class="visual" style="background-image:url('assets/elder-hands-craft.jpg')">
+          <div class="chip">손의 재능, AI가 못 만드는 것</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 나이가 무기다 -->
+  <section class="slide" id="s3">
+    <div class="slide-inner">
+      <div class="kicker">나이는 약점이 아니라</div>
+      <h2>평균 창업 나이는 45세.<br>그리고 <i>50세</i>가 무기가 되는 순간이 있습니다.</h2>
+      <div class="stat-box">
+        <div class="stat-row">
+          <div class="stat-num">1.8배</div>
+          <div class="stat-label">50세 이후 창업가가 상위 0.1% 초고속 성장 벤처를 만들 <b>확률</b>은 그 이전보다 1.8배 높습니다.</div>
+        </div>
+        <p class="foot">성공이 보장된다는 뜻이 아닙니다 — <b>성공률</b>이 아니라 <b>확률</b>에 대한 연구입니다. 다만 이 나이가 시작을 미룰 이유는 아니라는 뜻입니다.</p>
+      </div>
+      <p class="note">출처: 창업 연령 연구(Azoulay 외). 발표 전 원문 확인을 권합니다.</p>
+    </div>
+  </section>
+
+  <!-- 4. 혼자가 두려워서 멈췄다면 -->
+  <section class="slide cream" id="s4">
+    <div class="slide-inner">
+      <div class="split rev">
+        <div>
+          <div class="kicker coral">혼자였다면, 멈췄을 겁니다</div>
+          <h2>"이 나이에 혼자 하기는 두렵다" —<br>그래서 <i>같이</i> 짓습니다.</h2>
+          <p class="lead">놀일은 회사가 아니라 길드하우스입니다. 각자의 재능이 서로를 찾고, 서로 부족한 부분을 채웁니다.</p>
+          <p class="sub">5억 년쯤 전, 첫 식물이 물과 흙의 경계에 오를 때 뿌리도 없이 홀로가 아니라 땅속 균과 <b>공생</b>으로 버텼던 것처럼 — 여기도 혼자의 이야기가 아닙니다.</p>
+          <p class="note">땅도, 장비도, 자문도 — 그리고 무엇보다 같이 시작할 동료도 여기 있습니다.</p>
+        </div>
+        <div class="visual" style="background-image:url('assets/moss-macro.jpg')">
+          <div class="chip">혼자가 아니라, 공생</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 길드 리더 사다리 -->
+  <section class="slide mint" id="s5">
+    <div class="slide-inner">
+      <div class="kicker">당신의 재능으로 사람을 모으는 자리</div>
+      <h2>손님 → 도제 → 장인 → 코어</h2>
+      <p class="sub" style="margin-top:14px">지금 필요한 건 완벽한 사업계획서가 아니라, 한 걸음 — 도제로 시작하는 것입니다.</p>
+      <div class="ladder">
+        <div class="rung"><div class="n">손님</div><div class="x">처음 와서 둘러보는 자리. 아직 아무것도 정하지 않아도 됩니다.</div></div>
+        <div class="rung"><div class="n">도제</div><div class="x">재능을 나누기 시작하는 자리. <b>1회 호스트 = 사진·후기 지원.</b></div></div>
+        <div class="rung"><div class="n">장인</div><div class="x">자기 이름의 길드를 여는 자리. <b>고정 슬롯 + 소개 페이지</b>가 붙습니다.</div></div>
+        <div class="rung"><div class="n">코어</div><div class="x">놀일 운영에 함께하며, 다음 도제를 이끄는 자리.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 정원창업스쿨 -->
+  <section class="slide" id="s6">
+    <div class="slide-inner">
+      <div class="split">
+        <div>
+          <div class="kicker coral">졸업 = 장인 진입</div>
+          <h2>정원창업스쿨 — 재능을 상품으로,<br>상품을 다시 <i>일</i>로.</h2>
+          <p class="lead">시장을 읽는 것부터 나만의 아이템 정의, 상품화, 가격·판로, AI 도구까지 — 그리고 졸업 프로젝트는 놀일에서 여는 <b>나의 첫 클래스</b>입니다.</p>
+          <div class="cells">
+            <div class="cell"><div class="t">1:1 자문</div><div class="d">교수 15년 · 사회적기업 경력의 이상민이 직접 코칭합니다.</div></div>
+            <div class="cell"><div class="t">현장 학습</div><div class="d">케이플라워 꽃시장 3분 — 시세와 유통을 실물로 배웁니다.</div></div>
+            <div class="cell"><div class="t">인프라</div><div class="d">화훼도시 고양의 자산과 고양시 사회적경제 네트워크.</div></div>
+          </div>
+          <p class="note">지금은 설계 단계입니다. 이상민이 준비 중인 «정원 창업학» 집필과 연계해 커리큘럼을 다듬고 있습니다. 졸업 후에는 연 단위로 텃밭·장비·자문을 잇는 다음 과정도 준비 중입니다.</p>
+        </div>
+        <div class="visual" style="background-image:url('assets/greenhouse-flowers.jpg')">
+          <div class="chip">케이플라워 꽃시장, 걸어서 3분</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 왜 여기서 되나 -->
+  <section class="slide cream" id="s7">
+    <div class="slide-inner">
+      <div class="split rev">
+        <div>
+          <div class="kicker">왜 하필 여기, 왜 하필 지금</div>
+          <h2>맨땅에서 시작하는 게<br>아닙니다.</h2>
+          <p class="lead">이미 서 있는 공간, 이미 쌓인 관계 위에 당신의 재능을 얹습니다.</p>
+          <div class="cells">
+            <div class="cell"><div class="t">농장</div><div class="d">텃밭·공방·교육장을 갖춘 실제 공간. 이론이 아니라 흙에서 시작합니다.</div></div>
+            <div class="cell"><div class="t">입지</div><div class="d">서울역에서 GTX 21분, 역에서 농장까지 20분 — 서울에서 오가기 어렵지 않습니다.</div></div>
+            <div class="cell"><div class="t">정책 순풍</div><div class="d">신중년 인생3모작·도시농업 창업지원 — 같은 방향을 가리키는 제도들.</div></div>
+            <div class="cell"><div class="t">창업자</div><div class="d">교수 15년 · 사회적기업 · 고양시 산림형사회적경제협의회 상무이사.</div></div>
+          </div>
+        </div>
+        <div class="visual" style="background-image:url('assets/hands-soil.jpg')">
+          <div class="chip">흙에서 시작하는 창업</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 근거 -->
+  <section class="slide mint" id="s8">
+    <div class="slide-inner">
+      <div class="kicker coral">근거 있는 희망</div>
+      <h2>좋은 삶을 예측하는 가장 강력한 변수는,<br><i>관계</i>였습니다.</h2>
+      <p class="lead">하버드 성인발달연구는 85년에 걸쳐 이렇게 결론 내렸습니다 — 건강과 행복을 가장 강하게 예측하는 것은 재산도 성취도 아닌, <b>관계의 질</b>이었습니다.</p>
+      <p class="sub">놀일은 이 발견을 구조로 만듭니다. 내 재능이 공개되고, 다른 사람의 관심이 나를 다시 끌어당기는 <b>재능 플라이휠</b> — 혼자 웅크리지 않도록, 서로가 서로를 당깁니다.</p>
+      <p class="note">출처: 하버드 성인발달연구(85년). 발표 전 원문 확인을 권합니다.</p>
+    </div>
+  </section>
+
+  <!-- 9. CTA -->
+  <section class="slide cta" id="s9" style="--cta-bg:url('assets/open-field.jpg')">
+    <div class="slide-inner">
+      <div class="kicker on-dark">이건 판매가 아니라, 초대입니다</div>
+      <h1>먼저, 이야기부터<br>나누시겠어요?</h1>
+      <p class="lead">정원창업스쿨은 아직 설계 중입니다. 개강을 서둘러 확정하는 대신, 여러분의 이야기를 먼저 듣고 싶습니다.</p>
+      <div class="apply">
+        <div class="qr"><span>QR</span></div>
+        <div>
+          <div class="apply-k">지불의사 인터뷰 · 설명회 신청</div>
+          <div class="apply-url">playworkgrow.club</div>
+          <p class="apply-sub">QR을 스캔하거나 주소로 들어와 3분이면 됩니다. 이상민이 직접 읽고 연락드립니다.</p>
+        </div>
+      </div>
+      <div class="btn-row">
+        <span class="pill-btn primary">지불의사 인터뷰 신청</span>
+        <span class="pill-btn ghost">설명회 신청</span>
+      </div>
+      <p class="sub" style="margin-top:26px">놀일 · 놀며 일하고 성장하는 사람들 · PLAY WORK GROW</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="count" id="count">1 / 9</div>
+<div class="hint">← → 또는 클릭 · F 전체화면</div>
+<div class="nav"><a id="prev"></a><a id="next"></a></div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsWrap=document.getElementById('dots'),count=document.getElementById('count');
+  let i=0;
+  slides.forEach((_,k)=>{const d=document.createElement('div');d.className='dot'+(k?'':' on');d.onclick=()=>go(k);dotsWrap.appendChild(d);});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    slides[i].classList.remove('on');dots[i].classList.remove('on');
+    i=n;slides[i].classList.add('on');dots[i].classList.add('on');
+    count.textContent=(i+1)+' / '+slides.length;
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  addEventListener('keydown',e=>{const k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown')go(i+1);
+    else if(k==='ArrowLeft'||k==='PageUp')go(i-1);
+    else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
+    else if(k.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}});
+  let sx=0;addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));},{passive:true});
+</script>
+</body>
+</html>

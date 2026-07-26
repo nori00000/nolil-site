@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>놀일 — 같이 지을 동료를 찾습니다</title>
+<style>
+  :root{
+    --cream:#F7F3E8; --paper:#FCFAF4;
+    --ink:#1E2B22; --ink-mid:#4A554D; --ink-soft:#79857C;
+    --teal:#015E5C; --ember:#D0573B; --gold:#C9A227;
+    --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0c0f0d;font-family:var(--font);-webkit-font-smoothing:antialiased}
+
+  .deck{height:100vh;width:100vw;overflow:hidden;position:relative}
+  .slide{
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:min(9vh,80px) min(8vw,90px);
+    background-size:cover;background-position:center;
+    opacity:0;visibility:hidden;transition:opacity .5s ease;
+    color:var(--cream);
+  }
+  .slide.on{opacity:1;visibility:visible}
+  /* 좌하단 텍스트 가독용 스크림 */
+  .slide::after{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(105deg,
+      rgba(10,14,11,var(--sl,.82)) 0%,
+      rgba(10,14,11,var(--sm,.5)) 42%,
+      rgba(10,14,11,var(--sr,.15)) 100%);
+  }
+  .slide > *{position:relative;z-index:1;max-width:min(880px,88vw)}
+
+  .kick{font-size:clamp(12px,1.5vw,15px);font-weight:800;letter-spacing:.22em;
+    text-transform:uppercase;color:#e9d9a8;margin-bottom:18px}
+  h1{font-size:clamp(34px,6.4vw,74px);font-weight:850;line-height:1.08;letter-spacing:-.02em}
+  h2{font-size:clamp(26px,4.6vw,52px);font-weight:820;line-height:1.14;letter-spacing:-.02em}
+  .lead{font-size:clamp(17px,2.3vw,26px);font-weight:600;line-height:1.5;color:#efe9d8;margin-top:20px}
+  .sub{font-size:clamp(14px,1.7vw,19px);font-weight:600;color:#cfc8b6;margin-top:14px;line-height:1.55}
+  .em{color:#f4c66a}
+  .ember{color:#f0916f}
+
+  /* 자산·역할 그리드 */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:26px}
+  .cell{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    border-radius:14px;padding:15px 17px;backdrop-filter:blur(3px)}
+  .cell .t{font-size:13px;font-weight:850;letter-spacing:.02em;color:#f4c66a;margin-bottom:6px}
+  .cell .d{font-size:14px;font-weight:600;color:#e6e0cf;line-height:1.5}
+
+  /* 3층 */
+  .layers{display:flex;flex-direction:column;gap:11px;margin-top:24px}
+  .layer{display:flex;gap:16px;align-items:baseline;background:rgba(255,255,255,.06);
+    border-left:4px solid;border-radius:0 12px 12px 0;padding:13px 18px}
+  .layer .n{font-size:15px;font-weight:850;flex:none;width:74px}
+  .layer .x{font-size:15px;font-weight:600;color:#e6e0cf;line-height:1.45}
+
+  /* 질문(아이디어 세션) */
+  .q{font-size:clamp(17px,2.3vw,25px);font-weight:700;color:#f0e9d6;line-height:1.5;
+    padding-left:26px;position:relative;margin-top:16px}
+  .q::before{content:"?";position:absolute;left:0;top:0;color:#f4c66a;font-weight:850}
+
+  /* 진행 UI */
+  .dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:20;
+    display:flex;gap:7px}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:.2s}
+  .dot.on{background:#f4c66a;width:22px;border-radius:99px}
+  .count{position:fixed;bottom:18px;right:22px;z-index:20;color:rgba(255,255,255,.55);
+    font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+  .hint{position:fixed;bottom:18px;left:22px;z-index:20;color:rgba(255,255,255,.4);font-size:12px;font-weight:600}
+  .nav{position:fixed;inset:0;z-index:10;display:flex}
+  .nav a{flex:1;cursor:pointer}
+
+  @media (max-width:600px){
+    .slide{justify-content:flex-end;padding:40px 24px 70px}
+    h1{font-size:38px} h2{font-size:28px}
+  }
+</style>
+
+<style>
+  .deck-return{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:999px;background:rgba(10,13,11,.62);color:#fff;text-decoration:none;font:800 13px "Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px)}
+  .deck-return:hover{background:rgba(10,13,11,.78)}
+</style>
+<script>if(sessionStorage.getItem('nolilDeckUnlocked')!=='1')location.replace('../');</script>
+</head>
+<body>
+<a class="deck-return" href="../">목록</a>
+
+<div class="deck" id="deck">
+
+  <!-- 1. 표지 -->
+  <section class="slide on" style="background-image:url('assets/fire-circle.jpg');--sl:.86;--sm:.6">
+    <div class="kick">놀일 · 동료를 찾습니다</div>
+    <h1>완성된 걸 보러 오지 말고,<br><span class="em">같이 지으러</span> 오세요.</h1>
+    <p class="lead">놀며 일하고 성장하는 사람들 — 농장 기반 커뮤니티를 함께 만들 동료를 찾습니다.</p>
+    <p class="sub">이상민 · 네이처커뮤니티 · 2026년 7월</p>
+  </section>
+
+  <!-- 2. 저는 이미 지었습니다 (real, honest) -->
+  <section class="slide" style="background-image:url('assets/mist-lake2.jpg');--sl:.8;--sm:.42">
+    <div class="kick">먼저, 사실부터</div>
+    <h2>저는 이미 <span class="em">농장을 지었습니다.</span></h2>
+    <p class="lead">연못과 닭·오리, 텃밭, 공방, 교육장, 숙소, 카라반.<br>기획서가 아니라 <b>서 있는 공간</b>입니다.</p>
+    <p class="sub">그리고 예약 앱과 홈페이지는 <b>지금 돌아갑니다</b> — playworkgrow.club. 화면이 아니라 라이브 시스템입니다.</p>
+  </section>
+
+  <!-- 3. 관찰 (저 화자, 팩트 1개 출처와 함께) -->
+  <section class="slide" style="background-image:url('assets/elder-hands-craft.jpg');--sl:.82;--sm:.5">
+    <div class="kick">제가 본 것</div>
+    <h2>50세부터가 진짜 시작인 사람들이<br><span class="em">갈 곳이 없습니다.</span></h2>
+    <p class="lead">50세 이후에 초고속 성장을 이룰 확률은 그 이전의 <span class="em">1.8배</span>.<br>그런데 그 나이의 재능이 모일 자리는 비어 있습니다.</p>
+    <p class="sub">출처: WEF·연구 검증본(plan-master §7). — 저는 이 빈자리를 농장에서 채우려 합니다.</p>
+  </section>
+
+  <!-- 4. 자산 대차대조표 (co-builder traction) -->
+  <section class="slide" style="background-image:url('assets/open-field.jpg');--sl:.84;--sm:.55">
+    <div class="kick">지금 손에 쥔 것 — 왜 지금 합류할 만한가</div>
+    <h2>맨땅이 아닙니다.</h2>
+    <div class="grid">
+      <div class="cell"><div class="t">물리</div><div class="d">농장 + 입지: GTX 21분·KINTEX 5분·꽃시장 3분·병원 3분</div></div>
+      <div class="cell"><div class="t">디지털</div><div class="d">라이브 예약 앱·홈페이지·콘텐츠 엔진·AI 교육 자산</div></div>
+      <div class="cell"><div class="t">사람</div><div class="d">교수·사회적기업·고양사회적경제 라인·교회 커뮤니티·장인 후보</div></div>
+      <div class="cell"><div class="t">방법</div><div class="d">품 경제·길드 사다리·검증된 팩트·봇 파이프라인 설계</div></div>
+    </div>
+  </section>
+
+  <!-- 5. 입지 = 축 -->
+  <section class="slide" style="background-image:url('assets/greenhouse-flowers.jpg');--sl:.82;--sm:.5">
+    <div class="kick">왜 하필 여기</div>
+    <h2>"지방 농장"이 아닙니다.<br><span class="em">일산 한복판</span>입니다.</h2>
+    <p class="lead">서울역에서 GTX <b>21분</b>. 수련회 시장이 "양평 1시간"을 파는데,<br>우리는 <b>21분</b>입니다. 접근성이 곧 상품입니다.</p>
+    <p class="sub">KINTEX·꽃시장·호수공원·꽃박람회·공연장·병원이 전부 10분 안. 화훼도시 고양의 한가운데.</p>
+  </section>
+
+  <!-- 6. 3층 전략 -->
+  <section class="slide" style="background-image:url('assets/mist-lake2.jpg');--sl:.86;--sm:.58">
+    <div class="kick">돈은 어떻게 버나 — 3층</div>
+    <h2>지금 벌고, 다르게 서고, 멀리 봅니다.</h2>
+    <div class="layers">
+      <div class="layer" style="border-color:var(--ember)"><div class="n ember">지금 · 현금</div><div class="x"><b>조직 그룹 예약</b> — 기업·교회·단체 반나절 모임. 6주 안에 첫 계약금.</div></div>
+      <div class="layer" style="border-color:var(--gold)"><div class="n" style="color:#f4c66a">차별화</div><div class="x"><b>화훼·가든 허브</b> — 꽃도시 고양·소셜가드닝·반려식물. 아무도 못 베끼는 정체성.</div></div>
+      <div class="layer" style="border-color:#7fb28a"><div class="n" style="color:#a8d3b0">멀리 · 목적</div><div class="x"><b>5060 제2인생 커뮤니티</b> — 재능이 모이는 길드. 다리는 정원창업스쿨.</div></div>
+    </div>
+  </section>
+
+  <!-- 7. 지렛목 7/26 (proof in motion, honest) -->
+  <section class="slide" style="background-image:url('assets/campfire.jpg');--sl:.8;--sm:.44">
+    <div class="kick">이번 주 · D-5</div>
+    <h2>말이 아니라, <span class="em">이번 주에 일어납니다.</span></h2>
+    <p class="lead">7월 26일, 교회 단체가 농장에 옵니다. 우리의 첫 실전입니다.</p>
+    <p class="sub">정직하게: 아직 <b>실비 수준</b>이고 첫 데이터입니다. 그래서 더 중요합니다 —
+    이날 사진·후기·운영 리허설·첫 지갑 데이터가 한꺼번에 나옵니다. <b>전략 전체의 지렛목.</b></p>
+  </section>
+
+  <!-- 8. 차별화 한 줄 (품 경제) -->
+  <section class="slide" style="background-image:url('assets/hands-table.jpg');--sl:.82;--sm:.48">
+    <div class="kick">우리만의 것 — 품 경제</div>
+    <h2>"폰을 반납하면,<br><span class="em">루페를 드립니다."</span></h2>
+    <p class="lead">AI를 <b>안 쓰게</b> 만드는 게 아니라, 잠깐 <b>비싸게</b> 만들어 더 잘 쓰게 합니다.</p>
+    <p class="sub">모임 안에서 서로의 재능을 '품'으로 사고팝니다. 힐링 장사가 아니라, 사람이 사람에게 값을 매기는 경제 실험입니다.</p>
+  </section>
+
+  <!-- 9. 정직 — 아직 안 된 것 (recruiting hook) -->
+  <section class="slide" style="background-image:url('assets/empty-office.jpg');--sl:.88;--sm:.62">
+    <div class="kick">그래서, 당신이 필요합니다</div>
+    <h2>솔직히 말하면 —<br><span class="ember">아직 안 된 게 더 많습니다.</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="t">사람</div><div class="d">혼자입니다. 콘텐츠·운영·화훼·교육을 이끌 손이 없습니다.</div></div>
+      <div class="cell"><div class="t">검증</div><div class="d">유료로 돈 낸 고객은 아직 0명. PMF는 이제부터.</div></div>
+      <div class="cell"><div class="t">현금</div><div class="d">벌면서 갑니다. 화려한 런웨이는 없습니다.</div></div>
+    </div>
+    <p class="sub">이건 약점이 아니라 <b>초대장</b>입니다. 완성된 회사엔 당신이 바꿀 게 없습니다.</p>
+  </section>
+
+  <!-- 10. 역할 메뉴 (어떤 동료를 찾나) -->
+  <section class="slide" style="background-image:url('assets/hands-soil.jpg');--sl:.84;--sm:.52">
+    <div class="kick">함께 이끌 사람 — 하나만 골라도 됩니다</div>
+    <h2>혼자 키우지 않습니다.<br><span class="em">같이 키웁니다.</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="t">콘텐츠·영상</div><div class="d">농장을 유튜브·인스타로 옮기는 사람</div></div>
+      <div class="cell"><div class="t">오프라인 운영</div><div class="d">모임·교육·행사를 진행하는 사람</div></div>
+      <div class="cell"><div class="t">화훼·가든</div><div class="d">꽃과 정원을 상품으로 만드는 사람</div></div>
+      <div class="cell"><div class="t">재능 장인</div><div class="d">수리·목공·사진·조각… 자기 재능을 나눌 사람</div></div>
+      <div class="cell"><div class="t">마케팅·AI</div><div class="d">사람을 모으고 자동화를 얹는 사람</div></div>
+      <div class="cell"><div class="t">그리고 당신</div><div class="d">여기 없는 역할이면, 당신이 정의하세요</div></div>
+    </div>
+  </section>
+
+  <!-- 11. 아이디어 세션 — 같이 풀 질문 -->
+  <section class="slide" style="background-image:url('assets/moss-macro.jpg');--sl:.86;--sm:.56">
+    <div class="kick">오늘 같이 풀고 싶은 질문</div>
+    <h2>답을 들고 오지 않았습니다.<br><span class="em">같이 만들고 싶습니다.</span></h2>
+    <p class="q">조직 그룹 하루 모임, 사람당 얼마가 맞을까요?</p>
+    <p class="q">첫 길드는 무엇으로 시작해야 사람이 붙을까요?</p>
+    <p class="q">'품 경제'를 처음 오는 사람에게 30초로 어떻게 설명하죠?</p>
+    <p class="q">당신이라면, 이 농장에서 무엇을 하고 싶습니까?</p>
+  </section>
+
+  <!-- 12. 보상 구조 (정직) -->
+  <section class="slide" style="background-image:url('assets/mist-shore.jpg');--sl:.84;--sm:.52">
+    <div class="kick">같이 하면 무엇을 얻나 — 숨기지 않고</div>
+    <h2>첫 시즌은 <span class="em">품과 크레딧</span>으로 시작합니다.</h2>
+    <p class="lead">아직 큰 현금을 약속하진 못합니다. 대신 <b>만드는 사람의 지분</b>을 나눕니다 —
+    자기 길드, 자기 콘텐츠, 자기 이름.</p>
+    <p class="sub">현금 보상은 함께 만든 매출이 굴러가기 시작할 때. 지금 들어오는 사람이 규칙을 같이 씁니다.</p>
+  </section>
+
+  <!-- 13. 초대 -->
+  <section class="slide" style="background-image:url('assets/campfire.jpg');--sl:.72;--sm:.34;--sr:.1">
+    <div class="kick">초대</div>
+    <h1><span class="em">불은 이미 피웠습니다.</span><br>둘러앉을 사람이 필요합니다.</h1>
+    <p class="lead">한 번 와서 보세요. 마음에 걸리는 질문 하나만 들고 오면 됩니다.</p>
+    <p class="sub">놀일 · 놀며 일하고 성장하는 사람들 · playworkgrow.club</p>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="count" id="count">1 / 13</div>
+<div class="hint">← → 또는 클릭 · F 전체화면</div>
+<div class="nav"><a id="prev"></a><a id="next"></a></div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsWrap=document.getElementById('dots');
+  const count=document.getElementById('count');
+  let i=0;
+  slides.forEach((_,k)=>{const d=document.createElement('div');d.className='dot'+(k===0?' on':'');
+    d.onclick=()=>go(k);dotsWrap.appendChild(d);});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    slides[i].classList.remove('on');dots[i].classList.remove('on');
+    i=n;
+    slides[i].classList.add('on');dots[i].classList.add('on');
+    count.textContent=(i+1)+' / '+slides.length;
+    // 다음 슬라이드 이미지 미리 로드
+    const nx=slides[i+1];
+    if(nx){const m=/url\('([^']+)'\)/.exec(nx.getAttribute('style')||'');if(m){const im=new Image();im.src=m[1];}}
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(slides.length-1);
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  // 스와이프
+  let sx=0;
+  addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));},{passive:true});
+</script>
+</body>
+</html>

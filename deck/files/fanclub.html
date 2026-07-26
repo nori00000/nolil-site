@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>놀일 — 팬클럽 프라이빗 모임 제안</title>
+<style>
+  :root{
+    --teal:#015e5c; --teal-deep:#014140; --coral:#d0573b; --yellow:#f5e578;
+    --mint:#eef6ef; --cream:#F7F3E8; --paper:#FCFAF4; --ink:#173535; --body:#4e5c54;
+    --line:rgba(1,94,92,.14);
+    --font:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:#e9e3d0;font-family:var(--font);color:var(--ink);
+    -webkit-font-smoothing:antialiased;overflow:hidden;word-break:keep-all;
+  }
+  img{max-width:100%;display:block}
+
+  /* ===== 16:9 stage ===== */
+  .stage-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{
+    position:relative;
+    width:min(92vw, 163.5556vh);
+    height:min(92vh, 51.75vw);
+    background:var(--paper);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 40px 100px rgba(1,65,64,.28), 0 2px 10px rgba(1,65,64,.14);
+    container-type:size;
+  }
+  :fullscreen .stage{width:min(98vw,174.2222vh);height:min(98vh,55.125vw);border-radius:0;box-shadow:none}
+  :fullscreen .stage-wrap{background:#000}
+
+  /* ===== slide base ===== */
+  .slide{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    padding:5.6cqh 5.4cqw;background:var(--paper);color:var(--ink);
+    opacity:0;visibility:hidden;transition:opacity .5s ease;
+  }
+  .slide.on{opacity:1;visibility:visible}
+  .slide.bg-mint{background:var(--mint)}
+  .slide.bg-cream{background:var(--cream)}
+  .slide.bg-teal{background:var(--teal-deep);color:var(--cream)}
+  .slide.bg-photo{color:#fff}
+  .slide.bg-photo .photo-bg{position:absolute;inset:0;z-index:0}
+  .slide.bg-photo .photo-bg img{width:100%;height:100%;object-fit:cover}
+  .slide.bg-photo .photo-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg, rgba(1,32,31,.86) 0%, rgba(1,45,44,.62) 46%, rgba(1,45,44,.28) 100%);
+  }
+  .slide.bg-photo > *:not(.photo-bg){position:relative;z-index:1}
+  @media (prefers-reduced-motion: reduce){.slide{transition:none}}
+
+  .brandmark{
+    display:inline-flex;align-items:center;gap:.5em;color:inherit;opacity:.62;
+    font-weight:800;font-size:clamp(9px,1.05cqmin,12.5px);letter-spacing:.16em;text-transform:uppercase;
+  }
+  .brandmark::before{content:"";width:1.3em;height:1.3em;border-radius:50%;background:currentColor;opacity:.5}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.6em;margin-top:2.2cqh;
+    font-size:clamp(10px,1.15cqmin,14px);font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--coral);
+  }
+  .eyebrow::before{content:"";width:1.7em;height:2px;background:var(--coral);display:inline-block}
+  .bg-teal .eyebrow, .bg-photo .eyebrow{color:var(--yellow)}
+  .bg-teal .eyebrow::before, .bg-photo .eyebrow::before{background:var(--yellow)}
+
+  h1{
+    font-size:clamp(24px,4.6cqmin,54px);font-weight:800;line-height:1.16;letter-spacing:-.01em;
+    color:var(--teal);margin:.5em 0 0;
+  }
+  h2{
+    font-size:clamp(19px,3.3cqmin,38px);font-weight:800;line-height:1.22;letter-spacing:-.01em;
+    color:var(--teal);margin:.42em 0 0;
+  }
+  .bg-teal h1, .bg-photo h1, .bg-teal h2, .bg-photo h2{color:var(--cream)}
+  .hl{color:var(--coral)}
+  .bg-teal .hl, .bg-photo .hl{color:var(--yellow)}
+
+  .lead{font-size:clamp(12.5px,1.62cqmin,19px);line-height:1.62;color:var(--body);margin-top:1.1em;max-width:36em}
+  .bg-teal .lead, .bg-photo .lead{color:rgba(247,243,232,.92)}
+  .sub{font-size:clamp(10.5px,1.15cqmin,13.5px);line-height:1.6;color:var(--body);margin-top:.9em;opacity:.85;max-width:38em}
+  .bg-teal .sub, .bg-photo .sub{color:rgba(247,243,232,.72)}
+  b{font-weight:800;color:var(--ink)}
+  .bg-teal b, .bg-photo b{color:#fff}
+
+  .body-area{flex:1;display:flex;min-height:0}
+  .center{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .split{flex:1;display:grid;grid-template-columns:1.08fr .92fr;gap:4.4cqw;align-items:center}
+  .split.rev{grid-template-columns:.92fr 1.08fr}
+  .split .col{display:flex;flex-direction:column;justify-content:center;min-width:0}
+
+  .photo{border-radius:1.3cqw;overflow:hidden;box-shadow:0 1.6cqh 3cqh rgba(1,65,64,.22);height:100%;min-height:0}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .photo.short{height:auto;aspect-ratio:4/3}
+
+  /* segment / info cards */
+  .cards{display:grid;gap:1.2cqw;margin-top:2.4cqh}
+  .cards.n5{grid-template-columns:repeat(5,1fr)}
+  .cards.n4{grid-template-columns:repeat(4,1fr)}
+  .cards.n3{grid-template-columns:repeat(3,1fr)}
+  .cards.n2{grid-template-columns:repeat(2,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:1.1cqw;
+    padding:1.5cqh 1.2cqw;display:flex;flex-direction:column;gap:.5cqh;
+  }
+  .card .t{color:var(--teal);font-weight:800;font-size:clamp(11.5px,1.28cqmin,15px)}
+  .card .d{color:var(--body);font-size:clamp(10.5px,1.12cqmin,13.5px);line-height:1.56}
+  .card.coral{border-color:rgba(208,87,59,.36)}
+  .card.coral .t{color:var(--coral)}
+
+  /* safety note strip */
+  .note{
+    border-left:6px solid var(--coral);background:#fff;border-radius:.9cqw;
+    padding:1.3cqh 1.4cqw;font-size:clamp(11px,1.18cqmin,14.5px);line-height:1.6;color:var(--body);
+  }
+  .note b{color:var(--ink)}
+
+  /* access chip list */
+  .chiplist{display:grid;grid-template-columns:repeat(2,1fr);gap:.9cqw 1.2cqw;margin-top:2.2cqh;list-style:none;padding:0}
+  .chiplist li{
+    display:flex;align-items:center;gap:.7em;font-weight:700;font-size:clamp(10.5px,1.18cqmin,14px);
+    background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:.8cqw;padding:.9cqh 1cqw;color:var(--ink);
+  }
+  .chiplist li::before{content:"";width:.55em;height:.55em;border-radius:50%;background:var(--coral);flex:none}
+
+  /* day flow timeline */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3cqw;margin-top:2.6cqh;flex:1;align-items:stretch}
+  .flow .step{display:flex;flex-direction:column;gap:.8cqh;min-height:0}
+  .flow .num{
+    font-size:clamp(11px,1.15cqmin,13px);font-weight:800;color:var(--coral);letter-spacing:.08em;
+  }
+  .flow .step .photo{flex:1;min-height:0}
+  .flow .step .t{color:var(--teal);font-weight:800;font-size:clamp(11.5px,1.24cqmin,15px);margin-top:.2cqh}
+  .flow .step .d{color:var(--body);font-size:clamp(10px,1.06cqmin,12.8px);line-height:1.5}
+  .flow .step.icon-only{justify-content:flex-start}
+  .flow .icon-box{
+    flex:1;border-radius:1.1cqw;background:var(--mint);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:clamp(22px,3.4cqmin,40px);
+  }
+
+  /* placeholder frame */
+  .placeholder{
+    border:2px dashed rgba(1,94,92,.4);border-radius:1.2cqw;background:rgba(1,94,92,.05);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7cqh;
+    padding:2cqh 1.4cqw;height:100%;color:var(--teal);text-align:center;
+  }
+  .placeholder .pt{font-weight:800;font-size:clamp(11.5px,1.24cqmin,15px)}
+  .placeholder .pd{font-size:clamp(10px,1.06cqmin,12.8px);color:var(--body);max-width:22em}
+
+  /* offer box */
+  .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4cqw;margin-top:2.4cqh}
+  .offer-box{background:#fff;border:1px solid var(--line);border-radius:1.1cqw;padding:1.8cqh 1.5cqw}
+  .offer-box .k{font-size:clamp(10px,1.05cqmin,12.5px);font-weight:800;letter-spacing:.1em;color:var(--coral);text-transform:uppercase;margin-bottom:.5cqh}
+  .offer-box .v{font-size:clamp(13px,1.5cqmin,18px);font-weight:800;color:var(--teal);margin-bottom:.4cqh}
+  .offer-box .d{font-size:clamp(10.5px,1.12cqmin,13.5px);color:var(--body);line-height:1.55}
+
+  /* CTA box */
+  .cta-box{
+    display:flex;align-items:center;gap:2cqw;margin-top:3cqh;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
+    border-radius:1.2cqw;padding:1.8cqh 2cqw;max-width:44em;
+  }
+  .qr-ph{
+    flex:none;width:9.6cqw;height:9.6cqw;min-width:70px;min-height:70px;max-width:150px;max-height:150px;
+    border:2px dashed rgba(247,243,232,.55);border-radius:.8cqw;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3em;
+    color:rgba(247,243,232,.7);
+  }
+  .qr-ph .qm{font-size:clamp(18px,2.6cqmin,30px);font-weight:800;letter-spacing:.05em}
+  .qr-ph .qs{font-size:clamp(8px,.9cqmin,10.5px);font-weight:700}
+  .cta-k{font-size:clamp(11px,1.2cqmin,14.5px);font-weight:800;color:var(--yellow);margin-bottom:.3em}
+  .cta-url{font-size:clamp(15px,2cqmin,24px);font-weight:800;color:#fff;letter-spacing:-.01em}
+  .cta-sub{font-size:clamp(10.5px,1.12cqmin,13.5px);color:rgba(247,243,232,.78);margin-top:.5em;line-height:1.55}
+
+  /* ===== controls ===== */
+  .dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;display:flex;gap:7px;
+    background:rgba(1,65,64,.86);padding:8px 12px;border-radius:999px}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(247,243,232,.4);border:none;padding:0;cursor:pointer;transition:.2s}
+  .dot.on{background:var(--yellow);width:20px;border-radius:99px}
+  .dot:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+  .count{position:fixed;bottom:24px;right:26px;z-index:30;color:rgba(23,53,53,.55);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+  .hint{position:fixed;bottom:24px;left:26px;z-index:30;color:rgba(23,53,53,.42);font-size:12px;font-weight:700}
+  :fullscreen .count,:fullscreen .hint{color:rgba(247,243,232,.55)}
+  .nav{position:absolute;inset:0;z-index:5;display:flex}
+  .nav a{flex:1;cursor:pointer}
+
+  @media (max-width:720px){
+    .stage-wrap{align-items:stretch;justify-content:stretch}
+    .stage{width:100vw;height:100vh;border-radius:0;box-shadow:none}
+    .slide{padding:32px 22px 84px;overflow-y:auto}
+    .split,.split.rev{grid-template-columns:1fr;gap:18px}
+    .split .photo{order:-1;height:34vh}
+    .cards.n5,.cards.n4,.cards.n3{grid-template-columns:repeat(2,1fr)}
+    .flow{grid-template-columns:repeat(2,1fr);row-gap:18px}
+    .chiplist,.offer-grid{grid-template-columns:1fr}
+    .cta-box{flex-direction:column;text-align:center}
+    h1{font-size:clamp(24px,7.6vw,40px)}
+    h2{font-size:clamp(20px,6vw,30px)}
+  }
+</style>
+
+<style>
+  .deck-return{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:999px;background:rgba(10,13,11,.62);color:#fff;text-decoration:none;font:800 13px "Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px)}
+  .deck-return:hover{background:rgba(10,13,11,.78)}
+</style>
+<script>if(sessionStorage.getItem('nolilDeckUnlocked')!=='1')location.replace('../');</script>
+</head>
+<body>
+<a class="deck-return" href="../">목록</a>
+
+
+<div class="stage-wrap">
+  <div class="stage" id="stage">
+
+    <!-- 1. COVER -->
+    <section class="slide bg-teal on" aria-label="표지">
+      <span class="brandmark">놀일 팬클럽 프라이빗 모임 · PLAY WORK GROW</span>
+      <div class="split" style="margin-top:2.4cqh">
+        <div class="col">
+          <span class="eyebrow">팬클럽 · 프라이빗 모임</span>
+          <h1>우리 팬들만의,<br><span class="hl">사진으로 남는 하루.</span></h1>
+          <p class="lead">취향이 통하는 사람들끼리 — 킨텍스 근처 농장에서<br>우리만 아는, 사진으로 남는 특별한 하루를 만듭니다.</p>
+          <p class="sub">놀일 · 고양 일산 · playworkgrow.club</p>
+        </div>
+        <div class="photo">
+          <img src="assets/fire-circle.jpg" alt="놀일 농장의 캠프파이어 자리, 모여 앉을 수 있는 공간">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 왜 여기 — 인생샷 · 프라이빗 -->
+    <section class="slide bg-photo" aria-label="왜 놀일인가">
+      <div class="photo-bg"><img src="assets/campfire.jpg" alt="놀일 농장의 밤, 모닥불이 타오르는 골든아워 장면"></div>
+      <span class="brandmark" style="color:#fff">WHY NOLIL</span>
+      <div class="center">
+        <span class="eyebrow">왜 놀일인가</span>
+        <h1>어디서도 안 나오는<br><span class="hl">우리만의 인생샷.</span></h1>
+        <p class="lead">골든아워의 농장, 꽃 온실, 그리고 밤의 캠프파이어 — 팬 계정에 올릴 장면이 여기 다 있습니다.</p>
+        <p class="sub">다른 팀과 섞이지 않는 소규모 전용 진행 — 그날은 온전히 우리 팬클럽만의 시간입니다.</p>
+      </div>
+    </section>
+
+    <!-- 3. 접근성 -->
+    <section class="slide bg-mint" aria-label="접근성">
+      <span class="brandmark">왜 놀일인가</span>
+      <div class="split">
+        <div class="col">
+          <span class="eyebrow">ACCESS — 모이기 쉬운 곳</span>
+          <h2>전국 팬들이,<br><span class="hl">모이기 쉬운 곳.</span></h2>
+          <p class="lead">서울역에서 GTX로 킨텍스역까지 <b>21분</b>, 역에서 농장까지 <b>20분</b> — 문 앞까지 <b>40분대</b>입니다.</p>
+          <ul class="chiplist">
+            <li>서울역 → GTX 킨텍스역 21분</li>
+            <li>킨텍스역 → 농장 20분</li>
+            <li>케이플라워 꽃시장 차로 3분</li>
+            <li>일산호수공원 차로 5분</li>
+            <li>일산백병원 차로 3분</li>
+            <li>공항 약 1시간</li>
+          </ul>
+          <p class="sub">전국 각지에 흩어져 있던 팬들도, 이곳이면 모이기 쉽습니다.</p>
+        </div>
+        <div class="photo">
+          <img src="assets/greenhouse-flowers.jpg" alt="놀일 농장 인근 케이플라워 꽃시장의 온실 꽃">
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 하루 흐름 -->
+    <section class="slide" aria-label="하루 흐름">
+      <span class="brandmark">하루 구성</span>
+      <span class="eyebrow">A DAY AT NOLIL</span>
+      <h2>하루는 <span class="hl">이렇게</span> 흘러갑니다.</h2>
+      <div class="flow">
+        <div class="step">
+          <div class="num">01</div>
+          <div class="photo short"><img src="assets/open-field.jpg" alt="농장 한 바퀴를 도는 넓은 들판 포토 스팟"></div>
+          <div class="t">농장 포토 스팟</div>
+          <div class="d">농장과 꽃 온실을 돌며, 팬 계정에 올릴 장면을 담습니다.</div>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <div class="photo short"><img src="assets/hands-table.jpg" alt="테이블에 둘러앉아 함께 만드는 손"></div>
+          <div class="t">함께 만들기</div>
+          <div class="d">손으로 무언가를 만들며 함께 시간을 보냅니다.</div>
+        </div>
+        <div class="step icon-only">
+          <div class="num">03</div>
+          <div class="icon-box" aria-hidden="true">🔥</div>
+          <div class="t">캠프파이어</div>
+          <div class="d">밤의 불 앞에서 우리끼리 이야기를 나눕니다.</div>
+        </div>
+        <div class="step icon-only">
+          <div class="num">04</div>
+          <div class="icon-box" aria-hidden="true">📷</div>
+          <div class="t">사진 세션</div>
+          <div class="d">폰으로 담는, 우리 팬클럽만의 단체 사진.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 기념으로 남는 것 -->
+    <section class="slide bg-mint" aria-label="기념으로 남는 것">
+      <span class="brandmark">기념으로 남는 것</span>
+      <span class="eyebrow">WHAT YOU TAKE HOME</span>
+      <h2>그날이,<br><span class="hl">기념이 되어 남습니다.</span></h2>
+      <p class="lead">손으로 만든 기념 굿즈와, 팬 커뮤니티에 남을 사진 — 둘 다 그날의 증거가 됩니다.</p>
+      <div class="offer-grid">
+        <div class="offer-box"><div class="k">품경제 이끼코인</div><div class="v">손으로 번 커스텀 기념 토큰</div><div class="d">농장에서 몸으로 한 일만큼 번 이끼 코인 — 조각 클래스가 열리면 실물 굿즈로 만들어 가져갑니다.</div></div>
+        <div class="offer-box"><div class="k">사진 콘텐츠</div><div class="v">팬 커뮤니티에 남는 장면</div><div class="d">그날 찍은 사진은 팬클럽의 콘텐츠가 되고, 놀일 인스타(nolil.growfarm)와도 장면을 나눕니다.</div></div>
+      </div>
+    </section>
+
+    <!-- 6. 안심·편의 -->
+    <section class="slide bg-cream" aria-label="안심과 편의">
+      <span class="brandmark">팬클럽 운영진을 위한 안내</span>
+      <span class="eyebrow">SAFETY &amp; COMFORT</span>
+      <h2>안심하고 <span class="hl">오세요.</span></h2>
+      <div class="cards n4" style="margin-top:2cqh">
+        <div class="note"><b>소규모 전용</b> — 다른 단체와 섞이지 않는 프라이빗 진행.</div>
+        <div class="note"><b>물·불 안전</b> — 물놀이는 보호자 동반, 캠프파이어는 호스트만 점화·소화수 비치.</div>
+        <div class="note"><b>우천 시</b> — 실내(교육장)로 전환 진행 — 취소가 아닙니다.</div>
+        <div class="note"><b>식사</b> — 외주 케이터링·도시락 기본 운영.</div>
+      </div>
+    </section>
+
+    <!-- 7. 오퍼 -->
+    <section class="slide bg-mint" aria-label="오퍼">
+      <span class="brandmark">그룹 예약 오퍼</span>
+      <span class="eyebrow">THE OFFER</span>
+      <h2>인원만 알려주시면,<br><span class="hl">함께 정합니다.</span></h2>
+      <p class="lead">반나절이든 하루든, 팬클럽 모임 성격에 맞춰 구성합니다.</p>
+      <div class="offer-grid">
+        <div class="offer-box"><div class="k">A1 · 팀의 오후</div><div class="v">반나절 (3~4시간)</div><div class="d">농장 투어 · 만들기 테이블 · 품경제 환율회의 라이트로 이어지는 입문 구성.</div></div>
+        <div class="offer-box"><div class="k">A2 · 하루를 함께</div><div class="v">하루 (6~8시간)</div><div class="d">A1 구성 + 식사 · 캠프파이어 라운드까지 이어지는 본품 구성.</div></div>
+      </div>
+      <div class="note" style="margin-top:1.4cqh"><b>+ 사진 세션 애드온</b> — 사진 담당 확정 시, 폰으로 남기는 팬클럽 단체 사진을 더할 수 있습니다.</div>
+    </section>
+
+    <!-- 8. CTA -->
+    <section class="slide bg-teal" aria-label="문의">
+      <span class="brandmark">지금 이야기해요</span>
+      <div class="center">
+        <span class="eyebrow">LET'S TALK</span>
+        <h1>날짜와 인원,<br><span class="hl">알려만 주세요.</span></h1>
+        <p class="lead">팬클럽 모임 성격에 맞춰, 나머지는 저희가 같이 정리하겠습니다.</p>
+        <div class="cta-box">
+          <div class="qr-ph"><div class="qm">QR</div><div class="qs">준비 중</div></div>
+          <div>
+            <div class="cta-k">프라이빗 모임 문의</div>
+            <div class="cta-url">playworkgrow.club/group.html</div>
+            <div class="cta-sub">인원·날짜·팬클럽 이름을 알려주시면 견적을 보내드립니다.</div>
+          </div>
+        </div>
+        <p class="sub" style="margin-top:2.6cqh">놀일 · 놀며 일하고 성장하는 사람들</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="dots" id="dots" role="tablist" aria-label="슬라이드 이동"></div>
+<div class="count" id="count" aria-live="polite">1 / 8</div>
+<div class="hint">← → 클릭 · F 전체화면</div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const nav = document.createElement('div');
+  nav.className = 'nav';
+  nav.innerHTML = '<a aria-hidden="true" tabindex="-1"></a><a aria-hidden="true" tabindex="-1"></a>';
+  stage.appendChild(nav);
+
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsWrap = document.getElementById('dots');
+  const count = document.getElementById('count');
+  let i = 0;
+
+  slides.forEach((_, k) => {
+    const b = document.createElement('button');
+    b.className = 'dot' + (k ? '' : ' on');
+    b.setAttribute('aria-label', '슬라이드 ' + (k + 1));
+    b.setAttribute('role', 'tab');
+    b.onclick = () => go(k);
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.children];
+
+  function go(n) {
+    n = Math.max(0, Math.min(slides.length - 1, n));
+    if (n === i) return;
+    slides[i].classList.remove('on');
+    dots[i].classList.remove('on');
+    i = n;
+    slides[i].classList.add('on');
+    dots[i].classList.add('on');
+    count.textContent = (i + 1) + ' / ' + slides.length;
+  }
+
+  const [prev, next] = nav.querySelectorAll('a');
+  next.onclick = () => go(i + 1);
+  prev.onclick = () => go(i - 1);
+
+  addEventListener('keydown', (e) => {
+    const k = e.key;
+    if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') go(i + 1);
+    else if (k === 'ArrowLeft' || k === 'PageUp') go(i - 1);
+    else if (k === 'Home') go(0);
+    else if (k === 'End') go(slides.length - 1);
+    else if (k.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) stage.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  let sx = 0;
+  addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) go(i + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
