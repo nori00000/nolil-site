@@ -62,11 +62,14 @@ window.NOLIL_CONFIG = {
 };
 
 // ---------- 방문자 챗 위젯 로더 ----------
-// visitorChat.enabled=false 로 바꾸면 전 페이지에서 즉시 꺼집니다.
+// visitorChat.enabled=false 로 바꾸면 config.js를 로드하는 페이지에서 즉시 꺼집니다.
+// (config.js 없는 페이지 — group.html 등 — 에는 위젯이 원래 안 뜹니다.)
 (() => {
 	const chat = window.NOLIL_CONFIG && window.NOLIL_CONFIG.visitorChat;
 	if (!chat || !chat.enabled || !chat.scriptUrl) return;
+	if (document.getElementById("nolilVisitorChatLoader")) return;
 	const s = document.createElement("script");
+	s.id = "nolilVisitorChatLoader";
 	s.src = chat.scriptUrl;
 	s.defer = true;
 	if (chat.chatUrl) s.dataset.chatUrl = chat.chatUrl;
