@@ -60,3 +60,16 @@ window.NOLIL_CONFIG = {
 
 	capacity: 10,
 };
+
+// ---------- 방문자 챗 위젯 로더 ----------
+// visitorChat.enabled=false 로 바꾸면 전 페이지에서 즉시 꺼집니다.
+(() => {
+	const chat = window.NOLIL_CONFIG && window.NOLIL_CONFIG.visitorChat;
+	if (!chat || !chat.enabled || !chat.scriptUrl) return;
+	const s = document.createElement("script");
+	s.src = chat.scriptUrl;
+	s.defer = true;
+	if (chat.chatUrl) s.dataset.chatUrl = chat.chatUrl;
+	if (chat.label) s.dataset.label = chat.label;
+	document.head.appendChild(s);
+})();
