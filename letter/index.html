@@ -70,6 +70,7 @@
   .issue strong{display:block;font-size:18px;line-height:1.45;margin-bottom:8px}
   .issue p{font-size:15px;line-height:1.66}
   footer{padding:38px var(--pad);border-top:1px solid #eef0ec;color:var(--body)}
+  footer a{display:inline-flex;align-items:center;min-height:44px}
   @media (max-width:820px){
     .grid,.issues{grid-template-columns:1fr}
     .hero{padding:92px 0 72px}
@@ -101,6 +102,7 @@
         <div class="pills">
           <span class="pill">무료 모임</span>
           <span class="pill">화면 끄는 하루</span>
+          <span class="pill">고민 흐름 지도</span>
           <span class="pill">1:1 이야기</span>
           <span class="pill">AI 캠프</span>
           <span class="pill">사람 이야기</span>
@@ -121,7 +123,7 @@
             <input id="email" name="subscriber[email]" type="email" autocomplete="email" placeholder="you@example.com" required>
           </label>
           <label>관심 있는 것
-            <textarea id="interest" name="subscriber[interests]" maxlength="500" placeholder="예: 무료 모임, 교회 리트릿, 화면 끄는 하루, 제2인생 1:1 이야기"></textarea>
+            <textarea id="interest" name="subscriber[interests]" maxlength="500" placeholder="예: 무료 모임, 교회 리트릿, 화면 끄는 하루, 고민 흐름 지도, 제2인생 1:1 이야기"></textarea>
           </label>
           <label class="check"><input name="subscriber[privacy_consent]" value="1" type="checkbox" required> (필수) 소식 발송을 위한 개인정보 수집·이용에 동의합니다. 항목: 이름(선택), 이메일, 관심사. 보유: 수신거부 또는 해지 시 즉시 파기. <a href="../privacy.html" target="_blank" rel="noopener">개인정보 처리방침</a></label>
           <button class="btn" type="submit">소식 받기</button>
@@ -136,7 +138,7 @@
       <div class="issues">
         <article class="issue"><small>01</small><strong>이번 주 질문</strong><p>퇴직 후에도 일이 될 수 있는 경험은 무엇일까요.</p></article>
         <article class="issue"><small>02</small><strong>사람 이야기</strong><p>혼자 준비하던 일을 농장에서 말로 꺼낸 사람들.</p></article>
-        <article class="issue"><small>03</small><strong>모임 안내</strong><p>무료 모임, 화면 끄는 하루, 1:1 이야기의 다음 일정.</p></article>
+        <article class="issue"><small>03</small><strong>모임 안내</strong><p>무료 모임, 화면 끄는 하루, 고민 흐름 지도, 1:1 이야기의 다음 일정.</p></article>
         <article class="issue"><small>04</small><strong>작은 일</strong><p>이번 주에 같이 해볼 수 있는 한 가지 제안.</p></article>
       </div>
     </div>
