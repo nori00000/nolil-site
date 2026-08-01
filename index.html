@@ -877,6 +877,34 @@
     .site-links{display:flex}
     .story-intro{padding:108px 0}
   }
+  /* 모바일 하단 고정 CTA 바 — 720px 이하에서만 노출. z-index는 방문자 챗 위젯보다 낮게 두어 챗 버튼이 위로 오게 함. */
+  .mobile-cta-bar{display:none}
+  @media (max-width:720px){
+    .mobile-cta-bar{
+      display:flex;
+      gap:10px;
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:70;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--line);
+      box-shadow:0 -6px 20px rgba(0,0,0,.10);
+    }
+    .mobile-cta-bar .btn{
+      flex:1;
+      min-height:56px;
+      padding:14px 16px;
+      font-size:16px;
+    }
+    body{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .mobile-cta-bar .btn:hover{transform:none}
+  }
 </style>
 </head>
 <body>
@@ -928,10 +956,9 @@
         <h2>지금 실제로 열리는 모임부터 보세요</h2>
         <p>무료 모임으로 먼저 분위기를 보고, 맞는다고 느껴지면 하루 체험이나 단체 모임으로 이어갈 수 있습니다.</p>
       </div>
-      <div class="week-grid">
-        <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>7/22 수 · 무료</small><strong>공방 — 목공·이끼·화분</strong><span>14:00–17:00 · 정원 10명</span></a>
-        <a class="week-card" href="church-retreat.html"><small>7/26 일 · 교회</small><strong>주말 리트릿</strong><span>오후 도착 · 재능 나눔과 바베큐</span></a>
-        <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>7/28 월 · 무료</small><strong>AI 특강</strong><span>스마트폰으로 시작하는 AI</span></a>
+      <!-- 다가오는 일정은 config.js(fallbackSchedule)에서 자동 삽입됩니다. 아래는 날짜 없는 상시 카드입니다. -->
+      <div class="week-grid" id="weekGrid">
+        <a class="week-card" href="church-retreat.html"><small>교회·단체</small><strong>주말 리트릿</strong><span>교회·단체 일정 협의</span></a>
         <a class="week-card" href="group.html"><small>단체 문의</small><strong>팀 워크샵·수련회</strong><span>인원과 구성에 따라 함께 설계</span></a>
       </div>
     </div>
@@ -1131,7 +1158,7 @@
           <div class="bar"></div>
           <h2>오시는 길</h2>
           <div class="map-card" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 600 360" width="100%" height="100%"><rect width="600" height="360" fill="#e8f4e9"></rect><path d="M0 185h600M300 0v360" stroke="#fff" stroke-width="14"></path><path d="M0 185h600M300 0v360" stroke="#c8bea6" stroke-width="2" stroke-dasharray="12 16"></path><rect x="70" y="48" width="140" height="86" rx="12" fill="#cfebd6"></rect><rect x="402" y="68" width="138" height="88" rx="12" fill="#cfebd6"></rect><rect x="80" y="234" width="160" height="86" rx="12" fill="#cfebd6"></rect><circle cx="300" cy="184" r="22" fill="#fff"></circle><path d="M300 112c-44 0-62 50-34 83l34 48 34-48c28-33 10-83-34-83Z" fill="#015e5c"></path><circle cx="300" cy="160" r="16" fill="#fff"></circle><path d="M98 304c92-46 149-65 202-120 48-49 90-78 156-79" fill="none" stroke="#d0573b" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"></path></svg></div>
-          <div class="addr-row"><p><strong>주소</strong>신청하시면 오시는 길을 문자로 보내드립니다.</p><p><strong>주차</strong>농장 안에 주차하실 수 있습니다.</p></div>
+          <div class="addr-row"><p><strong>주소</strong>신청하시면 오시는 길을 문자로 보내드립니다.</p><p><strong>주차</strong>농장 안에 주차하실 수 있습니다.</p><p><strong>대중교통</strong>3호선 대화역에서 도보 15분 · 039번 버스</p></div>
         </div>
         <div><div class="bar"></div><h2>문의</h2><div class="contact-buttons" id="contactBtns"></div></div>
       </div>
@@ -1163,12 +1190,15 @@
 
           <figure class="walk-card"><div class="walk-media"><img src="images/infra/foot-volleyball-10min.webp?v=20260801" alt="놀일 농장 인근 도보 10분 거리 인조잔디 족구장과 심판대" width="1920" height="864" loading="lazy" decoding="async"><span class="walk-badge">도보 10분</span></div><figcaption><strong>족구장</strong><span>팀을 이뤄 활기찬 경기를 즐깁니다.</span></figcaption></figure>
 
-          <figure class="walk-card"><div class="walk-media"><img src="images/infra/street.webp?v=20260801" alt="놀일 농장 앞 대화로 대로변의 넓은 차로와 오가는 차량들의 모습" width="1920" height="864" loading="lazy" decoding="async"><span class="walk-badge badge-teal">대로변</span></div><figcaption><strong>대중교통·자가용</strong><span>농장 앞 대로변이 넓게 트여 차량과 대중교통으로 찾아오기 편리합니다.</span></figcaption></figure>
+          <figure class="walk-card"><div class="walk-media"><img src="images/infra/street.webp?v=20260801" alt="놀일 농장 앞 대화로 대로변의 넓은 차로와 오가는 차량들의 모습" width="1920" height="864" loading="lazy" decoding="async"><span class="walk-badge badge-teal">대로변</span></div><figcaption><strong>대중교통·자가용</strong><span>3호선 대화역 도보 15분, 039번 버스로 농장 앞까지 올 수 있습니다.</span></figcaption></figure>
         </div>
       </div>
     </div>
   </section>
 </main>
+
+<!-- 모바일 하단 고정 CTA 바 (버튼은 config.js 기반으로 아래 스크립트가 렌더) -->
+<div class="mobile-cta-bar" id="mobileCtaBar" role="region" aria-label="빠른 연락"></div>
 
 <footer>
   <span class="brand">NOLIL</span>
@@ -1219,6 +1249,39 @@
       setTimeout(() => { btn.textContent = "카카오톡 ID 보기"; }, 1800);
     });
   });
+  const meetingsUrl = C.meetingsUrl || "https://app.playworkgrow.club/meetings";
+
+  // ── 이번 주/다음 주 일정: config.js fallbackSchedule에서 오늘(KST) 이후만 자동 삽입 ──
+  const weekGrid = document.getElementById("weekGrid");
+  if (weekGrid && Array.isArray(C.fallbackSchedule)) {
+    const now = Date.now();
+    const upcoming = C.fallbackSchedule
+      // "2026-08-01"을 그날 KST 마감(23:59:59+09:00)까지 유효한 것으로 처리 → 당일 오후에도 안 사라짐
+      .filter(it => it && it.date && new Date(it.date + "T23:59:59+09:00").getTime() >= now)
+      .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+      .slice(0, 3);
+    let cards;
+    if (upcoming.length) {
+      cards = upcoming.map(it => {
+        const parts = String(it.date).split("-");
+        const md = `${Number(parts[1])}/${Number(parts[2])}`;
+        return `<a class="week-card" href="${esc(meetingsUrl)}" target="_blank" rel="noopener"><small>${esc(md + " " + (it.dow || ""))} · 무료</small><strong>${esc(it.program || "")}</strong><span>${esc(it.time || "")}</span></a>`;
+      }).join("");
+    } else {
+      cards = `<a class="week-card" href="${esc(leadUrl)}"><small>준비 중</small><strong>다음 모임 준비 중</strong><span>놀일 편지로 소식 받기</span></a>`;
+    }
+    weekGrid.insertAdjacentHTML("afterbegin", cards);
+  }
+
+  // ── 모바일 하단 고정 CTA 바 렌더 (phone 없으면 전화 버튼 생략) ──
+  const ctaBar = document.getElementById("mobileCtaBar");
+  if (ctaBar) {
+    const barBtns = [];
+    if (C.phone) barBtns.push(`<a class="btn btn-line" href="${esc(telHref)}">전화하기</a>`);
+    barBtns.push(`<a class="btn btn-hero" href="${esc(meetingsUrl)}" target="_blank" rel="noopener">무료 모임 보기</a>`);
+    ctaBar.innerHTML = barBtns.join("");
+  }
+
   const nav = document.getElementById("nav");
   const setNav = () => nav.classList.toggle("scrolled", window.scrollY > 34);
   setNav();
