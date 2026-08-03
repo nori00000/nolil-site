@@ -233,6 +233,7 @@
   .info-card{background:#e6f2e7}
   .info-card ul{list-style:none;display:grid;gap:8px;margin-top:4px}
   .info-card li{color:#3e4b44;font-size:16px;line-height:1.65}
+  .info-card li.account-note{color:#015e5c;font-weight:900}
 
   .final-cta{
     background:#f5e578;
@@ -351,7 +352,7 @@
     <h1>6일 뒤, 당신의 폰 홈 화면에 세상에 하나뿐인 서재가 생깁니다</h1>
     <p>그 안에는 6일간 매일 아침 당신이 직접 고른 문장들이 들어 있습니다. 앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-apply" href="#apply-form-tbd">신청하기</a>
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/dawn-library/apply">신청하기</a>
       <a class="btn btn-line" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
     </div>
     <div class="badges">
@@ -447,6 +448,7 @@
         <small>참가 순서</small>
         <strong>입금 → 신청 폼 → 오픈채팅방 초대</strong>
         <ul>
+          <li class="account-note">입금 계좌: 토스뱅크 1000-4503-5544 (예금주 이상민)</li>
           <li>24시간 내 오픈채팅방 초대</li>
           <li>8/17(월) 00:05 첫 미션</li>
         </ul>
@@ -467,7 +469,7 @@
     <p>아침 독서 습관 × 나만의 독서 앱, 6일 만에 둘 다.</p>
     <p>1기가 끝나면 2기(나만의 코칭 봇), 3기(나만의 언어 학습 앱)로 이어집니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-apply" href="#apply-form-tbd">신청하기</a>
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/dawn-library/apply">신청하기</a>
       <a class="btn btn-line-light" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
     </div>
   </div>
@@ -501,7 +503,7 @@
 <script>
 (() => {
   "use strict";
-  const APPLY_FORM_URL = "#apply-form-tbd";
+  const APPLY_FORM_URL = "https://sociai.org/challenge/dawn-library/apply";
   document.querySelectorAll(".js-apply").forEach((anchor) => {
     anchor.href = APPLY_FORM_URL;
   });
