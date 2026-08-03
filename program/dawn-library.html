@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#014140">
 <link rel="canonical" href="https://playworkgrow.club/program/dawn-library.html">
 
-<link rel="preload" as="image" href="../images/programs/dawn-library.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="../images/programs/dawn-library-hero.jpg" fetchpriority="high">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="../tokens.css">
 <style>
@@ -39,7 +39,7 @@
     margin-bottom:24px;
   }
   h2::before{
-    content:"DAWN LIBRARY";
+    content:"NOLIL PROGRAM";
     display:block;
     margin-bottom:12px;
     font-size:12px;
@@ -49,8 +49,6 @@
   }
   section p{font-size:17px;line-height:1.8;margin-bottom:14px}
   section p:last-child{margin-bottom:0}
-  b{color:#d0573b;font-weight:800}
-
   .topbar{
     position:absolute;
     z-index:5;
@@ -84,7 +82,7 @@
     position:absolute;
     inset:0;
     opacity:.74;
-    background-image:url('../images/programs/dawn-library.jpg');
+    background-image:url('../images/programs/dawn-library-hero.jpg');
     background-size:cover;
     background-position:center 42%;
   }
@@ -295,8 +293,8 @@
   "@type": "Event",
   "name": "새벽서재 챌린지 1기",
   "description": "아침 독서 습관 × 나만의 독서 앱, 6일 만에 둘 다",
-  "startDate": "2026-08-17",
-  "endDate": "2026-08-22",
+  "startDate": "2026-08-17T00:05:00+09:00",
+  "endDate": "2026-08-22T23:59:00+09:00",
   "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "image": [
@@ -310,7 +308,13 @@
     {
       "@type": "Place",
       "name": "일산 놀일 농장",
-      "url": "https://playworkgrow.club"
+      "url": "https://playworkgrow.club",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "고양시 일산서구",
+        "addressRegion": "경기도",
+        "addressCountry": "KR"
+      }
     }
   ],
   "organizer": {
@@ -347,7 +351,7 @@
     <h1>6일 뒤, 당신의 폰 홈 화면에 세상에 하나뿐인 서재가 생깁니다</h1>
     <p>그 안에는 6일간 매일 아침 당신이 직접 고른 문장들이 들어 있습니다. 앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다.</p>
     <div class="cta-row">
-      <button class="btn btn-primary js-apply" type="button">신청하기</button>
+      <a class="btn btn-primary js-apply" href="#apply-form-tbd">신청하기</a>
       <a class="btn btn-line" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
     </div>
     <div class="badges">
@@ -409,7 +413,7 @@
         <p>데모데이는 마지막 날(8/22) 일산 놀일 농장에서 열립니다. 놀일에 오시는 분들은 책, 문장, 앱, 사람을 한 자리에서 만납니다.</p>
       </div>
       <div class="demo-image">
-        <img src="../images/programs/dawn-library.jpg" alt="창문과 달빛이 있는 새벽 서재 일러스트" width="1080" height="1350" loading="lazy" decoding="async">
+        <img src="../images/programs/dawn-library-hero.jpg" alt="창문과 달빛이 있는 새벽 서재 일러스트" width="1920" height="1080" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -453,15 +457,17 @@
         <p>첫 시작을 함께할 1기를 지금 모집합니다.</p>
       </div>
     </div>
+    <p class="narrow">주최: 일산 놀일 농장의 AI 프로그램 sociai</p>
   </div>
 </section>
 
-<section id="contact" class="final-cta">
+<section id="apply" class="final-cta">
   <div class="wrap">
     <h2>첫 시작을 함께할 1기를 지금 모집합니다</h2>
     <p>아침 독서 습관 × 나만의 독서 앱, 6일 만에 둘 다.</p>
+    <p>1기가 끝나면 2기(나만의 코칭 봇), 3기(나만의 언어 학습 앱)로 이어집니다.</p>
     <div class="cta-row">
-      <button class="btn btn-primary js-apply" type="button">신청하기</button>
+      <a class="btn btn-primary js-apply" href="#apply-form-tbd">신청하기</a>
       <a class="btn btn-line-light" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
     </div>
   </div>
@@ -491,14 +497,13 @@
   </div>
 </footer>
 
+<script src="../config.js"></script>
 <script>
 (() => {
   "use strict";
   const APPLY_FORM_URL = "#apply-form-tbd";
-  document.querySelectorAll(".js-apply").forEach((button) => {
-    button.addEventListener("click", () => {
-      window.location.href = APPLY_FORM_URL;
-    });
+  document.querySelectorAll(".js-apply").forEach((anchor) => {
+    anchor.href = APPLY_FORM_URL;
   });
 })();
 </script>
