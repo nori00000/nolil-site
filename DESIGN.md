@@ -14,7 +14,7 @@ Nolil should feel like a people-and-content community that happens through a far
 
 | Role | Token | Value | Usage |
 |---|---|---|---|
-| Farm deep | `--solso-teal` | `#005e5c` | Deep destination bands, dark sections |
+| Farm deep | `--solso-teal` | `#015e5c` | Deep destination bands, dark sections |
 | Farm mint | `--solso-mint` | `#e6f2e7` | Program map and soft section backgrounds |
 | Farm yellow | `--solso-sun` | `#f5e578` | Warm highlight bands and low-volume accents |
 | Nolil moss | `--moss-900` | existing | Text, brand anchor |
