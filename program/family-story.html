@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>새벽서재 챌린지 1기 — 놀일</title>
-<meta name="description" content="아침 독서 습관 × 나만의 독서 앱, 10일 만에 둘 다">
+<title>부모님의 이야기 1기 — 놀일</title>
+<meta name="description" content="매일 5분, 10일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다.">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="새벽서재 챌린지 1기 — 놀일">
-<meta property="og:description" content="10일 뒤, 당신의 폰 홈 화면에 세상에 하나뿐인 서재가 생깁니다">
-<meta property="og:image" content="https://playworkgrow.club/images/og-dawn-library.jpg">
-<meta property="og:url" content="https://playworkgrow.club/program/dawn-library.html">
+<meta property="og:title" content="부모님의 이야기 1기 — 놀일">
+<meta property="og:description" content="매일 5분, 10일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다.">
+<meta property="og:image" content="https://playworkgrow.club/images/programs/dawn-library-hero.jpg">
+<meta property="og:url" content="https://playworkgrow.club/program/family-story.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#014140">
-<link rel="canonical" href="https://playworkgrow.club/program/dawn-library.html">
+<link rel="canonical" href="https://playworkgrow.club/program/family-story.html">
 
 <link rel="preload" as="image" href="../images/programs/dawn-library-hero.jpg" fetchpriority="high">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -158,7 +158,7 @@
     background:#fff;
     padding:24px;
   }
-  .routine-card small,.info-card small{
+  .routine-card small,.info-card small,.mission-card small{
     display:block;
     color:#015e5c;
     font-size:12px;
@@ -175,32 +175,35 @@
   }
   .routine-card p,.info-card p{color:#3e4b44;font-size:16px;line-height:1.72}
 
-  .sched-scroll{overflow-x:auto;margin-top:34px}
-  .sched{
-    width:100%;
-    min-width:560px;
-    border-collapse:collapse;
-    font-size:16px;
+  .mission-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:34px;
+    counter-reset:mission;
   }
-  .sched th,.sched td{
-    border:1px solid rgba(1,94,92,.18);
-    padding:14px 16px;
-    text-align:left;
-    vertical-align:top;
-    line-height:1.6;
+  .mission-card{
+    position:relative;
+    border:1px solid rgba(59,74,54,.10);
+    background:#fff;
+    padding:22px 22px 22px 70px;
   }
-  .sched thead th{
+  .mission-card::before{
+    counter-increment:mission;
+    content:counter(mission);
+    position:absolute;
+    left:22px;
+    top:22px;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
     background:#015e5c;
     color:#f5e578;
-    font-size:12px;
     font-weight:900;
-    letter-spacing:.12em;
   }
-  .sched td:first-child{white-space:nowrap;font-weight:800;color:#111}
-  .sched td:last-child{color:#3e4b44;white-space:nowrap}
-  .sched tr.farm td{background:#f5e578}
-  .sched tr.farm td:last-child{color:#26362f}
-  .sched-note{margin-top:16px;color:#3e4b44;font-size:15px}
+  .mission-card strong{display:block;font-size:19px;line-height:1.42;color:#111}
 
   .dark{background:#015e5c;color:var(--cream)}
   .dark h2{color:var(--cream)}
@@ -322,34 +325,45 @@
     .cta-row .btn{flex:1}
     .routine-grid{grid-template-columns:repeat(2,1fr)}
     .info-grid{grid-template-columns:repeat(2,1fr)}
+    .mission-grid{grid-template-columns:repeat(3,1fr)}
+    .mission-card{padding:70px 22px 22px}
+    .mission-card::before{left:22px;top:22px}
     .demo-panel{grid-template-columns:1fr 1fr}
     .facilitator-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
     .facilitator-copy{padding:34px}
     .family-links{flex-direction:row}
     .family-links .family-link{flex:1}
   }
+
+  .schedule-table{width:100%;border-collapse:collapse;margin-top:30px;background:#fff;border:1px solid rgba(1,94,92,.18)}
+  .schedule-table th,.schedule-table td{padding:16px 18px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(1,94,92,.12);font-size:16px;line-height:1.6}
+  .schedule-table th{background:#e6f2e7;color:#015e5c;font-size:13px;font-weight:900;letter-spacing:.08em}
+  .schedule-table tr:last-child td{border-bottom:0}
+  .schedule-table strong{color:#111}
+  .note-line{margin-top:18px;color:#3e4b44;text-align:center}
+  @media (max-width:639px){.schedule-table{display:block;overflow-x:auto}.schedule-table th,.schedule-table td{min-width:150px}}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Event",
-  "name": "새벽서재 챌린지 1기",
-  "description": "아침 독서 습관 × 나만의 독서 앱, 10일 만에 둘 다",
-  "startDate": "2026-08-13",
-  "endDate": "2026-08-22",
+  "name": "부모님의 이야기 1기",
+  "description": "매일 5분, 10일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다.",
+  "startDate": "2026-08-13T00:00:00+09:00",
+  "endDate": "2026-08-22T23:59:00+09:00",
   "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "image": [
-    "https://playworkgrow.club/images/og-dawn-library.jpg"
+    "https://playworkgrow.club/images/programs/dawn-library-hero.jpg"
   ],
   "location": [
     {
       "@type": "VirtualLocation",
-      "url": "https://playworkgrow.club/program/dawn-library.html"
+      "url": "https://playworkgrow.club/program/family-story.html"
     },
     {
       "@type": "Place",
-      "name": "일산 놀일 농장",
+      "name": "온라인+놀일 농장",
       "url": "https://playworkgrow.club",
       "address": {
         "@type": "PostalAddress",
@@ -361,7 +375,7 @@
   ],
   "organizer": {
     "@type": "Organization",
-    "name": "일산 놀일 농장의 AI 프로그램 sociai",
+    "name": "놀일/sociai",
     "url": "https://sociai.org"
   },
   "offers": [
@@ -389,17 +403,17 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="kicker">새벽서재 챌린지 1기</span>
-    <h1>10일 뒤, 당신의 폰 홈 화면에 세상에 하나뿐인 서재가 생깁니다</h1>
-    <p>그 안에는 매일 아침 5분씩 당신이 직접 고른 문장들이 들어 있습니다. 앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다.</p>
+    <span class="kicker">부모님의 이야기 1기</span>
+    <h1>부모님의 이야기</h1>
+    <p>매일 5분, 10일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=dawn-library">신청하기</a>
-      <a class="btn btn-line" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=family-story">신청하기</a>
+      <a class="btn btn-line" href="../index.html#programs">다른 프로그램 보기</a>
     </div>
     <div class="badges">
       <span class="badge">2026년 8/13(목) – 8/22(토)</span>
       <span class="badge">하루 5분 + 주말 2회 반나절</span>
-      <span class="badge">초급 · 코딩 경험 불필요</span>
+      <span class="badge">트랙 라이브 목 21:30</span>
     </div>
   </div>
 </header>
@@ -407,25 +421,26 @@
 <section class="problem">
   <div class="wrap">
     <div class="narrow">
-      <h2>읽어도 남지 않는 이유</h2>
-      <p>독서가 습관이 되지 않는 이유는 의지가 아니라 시스템입니다. 읽어도 남지 않고, 남겨도 다시 보지 않으니까요.</p>
+      <h2>가족 이야기가 늦어지는 이유</h2>
+      <p>습관이 안 잡히는 건 의지가 아니라 시스템 때문입니다. 기록해도 남지 않고, 남겨도 다시 보지 않으니까요.</p>
+      <p>앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다. 코딩은 몰라도 됩니다. AI에게 말로 시킵니다.</p>
     </div>
   </div>
 </section>
 
 <section class="routine">
   <div class="wrap">
-    <h2>하루를 두 번 씁니다</h2>
+    <h2>통화할 수 있는 시간에 묻고 남깁니다</h2>
     <div class="routine-grid">
       <div class="routine-card">
-        <small>아침 7~9시</small>
-        <strong>책을 읽고, 마음에 남은 문장 하나를 채집합니다</strong>
-        <p>읽을 책 1권을 정하고 매일 아침 5분, 한 문장씩 남깁니다.</p>
+        <small>매일 자유(통화 시간)</small>
+        <strong>부모님께 질문 1개를 여쭙고 메모 3줄을 남깁니다</strong>
+        <p>매일 가능한 통화 시간에 질문 하나를 드리고, 들은 이야기를 세 줄로 기록합니다.</p>
       </div>
       <div class="routine-card">
-        <small>합동 기술 파트</small>
-        <strong>그 문장들이 쌓이는 '나만의 독서 앱'을 AI와 함께 만듭니다</strong>
-        <p>AI에게 말로 시켜서 앱을 만들고, 배포하고, 온라인 DB와 AI 사서를 연결합니다. 8/17과 8/22 농장 합동 시간에 다 같이 진행합니다.</p>
+        <small>앱 만들기</small>
+        <strong>그 메모가 음성을 포함한 가족 아카이브로 이어집니다</strong>
+        <p>기록을 앱에 쌓고, 가족 이야기를 다시 꺼내 볼 수 있는 아카이브를 만듭니다.</p>
       </div>
     </div>
   </div>
@@ -433,38 +448,80 @@
 
 <section>
   <div class="wrap">
-    <h2>10일 일정</h2>
-    <div class="sched-scroll">
-      <table class="sched">
-        <thead>
-          <tr><th scope="col">날짜</th><th scope="col">내용</th><th scope="col">장소</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>8/13(목)</td><td>데일리 채집 시작 — 아침 7~9시</td><td>온라인</td></tr>
-          <tr><td>8/14(금)~8/16(일)</td><td>데일리 채집</td><td>온라인</td></tr>
-          <tr class="farm"><td>8/17(월)</td><td><strong>농장 합동 빌드데이</strong> — 앱 만들고 인터넷에 배포 (10:00~13:00) · 광복절 대체공휴일</td><td>놀일 농장 (+줌 중계)</td></tr>
-          <tr><td>8/18(화)~8/21(금)</td><td>데일리 채집 + 트랙 라이브 화 20:00 (60분)</td><td>온라인</td></tr>
-          <tr class="farm"><td>8/22(토)</td><td><strong>농장 합동 데모데이</strong> — DB·AI 연동 마무리 + 서로의 결과물 공개 (10:00~13:00)</td><td>놀일 농장 (+줌 중계)</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="sched-note narrow">총 10일, 실제 요구 시간은 하루 5분 + 주말 2회 반나절입니다. 온라인 전용 참가자는 8/17·8/22에 줌으로 동시 참여하고 녹화도 받습니다.</p>
+    <h2>공통 일정</h2>
+    <table class="schedule-table">
+      <thead>
+        <tr><th>날짜</th><th>내용</th><th>장소</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>8/13(목)</strong></td><td>전 트랙 데일리 채집 시작 (부모님의 이야기: 매일 자유(통화 시간))</td><td>온라인</td></tr>
+        <tr><td>8/14(금)~8/16(일)</td><td>데일리 채집</td><td>온라인</td></tr>
+        <tr><td><strong>8/17(월·광복절 대체공휴일)</strong></td><td><strong>농장 합동 빌드데이</strong> — 앱 만들고 인터넷에 배포 (10:00~13:00)</td><td>놀일 농장 (+줌 중계)</td></tr>
+        <tr><td>8/18(화)~8/21(금)</td><td>데일리 채집 + <strong>부모님의 이야기 트랙 라이브 목 21:30</strong> (60분)</td><td>온라인</td></tr>
+        <tr><td><strong>8/22(토)</strong></td><td><strong>농장 합동 데모데이</strong> — DB·AI 연동 마무리 + 서로의 결과물 공개 (10:00~13:00)</td><td>놀일 농장 (+줌 중계)</td></tr>
+      </tbody>
+    </table>
+    <p class="note-line">총 10일, 실제 요구 시간은 하루 5분 + 주말 2회 반나절입니다.</p>
+    <p class="note-line">다른 프로그램과 시간이 겹치지 않게 짜여 있어, 두 개를 함께 신청하실 수 있습니다(두 번째 프로그램 50% 할인).</p>
   </div>
 </section>
 
 <section class="dark">
   <div class="wrap">
-    <h2>마지막 날엔 농장에서 엽니다</h2>
-    <p class="narrow">8/22(토) 일산 놀일 농장에서 서로의 서재를 공개하는 합동 데모데이가 열립니다. 8개 트랙이 한자리에 모여 각자 만든 앱을 공개합니다. 데모데이는 6일 이상 인증한 완주자만 초청합니다.</p>
+    <h2>끝나면 남는 것</h2>
+    <p class="narrow">6일 이상 인증한 메모 위에 음성을 포함한 가족 이야기 아카이브 앱이 남습니다.</p>
     <div class="demo-panel">
       <div class="demo-copy">
-        <strong>폰 홈 화면에 들어간 내 서재를 서로에게 보여줍니다</strong>
-        <p>데모데이는 8/22(토) 10:00~13:00 일산 놀일 농장에서 열립니다. 놀일에 오시는 분들은 책, 문장, 앱, 사람을 한 자리에서 만납니다.</p>
+        <strong>가족 이야기 아카이브 앱 (음성 포함)</strong>
+        <p>휴가·벌초로 만나는 시기인 8월에 매일 5분씩 채집한 것을 당신의 폰에 들어가는 앱으로 마무리합니다.</p>
       </div>
       <div class="demo-image">
         <img src="../images/programs/dawn-library-hero.jpg" alt="창문과 달빛이 있는 새벽 서재 일러스트" width="1920" height="1080" loading="lazy" decoding="async">
       </div>
     </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <h2>참가 정보</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <small>기간</small>
+        <strong>2026년 8/13(목) – 8/22(토), 총 10일</strong>
+        <p>8/13(목)부터 트랙별 시간대에 데일리 채집을 시작합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>트랙 라이브</small>
+        <strong>목 21:30, 60분</strong>
+        <p>주제별 심화와 질의응답을 온라인으로 진행합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>참가비</small>
+        <strong>온라인 30,000원 / 농장 포함 50,000원</strong>
+        <p>농장 포함 옵션은 8/17 빌드데이와 8/22 데모데이 현장 참가, 식사를 포함합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>준비물</small>
+        <strong>스마트폰, 컴퓨터, 구글 계정</strong>
+        <p>부모님께 질문드릴 수 있는 통화 시간과 메모할 도구를 준비해 주세요.</p>
+      </div>
+      <div class="info-card">
+        <small>참가 순서</small>
+        <strong>입금 → 신청 폼 → 오픈채팅방 초대</strong>
+        <ul>
+          <li class="account-note">입금 계좌: 토스뱅크 1000-4503-5544 (예금주 이상민)</li>
+          <li>데모데이는 완주자만 초청합니다. (6일 이상 인증)</li>
+          <li>온라인 전용 참가자는 8/17·8/22 줌 동시 참여 + 녹화</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <small>매일 5분</small>
+        <strong>부모님께 질문 1개 여쭙고 메모 3줄</strong>
+        <p>부모님의 이야기 트랙의 데일리 시간대는 자유(통화 시간)입니다.</p>
+      </div>
+    </div>
+    <p class="narrow">주최: 놀일/sociai · 진행: 이상민 (놀일 농장 운영 · sociai)</p>
   </div>
 </section>
 
@@ -488,64 +545,14 @@
   </div>
 </section>
 
-<section class="info">
-  <div class="wrap">
-    <h2>참가 정보</h2>
-    <div class="info-grid">
-      <div class="info-card">
-        <small>기간</small>
-        <strong>2026년 8/13(목) – 8/22(토), 총 10일</strong>
-        <p>8/13(목) 아침 7~9시 첫 데일리로 시작합니다.</p>
-      </div>
-      <div class="info-card">
-        <small>난이도</small>
-        <strong>초급, 코딩 경험 불필요</strong>
-        <p>코딩이요? 몰라도 됩니다. AI에게 말로 시켜서 앱을 만듭니다.</p>
-      </div>
-      <div class="info-card">
-        <small>참가비</small>
-        <strong>온라인 30,000원 / 농장 포함 50,000원</strong>
-        <ul>
-          <li>온라인: 데일리 미션 + 트랙 라이브 + 8/17·8/22 줌 참여 + 녹화</li>
-          <li>농장 포함: 8/17 빌드데이 &amp; 8/22 데모데이 현장 참가 (식사 포함)</li>
-          <li>다른 프로그램과 시간이 겹치지 않게 짜여 있어, 두 개를 함께 신청하실 수 있습니다(두 번째 프로그램 50% 할인).</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <small>준비물</small>
-        <strong>책 1권, 스마트폰, 컴퓨터, 구글 계정</strong>
-        <p>기간 동안 읽을 책 1권을 준비해 주세요.</p>
-      </div>
-      <div class="info-card">
-        <small>참가 순서</small>
-        <strong>입금 → 신청 폼 → 오픈채팅방 초대</strong>
-        <ul>
-          <li class="account-note">입금 계좌: 토스뱅크 1000-4503-5544 (예금주 이상민)</li>
-          <li>24시간 내 오픈채팅방 초대</li>
-          <li>8/13(목) 첫 데일리</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <small>환불 / 개설 기준</small>
-        <strong>시작 전일까지 전액 환불</strong>
-        <ul>
-          <li>데모데이는 6일 이상 인증한 완주자만 초청합니다</li>
-          <li>이 트랙 신청이 2명 미만이면 이번 1기는 미개설되고 다음 기수로 이월됩니다</li>
-        </ul>
-      </div>
-    </div>
-    <p class="narrow">주최: 일산 놀일 농장의 AI 프로그램 sociai</p>
-  </div>
-</section>
-
 <section id="apply" class="final-cta">
   <div class="wrap">
-    <h2>첫 시작을 함께할 1기를 지금 모집합니다</h2>
-    <p>아침 독서 습관 × 나만의 독서 앱, 매일 5분으로 둘 다.</p>
-    <p>8월 17일 광복절 대체공휴일, 농장에서 다 같이 만듭니다.</p>
+    <h2>부모님의 이야기 1기에 신청합니다</h2>
+    <p>매일 5분, 10일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다.</p>
+    <p>가족 이야기 아카이브 앱 (음성 포함)</p>
     <div class="cta-row">
-      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=dawn-library">신청하기</a>
-      <a class="btn btn-line-light" href="https://sociai.org/challenge/dawn-library">상세 커리큘럼 보기</a>
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=family-story">신청하기</a>
+      <a class="btn btn-line-light" href="../index.html#programs">다른 프로그램 보기</a>
     </div>
   </div>
 </section>
@@ -578,7 +585,7 @@
 <script>
 (() => {
   "use strict";
-  const APPLY_FORM_URL = "https://sociai.org/challenge/apply?track=dawn-library";
+  const APPLY_FORM_URL = "https://sociai.org/challenge/apply?track=family-story";
   document.querySelectorAll(".js-apply").forEach((anchor) => {
     anchor.href = APPLY_FORM_URL;
   });
