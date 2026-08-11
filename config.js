@@ -12,6 +12,9 @@ window.NOLIL_CONFIG = {
 	instagramUrl: "https://instagram.com/nolil.growfarm",
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
+	// 수리수리공방 회원 설문. 회차가 바뀌면 여기 slug만 고치면 됩니다.
+	// 비우면 index.html에 하드코딩된 기본 링크가 그대로 쓰입니다.
+	repairSurveyUrl: "https://app.playworkgrow.club/s/repair-2026-08",
 	meetingPollsUrl: "https://app.playworkgrow.club/host/meeting_polls",
 	consultUrl: "https://app.playworkgrow.club/meetings",
 	leadFormUrl: "letter/",

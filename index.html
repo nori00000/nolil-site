@@ -1045,7 +1045,7 @@
         <p class="prog-group-sub">재능 있는 분들이 직접 여는 첫 모임들입니다. 다음은 당신 차례일 수 있습니다.</p>
       </div>
       <div class="program-grid">
-        <div class="program-card prog-static-card"><div class="program-art art-repair"><img src="images/program-repair.jpg" alt="나무 상자 위에 놓인 오래된 라디오" width="1280" height="800" loading="lazy" decoding="async"></div><div class="program-body"><div class="tag-row"><span class="tag">재능인이 리드</span></div><h3>전자제품 수리공방</h3><p class="program-lead">농장에서 고쳐 쓰는 삶을 배웁니다. 오래된 소형 전자제품을 함께 열어보고, 버리기 전에 다시 쓸 방법을 찾습니다.</p></div></div>
+        <a class="program-card" id="ctaRepairSurvey" href="https://app.playworkgrow.club/s/repair-2026-08" target="_blank" rel="noopener"><div class="program-art art-repair"><img src="images/program-repair.jpg" alt="나무 상자 위에 놓인 오래된 라디오" width="1280" height="800" loading="lazy" decoding="async"></div><div class="program-body"><div class="tag-row"><span class="tag">재능인이 리드</span><span class="tag">격주 수·토 저녁 6시</span></div><h3>전자제품 수리공방</h3><p class="program-lead">농장에서 고쳐 쓰는 삶을 배웁니다. 오래된 소형 전자제품을 함께 열어보고, 버리기 전에 다시 쓸 방법을 찾습니다.</p><p class="program-lead">지금 첫 설문을 받고 있습니다. 관심 분야와 해보신 것을 알려주시면, 그에 맞는 공유회·강의·워크숍을 함께 만들어 갑니다.</p><span class="program-action primary-action">설문 참여하기 (약 2분)</span></div></a>
         <div class="program-card prog-static-card"><div class="program-art art-craft"><img src="images/space/stay-cabin.webp?v=20260801" alt="놀일 농장 농막 외관의 통나무 단면 장식 벽과 앞에 놓인 웃는 얼굴 의자 셋" width="1280" height="960" loading="lazy" decoding="async"></div><div class="program-body"><div class="tag-row"><span class="tag">네이처 목공</span></div><h3>목공 소도구 모임</h3><p class="program-lead">젓가락, 숟가락, 작은 미니 테이블처럼 집에서 바로 쓰는 것을 깎고 다듬습니다. 나무 결을 만지며 생활을 천천히 고칩니다.</p></div></div>
         <div class="program-card prog-static-card"><div class="program-art art-record"><img src="images/program-record.jpg" alt="나무 테이블 위에 놓인 필름 카메라와 펼쳐진 노트" width="1280" height="800" loading="lazy" decoding="async"></div><div class="program-body"><div class="tag-row"><span class="tag">클래스</span></div><h3>사진·기록 클래스</h3><p class="program-lead">농장의 빛, 손, 사람의 표정을 찍고 짧은 글로 남깁니다. 혼자 본 장면을 다음 모임의 콘텐츠로 바꾸는 연습입니다.</p></div></div>
         <div class="program-card prog-static-card"><div class="program-art art-object"><img src="images/space/farm-moss.webp?v=20260801" alt="놀일 농장 온실 선반에 초록빛 이끼가 종류별로 줄지어 자라는 이끼 재배장" width="960" height="1280" loading="lazy" decoding="async"></div><div class="program-body"><div class="tag-row"><span class="tag">클래스</span></div><h3>조각·식물 오브제</h3><p class="program-lead">이끼, 나무, 작은 돌을 만지며 농장 네이처 오브제를 만듭니다. 완성품보다 손으로 집중하는 시간이 중심입니다.</p></div></div>
@@ -1295,6 +1295,10 @@
     });
   });
   const meetingsUrl = C.meetingsUrl || "https://app.playworkgrow.club/meetings";
+
+  // 수리공방 설문 링크는 회차마다 바뀐다 — config.js에 값이 있으면 그걸 쓴다.
+  const repairSurveyCta = document.getElementById("ctaRepairSurvey");
+  if (repairSurveyCta && C.repairSurveyUrl) repairSurveyCta.href = C.repairSurveyUrl;
 
   // ── 이번 주/다음 주 일정: config.js fallbackSchedule에서 오늘(KST) 이후만 자동 삽입 ──
   const weekGrid = document.getElementById("weekGrid");
