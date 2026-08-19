@@ -200,6 +200,11 @@ td.c2{font-weight:700;color:var(--coral-text);white-space:nowrap;font-variant-nu
 .t0 .tier-name,.t1 .tier-name{color:var(--text)}
 .t0 .tier-price,.t1 .tier-price{color:var(--coral-text)}
 .t0 .tier-meta dt,.t1 .tier-meta dt{color:var(--teal)}
+/* L4 는 회비를 내지 않고 함께 일하는 칸 — 파선 테두리로 '살 수 없는 칸'임을 표시 */
+.t4{background:var(--mint-strong);border-left-style:dashed;border-left-color:var(--teal)}
+.t4 .tier-code,.t4 .tier-meta dt,.t4 .tier-price{color:var(--teal)}
+.t4 .tier-name{color:var(--text)}
+.t4 .tier-price{white-space:normal;font-size:.92rem}
 .t2{background:var(--teal);border-left-color:var(--mint-strong);color:var(--mint)}
 .t3{background:var(--teal-deep);border-left-color:var(--coral);color:var(--mint)}
 .t5{background:var(--teal-deep);border-left-color:var(--yellow);border-left-width:7px;color:var(--mint)}
@@ -460,6 +465,20 @@ footer time{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
             <dl class="tier-meta">
               <dt>포함</dt><dd>지정 자리 + 락커 배정 + L1 권리</dd>
               <dt>신호</dt><dd>긱워커, 1인 창업자</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="tier t4">
+          <div class="tier-code" aria-hidden="true">L4</div>
+          <div class="tier-body">
+            <div class="tier-top">
+              <h3 class="tier-name">한솥밥</h3>
+              <span class="tier-price">회비 없음 · 함께 일함</span>
+            </div>
+            <dl class="tier-meta">
+              <dt>관계</dt><dd>파트타임으로 함께 일하며 손발을 맞춥니다</dd>
+              <dt>신호</dt><dd>L3에서 남을 돕는 게 몸에 뱄고, 같이 일해보자는 말이 오갈 때</dd>
             </dl>
           </div>
         </article>

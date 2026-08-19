@@ -943,6 +943,8 @@
 .guild-rung-name{font-family:var(--serif);font-size:clamp(19px,2.2vw,24px);font-weight:700;line-height:1.3;color:var(--text);margin:0}
 .guild-rung-price{font-size:15px;font-weight:700;color:var(--teal-deep)}
 .guild-per{font-size:12px;font-weight:600;color:var(--body);margin-right:3px}
+/* L4 는 돈이 반대로 흐르는 칸 — 가격처럼 보이면 안 되므로 파선 칩으로 구분 */
+.guild-rung-price--none{font-size:13px;font-weight:600;color:var(--body);border:1px dashed var(--teal);border-radius:999px;padding:3px 10px 2px;white-space:normal}
 .guild-rung-desc{font-size:15px;line-height:1.7;color:var(--body);margin:0}
 .guild-flag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;line-height:1;padding:5px 10px 4px;border-radius:999px;vertical-align:middle;margin-left:8px;transform:translateY(-2px)}
 .guild-flag--start{border:1px solid var(--teal);color:var(--teal);background:var(--mint)}
@@ -1212,7 +1214,7 @@
       <div class="section-head">
         <div class="bar"></div>
         <div class="eyebrow">여기 들어오면 이렇게 됩니다</div>
-        <h2>손님이 아니라 식구가 되는 다섯 칸</h2>
+        <h2>손님이 아니라 식구가 되는 여섯 칸</h2>
         <p>놀일은 공간을 빌려주지 않습니다. 관계를 세웁니다. 아래는 그 관계가 자라는 순서이고, 각 칸마다 농장이 당신에게 거는 것이 정해져 있습니다.</p>
       </div>
 
@@ -1281,6 +1283,20 @@
           <div class="guild-rung-signal">
             <span class="guild-signal-label">올라서는 신호</span>
             <p>여기가 일터가 될 때</p>
+          </div>
+        </li>
+        <li class="guild-rung">
+          <div class="guild-rung-step"><span class="guild-step-l">L</span><span class="guild-step-n">4</span></div>
+          <div class="guild-rung-main">
+            <div class="guild-rung-title">
+              <h3 class="guild-rung-name">한솥밥</h3>
+              <span class="guild-rung-price guild-rung-price--none">회비 없음 · 함께 일함</span>
+            </div>
+            <p class="guild-rung-desc">파트타임으로 함께 일합니다. 손발을 맞춰보는 자리.</p>
+          </div>
+          <div class="guild-rung-signal">
+            <span class="guild-signal-label">올라서는 신호</span>
+            <p>돕는 게 몸에 뱄고, 같이 일해보자는 말이 오갈 때</p>
           </div>
         </li>
         <li class="guild-rung guild-rung--top">
