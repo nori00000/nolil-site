@@ -62,7 +62,67 @@ window.NOLIL_CONFIG = {
 	],
 
 	capacity: 10,
+
+	// ---------- ⑤ 측정기 ----------
+	// 홍보를 쏜 뒤 "몇 명이 왔고 어디서 왔는지"를 보려면 필요합니다.
+	// 지금은 전부 비어 있어서 아무것도 로드되지 않습니다 (아무 부작용 없음).
+	// 발급받은 값을 여기에만 붙여넣으면 config.js를 쓰는 16개 페이지에서 한 번에 켜집니다.
+	//
+	//  ga4          Google Analytics 4 측정 ID.  형식: G-XXXXXXXXXX
+	//               analytics.google.com → 관리(톱니) → 데이터 스트림 → 웹 → 측정 ID
+	//  naverVerify  네이버 서치어드바이저 소유확인 코드 (meta 태그의 content 값만 복사)
+	//               searchadvisor.naver.com → 사이트 등록 → HTML 태그 방식
+	//  naverWcs     네이버 애널리틱스 인증키
+	//               analytics.naver.com → 사이트 등록 후 발급
+	//
+	// ⚠ 켜기 전에 privacy.html(개인정보처리방침)에 분석도구 사용을 적어야 합니다.
+	analytics: {
+		ga4: "",
+		naverVerify: "",
+		naverWcs: "",
+	},
 };
+
+// ---------- 측정기 로더 ----------
+// 값이 비면 아무것도 붙지 않습니다(fail-closed). ID를 채우는 순간 켜집니다.
+// 각 페이지의 HTML은 건드릴 필요가 없습니다.
+(() => {
+	const a = (window.NOLIL_CONFIG && window.NOLIL_CONFIG.analytics) || {};
+
+	// 네이버 서치어드바이저 소유확인 — 검색 노출의 전제
+	if (a.naverVerify) {
+		const m = document.createElement("meta");
+		m.name = "naver-site-verification";
+		m.content = a.naverVerify;
+		document.head.appendChild(m);
+	}
+
+	// GA4 — 어디서 들어왔는지(referrer·utm)를 보는 주 측정기
+	if (a.ga4) {
+		const s = document.createElement("script");
+		s.async = true;
+		s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(a.ga4);
+		document.head.appendChild(s);
+		window.dataLayer = window.dataLayer || [];
+		window.gtag = function () {
+			window.dataLayer.push(arguments);
+		};
+		window.gtag("js", new Date());
+		window.gtag("config", a.ga4);
+	}
+
+	// 네이버 애널리틱스 — 네이버 유기검색 유입 판정용(결정 #40)
+	if (a.naverWcs) {
+		const s = document.createElement("script");
+		s.src = "https://wcs.naver.net/wcslog.js";
+		s.onload = () => {
+			window.wcs_add = window.wcs_add || {};
+			window.wcs_add.wa = a.naverWcs;
+			if (typeof window.wcs_do === "function") window.wcs_do();
+		};
+		document.head.appendChild(s);
+	}
+})();
 
 // ---------- 방문자 챗 위젯 로더 ----------
 // visitorChat.enabled=false 로 바꾸면 config.js를 로드하는 페이지에서 즉시 꺼집니다.
