@@ -2,4 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /deck/
 
+# Public search crawlers: keep the same open-web policy explicit.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: OAI-AdsBot
+Allow: /
+
 Sitemap: https://playworkgrow.club/sitemap.xml

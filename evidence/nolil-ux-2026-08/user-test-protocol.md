@@ -7,7 +7,7 @@
 - 기존 참가자: `E01`부터, 신규·잠재 참가자: `N01`부터 익명 코드 사용
 - 이름, 전화, 이메일, 음성, 영상은 저장하지 않음
 - 관찰 사실, 발화 요약, 해석, 수정 가설을 분리
-- 모집 상태: 실제 주간 방문자 세션 일정 조율 필요. 결과를 임의로 생성하지 않음
+- 모집 상태: `recruitment-status.md`에만 기록한다. 실제 주간 방문자 세션 일정 조율 전이며 결과를 임의로 생성하지 않음
 
 ## 과업
 
@@ -25,3 +25,25 @@
 - 단체 대관: 80% 이상 2회 이내 `group.html` 도달
 
 표본은 5~8명이며 가능하면 기존 참가자 3~4명과 신규·잠재 참가자 3~4명으로 나눈다.
+
+## 익명 결과 기록 양식
+
+결과는 `participant-results-template.md` 형식으로만 기록한다. 한 행은 한 사람이며, 개인을 재식별할 수 있는 설명을 쓰지 않는다.
+
+| participant_code | segment | date | viewport | 5s_recall_terms | first_click_target | free_detail_result | group_inquiry_clicks | group_inquiry_result | hesitation_summary | observer_fact | interpretation | change_hypothesis |
+| --- | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- |
+| E01 또는 N01 | existing 또는 new | YYYY-MM-DD | mobile 또는 desktop | 사람/재능/모임 중 언급된 단어만 | 예: hero_free_cta | pass/fail/helped | 0 | pass/fail/helped | 이름·직장·연락처 없는 발화 요약 | 관찰 사실만 | 해석 | 수정 가설 |
+
+금지 예시:
+
+- 이름, 전화번호, 이메일, 직장명, 소속 교회명, 얼굴·목소리·영상 파일명
+- “OO동에 사는 64세 전직 교사”처럼 조합하면 특정될 수 있는 설명
+- 신청서에 입력한 실제 메시지나 연락처 원문
+
+## 진행 상태 판정
+
+- `not-started`: 대상자에게 아직 요청하지 않음
+- `recruiting`: 참여 의사를 묻는 중
+- `scheduled`: 익명 코드와 일시만 확정
+- `completed`: 결과 행 작성 완료
+- `discarded`: 동의 철회 또는 기록 폐기
