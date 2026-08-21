@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 const ANALYTICS_PATTERN = /googletagmanager|clarity\.ms|wcs\.naver/;
 const CONSENT_KEY = "nolil_analytics_consent";
 const REAL_CONFIG = await readFile(new URL("../../config.js", import.meta.url), "utf8");
+const REAL_HOMEPAGE = await readFile(new URL("../../index.html", import.meta.url), "utf8");
 const FAKE_ANALYTICS_CONFIG = REAL_CONFIG.replace(
   /enabled: (?:true|false),\n\t\tga4: \"[^\"]*\",\n\t\tclarity: \"[^\"]*\",\n\t\tnaverVerify: \"[^\"]*\",\n\t\tnaverWcs: \"[^\"]*\",/,
   "enabled: true,\n\t\tga4: \"G-TEST12345\",\n\t\tclarity: \"claritytest\",\n\t\tnaverVerify: \"naververifytest\",\n\t\tnaverWcs: \"naverwcstest\",",
@@ -33,6 +34,10 @@ test("homepage has no automated WCAG violations", async ({ page }) => {
   expect(results.violations).toEqual([]);
 });
 
+test("Naver ownership verification is present in the source HTML", () => {
+  expect(REAL_HOMEPAGE).toContain('<meta name="naver-site-verification" content="39ad44e87fb5281b7a3fed3e76f5d54efb1519a7">');
+});
+
 test("analytics stays fail-closed without consent", async ({ page }) => {
   // Given: the visitor has not made an analytics choice.
   const analyticsRequests = captureAnalyticsRequests(page);
@@ -54,6 +59,7 @@ test("Naver ownership verification is available without analytics consent", asyn
   await page.goto("/index.html", { waitUntil: "networkidle" });
 
   const verification = page.locator('meta[name="naver-site-verification"]');
+  await expect(verification).toHaveCount(1);
   await expect(verification).toHaveAttribute("content", "39ad44e87fb5281b7a3fed3e76f5d54efb1519a7");
 });
 
