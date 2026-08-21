@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-08-21T13:20:00+09:00",
+  "source_commit": "6f1f22489f4b17d144111a15b9d2eb8cffc279e3",
+  "top_level_sections": 16,
+  "visible_links_approx": 49,
+  "primary_cta": {
+    "label": "무료로 한번 와보기",
+    "href": "https://app.playworkgrow.club/meetings"
+  },
+  "schedule_state": "config.js의 과거 fallbackSchedule을 거른 뒤 다음 모임 준비 중을 표시",
+  "known_conversion_defect": "일반 모임 목록에서 유료 모임이 무료 모임보다 먼저 보일 수 있음",
+  "visual_capture": "blocked: in-app Browser runtime returned Browser is not available: iab"
+}
