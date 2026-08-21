@@ -93,3 +93,12 @@ test("free-meeting landing defers volatile schedule claims to the app", async ({
   await expect(page.locator(".next-step a[href='../rules.html']")).toBeVisible();
   await expect(page.locator(".next-step a[href='../letter/']")).toBeVisible();
 });
+
+test("first-meeting story does not promise volatile capacity or fixed weekdays", async ({ page }) => {
+  await page.goto("/stories/first-free-meeting.html", { waitUntil: "networkidle" });
+  const body = await page.locator("body").innerText();
+  expect(body).not.toContain("화요일엔");
+  expect(body).not.toContain("목요일엔");
+  expect(body).not.toContain("열 자리뿐");
+  await expect(page.locator(".cta-band")).toContainText("신청 가능한 날짜와 잔여석");
+});
