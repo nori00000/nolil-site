@@ -55,11 +55,11 @@ window.NOLIL_CONFIG = {
 	//               analytics.naver.com → 사이트 등록 후 발급
 	//
 	// ⚠ 켜기 전에 방문자 동의 UI와 privacy.html 고지를 먼저 완성해야 합니다.
-	// consent는 현재 fail-closed 운영 스위치일 뿐입니다. 실제 동의 상태와 연동하기 전에 true로 바꾸지 마세요.
+	// enabled는 운영 스위치이며, 방문자 동의 상태와 동시에 확인될 때만 분석 도구가 로드됩니다.
 	analytics: {
+		enabled: false,
 		ga4: "",
 		clarity: "",
-		consent: false,
 		naverVerify: "",
 		naverWcs: "",
 	},
@@ -70,6 +70,14 @@ window.NOLIL_CONFIG = {
 // 각 페이지의 HTML은 건드릴 필요가 없습니다.
 (() => {
 	const a = (window.NOLIL_CONFIG && window.NOLIL_CONFIG.analytics) || {};
+	const hasVisitorConsent = () => {
+		try {
+			return window.localStorage.getItem("nolil_analytics_consent") === "granted";
+		} catch {
+			return false;
+		}
+	};
+	const analyticsEnabled = a.enabled === true && hasVisitorConsent();
 
 	// 네이버 서치어드바이저 소유확인 — 검색 노출의 전제
 	if (a.naverVerify) {
@@ -79,7 +87,7 @@ window.NOLIL_CONFIG = {
 		document.head.appendChild(m);
 	}
 
-	if (a.ga4 && a.consent === true) {
+	if (a.ga4 && analyticsEnabled) {
 		const s = document.createElement("script");
 		s.async = true;
 		s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(a.ga4);
@@ -96,7 +104,7 @@ window.NOLIL_CONFIG = {
 		});
 	}
 
-	if (a.clarity && a.consent === true) {
+	if (a.clarity && analyticsEnabled) {
 		window.clarity = window.clarity || function () {
 			(window.clarity.q = window.clarity.q || []).push(arguments);
 		};
@@ -107,7 +115,7 @@ window.NOLIL_CONFIG = {
 	}
 
 	// 네이버 애널리틱스 — 네이버 유기검색 유입 판정용(결정 #40)
-	if (a.naverWcs && a.consent === true) {
+	if (a.naverWcs && analyticsEnabled) {
 		const s = document.createElement("script");
 		s.src = "https://wcs.naver.net/wcslog.js";
 		s.onload = () => {
