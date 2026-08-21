@@ -44,8 +44,8 @@ window.NOLIL_CONFIG = {
 
 	// ---------- ④ 측정기 ----------
 	// 홍보를 쏜 뒤 "몇 명이 왔고 어디서 왔는지"를 보려면 필요합니다.
-	// 지금은 전부 비어 있어서 아무것도 로드되지 않습니다 (아무 부작용 없음).
-	// 발급받은 값을 여기에만 붙여넣으면 config.js를 쓰는 16개 페이지에서 한 번에 켜집니다.
+	// 발급값이 있어도 방문자가 동의하기 전에는 분석 스크립트를 로드하지 않습니다.
+	// 값을 이곳에서 관리하면 config.js를 쓰는 페이지에 같은 정책이 적용됩니다.
 	//
 	//  ga4          Google Analytics 4 측정 ID.  형식: G-XXXXXXXXXX
 	//               analytics.google.com → 관리(톱니) → 데이터 스트림 → 웹 → 측정 ID
@@ -54,12 +54,11 @@ window.NOLIL_CONFIG = {
 	//  naverWcs     네이버 애널리틱스 인증키
 	//               analytics.naver.com → 사이트 등록 후 발급
 	//
-	// ⚠ 켜기 전에 방문자 동의 UI와 privacy.html 고지를 먼저 완성해야 합니다.
 	// enabled는 운영 스위치이며, 방문자 동의 상태와 동시에 확인될 때만 분석 도구가 로드됩니다.
 	analytics: {
-		enabled: false,
-		ga4: "",
-		clarity: "",
+		enabled: true,
+		ga4: "G-RQBVMTZLN5",
+		clarity: "y5v1ct4nun",
 		naverVerify: "",
 		naverWcs: "",
 	},
@@ -69,15 +68,17 @@ window.NOLIL_CONFIG = {
 // 값이 비면 아무것도 붙지 않습니다(fail-closed). ID를 채우는 순간 켜집니다.
 // 각 페이지의 HTML은 건드릴 필요가 없습니다.
 (() => {
+	const CONSENT_KEY = "nolil_analytics_consent";
 	const a = (window.NOLIL_CONFIG && window.NOLIL_CONFIG.analytics) || {};
 	const hasVisitorConsent = () => {
 		try {
-			return window.localStorage.getItem("nolil_analytics_consent") === "granted";
+			return window.localStorage.getItem(CONSENT_KEY) === "granted";
 		} catch {
 			return false;
 		}
 	};
-	const analyticsEnabled = a.enabled === true && hasVisitorConsent();
+	const isAnalyticsEnabled = () => a.enabled === true && hasVisitorConsent();
+	let loaded = false;
 
 	// 네이버 서치어드바이저 소유확인 — 검색 노출의 전제
 	if (a.naverVerify) {
@@ -87,44 +88,59 @@ window.NOLIL_CONFIG = {
 		document.head.appendChild(m);
 	}
 
-	if (a.ga4 && analyticsEnabled) {
-		const s = document.createElement("script");
-		s.async = true;
-		s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(a.ga4);
-		document.head.appendChild(s);
-		window.dataLayer = window.dataLayer || [];
-		window.gtag = function () {
-			window.dataLayer.push(arguments);
-		};
-		window.gtag("js", new Date());
-		window.gtag("config", a.ga4, { send_page_view: false });
-		window.gtag("event", "page_view", {
-			page_path: window.location.pathname,
-			page_location: window.location.origin + window.location.pathname,
-		});
-	}
+	const loadAnalytics = () => {
+		if (loaded || !isAnalyticsEnabled()) return false;
+		loaded = true;
 
-	if (a.clarity && analyticsEnabled) {
-		window.clarity = window.clarity || function () {
-			(window.clarity.q = window.clarity.q || []).push(arguments);
-		};
-		const s = document.createElement("script");
-		s.async = true;
-		s.src = "https://www.clarity.ms/tag/" + encodeURIComponent(a.clarity);
-		document.head.appendChild(s);
-	}
+		if (a.ga4) {
+			const s = document.createElement("script");
+			s.async = true;
+			s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(a.ga4);
+			document.head.appendChild(s);
+			window.dataLayer = window.dataLayer || [];
+			window.gtag = function () {
+				window.dataLayer.push(arguments);
+			};
+			window.gtag("js", new Date());
+			window.gtag("config", a.ga4, { send_page_view: false });
+			window.gtag("event", "page_view", {
+				page_path: window.location.pathname,
+				page_location: window.location.origin + window.location.pathname,
+			});
+		}
 
-	// 네이버 애널리틱스 — 네이버 유기검색 유입 판정용(결정 #40)
-	if (a.naverWcs && analyticsEnabled) {
-		const s = document.createElement("script");
-		s.src = "https://wcs.naver.net/wcslog.js";
-		s.onload = () => {
-			window.wcs_add = window.wcs_add || {};
-			window.wcs_add.wa = a.naverWcs;
-			if (typeof window.wcs_do === "function") window.wcs_do();
-		};
-		document.head.appendChild(s);
-	}
+		if (a.clarity) {
+			window.clarity = window.clarity || function () {
+				(window.clarity.q = window.clarity.q || []).push(arguments);
+			};
+			const s = document.createElement("script");
+			s.async = true;
+			s.src = "https://www.clarity.ms/tag/" + encodeURIComponent(a.clarity);
+			document.head.appendChild(s);
+		}
+
+		// 네이버 애널리틱스 — 네이버 유기검색 유입 판정용(결정 #40)
+		if (a.naverWcs) {
+			const s = document.createElement("script");
+			s.src = "https://wcs.naver.net/wcslog.js";
+			s.onload = () => {
+				window.wcs_add = window.wcs_add || {};
+				window.wcs_add.wa = a.naverWcs;
+				if (typeof window.wcs_do === "function") window.wcs_do();
+			};
+			document.head.appendChild(s);
+		}
+
+		return true;
+	};
+
+	window.NOLIL_ANALYTICS = {
+		consentKey: CONSENT_KEY,
+		hasConsent: hasVisitorConsent,
+		isEnabled: isAnalyticsEnabled,
+		load: loadAnalytics,
+	};
+	loadAnalytics();
 })();
 
 // ---------- 방문자 챗 위젯 로더 ----------

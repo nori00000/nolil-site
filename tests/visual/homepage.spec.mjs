@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const viewports = [
+  { name: "mobile-360", width: 360, height: 800 },
   { name: "mobile-390", width: 390, height: 844 },
   { name: "mobile-412", width: 412, height: 915 },
   { name: "tablet-768", width: 768, height: 1024 },
@@ -14,6 +15,11 @@ async function prepare(page) {
     content: "* { animation: none !important; transition: none !important; }",
   });
   await page.evaluate(() => document.fonts?.ready);
+}
+
+async function scrollToSelector(page, selector) {
+  await page.locator(selector).scrollIntoViewIfNeeded();
+  await page.waitForTimeout(100);
 }
 
 for (const viewport of viewports) {
@@ -52,7 +58,71 @@ for (const viewport of viewports) {
     await prepare(page);
     await expect(page.locator(".hero")).toHaveScreenshot(`${viewport.name}-hero.png`);
   });
+
+  test(`homepage post-hero viewport evidence: ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await prepare(page);
+    await scrollToSelector(page, "#weekly");
+    await expect(page).toHaveScreenshot(`${viewport.name}-weekly-viewport.png`);
+  });
 }
+
+test("homepage key conversion sections remain visible on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepare(page);
+
+  await scrollToSelector(page, "#weekly");
+  await expect(page.locator("#weekly")).toContainText("가까운 무료 모임에서 먼저 만나세요");
+  await expect(page.locator('#weekly a[href*="meetings?price=free"]')).toBeVisible();
+
+  await scrollToSelector(page, "#space");
+  await expect(page.locator('[data-testid="stay-note"]')).toBeVisible();
+  await expect(page).toHaveScreenshot("mobile-390-space-stay-viewport.png");
+
+  await scrollToSelector(page, "#group-inquiry");
+  await expect(page.locator("#group-inquiry")).toContainText("단체 대관은 개인 무료 모임과 분리");
+  await expect(page.locator('#group-inquiry a[href="group.html"]')).toBeVisible();
+  await expect(page).toHaveScreenshot("mobile-390-group-inquiry-viewport.png");
+});
+
+test("required homepage images load with accessible names", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepare(page);
+  await page.evaluate(async () => {
+    for (const y of [0, 600, 1200, 1800, 2400, 3200, document.body.scrollHeight]) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+    await Promise.all(
+      Array.from(document.querySelectorAll("main img, .hero-photo"), async (img) => {
+        if (typeof img.decode === "function") {
+          try {
+            await img.decode();
+          } catch {
+            // Broken images are caught by naturalWidth/naturalHeight assertions below.
+          }
+        }
+      }),
+    );
+  });
+
+  const images = await page.locator("main img, .hero-photo").evaluateAll((elements) =>
+    elements.map((img) => ({
+      alt: img.getAttribute("alt") || "",
+      complete: img.complete,
+      naturalWidth: img.naturalWidth,
+      naturalHeight: img.naturalHeight,
+    })),
+  );
+
+  expect(images.length).toBeGreaterThan(0);
+  for (const image of images) {
+    expect(image.alt.trim().length).toBeGreaterThan(8);
+    expect(image.complete).toBe(true);
+    expect(image.naturalWidth).toBeGreaterThan(0);
+    expect(image.naturalHeight).toBeGreaterThan(0);
+  }
+});
 
 test("group inquiry remains a distinct secondary path", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -61,6 +131,7 @@ test("group inquiry remains a distinct secondary path", async ({ page }) => {
   await expect(phone).toBeVisible();
   await expect(phone).toContainText("010-2295-7100");
   await expect(page.locator('a[href="index.html"]')).toHaveCount(0);
+  await expect(page.locator(".hero")).toHaveScreenshot("mobile-390-group-hero.png");
 });
 
 test("homepage makes accommodation and its pricing rule explicit", async ({ page }) => {

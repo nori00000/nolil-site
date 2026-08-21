@@ -639,6 +639,61 @@
     font-weight:800;
     box-shadow:0 8px 22px rgba(0,0,0,.16);
   }
+  .analytics-consent{
+    position:fixed;
+    left:18px;
+    right:18px;
+    bottom:18px;
+    z-index:90;
+    max-width:720px;
+    margin:0 auto;
+    border:1px solid rgba(59,74,54,.16);
+    border-radius:18px;
+    background:rgba(255,255,255,.98);
+    box-shadow:0 18px 60px rgba(1,65,64,.18);
+    padding:18px;
+  }
+  .analytics-consent[hidden]{display:none}
+  .analytics-consent strong{
+    display:block;
+    color:var(--text);
+    font-size:17px;
+    line-height:1.45;
+    margin-bottom:4px;
+  }
+  .analytics-consent p{
+    margin:0;
+    color:var(--body);
+    font-size:14px;
+    line-height:1.65;
+  }
+  .analytics-consent a{
+    color:var(--teal);
+    font-weight:900;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .analytics-consent-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+  }
+  .analytics-consent-actions .btn{
+    min-height:46px;
+    padding:10px 16px;
+    font-size:14px;
+  }
+  .footer-action{
+    border:0;
+    background:transparent;
+    color:inherit;
+    text-decoration:underline;
+    text-underline-offset:4px;
+    cursor:pointer;
+    padding:0;
+  }
+  .footer-action:hover{color:var(--teal)}
   [data-reveal]{opacity:1;transform:none;transition:opacity .72s ease,transform .72s ease}
   .js [data-reveal]{opacity:1;transform:none}
   [data-reveal].show{opacity:1;transform:none}
@@ -899,6 +954,7 @@
       background:#fff;
       border-top:1px solid #eef0ec;
     }
+    .analytics-consent{bottom:calc(88px + env(safe-area-inset-bottom))}
   }
   @media (min-width:560px){
     .hero{min-height:620px;padding-bottom:72px}
@@ -1222,10 +1278,19 @@
 <!-- 모바일 하단 고정 CTA 바 (버튼은 config.js 기반으로 아래 스크립트가 렌더) -->
 <section class="mobile-cta-bar" id="mobileCtaBar" aria-label="빠른 연락"></section>
 
+<section class="analytics-consent" id="analyticsConsent" aria-labelledby="analyticsConsentTitle" hidden>
+  <strong id="analyticsConsentTitle">방문 흐름 측정에 동의하시겠어요?</strong>
+  <p>홈 방문, 무료 모임 보기, 단체 대관 문의 같은 익명 이용 흐름만 봅니다. 이름, 전화번호, 이메일, 신청 내용은 분석 이벤트로 보내지 않습니다. <a href="privacy.html#analytics">자세히 보기</a></p>
+  <div class="analytics-consent-actions">
+    <button class="btn btn-primary" type="button" id="analyticsAccept">동의</button>
+    <button class="btn btn-line" type="button" id="analyticsReject">거부</button>
+  </div>
+</section>
+
 <footer>
   <span class="brand">NOLIL</span>
   놀며 일하고 성장하는 사람들<br>
-  운영: 네이처커뮤니티 · 이상민 · <a href="group.html">단체 대관 문의</a> · <a href="privacy.html">개인정보 처리방침</a> · <a href="https://instagram.com/nolil.growfarm" target="_blank" rel="noopener">Instagram</a>
+  운영: 네이처커뮤니티 · 이상민 · <a href="group.html">단체 대관 문의</a> · <a href="privacy.html">개인정보 처리방침</a> · <button class="footer-action" type="button" id="analyticsSettings">분석 설정</button> · <a href="https://instagram.com/nolil.growfarm" target="_blank" rel="noopener">Instagram</a>
 </footer>
 
 <script src="config.js"></script>
@@ -1237,11 +1302,53 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
     {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const allowedEvents = new Set(["homepage_view", "free_meeting_click", "group_inquiry_click", "tel_click", "paid_path_click", "return_path_click"]);
+  window.NOLIL_ANALYTICS_EVENTS = Object.freeze(Array.from(allowedEvents));
+  const analyticsAllowsEvents = () => Boolean(window.NOLIL_ANALYTICS && window.NOLIL_ANALYTICS.isEnabled());
   const track = (eventName) => {
-    if (!allowedEvents.has(eventName)) return;
+    if (!allowedEvents.has(eventName) || !analyticsAllowsEvents()) return;
     if (typeof window.gtag === "function") window.gtag("event", eventName, { page_path: window.location.pathname });
     if (typeof window.clarity === "function") window.clarity("event", eventName);
   };
+  const consentKey = (window.NOLIL_ANALYTICS && window.NOLIL_ANALYTICS.consentKey) || "nolil_analytics_consent";
+  const getConsent = () => {
+    try {
+      return window.localStorage.getItem(consentKey);
+    } catch {
+      return "denied";
+    }
+  };
+  const setConsent = (value) => {
+    const previous = getConsent();
+    try {
+      window.localStorage.setItem(consentKey, value);
+    } catch {
+      return;
+    }
+    if (previous === "granted" && value !== "granted") {
+      window.location.reload();
+      return;
+    }
+    syncConsentUi();
+    if (value === "granted" && window.NOLIL_ANALYTICS && window.NOLIL_ANALYTICS.load()) {
+      track("homepage_view");
+    }
+  };
+  const consentPanel = document.getElementById("analyticsConsent");
+  const analyticsSettings = document.getElementById("analyticsSettings");
+  const syncConsentUi = () => {
+    if (!consentPanel) return;
+    consentPanel.hidden = getConsent() !== null;
+  };
+  if (consentPanel) {
+    document.getElementById("analyticsAccept")?.addEventListener("click", () => setConsent("granted"));
+    document.getElementById("analyticsReject")?.addEventListener("click", () => setConsent("denied"));
+    syncConsentUi();
+  }
+  analyticsSettings?.addEventListener("click", () => {
+    if (!consentPanel) return;
+    consentPanel.hidden = false;
+    document.getElementById("analyticsReject")?.focus();
+  });
   const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
   const buttons = [];
   if (C.kakaoUrl) buttons.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡 문의</a>`);
