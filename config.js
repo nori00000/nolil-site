@@ -81,7 +81,7 @@ window.NOLIL_CONFIG = {
 	let loaded = false;
 
 	// 네이버 서치어드바이저 소유확인 — 검색 노출의 전제
-	if (a.naverVerify) {
+	if (a.naverVerify && !document.querySelector('meta[name="naver-site-verification"]')) {
 		const m = document.createElement("meta");
 		m.name = "naver-site-verification";
 		m.content = a.naverVerify;
