@@ -24,20 +24,3 @@ package, lockfile, or runtime dependency to the repository.
 Remaining performance opportunities are delivery concerns rather than release
 blockers: optimize the hero WebP, reduce unused legacy CSS, and tune production
 cache headers. Production field data must be checked after release.
-
-## Follow-up gate run
-
-Date: 2026-08-21 KST
-Target: `http://127.0.0.1:4173/index.html`
-Viewport/profile: Lighthouse 13.4.1 mobile, headless Google Chrome
-
-| Category | Score |
-| --- | ---: |
-| Performance | 95 |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
-
-This run was performed after adding the Playwright layout contract and axe
-coverage. It is evidence for the local gate only; the GitHub Actions workflow
-will generate a fresh artifact for each pull request and `main` push.
