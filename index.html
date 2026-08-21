@@ -398,6 +398,11 @@
   .prog-group-note{margin:22px 0 0;color:var(--soft);font-size:15px}
   .prog-group-note a{color:var(--coral);font-weight:800;text-decoration:none}
   .prog-group-note a:hover,.prog-group-note a:focus-visible{text-decoration:underline}
+  .funnel-bridge{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:28px 0 0}
+  .funnel-bridge a{display:flex;flex-direction:column;gap:6px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--mint);color:var(--ink);text-decoration:none}
+  .funnel-bridge a:hover,.funnel-bridge a:focus-visible{border-color:var(--teal);box-shadow:0 8px 20px rgba(1,94,92,.12)}
+  .funnel-bridge small{color:var(--teal);font-weight:800;letter-spacing:.06em}
+  .funnel-bridge strong{font-size:17px}
   .section-head{
     max-width:820px;
     margin:0 auto 38px;
@@ -869,7 +874,7 @@
     .hero-card{display:none}
     h1{font-size:54px}
     .hero-title{font-size:34px}
-    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel,.wedge-panel,.week-grid,.channel-grid{grid-template-columns:1fr}
+    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel,.wedge-panel,.week-grid,.channel-grid,.funnel-bridge{grid-template-columns:1fr}
     .choice{padding:16px}
     .choice strong{font-size:17px}
     .person-card,.outcome-card{padding:20px}
@@ -1152,6 +1157,18 @@
         <div class="outcome-card"><img class="outcome-thumb" src="images/people/moss-award.webp?v=20260801" alt="놀일 농장에서 기른 이끼로 장식한 원목 액자 형태의 공로패" width="960" height="1280" loading="lazy" decoding="async"><small>03</small><strong>작은 실험</strong><p>작은 수업, 체험, 상품을 시험해보고 다음 약속을 잡습니다.</p></div>
         <div class="outcome-card"><img class="outcome-thumb" src="images/people/group-class.webp?v=20260801" alt="놀일 농장 교육장에서 강사의 발표를 경청하는 참가자들의 모습" width="1280" height="721" loading="lazy" decoding="async"><small>04</small><strong>함께 일하기</strong><p>서로의 품이 붙으면 모임이 콘텐츠와 작은 일로 이어집니다.</p></div>
       </div>
+      <div class="funnel-bridge" aria-label="무료 모임 다음 선택">
+        <a href="rules.html" data-funnel="paid-path">
+          <small>무료 모임 다음</small>
+          <strong>함께할 약속과 요금 구조 보기 →</strong>
+          <span>길드하우스의 단계와 회비는 규약에서 먼저 확인합니다.</span>
+        </a>
+        <a href="letter/" data-funnel="return-path">
+          <small>아직 날짜를 못 골랐다면</small>
+          <strong>놀일 소식을 편지로 받기 →</strong>
+          <span>전화번호 없이 이메일로 다음 모임 소식을 받아봅니다.</span>
+        </a>
+      </div>
       <p class="prog-group-note" style="text-align:center"><a href="rules.html">길드하우스 규약 전문 보기 →</a></p>
     </div>
   </section>
@@ -1219,7 +1236,7 @@
   const C = window.NOLIL_CONFIG || {};
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
     {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const allowedEvents = new Set(["view_home", "select_free_meeting", "select_group_inquiry", "click_phone"]);
+  const allowedEvents = new Set(["homepage_view", "free_meeting_click", "group_inquiry_click", "tel_click", "paid_path_click", "return_path_click"]);
   const track = (eventName) => {
     if (!allowedEvents.has(eventName)) return;
     if (typeof window.gtag === "function") window.gtag("event", eventName, { page_path: window.location.pathname });
@@ -1252,15 +1269,21 @@
   });
   const meetingsUrl = C.meetingsUrl || "https://app.playworkgrow.club/meetings";
   const freeMeetingsUrl = C.freeMeetingsUrl || `${meetingsUrl}?price=free`;
-  track("view_home");
+  track("homepage_view");
   document.querySelectorAll('a[href*="meetings?price=free"]').forEach(a => {
-    a.addEventListener("click", () => track("select_free_meeting"));
+    a.addEventListener("click", () => track("free_meeting_click"));
   });
   document.querySelectorAll('a[href="group.html"]').forEach(a => {
-    a.addEventListener("click", () => track("select_group_inquiry"));
+    a.addEventListener("click", () => track("group_inquiry_click"));
   });
   document.querySelectorAll('a[href^="tel:"]').forEach(a => {
-    a.addEventListener("click", () => track("click_phone"));
+    a.addEventListener("click", () => track("tel_click"));
+  });
+  document.querySelectorAll('[data-funnel="paid-path"]').forEach(a => {
+    a.addEventListener("click", () => track("paid_path_click"));
+  });
+  document.querySelectorAll('[data-funnel="return-path"]').forEach(a => {
+    a.addEventListener("click", () => track("return_path_click"));
   });
 
   // ── 모바일 하단 고정 CTA 바 렌더 (phone 없으면 전화 버튼 생략) ──
@@ -1271,10 +1294,10 @@
     barBtns.push(`<a class="btn btn-hero" href="${esc(freeMeetingsUrl)}" target="_blank" rel="noopener">무료 모임 보기</a>`);
     ctaBar.innerHTML = barBtns.join("");
     ctaBar.querySelectorAll('a[href^="tel:"]').forEach(a => {
-      a.addEventListener("click", () => track("click_phone"));
+      a.addEventListener("click", () => track("tel_click"));
     });
     ctaBar.querySelectorAll('a[href*="meetings?price=free"]').forEach(a => {
-      a.addEventListener("click", () => track("select_free_meeting"));
+      a.addEventListener("click", () => track("free_meeting_click"));
     });
     const setCtaBar = () => ctaBar.classList.toggle("is-visible", window.scrollY > 420);
     setCtaBar();

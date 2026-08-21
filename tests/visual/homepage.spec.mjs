@@ -76,3 +76,20 @@ test("homepage makes accommodation and its pricing rule explicit", async ({ page
   await expect(stay).toContainText("실내 교육장 약 30평");
   await expect(page.locator('img[alt*="숙박 공간"]')).toHaveCount(1);
 });
+
+test("homepage exposes a truthful post-free path without replacing the primary CTA", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/index.html", { waitUntil: "networkidle" });
+  await expect(page.locator("#ctaHero")).toHaveAttribute("href", /meetings\?price=free/);
+  await expect(page.locator('[data-funnel="paid-path"]')).toHaveAttribute("href", "rules.html");
+  await expect(page.locator('[data-funnel="return-path"]')).toHaveAttribute("href", "letter/");
+  await expect(page.locator('[data-funnel="paid-path"]')).toContainText("요금 구조");
+});
+
+test("free-meeting landing defers volatile schedule claims to the app", async ({ page }) => {
+  await page.goto("/moim/index.html", { waitUntil: "networkidle" });
+  await expect(page.locator(".hero")).toContainText("신청 페이지에서 최신 내용으로 확인합니다");
+  await expect(page.locator(".badges")).not.toContainText("회당 10명");
+  await expect(page.locator(".next-step a[href='../rules.html']")).toBeVisible();
+  await expect(page.locator(".next-step a[href='../letter/']")).toBeVisible();
+});
