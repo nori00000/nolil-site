@@ -682,8 +682,9 @@
   .site-links a:focus-visible,.site-links a:hover{color:var(--yellow)}
   @media (max-width:559px){
     .site-links{display:flex}
-    .site-links a:not(:last-child){display:none}
-    .site-links a:last-child{padding:0 10px;border:1px solid rgba(255,255,255,.62);border-radius:999px;font-size:13px}
+    .site-links a:nth-child(2),.site-links a:nth-child(3){display:none}
+    .site-links a:first-child{display:block;padding:0 9px;border:1px solid rgba(245,229,120,.88);border-radius:999px;color:var(--yellow);font-size:12px}
+    .site-links a:last-child{padding:0 9px;border:1px solid rgba(255,255,255,.62);border-radius:999px;font-size:12px}
   }
   .hero{
     min-height:560px;
@@ -1034,7 +1035,7 @@
   <section class="story-intro" id="proof">
     <div class="wrap">
       <h2>이미 매주 사람들이 오고 있습니다</h2>
-      <p>놀일은 완성된 강의를 사는 곳이 아닙니다. 농장 원탁에서 서로의 경험을 말하고, 잘하는 것 하나를 작은 모임의 씨앗으로 바꾸는 곳입니다.</p>
+      <p>놀일은 완성된 강의를 사는 곳이 아닙니다. 농장 원탁에서 서로의 경험을 말하고, 잘하는 것 하나를 작은 모임의 씨앗으로 바꾸는 곳입니다. <a class="proof-link" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener">지금 열리는 무료 모임과 잔여석 확인하기</a></p>
       <p>처음부터 돈을 내고 깊이 들어오라는 말보다, 먼저 무료 모임에서 얼굴을 보고 분위기를 확인하는 흐름을 앞에 둡니다.</p>
     </div>
   </section>
@@ -1064,9 +1065,7 @@
         <p>일정·가격·잔여석은 신청 페이지가 기준입니다. 홈페이지에는 오래된 날짜를 복제하지 않고, 무료 모임 목록으로 바로 안내합니다.</p>
       </div>
       <div class="week-grid" id="weekGrid">
-        <a class="week-card" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener"><small>무료 · 첫 방문</small><strong>농장 오픈 모임</strong><span>신청 페이지에서 가까운 날짜 확인</span></a>
-        <a class="week-card" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener"><small>무료 · 대화</small><strong>내 재능 한 줄 꺼내기</strong><span>사람과 만나 작은 모임의 씨앗 찾기</span></a>
-        <a class="week-card" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener"><small>무료 · 다음 약속</small><strong>함께 열 모임 살펴보기</strong><span>방문 뒤 맞는 흐름으로 이어가기</span></a>
+        <a class="week-card" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener"><small>무료 · 첫 방문</small><strong>무료 모임 목록에서 날짜 고르기</strong><span>가격 0원·잔여석·신청은 운영 앱에서 확인합니다.</span></a>
       </div>
     </div>
   </section>
@@ -1089,7 +1088,7 @@
 
   <section id="path" data-reveal>
     <div class="wrap">
-      <div class="section-head"><div class="bar"></div><div class="eyebrow">GROW PATH</div><h2>방문이 모임·콘텐츠·일로 자랍니다</h2><p>놀일의 유료 구조는 처음부터 결제하라는 압박이 아니라, 관계가 깊어질수록 농장과 서로에게 거는 약속을 분명히 하는 방식입니다.</p></div>
+      <div class="section-head"><div class="bar"></div><div class="eyebrow">GROW PATH</div><h2>방문이 모임·콘텐츠·일로 자랍니다</h2><p>놀일의 유료 구조는 처음부터 결제하라는 압박이 아니라, 관계가 깊어질수록 농장과 서로에게 거는 약속을 분명히 하는 방식입니다. 무료 모임 이후의 유료 프로그램·회비·단체 대관은 각각 선택 사항이며, 신청 전에 비용을 안내합니다.</p></div>
       <div class="outcome-grid">
         <div class="outcome-card"><img class="outcome-thumb" src="images/people/group-caravan.webp?v=20260801" alt="놀일 농장 카라반 내부에 모여 앉아 담소를 나누는 참가자들의 모습" width="1280" height="960" loading="lazy" decoding="async"><small>01</small><strong>방문</strong><p>무료 모임에서 농장과 사람을 먼저 봅니다.</p></div>
         <div class="outcome-card"><img class="outcome-thumb" src="images/people/group-tour.webp?v=20260801" alt="놀일 농장 야외 텃밭길을 걸으며 농장을 둘러보는 참가자들과 강아지" width="795" height="1280" loading="lazy" decoding="async"><small>02</small><strong>기록</strong><p>하루의 관찰과 대화가 짧은 글이나 영상의 씨앗으로 남습니다.</p></div>
