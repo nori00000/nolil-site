@@ -69,7 +69,10 @@ test("homepage makes accommodation and its pricing rule explicit", async ({ page
   const stay = page.locator('[data-testid="stay-note"]');
   await expect(stay).toBeVisible();
   await expect(stay).toContainText("숙박 포함 요금제");
-  await expect(stay).toContainText("1인 30,000원부터");
-  await expect(stay).toContainText("별도 견적");
+  await expect(stay).toContainText("당일·숙박 포함 모두 1인 30,000원");
+  await expect(stay).toContainText("카라반 최대 6명");
+  await expect(stay).toContainText("농막 최대 5명");
+  await expect(stay).toContainText("캠핑사이트 최대 10곳");
+  await expect(stay).toContainText("실내 교육장 약 30평");
   await expect(page.locator('img[alt*="숙박 공간"]')).toHaveCount(1);
 });
