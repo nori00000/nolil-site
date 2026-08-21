@@ -1,0 +1,10 @@
+{
+  "name": "nolil-site-qa",
+  "private": true,
+  "scripts": {
+    "test:visual": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}

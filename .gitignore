@@ -11,3 +11,11 @@ p2.html
 
 # 도구 로컬 상태 (Serena MCP가 세션마다 재생성)
 .serena/
+
+# Playwright local artifacts
+node_modules/
+playwright-report/
+test-results/
+
+# OMX session state
+.omx/
