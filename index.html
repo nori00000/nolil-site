@@ -814,6 +814,7 @@
   .space-group h3{margin:0 0 4px;font-size:22px}
   .space-group-sub{margin:0;color:var(--soft);font-size:15px}
   .space-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:20px}
+  .space-grid:focus-visible{outline:3px solid var(--ember-500);outline-offset:6px}
   .space-fig{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
   .space-fig img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--mint)}
   .space-fig figcaption{padding:14px 16px;font-size:15px;line-height:1.6;color:var(--body)}
@@ -1156,7 +1157,7 @@
         <h2>실제 농장 공간에서 만납니다</h2>
         <p>교육장, 라운지, 텃밭, 바베큐 공간이 한곳에 있습니다. 사진은 놀일 농장의 실제 공간입니다.</p>
       </div>
-      <div class="space-grid">
+      <div class="space-grid" tabindex="0" aria-label="놀일 농장 공간 사진 목록. 모바일에서는 가로로 스크롤할 수 있습니다.">
         <figure class="space-fig"><img src="images/space/edu-hall.webp?v=20260801" alt="놀일 농장 온실 교육장 전경으로 강의용 테이블과 다양한 의자가 넉넉히 놓인 모습" width="960" height="1280" loading="lazy" decoding="async"><figcaption>둘러앉아 대화하고 발표할 수 있는 온실 교육장입니다.</figcaption></figure>
         <figure class="space-fig"><img src="images/space/edu-lounge.webp?v=20260801" alt="놀일 농장 교육장 라운지에 놓인 소파와 티브이, 온실 채광이 드는 아늑한 공간" width="1280" height="960" loading="lazy" decoding="async"><figcaption>처음 온 분도 편히 앉아 차를 마실 수 있는 라운지입니다.</figcaption></figure>
         <figure class="space-fig"><img src="images/space/farm-field.webp?v=20260801" alt="놀일 농장 텃밭에 우거진 넝쿨 작물과 파란 하늘, 멀리 보이는 경기장 지붕" width="960" height="1280" loading="lazy" decoding="async"><figcaption>손으로 만지고 걸으며 이야기할 수 있는 텃밭과 야외 공간입니다.</figcaption></figure>

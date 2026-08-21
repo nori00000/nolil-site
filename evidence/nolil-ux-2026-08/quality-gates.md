@@ -39,6 +39,8 @@ Lighthouse 점수는 기술 품질의 보조 지표입니다. 홈페이지 합�
 
 Playwright `toHaveScreenshot()`을 1차 자동화 후보로 사용합니다. 처음에는 actual/expected/diff를 리뷰 아티팩트로 남기고, baseline이 안정된 뒤 홈 hero·무료 CTA·단체 문의만 required check로 올립니다.
 
+현재 GitHub Actions는 OS별 폰트 차이로 인한 screenshot false positive를 피하기 위해 layout contract와 axe를 required check로 실행합니다. 시각 baseline은 동일한 로컬 Chrome 환경에서 `npm run test:visual`로 실행하며, Linux baseline을 별도로 승인한 뒤 CI visual diff를 차단 게이트로 승격합니다.
+
 ### 기술·접근성
 
 Lighthouse CI는 성능·SEO·Best Practices·접근성 예산을 검사합니다. axe 또는 Accessibility Insights는 레이블·대비·focus·semantic 문제를 검사합니다. 이 두 도구는 이미지 구도와 구매 의사를 판정하지 않습니다.

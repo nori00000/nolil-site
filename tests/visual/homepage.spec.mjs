@@ -17,7 +17,7 @@ async function prepare(page) {
 }
 
 for (const viewport of viewports) {
-  test(`homepage layout contract and visual baseline: ${viewport.name}`, async ({ page }) => {
+  test(`homepage layout contract: ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await prepare(page);
 
@@ -45,6 +45,11 @@ for (const viewport of viewports) {
     expect(contract.heroImageHeight).toBeGreaterThan(0);
     expect(contract.heroImageHeight).toBeLessThanOrEqual(contract.heroHeight);
 
+  });
+
+  test(`homepage visual baseline: ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await prepare(page);
     await expect(page.locator(".hero")).toHaveScreenshot(`${viewport.name}-hero.png`);
   });
 }

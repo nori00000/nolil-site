@@ -15,7 +15,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { outputFolder: "playwright-report", open: "never" }]],
   use: {
     baseURL: "http://127.0.0.1:4173",
-    channel: "chrome",
+    channel: process.env.PW_CHANNEL || "chrome",
     colorScheme: "light",
     locale: "ko-KR",
     reducedMotion: "reduce",
