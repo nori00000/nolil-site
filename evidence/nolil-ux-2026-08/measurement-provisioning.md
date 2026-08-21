@@ -23,9 +23,12 @@
 
 ## 네이버
 
-- Search Advisor: 네이버 로그인 화면에서 대기 중
+- Search Advisor: `https://playworkgrow.club` 신규 등록 완료, 소유확인 대기
+- 기존 계정 목록에 같은 사이트가 없어 중복 없이 등록함
+- HTML 태그 verification content: `39ad44e87fb5281b7a3fed3e76f5d54efb1519a7`
+- HTML 파일 업로드와 DNS 변경은 진행하지 않음
 - Analytics/WCS: 네이버 로그인 화면에서 대기 중
-- `naverVerify`, `naverWcs`는 발급 전까지 빈 값으로 유지
-- 로그인 후 기존 등록 여부를 먼저 확인하고, 중복 없이 발급·소유 확인을 이어서 진행해야 함
+- `naverVerify`는 설정 완료, `naverWcs`는 발급 전까지 빈 값으로 유지
+- 이 변경이 운영 사이트에 배포된 다음 Search Advisor에서 HTML 태그 방식 소유확인을 완료해야 함
 
 이 파일에는 비밀번호, 인증 토큰, 쿠키, 복구 코드 같은 비밀정보를 기록하지 않습니다. 측정 ID와 Project ID는 웹사이트 클라이언트 코드에 공개되는 설치 식별자입니다.

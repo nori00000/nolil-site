@@ -48,6 +48,15 @@ test("analytics stays fail-closed without consent", async ({ page }) => {
   await expect(page.getByRole("button", { name: "동의" })).toBeVisible();
 });
 
+test("Naver ownership verification is available without analytics consent", async ({ page }) => {
+  await page.addInitScript((key) => localStorage.removeItem(key), CONSENT_KEY);
+  await page.route("https://app.playworkgrow.club/**", (route) => route.abort());
+  await page.goto("/index.html", { waitUntil: "networkidle" });
+
+  const verification = page.locator('meta[name="naver-site-verification"]');
+  await expect(verification).toHaveAttribute("content", "39ad44e87fb5281b7a3fed3e76f5d54efb1519a7");
+});
+
 test("analytics does not load before consent even when IDs are configured", async ({ page }) => {
   // Given: analytics IDs exist but the visitor has not consented.
   const analyticsRequests = captureAnalyticsRequests(page);
