@@ -167,6 +167,8 @@
     font-size:18px;
     line-height:1.85;
   }
+  .mobile-break{display:none}
+  .desktop-break{display:block}
   p{color:var(--body);margin:0 0 16px}
   .hero-card{
     display:none;
@@ -924,9 +926,11 @@
       background:linear-gradient(180deg,rgba(0,94,92,.08),rgba(0,94,92,.68));
     }
     .hero .wrap{padding-top:26px}
+    .mobile-break{display:inline}
+    .desktop-break{display:none}
     h1{
       max-width:100%;
-      font-size:clamp(32px,8.6vw,40px);
+      font-size:clamp(30px,8vw,36px);
       line-height:1.08;
       overflow-wrap:anywhere;
     }
@@ -1072,7 +1076,7 @@
   <img class="hero-photo" src="images/people/group-tea.webp?v=20260801" alt="놀일 농장 온실 라운지에 둘러앉아 웃으며 담소를 나누는 참가자들 단체 모습" width="1280" height="960" fetchpriority="high">
   <div class="wrap">
     <span class="kicker">일산의 재능 길드하우스</span>
-    <h1>혼자 있으면 취미인 재능을,<br>사람과 만나 작은 일로.</h1>
+    <h1>혼자 있으면 취미인<span class="mobile-break"><br></span> 재능을,<br class="desktop-break"> 사람과 만나<span class="mobile-break"><br></span> 작은 일로.</h1>
     <p>놀일은 평생 쌓은 경험을 꺼내 함께 모임을 열고, 기록과 콘텐츠로 키우는 농장 커뮤니티입니다.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener" id="ctaHero">가까운 무료 모임 보기</a>
