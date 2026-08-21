@@ -14,7 +14,7 @@ Nolil should feel like a people-and-content community that happens through a far
 
 | Role | Token | Value | Usage |
 |---|---|---|---|
-| Farm deep | `--solso-teal` | `#005e5c` | Deep destination bands, dark sections |
+| Farm deep | `--solso-teal` | `#015e5c` | Deep destination bands, dark sections |
 | Farm mint | `--solso-mint` | `#e6f2e7` | Program map and soft section backgrounds |
 | Farm yellow | `--solso-sun` | `#f5e578` | Warm highlight bands and low-volume accents |
 | Nolil moss | `--moss-900` | existing | Text, brand anchor |
@@ -98,4 +98,4 @@ Strategy: mixed tonal-shift plus light borders. The Solso reference is largely f
 
 - Target: WCAG 2.2 AA for body text and interactive controls.
 - Body text remains 17px minimum despite the Solso reference using 10-12px text.
-- Accepted debt: real farm photography is still limited. The current hero uses existing `hero.jpg`; when actual space photos arrive, they should replace broad CSS atmosphere rather than adding decorative stock imagery.
+- Resolved (2026-08): real farm photography is now in place. The hero, program cards, SPACE gallery, outcome thumbnails, and neighborhood ACCESS grid all use actual space/people/infra photos from `images/{space,people,infra}/`. Real photography replaced the broad CSS atmosphere and every legacy stock/placeholder image; alt text and captions follow `alt텍스트_캡션.md`.

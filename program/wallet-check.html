@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지출 점검과 소비 트리거 분석 앱 — 휴가 끝, 지갑 점검 2기 | 놀일</title>
+<meta name="description" content="매일 밤 5분, 오늘 가장 아까웠던 지출 1개와 그때 기분을 기록합니다. 6일 뒤 내 소비 트리거 분석 앱이 폰에 생깁니다.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="지출 점검과 소비 트리거 분석 앱 — 휴가 끝, 지갑 점검 2기 | 놀일">
+<meta property="og:description" content="매일 밤 5분, 오늘 가장 아까웠던 지출 1개와 그때 기분을 기록합니다. 6일 뒤 내 소비 트리거 분석 앱이 폰에 생깁니다.">
+<meta property="og:image" content="https://playworkgrow.club/og.jpg">
+<meta property="og:url" content="https://playworkgrow.club/program/wallet-check.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#014140">
+<link rel="canonical" href="https://playworkgrow.club/program/wallet-check.html">
+
+<link rel="preload" as="image" href="../images/space/edu-lounge.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font-sans);
+    background:#fff;color:#111;
+    font-size:17px;line-height:1.7;word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:720px;margin:0 auto}
+  section{padding:72px 0;border-bottom:0}
+  h2{
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.18;
+    letter-spacing:0;
+    text-align:center;
+    margin-bottom:24px;
+  }
+  h2::before{
+    content:"NOLIL PROGRAM";
+    display:block;
+    margin-bottom:12px;
+    font-size:12px;
+    line-height:1.2;
+    letter-spacing:.18em;
+    color:#015e5c;
+  }
+  section p{font-size:17px;line-height:1.8;margin-bottom:14px}
+  section p:last-child{margin-bottom:0}
+  .topbar{
+    position:absolute;
+    z-index:5;
+    left:0;
+    right:0;
+    top:0;
+    background:transparent;
+    padding:18px 0;
+  }
+  .home-link{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:13px;font-weight:800;letter-spacing:.12em;
+    color:rgba(247,243,232,.82);
+    text-decoration:none;
+  }
+  .home-link:hover,.home-link:focus-visible{color:#fff}
+  .home-link:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:4px}
+
+  .hero{
+    min-height:620px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 72px;
+    background:#014140;
+    color:var(--cream);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.74;
+    background-image:url('../images/space/edu-lounge.webp');
+    background-size:cover;
+    background-position:center 50%;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg, rgba(1,65,64,.20) 0%, rgba(1,65,64,.34) 42%, rgba(1,65,64,.88) 100%),
+      linear-gradient(90deg, rgba(1,65,64,.94) 0%, rgba(1,94,92,.62) 54%, rgba(1,65,64,.18) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .kicker{
+    display:inline-block;
+    color:#f5e578;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.24em;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    max-width:820px;
+    font-size:clamp(38px,6.2vw,68px);
+    line-height:1.1;
+    letter-spacing:0;
+    margin-bottom:18px;
+  }
+  .hero p{max-width:660px;font-size:20px;color:rgba(247,243,232,.94);line-height:1.75;margin-bottom:28px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .badge{
+    background:rgba(247,243,232,.12);
+    border:1px solid rgba(245,229,120,.56);
+    color:#f5e578;
+    font-size:14px;
+    font-weight:800;
+    padding:8px 14px;
+    border-radius:999px;
+  }
+
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    min-height:58px;min-width:0;padding:14px 22px;border-radius:999px;
+    font-size:18px;font-weight:800;text-decoration:none;
+    border:2px solid transparent;cursor:pointer;font-family:inherit;
+    transition:transform .16s ease-out,filter .16s ease-out,border-color .16s ease-out,background-color .16s ease-out;
+    text-align:center;line-height:1.35;
+  }
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
+  .btn:active{filter:brightness(.93)}
+  .btn:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
+  .btn-primary{background:#d0573b;color:#fff}
+  .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
+  .btn-line:hover{border-color:var(--cream)}
+  .btn-line-light{background:#fff;color:#015e5c;border-color:#015e5c}
+  .cta-row{display:flex;flex-direction:column;gap:10px}
+
+  .problem{background:#fff}
+  .problem .narrow{
+    border-left:4px solid #d0573b;
+    padding-left:24px;
+  }
+  .problem p{font-size:20px;color:#24362e}
+
+  .routine{background:#e6f2e7}
+  .routine-grid,.info-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:30px;
+  }
+  .routine-card,.info-card{
+    border:1px solid rgba(1,94,92,.18);
+    background:#fff;
+    padding:24px;
+  }
+  .routine-card small,.info-card small{
+    display:block;
+    color:#015e5c;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+    margin-bottom:8px;
+  }
+  .routine-card strong,.info-card strong{
+    display:block;
+    color:#111;
+    font-size:21px;
+    line-height:1.38;
+    margin-bottom:8px;
+  }
+  .routine-card p,.info-card p{color:#3e4b44;font-size:16px;line-height:1.72}
+
+  .sched-scroll{overflow-x:auto;margin-top:34px}
+  .sched{
+    width:100%;
+    min-width:560px;
+    border-collapse:collapse;
+    font-size:16px;
+  }
+  .sched th,.sched td{
+    border:1px solid rgba(1,94,92,.18);
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+    line-height:1.6;
+  }
+  .sched thead th{
+    background:#015e5c;
+    color:#f5e578;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+  }
+  .sched td:first-child{white-space:nowrap;font-weight:800;color:#111}
+  .sched td:last-child{color:#3e4b44;white-space:nowrap}
+  .sched tr.farm td{background:#f5e578}
+  .sched tr.farm td:last-child{color:#26362f}
+  .sched-note{margin-top:16px;color:#3e4b44;font-size:15px}
+
+  .dark{background:#015e5c;color:var(--cream)}
+  .dark h2{color:var(--cream)}
+  .dark h2::before{color:#f5e578}
+  .dark p{color:rgba(247,243,232,.90)}
+  .demo-panel{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-items:center;
+    margin-top:30px;
+  }
+  .demo-copy{
+    border:1px solid rgba(245,229,120,.35);
+    background:rgba(255,255,255,.08);
+    padding:26px;
+  }
+  .demo-copy strong{display:block;color:#fff;font-size:22px;line-height:1.42;margin-bottom:10px}
+  .demo-image{
+    overflow:hidden;
+    border:1px solid rgba(245,229,120,.35);
+    background:rgba(255,255,255,.08);
+  }
+  .demo-image img{display:block;width:100%;height:auto}
+
+  .facilitator{background:#fff}
+  .facilitator-panel{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-items:center;
+    margin-top:30px;
+    border:1px solid rgba(1,94,92,.18);
+    background:#e6f2e7;
+  }
+  .facilitator-image{
+    overflow:hidden;
+    background:#015e5c;
+  }
+  .facilitator-image img{
+    display:block;
+    width:100%;
+    height:100%;
+    min-height:260px;
+    object-fit:cover;
+  }
+  .facilitator-copy{padding:26px}
+  .facilitator-copy small{
+    display:block;
+    color:#015e5c;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+    margin-bottom:10px;
+  }
+  .facilitator-copy h3{
+    color:#111;
+    font-size:clamp(26px,4vw,36px);
+    line-height:1.18;
+    letter-spacing:0;
+    margin-bottom:14px;
+  }
+  .facilitator-copy p{color:#3e4b44;font-size:16px;line-height:1.75}
+  .facilitator-copy .proof{
+    color:#111;
+    font-weight:800;
+  }
+  .facilitator-copy a{color:#015e5c;font-weight:900;text-decoration-thickness:2px;text-underline-offset:4px}
+  .facilitator-copy a:focus-visible{outline:3px solid rgba(208,87,59,.45);outline-offset:3px}
+
+  .info{background:#fff}
+  .info-card{background:#e6f2e7}
+  .info-card ul{list-style:none;display:grid;gap:8px;margin-top:4px}
+  .info-card li{color:#3e4b44;font-size:16px;line-height:1.65}
+  .info-card li.account-note{color:#015e5c;font-weight:900}
+
+  .final-cta{
+    background:#f5e578;
+    text-align:center;
+  }
+  .final-cta h2::before{color:#015e5c}
+  .final-cta p{max-width:700px;margin-left:auto;margin-right:auto;color:#26362f}
+  .final-cta .cta-row{max-width:620px;margin:26px auto 0}
+
+  .family{
+    background:#015e5c;
+    color:#fff;
+  }
+  .family-label{
+    color:#f5e578;
+    text-align:center;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.14em;
+    margin-bottom:16px;
+  }
+  .family-links{display:flex;flex-direction:column;gap:12px}
+  .family-link{
+    display:block;
+    border:1px solid rgba(255,255,255,.32);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    padding:16px 18px;
+    text-decoration:none;
+    transition:border-color .16s ease-out,transform .16s ease-out;
+  }
+  .family-link:hover,.family-link:focus-visible{border-color:#f5e578;transform:translateY(-2px)}
+  .family-link:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
+  .family-name{font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .family-name .ext{font-size:13px;color:rgba(255,255,255,.72);font-weight:700}
+  .family-desc{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:0}
+
+  footer{padding:32px 0 44px;text-align:center;color:#667069;font-size:14px;line-height:1.8;background:#fff;border-top:1px solid #f2f2f2}
+  footer b{color:#16311F}
+  footer a{color:#667069}
+
+  @media (min-width:640px){
+    .cta-row{flex-direction:row}
+    .cta-row .btn{flex:1}
+    .routine-grid{grid-template-columns:repeat(2,1fr)}
+    .info-grid{grid-template-columns:repeat(2,1fr)}
+    .demo-panel{grid-template-columns:1fr 1fr}
+    .facilitator-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+    .facilitator-copy{padding:34px}
+    .family-links{flex-direction:row}
+    .family-links .family-link{flex:1}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "휴가 끝, 지갑 점검 2기",
+  "description": "매일 밤 5분, 오늘 가장 아까웠던 지출 1개와 기분을 기록해 내 소비 트리거 분석 앱과 결제 브레이크 봇을 직접 만듭니다.",
+  "startDate": "2026-09-07",
+  "endDate": "2026-09-12",
+  "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "image": [
+    "https://playworkgrow.club/og.jpg"
+  ],
+  "location": [
+    {
+      "@type": "VirtualLocation",
+      "url": "https://playworkgrow.club/program/wallet-check.html"
+    },
+    {
+      "@type": "Place",
+      "name": "일산 놀일 농장",
+      "url": "https://playworkgrow.club",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "대화동 1667-4",
+        "addressLocality": "고양시 일산서구",
+        "addressRegion": "경기도",
+        "addressCountry": "KR"
+      }
+    }
+  ],
+  "organizer": {
+    "@type": "Organization",
+    "name": "일산 놀일 농장의 AI 프로그램 sociai",
+    "url": "https://sociai.org"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "온라인",
+      "price": "30000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+    },
+    {
+      "@type": "Offer",
+      "name": "농장 포함",
+      "price": "50000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap"><a class="home-link" href="../">← 놀일</a></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">휴가 끝, 지갑 점검 2기</span>
+    <h1>매일 5분, 6일 뒤 당신의 폰에 세상에 하나뿐인 앱이 생깁니다</h1>
+    <p>밤에 5분, 오늘 가장 아까웠던 지출 하나와 그때의 기분을 적습니다. 엿새 뒤엔 내 소비 트리거를 아는 앱이 폰 홈 화면에 들어갑니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=wallet-check-2">신청하기</a>
+      <a class="btn btn-line" href="#info">참가 정보 보기</a>
+    </div>
+    <div class="badges">
+      <span class="badge">2026년 9/7(월) – 9/12(토)</span>
+      <span class="badge">하루 5분 + 마지막 날 반나절</span>
+      <span class="badge">초급 · 코딩 경험 불필요</span>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>가계부가 오래 못 가는 이유</h2>
+      <p>습관이 안 잡히는 건 의지가 아니라 시스템 때문입니다. 기록해도 남지 않고, 남겨도 다시 보지 않으니까요.</p>
+      <p>휴가 지출이 그대로 남아 있는 지금이, 내 소비를 들여다보기에 가장 아픈 타이밍입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="routine">
+  <div class="wrap">
+    <h2>매일 5분에 하는 일</h2>
+    <div class="routine-grid">
+      <div class="routine-card">
+        <small>밤 21~22시</small>
+        <strong>오늘 가장 아까웠던 지출 1개 + 그때 기분을 적습니다</strong>
+        <p>모든 지출을 적지 않습니다. 오늘 가장 아까웠던 것 하나와, 그걸 결제하던 순간의 기분만 남깁니다. 이게 매일의 전부입니다.</p>
+      </div>
+      <div class="routine-card">
+        <small>합동 기술 파트</small>
+        <strong>그 기록이 쌓이는 앱을 AI와 함께 만듭니다</strong>
+        <p>계정 만들기 → 앱 제작 → 인터넷 배포 → DB 연동 → AI 연동 → 폰 설치까지, 9/12(토) 농장 합동 데모데이 시간에 다 같이 진행합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>6일 일정</h2>
+    <div class="sched-scroll">
+      <table class="sched">
+        <thead>
+          <tr><th scope="col">날짜</th><th scope="col">내용</th><th scope="col">장소</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>9/7(월)</td><td>데일리 채집 시작 — 밤 21~22시</td><td>온라인</td></tr>
+          <tr><td>9/8(화)~9/11(금)</td><td>데일리 채집 + 트랙 라이브 금 21:30 (60분)</td><td>온라인</td></tr>
+          <tr class="farm"><td>9/12(토)</td><td><strong>농장 합동 데모데이</strong> — DB·AI 연동 마무리 + 서로의 결과물 공개 (10:00~13:00)</td><td>놀일 농장 (+줌 중계)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sched-note narrow">총 6일, 실제 요구 시간은 하루 5분 + 마지막 날 반나절입니다. 온라인 전용 참가자는 9/12(토) 데모데이에 줌으로 동시 참여하고 녹화도 받습니다.</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <h2>끝나면 남는 것</h2>
+    <p class="narrow">앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다. 코딩은 몰라도 됩니다 — AI에게 말로 시킵니다.</p>
+    <div class="demo-panel">
+      <div class="demo-copy">
+        <strong>내 소비 트리거 분석 앱 + 결제 브레이크 봇</strong>
+        <p>남의 가계부 앱이 아니라, 내가 어떤 기분일 때 지갑을 여는지 알고 있는 앱입니다. 결제 브레이크 봇이 그 순간에 한 번 물어봐 줍니다.</p>
+        <p>여름 휴가 지출을 결산하고 추석 지출을 대비하는 9월, 9/12(토) 농장에서 다 같이 앱으로 만듭니다.</p>
+      </div>
+      <div class="demo-image">
+        <img src="../images/space/edu-board.webp" alt="놀일 농장 교육장 대형 화면 앞에서 진행 중인 수업" width="1280" height="960" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facilitator">
+  <div class="wrap">
+    <h2>진행하는 사람</h2>
+    <div class="facilitator-panel">
+      <div class="facilitator-image">
+        <img src="../images/people/group-class.webp" alt="놀일 농장 교육장에서 강의하는 이상민" width="1280" height="721" loading="lazy" decoding="async">
+      </div>
+      <div class="facilitator-copy">
+        <small>HOST</small>
+        <h3>이상민</h3>
+        <p>고양 일산에서 '놀일 농장'을 운영하며, AI로 실제 서비스를 만들어 운영합니다.</p>
+        <p>놀일 농장에서 AI 캠프, 빌더스 캠프, 스크린 오프 데이, 단체 리트릿 등 모임과 교육을 계속 열어왔습니다.</p>
+        <p>운영 브랜드는 놀일 · <a href="https://sociai.org" target="_blank" rel="noopener">sociai</a> · 어반정글입니다.</p>
+        <p class="proof">이 챌린지의 커리큘럼과 신청 시스템도 AI와 함께 직접 만들었습니다.</p>
+        <p>9/12(토) 데모데이에서 직접 만납니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="info" class="info">
+  <div class="wrap">
+    <h2>참가 정보</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <small>기간</small>
+        <strong>2026년 9/7(월) – 9/12(토), 총 6일</strong>
+        <p>9/7(월) 밤 21~22시 첫 데일리로 시작합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>난이도</small>
+        <strong>초급, 코딩 경험 불필요</strong>
+        <p>코딩이요? 몰라도 됩니다. AI에게 말로 시켜서 앱을 만듭니다.</p>
+      </div>
+      <div class="info-card">
+        <small>참가비</small>
+        <strong>온라인 30,000원 / 농장 포함 50,000원</strong>
+        <ul>
+          <li>온라인: 데일리 미션 + 트랙 라이브 + 9/12(토) 데모데이 줌 참여 + 녹화</li>
+          <li>농장 포함: 9/12(토) 데모데이 현장 참가 (식사 포함)</li>
+          <li>다른 프로그램과 시간이 겹치지 않게 짜여 있어, 두 개를 함께 신청하실 수 있습니다(두 번째 프로그램 50% 할인).</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <small>준비물</small>
+        <strong>스마트폰, 컴퓨터, 구글 계정</strong>
+        <p>가계부 앱이나 영수증을 미리 정리할 필요는 없습니다. 오늘 아까웠던 지출 하나만 있으면 됩니다.</p>
+      </div>
+      <div class="info-card">
+        <small>참가 순서</small>
+        <strong>입금 → 신청 폼 → 오픈채팅방 초대</strong>
+        <ul>
+          <li class="account-note">입금 계좌: 토스뱅크 1000-4503-5544 (예금주 이상민)</li>
+          <li>트랙별 오픈채팅방으로 데일리를 진행합니다</li>
+          <li>9/7(월) 첫 데일리</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <small>데모데이 / 개설 기준</small>
+        <strong>데모데이는 완주자만 초청</strong>
+        <ul>
+          <li>4일 이상 인증한 완주자를 9/12(토) 데모데이에 초청합니다</li>
+          <li>이 트랙 신청이 2명 미만이면 이번 2기는 미개설되고 다음 기수로 이월됩니다</li>
+        </ul>
+      </div>
+    </div>
+    <p class="narrow">주최: 일산 놀일 농장의 AI 프로그램 sociai</p>
+  </div>
+</section>
+
+<section id="apply" class="final-cta">
+  <div class="wrap">
+    <h2>매일 5분, 6일 뒤 당신의 폰에</h2>
+    <p>여름 휴가 지출 결산과 추석 지출 대비, 밤 5분으로 내 소비를 아는 앱을 만듭니다.</p>
+    <p>여름 휴가 지출을 결산하고 추석 지출을 대비하는 9월, 9/12(토) 농장에서 다 같이 앱으로 만듭니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=wallet-check-2">신청하기</a>
+      <a class="btn btn-line-light" href="../">놀일 둘러보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="family">
+  <div class="wrap">
+    <div class="family-label">이상민이 이어온 자산</div>
+    <div class="family-links">
+      <a class="family-link" href="https://www.urban-jungle.kr" target="_blank" rel="noopener">
+        <div class="family-name">소셜가드닝 <span class="ext">↗</span></div>
+        <p class="family-desc">가드닝 뉴스와 계절 가이드 — 정원을 가꾸는 이야기</p>
+      </a>
+      <a class="family-link" href="https://sociai.org" target="_blank" rel="noopener">
+        <div class="family-name">sociai <span class="ext">↗</span></div>
+        <p class="family-desc">소셜섹터를 위한 AI — 뉴스·교육·컨설팅</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>놀일 NOLIL</b> · 놀며 일하고 성장하는 사람들<br>
+    운영: 네이처커뮤니티 · 이상민 · <a href="../privacy.html">개인정보 처리방침</a><br>
+    <a href="../">← 놀일 홈으로</a>
+  </div>
+</footer>
+
+<script src="../config.js"></script>
+<script>
+(() => {
+  "use strict";
+  const APPLY_FORM_URL = "https://sociai.org/challenge/apply?track=wallet-check-2";
+  document.querySelectorAll(".js-apply").forEach((anchor) => {
+    anchor.href = APPLY_FORM_URL;
+  });
+})();
+</script>
+</body>
+</html>

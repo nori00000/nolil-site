@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>아그리 AI 빌리지 — 놀일</title>
-<meta name="description" content="구획 텃밭과 장비, 그리고 AI·창업 어드바이스. 되는 것은 함께 사업으로 키웁니다.">
+<title>고양 일산 구획 텃밭과 AI 창업 — 아그리 AI 빌리지 | 놀일</title>
+<meta name="description" content="고양 일산 농장에서 구획 텃밭을 가꾸며 AI·창업 어드바이스를 받습니다. 장비를 갖춘 현장에서 시작하고, 되는 것은 함께 사업으로 키웁니다.">
 
 <!-- 카톡·당근에 링크 붙일 때 보이는 카드 -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="아그리 AI 빌리지 — 놀일">
-<meta property="og:description" content="구획 텃밭과 장비, 그리고 AI·창업 어드바이스. 되는 것은 함께 사업으로 키웁니다.">
+<meta property="og:title" content="고양 일산 구획 텃밭과 AI 창업 — 아그리 AI 빌리지 | 놀일">
+<meta property="og:description" content="고양 일산 농장에서 구획 텃밭을 가꾸며 AI·창업 어드바이스를 받습니다. 장비를 갖춘 현장에서 시작하고, 되는 것은 함께 사업으로 키웁니다.">
 <meta property="og:image" content="https://playworkgrow.club/og.jpg">
 <meta property="og:url" content="https://playworkgrow.club/program/agri-village.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -158,7 +158,7 @@
     .family-links .family-link{flex:1}
   }
   :root{
-    --solso-teal:#005e5c;
+    --solso-teal:#015e5c;
     --solso-mint:#e6f2e7;
     --solso-sun:#f5e578;
     --content-max:960px;
@@ -413,7 +413,7 @@
   else if (C.kakaoId) btns.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
   if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램 문의</a>`);
   if (C.daangnUrl) btns.push(`<a class="btn btn-line-light" href="${esc(C.daangnUrl)}" target="_blank" rel="noopener">당근에서 보기</a>`);
-  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">급한 문의 전화하기</a>`);
+  if (C.phone)     btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">전화 ${esc(C.phone)}</a>`);
   const cb = $("contactBtns");
   if (cb) cb.innerHTML = btns.join("");
   document.querySelectorAll(".js-copy-kakao").forEach(btn => {

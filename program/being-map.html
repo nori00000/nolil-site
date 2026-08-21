@@ -89,7 +89,7 @@
     position:absolute;
     inset:0;
     opacity:.76;
-    background-image:url('../images/program-screen-off.jpg');
+    background-image:url('../images/people/group-tea.webp?v=20260801');
     background-size:cover;
     background-position:center;
   }
@@ -369,7 +369,7 @@
     </div>
     <div class="safety-note">
       <strong>긴급한 도움은 전문 기관으로 연결합니다</strong>
-      <p>자해·자살 위험, 폭력, 학대, 급박한 의료 문제가 있는 경우 이 프로그램으로 접수하지 않습니다. 즉시 가까운 응급기관이나 한국생명의전화 1588-9191에 도움을 요청해 주세요.</p>
+      <p>자해·자살 위험, 폭력, 학대, 급박한 의료 문제가 있는 경우 이 프로그램으로 접수하지 않습니다. 즉시 가까운 응급기관이나 자살예방상담전화 109에 도움을 요청해 주세요.</p>
     </div>
   </div>
 </section>
@@ -436,17 +436,42 @@
   "use strict";
   const C = window.NOLIL_CONFIG || {};
   const $ = (id) => document.getElementById(id);
-  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => (
-    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
-  const btns = [];
-  if (C.kakaoUrl) btns.push(`<a class="btn btn-kakao" href="${esc(C.kakaoUrl)}" target="_blank" rel="noopener">카카오톡으로 내 지도 링크 받기</a>`);
-  else if (C.kakaoId) btns.push(`<button class="btn btn-copy js-copy-kakao" type="button" data-copy="${esc(C.kakaoId)}">카카오톡 ID 보기</button>`);
-  if (C.telegramUrl) btns.push(`<a class="btn btn-telegram" href="${esc(C.telegramUrl)}" target="_blank" rel="noopener">텔레그램으로 링크 받기</a>`);
-  if (C.phone) btns.push(`<a class="btn btn-line-light" href="${esc(telHref)}">전화로 문의하기</a>`);
-  if (!btns.length) btns.push(`<p class="contact-note">메시지 채널 연결 전입니다. 놀일 운영자에게 직접 문의해 주세요.</p>`);
   const cb = $("contactBtns");
-  if (cb) cb.innerHTML = btns.join("");
+  const makeLink = (className, href, text, external = false) => {
+    const link = document.createElement("a");
+    link.className = className;
+    link.href = String(href || "#");
+    link.textContent = text;
+    if (external) {
+      link.target = "_blank";
+      link.rel = "noopener";
+    }
+    return link;
+  };
+  const makeButton = (className, text) => {
+    const button = document.createElement("button");
+    button.className = className;
+    button.type = "button";
+    button.textContent = text;
+    return button;
+  };
+  if (cb) {
+    const telHref = `tel:${String(C.phone || "").replace(/[^0-9+]/g, "")}`;
+    if (C.kakaoUrl) cb.appendChild(makeLink("btn btn-kakao", C.kakaoUrl, "카카오톡으로 내 지도 링크 받기", true));
+    else if (C.kakaoId) {
+      const kakaoButton = makeButton("btn btn-copy js-copy-kakao", "카카오톡 ID 보기");
+      kakaoButton.dataset.copy = String(C.kakaoId);
+      cb.appendChild(kakaoButton);
+    }
+    if (C.telegramUrl) cb.appendChild(makeLink("btn btn-telegram", C.telegramUrl, "텔레그램으로 링크 받기", true));
+    if (C.phone) cb.appendChild(makeLink("btn btn-line-light", telHref, "전화로 문의하기"));
+    if (!cb.children.length) {
+      const note = document.createElement("p");
+      note.className = "contact-note";
+      note.textContent = "메시지 채널 연결 전입니다. 놀일 운영자에게 직접 문의해 주세요.";
+      cb.appendChild(note);
+    }
+  }
   document.querySelectorAll(".js-copy-kakao").forEach(btn => {
     btn.addEventListener("click", async () => {
       const value = btn.dataset.copy || "";

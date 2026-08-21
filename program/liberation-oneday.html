@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광복절 원데이 — 하루 만에 내 앱 만들기 | 놀일</title>
+<meta name="description" content="2026년 8월 17일 광복절 대체공휴일, 쉬는 날 하루 농장에서 AI에게 말로 시켜 내 앱을 만들고 인터넷에 배포합니다.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="광복절 원데이 — 하루 만에 내 앱 만들기 | 놀일">
+<meta property="og:description" content="쉬는 날 하루, 농장에서 끝냅니다. 내 앱을 만들고 인터넷 주소와 폰 홈 화면 아이콘까지 남깁니다.">
+<meta property="og:image" content="https://playworkgrow.club/images/space/edu-board.webp">
+<meta property="og:url" content="https://playworkgrow.club/program/liberation-oneday.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#015e5c">
+<link rel="canonical" href="https://playworkgrow.club/program/liberation-oneday.html">
+
+<link rel="preload" as="image" href="../images/space/edu-board.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font-sans);
+    background:#fff;color:#111;
+    font-size:17px;line-height:1.7;word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:720px;margin:0 auto}
+  section{padding:72px 0;border-bottom:0}
+  h2{
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.18;
+    letter-spacing:0;
+    text-align:center;
+    margin-bottom:24px;
+  }
+  h2::before{
+    content:"NOLIL PROGRAM";
+    display:block;
+    margin-bottom:12px;
+    font-size:12px;
+    line-height:1.2;
+    letter-spacing:.18em;
+    color:#015e5c;
+  }
+  section p{font-size:17px;line-height:1.8;margin-bottom:14px}
+  section p:last-child{margin-bottom:0}
+  .topbar{
+    position:absolute;
+    z-index:5;
+    left:0;
+    right:0;
+    top:0;
+    background:transparent;
+    padding:18px 0;
+  }
+  .home-link{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:13px;font-weight:800;letter-spacing:.12em;
+    color:rgba(247,243,232,.82);
+    text-decoration:none;
+  }
+  .home-link:hover,.home-link:focus-visible{color:#fff}
+  .home-link:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:4px}
+
+  .hero{
+    min-height:620px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 72px;
+    background:#015e5c;
+    color:var(--cream);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.74;
+    background-image:url('../images/space/edu-board.webp');
+    background-size:cover;
+    background-position:center 46%;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg, rgba(1,94,92,.16) 0%, rgba(1,94,92,.34) 42%, rgba(1,94,92,.90) 100%),
+      linear-gradient(90deg, rgba(1,94,92,.95) 0%, rgba(1,94,92,.68) 54%, rgba(1,94,92,.22) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .kicker{
+    display:inline-block;
+    color:#f5e578;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.24em;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    max-width:820px;
+    font-size:clamp(42px,7vw,76px);
+    line-height:1.08;
+    letter-spacing:0;
+    margin-bottom:18px;
+  }
+  .hero p{max-width:660px;font-size:20px;color:rgba(247,243,232,.94);line-height:1.75;margin-bottom:28px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .badge{
+    background:rgba(247,243,232,.12);
+    border:1px solid rgba(245,229,120,.56);
+    color:#f5e578;
+    font-size:14px;
+    font-weight:800;
+    padding:8px 14px;
+    border-radius:999px;
+  }
+
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    min-height:58px;min-width:0;padding:14px 22px;border-radius:999px;
+    font-size:18px;font-weight:800;text-decoration:none;
+    border:2px solid transparent;cursor:pointer;font-family:inherit;
+    transition:transform .16s ease-out,filter .16s ease-out,border-color .16s ease-out,background-color .16s ease-out;
+    text-align:center;line-height:1.35;
+  }
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px)}
+  .btn:active{filter:brightness(.93)}
+  .btn:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
+  .btn-primary{background:#d0573b;color:#fff}
+  .btn-line{background:transparent;color:var(--cream);border-color:rgba(247,243,232,.55)}
+  .btn-line:hover{border-color:var(--cream)}
+  .btn-line-light{background:#fff;color:#015e5c;border-color:#015e5c}
+  .cta-row{display:flex;flex-direction:column;gap:10px}
+
+  .problem{background:#fff}
+  .problem .narrow{
+    border-left:4px solid #d0573b;
+    padding-left:24px;
+  }
+  .problem p{font-size:20px;color:#24362e}
+
+  .routine{background:#e6f2e7}
+  .routine-grid,.info-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:30px;
+  }
+  .routine-card,.info-card{
+    border:1px solid rgba(1,94,92,.18);
+    background:#fff;
+    padding:24px;
+  }
+  .routine-card small,.info-card small{
+    display:block;
+    color:#015e5c;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+    margin-bottom:8px;
+  }
+  .routine-card strong,.info-card strong{
+    display:block;
+    color:#111;
+    font-size:21px;
+    line-height:1.38;
+    margin-bottom:8px;
+  }
+  .routine-card p,.info-card p{color:#3e4b44;font-size:16px;line-height:1.72}
+
+  .sched-scroll{overflow-x:auto;margin-top:34px}
+  .sched{
+    width:100%;
+    min-width:560px;
+    border-collapse:collapse;
+    font-size:16px;
+  }
+  .sched th,.sched td{
+    border:1px solid rgba(1,94,92,.18);
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+    line-height:1.6;
+  }
+  .sched thead th{
+    background:#015e5c;
+    color:#f5e578;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+  }
+  .sched td:first-child{white-space:nowrap;font-weight:800;color:#111}
+  .sched td:last-child{color:#3e4b44}
+  .sched tr.farm td{background:#f5e578}
+  .sched tr.farm td:last-child{color:#26362f}
+  .sched-note{margin-top:16px;color:#3e4b44;font-size:15px}
+
+  .dark{background:#015e5c;color:var(--cream)}
+  .dark h2{color:var(--cream)}
+  .dark h2::before{color:#f5e578}
+  .dark p{color:rgba(247,243,232,.90)}
+  .demo-panel{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-items:center;
+    margin-top:30px;
+  }
+  .demo-copy{
+    border:1px solid rgba(245,229,120,.35);
+    background:rgba(255,255,255,.08);
+    padding:26px;
+  }
+  .demo-copy strong{display:block;color:#fff;font-size:22px;line-height:1.42;margin-bottom:10px}
+  .demo-image{
+    overflow:hidden;
+    border:1px solid rgba(245,229,120,.35);
+    background:rgba(255,255,255,.08);
+  }
+  .demo-image img{display:block;width:100%;height:auto}
+
+  .facilitator{background:#fff}
+  .facilitator-panel{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-items:center;
+    margin-top:30px;
+    border:1px solid rgba(1,94,92,.18);
+    background:#e6f2e7;
+  }
+  .facilitator-image{
+    overflow:hidden;
+    background:#015e5c;
+  }
+  .facilitator-image img{
+    display:block;
+    width:100%;
+    height:100%;
+    min-height:260px;
+    object-fit:cover;
+  }
+  .facilitator-copy{padding:26px}
+  .facilitator-copy small{
+    display:block;
+    color:#015e5c;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.12em;
+    margin-bottom:10px;
+  }
+  .facilitator-copy h3{
+    color:#111;
+    font-size:clamp(26px,4vw,36px);
+    line-height:1.18;
+    letter-spacing:0;
+    margin-bottom:14px;
+  }
+  .facilitator-copy p{color:#3e4b44;font-size:16px;line-height:1.75}
+  .facilitator-copy .proof{
+    color:#111;
+    font-weight:800;
+  }
+  .facilitator-copy a{color:#015e5c;font-weight:900;text-decoration-thickness:2px;text-underline-offset:4px}
+  .facilitator-copy a:focus-visible{outline:3px solid rgba(208,87,59,.45);outline-offset:3px}
+
+  .info{background:#fff}
+  .info-card{background:#e6f2e7}
+  .info-card ul{list-style:none;display:grid;gap:8px;margin-top:4px}
+  .info-card li{color:#3e4b44;font-size:16px;line-height:1.65}
+  .info-card li.account-note{color:#015e5c;font-weight:900}
+  .connection-note{
+    margin-top:26px;
+    padding:20px 22px;
+    border-left:4px solid #d0573b;
+    background:#fff;
+    color:#26362f;
+    font-size:17px;
+    line-height:1.75;
+  }
+
+  .final-cta{
+    background:#f5e578;
+    text-align:center;
+  }
+  .final-cta h2::before{color:#015e5c}
+  .final-cta p{max-width:700px;margin-left:auto;margin-right:auto;color:#26362f}
+  .final-cta .cta-row{max-width:620px;margin:26px auto 0}
+
+  .family{
+    background:#015e5c;
+    color:#fff;
+  }
+  .family-label{
+    color:#f5e578;
+    text-align:center;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.14em;
+    margin-bottom:16px;
+  }
+  .family-links{display:flex;flex-direction:column;gap:12px}
+  .family-link{
+    display:block;
+    border:1px solid rgba(255,255,255,.32);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    padding:16px 18px;
+    text-decoration:none;
+    transition:border-color .16s ease-out,transform .16s ease-out;
+  }
+  .family-link:hover,.family-link:focus-visible{border-color:#f5e578;transform:translateY(-2px)}
+  .family-link:focus-visible{outline:3px solid rgba(245,229,120,.9);outline-offset:3px}
+  .family-name{font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .family-name .ext{font-size:13px;color:rgba(255,255,255,.72);font-weight:700}
+  .family-desc{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:0}
+
+  footer{padding:32px 0 44px;text-align:center;color:#667069;font-size:14px;line-height:1.8;background:#fff;border-top:1px solid #f2f2f2}
+  footer b{color:#16311F}
+  footer a{color:#667069}
+
+  @media (min-width:640px){
+    .cta-row{flex-direction:row}
+    .cta-row .btn{flex:1}
+    .routine-grid{grid-template-columns:repeat(2,1fr)}
+    .info-grid{grid-template-columns:repeat(2,1fr)}
+    .demo-panel{grid-template-columns:1fr 1fr}
+    .facilitator-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+    .facilitator-copy{padding:34px}
+    .family-links{flex-direction:row}
+    .family-links .family-link{flex:1}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "광복절 원데이 — 하루 만에 내 앱 만들기",
+  "description": "2026년 8월 17일 광복절 대체공휴일, 놀일 농장에서 AI에게 말로 시켜 내 앱을 만들고 인터넷에 배포하는 하루짜리 현장 단품 프로그램입니다.",
+  "startDate": "2026-08-17T10:00:00+09:00",
+  "endDate": "2026-08-17T17:00:00+09:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "image": [
+    "https://playworkgrow.club/images/space/edu-board.webp"
+  ],
+  "location": {
+    "@type": "Place",
+    "name": "놀일 농장",
+    "url": "https://playworkgrow.club",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "대화동 1667-4",
+      "addressLocality": "고양시 일산서구",
+      "addressRegion": "경기도",
+      "addressCountry": "KR"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "놀일/sociai",
+    "url": "https://sociai.org"
+  },
+  "offers": {
+    "@type": "Offer",
+    "name": "현장 참가",
+    "price": "79000",
+    "priceCurrency": "KRW",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap"><a class="home-link" href="../">← 놀일</a></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">NOLIL PROGRAM</span>
+    <h1>광복절 원데이 — 하루 만에 내 앱 만들기</h1>
+    <p>쉬는 날 하루, 농장에서 끝냅니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=oneday-0817">신청하기</a>
+      <a class="btn btn-line" href="../index.html#programs">다른 프로그램 보기</a>
+    </div>
+    <div class="badges">
+      <span class="badge">2026년 8/17(월) 광복절 대체공휴일</span>
+      <span class="badge">10:00~17:00 · 점심 포함</span>
+      <span class="badge">정원 12명</span>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>왜 하루인가</h2>
+      <p>6일 챌린지가 부담스러운 사람을 위한 단품입니다. 결심이 아니라 일정 하나면 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="routine">
+  <div class="wrap">
+    <h2>코딩을 몰라도 되는 이유</h2>
+    <div class="routine-grid">
+      <div class="routine-card">
+        <small>AI BUILD</small>
+        <strong>AI에게 말로 시켜 내 앱을 만듭니다</strong>
+        <p>코드를 직접 외우거나 처음부터 쓰는 시간이 아닙니다. 만들고 싶은 앱을 말로 설명하고, AI와 함께 화면을 만들고 고쳐갑니다.</p>
+      </div>
+      <div class="routine-card">
+        <small>ONE DAY</small>
+        <strong>만들기에서 설치까지 하루 안에 갑니다</strong>
+        <p>나만의 앱 만들기, 인터넷 배포, 폰에서 열기까지 그날의 흐름 안에서 끝까지 진행합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>그날의 흐름</h2>
+    <div class="sched-scroll">
+      <table class="sched">
+        <thead>
+          <tr><th scope="col">시간</th><th scope="col">내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10:00</td><td>도착 · 계정 준비</td></tr>
+          <tr><td>11:00</td><td>AI에게 말로 시켜 내 앱 만들기</td></tr>
+          <tr class="farm"><td>12:30</td><td>점심(농장)</td></tr>
+          <tr><td>13:30</td><td>인터넷에 배포 — 내 주소 생기기</td></tr>
+          <tr><td>15:00</td><td>폰 홈 화면에 설치</td></tr>
+          <tr><td>16:00</td><td>서로의 앱 공개</td></tr>
+          <tr><td>17:00</td><td>마무리</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sched-note narrow">2026년 8월 17일 광복절 대체공휴일, 놀일 농장에서 현장으로 진행합니다.</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <h2>끝나면 남는 것</h2>
+    <p class="narrow">하루가 끝나면 인터넷 주소로 열리는 내 앱과 폰 홈 화면 아이콘이 남습니다. 앱스토어에서 받은 앱이 아니라, 당신이 만든 앱입니다.</p>
+    <div class="demo-panel">
+      <div class="demo-copy">
+        <strong>내 주소로 열고, 내 폰 홈 화면에서 다시 엽니다</strong>
+        <p>그날 만든 앱을 인터넷에 배포하고, 스마트폰 홈 화면에 설치해 바로 꺼내 볼 수 있게 만듭니다.</p>
+      </div>
+      <div class="demo-image">
+        <img src="../images/space/edu-board.webp" alt="놀일 농장 교육장의 보드와 작업 공간" width="1280" height="720" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facilitator">
+  <div class="wrap">
+    <h2>진행하는 사람</h2>
+    <div class="facilitator-panel">
+      <div class="facilitator-image">
+        <img src="../images/people/group-class.webp" alt="놀일 농장 교육장에서 강의하는 이상민" width="1280" height="721" loading="lazy" decoding="async">
+      </div>
+      <div class="facilitator-copy">
+        <small>HOST</small>
+        <h3>이상민</h3>
+        <p>고양 일산에서 '놀일 농장'을 운영하며, AI로 실제 서비스를 만들어 운영합니다.</p>
+        <p>놀일 농장에서 AI 캠프, 빌더스 캠프, 스크린 오프 데이, 단체 리트릿 등 모임과 교육을 계속 열어왔습니다.</p>
+        <p>운영 브랜드는 놀일 · <a href="https://sociai.org" target="_blank" rel="noopener">sociai</a> · 어반정글입니다.</p>
+        <p class="proof">이 챌린지의 커리큘럼과 신청 시스템도 AI와 함께 직접 만들었습니다.</p>
+        <p>데모데이에서 직접 만납니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <h2>참가 정보</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <small>일시</small>
+        <strong>2026년 8월 17일(월) 10:00~17:00</strong>
+        <p>광복절 대체공휴일 하루 동안 진행합니다. 점심이 포함되어 있습니다.</p>
+      </div>
+      <div class="info-card">
+        <small>참가비</small>
+        <strong>79,000원</strong>
+        <ul>
+          <li>점심 포함</li>
+          <li>현장 참가</li>
+          <li class="account-note">입금 계좌: 토스뱅크 1000-4503-5544 (예금주 이상민)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <small>정원</small>
+        <strong>12명</strong>
+        <p>현장에서 함께 만들 수 있는 인원으로 진행합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>장소</small>
+        <strong>놀일 농장</strong>
+        <p>고양시 일산서구에서 만납니다.</p>
+      </div>
+      <div class="info-card">
+        <small>준비물</small>
+        <strong>노트북 · 스마트폰 · 구글 계정</strong>
+        <p>계정 준비부터 함께 시작합니다.</p>
+      </div>
+      <div class="info-card">
+        <small>대상</small>
+        <strong>하루는 낼 수 있는 사람</strong>
+        <p>6일 챌린지는 부담스럽지만, 하루 안에 내 앱을 만들어 보고 싶은 분을 위한 단품입니다.</p>
+      </div>
+    </div>
+    <p class="connection-note narrow">8월 챌린지(8/13~8/22) 참가자 중 '농장 포함'을 선택하신 분은 이 날이 이미 포함되어 있습니다. 원데이 참가 후 챌린지 합류를 원하시면 차액만 결제하면 됩니다.</p>
+  </div>
+</section>
+
+<section id="apply" class="final-cta">
+  <div class="wrap">
+    <h2>쉬는 날 하루, 내 앱 하나를 끝냅니다</h2>
+    <p>2026년 8월 17일 광복절 대체공휴일, 농장에서 다 같이 만듭니다.</p>
+    <p>AI에게 말로 시켜 만들고, 인터넷에 배포하고, 폰 홈 화면에 설치합니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary js-apply" href="https://sociai.org/challenge/apply?track=oneday-0817">신청하기</a>
+      <a class="btn btn-line-light" href="../index.html#programs">다른 프로그램 보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="family">
+  <div class="wrap">
+    <div class="family-label">이상민이 이어온 자산</div>
+    <div class="family-links">
+      <a class="family-link" href="https://www.urban-jungle.kr" target="_blank" rel="noopener">
+        <div class="family-name">소셜가드닝 <span class="ext">↗</span></div>
+        <p class="family-desc">가드닝 뉴스와 계절 가이드 — 정원을 가꾸는 이야기</p>
+      </a>
+      <a class="family-link" href="https://sociai.org" target="_blank" rel="noopener">
+        <div class="family-name">sociai <span class="ext">↗</span></div>
+        <p class="family-desc">소셜섹터를 위한 AI — 뉴스·교육·컨설팅</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>놀일 NOLIL</b> · 놀며 일하고 성장하는 사람들<br>
+    운영: 네이처커뮤니티 · 이상민 · <a href="../privacy.html">개인정보 처리방침</a><br>
+    <a href="../">← 놀일 홈으로</a>
+  </div>
+</footer>
+
+<script src="../config.js"></script>
+<script>
+(() => {
+  "use strict";
+  const APPLY_FORM_URL = "https://sociai.org/challenge/apply?track=oneday-0817";
+  document.querySelectorAll(".js-apply").forEach((anchor) => {
+    anchor.href = APPLY_FORM_URL;
+  });
+})();
+</script>
+</body>
+</html>
