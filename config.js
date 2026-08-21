@@ -54,7 +54,8 @@ window.NOLIL_CONFIG = {
 	//  naverWcs     네이버 애널리틱스 인증키
 	//               analytics.naver.com → 사이트 등록 후 발급
 	//
-	// ⚠ 켜기 전에 privacy.html(개인정보처리방침)에 분석도구 사용을 적어야 합니다.
+	// ⚠ 켜기 전에 방문자 동의 UI와 privacy.html 고지를 먼저 완성해야 합니다.
+	// consent는 현재 fail-closed 운영 스위치일 뿐입니다. 실제 동의 상태와 연동하기 전에 true로 바꾸지 마세요.
 	analytics: {
 		ga4: "",
 		clarity: "",
@@ -88,7 +89,11 @@ window.NOLIL_CONFIG = {
 			window.dataLayer.push(arguments);
 		};
 		window.gtag("js", new Date());
-		window.gtag("config", a.ga4);
+		window.gtag("config", a.ga4, { send_page_view: false });
+		window.gtag("event", "page_view", {
+			page_path: window.location.pathname,
+			page_location: window.location.origin + window.location.pathname,
+		});
 	}
 
 	if (a.clarity && a.consent === true) {
