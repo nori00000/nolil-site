@@ -12,6 +12,7 @@ window.NOLIL_CONFIG = {
 	instagramUrl: "https://instagram.com/nolil.growfarm",
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
+	freeMeetingsUrl: "https://app.playworkgrow.club/meetings?price=free",
 	// 수리수리공방 회원 설문. 회차가 바뀌면 여기 slug만 고치면 됩니다.
 	// 비우면 index.html에 하드코딩된 기본 링크가 그대로 쓰입니다.
 	repairSurveyUrl: "https://app.playworkgrow.club/s/repair-2026-08",
@@ -41,28 +42,7 @@ window.NOLIL_CONFIG = {
 	supabaseUrl: "",
 	supabaseAnonKey: "",
 
-	// ---------- ④ 일정 (Supabase 없을 때 보여줄 정적 일정표) ----------
-	// Supabase가 연결되면 이건 무시되고 DB의 실제 잔여석이 표시됩니다.
-	// ⚠ 시간은 임시값입니다. 확정되면 여기와 booking/seed.sql 둘 다 고치세요.
-	fallbackSchedule: [
-		{
-			date: "2026-07-22",
-			dow: "수",
-			program: "공방 — 목공·이끼·화분",
-			time: "14:00–17:00",
-		},
-		{ date: "2026-07-28", dow: "화", program: "AI 특강 — 스마트폰으로 시작하는 AI", time: "14:00–16:00" },
-		{ date: "2026-07-30", dow: "목", program: "공방 — 목공·이끼·화분", time: "14:00–17:00" },
-		{ date: "2026-08-01", dow: "토", program: "농장 오픈데이", time: "11:00–16:00" },
-		{ date: "2026-08-02", dow: "일", program: "농장 오픈데이", time: "11:00–16:00" },
-		{ date: "2026-08-04", dow: "화", program: "AI 특강", time: "14:00–16:00" },
-		{ date: "2026-08-06", dow: "목", program: "공방", time: "14:00–17:00" },
-		{ date: "2026-08-08", dow: "토", program: "농장 오픈데이", time: "11:00–16:00" },
-	],
-
-	capacity: 10,
-
-	// ---------- ⑤ 측정기 ----------
+	// ---------- ④ 측정기 ----------
 	// 홍보를 쏜 뒤 "몇 명이 왔고 어디서 왔는지"를 보려면 필요합니다.
 	// 지금은 전부 비어 있어서 아무것도 로드되지 않습니다 (아무 부작용 없음).
 	// 발급받은 값을 여기에만 붙여넣으면 config.js를 쓰는 16개 페이지에서 한 번에 켜집니다.
@@ -74,9 +54,12 @@ window.NOLIL_CONFIG = {
 	//  naverWcs     네이버 애널리틱스 인증키
 	//               analytics.naver.com → 사이트 등록 후 발급
 	//
-	// ⚠ 켜기 전에 privacy.html(개인정보처리방침)에 분석도구 사용을 적어야 합니다.
+	// ⚠ 켜기 전에 방문자 동의 UI와 privacy.html 고지를 먼저 완성해야 합니다.
+	// enabled는 운영 스위치이며, 방문자 동의 상태와 동시에 확인될 때만 분석 도구가 로드됩니다.
 	analytics: {
+		enabled: false,
 		ga4: "",
+		clarity: "",
 		naverVerify: "",
 		naverWcs: "",
 	},
@@ -87,6 +70,14 @@ window.NOLIL_CONFIG = {
 // 각 페이지의 HTML은 건드릴 필요가 없습니다.
 (() => {
 	const a = (window.NOLIL_CONFIG && window.NOLIL_CONFIG.analytics) || {};
+	const hasVisitorConsent = () => {
+		try {
+			return window.localStorage.getItem("nolil_analytics_consent") === "granted";
+		} catch {
+			return false;
+		}
+	};
+	const analyticsEnabled = a.enabled === true && hasVisitorConsent();
 
 	// 네이버 서치어드바이저 소유확인 — 검색 노출의 전제
 	if (a.naverVerify) {
@@ -96,8 +87,7 @@ window.NOLIL_CONFIG = {
 		document.head.appendChild(m);
 	}
 
-	// GA4 — 어디서 들어왔는지(referrer·utm)를 보는 주 측정기
-	if (a.ga4) {
+	if (a.ga4 && analyticsEnabled) {
 		const s = document.createElement("script");
 		s.async = true;
 		s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(a.ga4);
@@ -107,11 +97,25 @@ window.NOLIL_CONFIG = {
 			window.dataLayer.push(arguments);
 		};
 		window.gtag("js", new Date());
-		window.gtag("config", a.ga4);
+		window.gtag("config", a.ga4, { send_page_view: false });
+		window.gtag("event", "page_view", {
+			page_path: window.location.pathname,
+			page_location: window.location.origin + window.location.pathname,
+		});
+	}
+
+	if (a.clarity && analyticsEnabled) {
+		window.clarity = window.clarity || function () {
+			(window.clarity.q = window.clarity.q || []).push(arguments);
+		};
+		const s = document.createElement("script");
+		s.async = true;
+		s.src = "https://www.clarity.ms/tag/" + encodeURIComponent(a.clarity);
+		document.head.appendChild(s);
 	}
 
 	// 네이버 애널리틱스 — 네이버 유기검색 유입 판정용(결정 #40)
-	if (a.naverWcs) {
+	if (a.naverWcs && analyticsEnabled) {
 		const s = document.createElement("script");
 		s.src = "https://wcs.naver.net/wcslog.js";
 		s.onload = () => {
