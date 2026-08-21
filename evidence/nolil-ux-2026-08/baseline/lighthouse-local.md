@@ -6,7 +6,7 @@ Viewport/profile: Lighthouse mobile defaults, headless Google Chrome
 
 | Category | Before | After |
 | --- | ---: | ---: |
-| Performance | 63 | 88 |
+| Performance | 63 | 95 |
 | Accessibility | 95 | 100 |
 | Best Practices | 96 | 100 |
 | SEO | 100 | 100 |
@@ -14,7 +14,9 @@ Viewport/profile: Lighthouse mobile defaults, headless Google Chrome
 The corrective pass removed the mobile visitor-chat overlap, fixed all reported
 color-contrast failures, supplied an empty favicon to prevent a console 404,
 and stopped rendering the hero photograph twice through both an image element
-and a pseudo-element.
+and a pseudo-element. A repeated audit exposed a 64–88 performance swing caused
+by render-blocking Google Fonts; replacing that external request with local
+device fonts produced 95 in two consecutive runs with a 3.0 second LCP.
 
 The audit was run with a transient Lighthouse CLI invocation. It did not add a
 package, lockfile, or runtime dependency to the repository.
