@@ -131,6 +131,11 @@ test("group inquiry remains a distinct secondary path", async ({ page }) => {
   await expect(phone).toBeVisible();
   await expect(phone).toContainText("010-2295-7100");
   await expect(page.locator('a[href="index.html"]')).toHaveCount(0);
+});
+
+test("group page visual baseline", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/group.html", { waitUntil: "networkidle" });
   await expect(page.locator(".hero")).toHaveScreenshot("mobile-390-group-hero.png");
 });
 
