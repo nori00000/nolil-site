@@ -62,3 +62,14 @@ test("group inquiry remains a distinct secondary path", async ({ page }) => {
   await expect(phone).toContainText("010-2295-7100");
   await expect(page.locator('a[href="index.html"]')).toHaveCount(0);
 });
+
+test("homepage makes accommodation and its pricing rule explicit", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/index.html", { waitUntil: "networkidle" });
+  const stay = page.locator('[data-testid="stay-note"]');
+  await expect(stay).toBeVisible();
+  await expect(stay).toContainText("숙박 포함 요금제");
+  await expect(stay).toContainText("1인 30,000원부터");
+  await expect(stay).toContainText("별도 견적");
+  await expect(page.locator('img[alt*="숙박 공간"]')).toHaveCount(1);
+});
