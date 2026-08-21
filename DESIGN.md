@@ -99,3 +99,9 @@ Strategy: mixed tonal-shift plus light borders. The Solso reference is largely f
 - Target: WCAG 2.2 AA for body text and interactive controls.
 - Body text remains 17px minimum despite the Solso reference using 10-12px text.
 - Resolved (2026-08): real farm photography is now in place. The hero, program cards, SPACE gallery, outcome thumbnails, and neighborhood ACCESS grid all use actual space/people/infra photos from `images/{space,people,infra}/`. Real photography replaced the broad CSS atmosphere and every legacy stock/placeholder image; alt text and captions follow `alt텍스트_캡션.md`.
+
+## 9. Quality & Marketing Contract
+
+Lighthouse is a technical quality signal, not the homepage acceptance criterion. UX changes must satisfy the fixed viewport, layout contract, user-test, and consent-safe behavior rules in `evidence/nolil-ux-2026-08/quality-gates.md`.
+
+Marketing claims and AI-assisted copy must use [`marketing-context.md`](marketing-context.md) as the source of truth. Do not invent testimonials, attendance numbers, schedules, prices, or location details. The selected marketing skills are documented in `evidence/nolil-ux-2026-08/marketing-skills-selection.md`; use them to generate hypotheses and evidence-backed audits, not autonomous publishing.
