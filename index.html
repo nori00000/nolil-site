@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://playworkgrow.club/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="keywords" content="일산 취미,고양 취미,일산 문화센터,고양 문화센터,일산 원데이클래스,일산 클래스,40대 취미,50대 취미,여성 취미,일산 모임,고양 농장 체험,농장 클래스,호수공원,킨텍스,대화동,액티브시니어,커뮤니티,놀일">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
     --mint:#eef6ef;
     --mint-strong:#dcefe0;
     --yellow:#f5e578;
-    --coral:#d0573b;
+    --coral:#a9432e;
     --text:#173535;
     --body:#4e5c54;
     --soft:#6e827a;
@@ -203,7 +204,7 @@
   .btn-line{background:#fff;color:var(--teal);border-color:var(--line)}
   .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.64)}
   .btn-kakao,.btn-copy{background:#fee500;color:#191600}
-  .btn-telegram{background:#229ed9;color:#fff}
+  .btn-telegram{background:#086b96;color:#fff}
   section{padding:104px 0}
   .eyebrow{
     font-family:var(--eyebrow);
@@ -321,6 +322,7 @@
   .choice strong{display:block;color:var(--text);font-size:18px;line-height:1.45}
   .wedge-banner{background:#062c2a;color:#fff;padding:54px 0}
   .wedge-panel{display:grid;grid-template-columns:1.1fr auto;gap:24px;align-items:center;border:1px solid rgba(220,239,224,.18);border-radius:22px;background:rgba(255,255,255,.08);padding:30px}
+  .wedge-panel .eyebrow{color:var(--yellow)}
   .wedge-panel h2{color:#fff;margin:8px 0 12px}
   .wedge-panel p{color:rgba(255,255,255,.78);font-size:18px;line-height:1.75}
   .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:30px}
@@ -698,17 +700,7 @@
     position:relative;
     overflow:hidden;
   }
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    opacity:.78;
-    background-image:url("images/people/group-tea.webp?v=20260801");
-    background-size:cover;
-    background-position:center bottom;
-    transform:none;
-    z-index:0;
-  }
+  .hero::before{content:none}
   .hero-photo{
     position:absolute;
     inset:0;
@@ -903,6 +895,7 @@
   /* 모바일 하단 고정 CTA 바 — 720px 이하에서만 노출. z-index는 방문자 챗 위젯보다 낮게 두어 챗 버튼이 위로 오게 함. */
   .mobile-cta-bar{display:none}
   @media (max-width:720px){
+    #nolilVisitorChat{display:none!important}
     .mobile-cta-bar{
       display:flex;
       gap:10px;
