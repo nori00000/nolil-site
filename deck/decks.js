@@ -1,6 +1,12 @@
 // Curated active deck list. Obsolete draft decks are intentionally removed from the selector.
 window.NOLIL_DECKS=[
   {
+    title:'레포 세계관 · 접근 신청',
+    tag:'개발',
+    desc:'제가 만든 레포들이 왜 존재하고 어떤 순서로 굴러가는지 보여주고, 필요한 사람이 접근 권한을 신청하도록 QR까지 연결한 덱입니다.',
+    href:'files/repo-worldview.html'
+  },
+  {
     title:'LET’S 세션 진행 장표',
     tag:'워크숍',
     desc:'교회 피드백 모임에서 Look, Empathize, Target, Shape 흐름으로 의견을 모으고 실행표까지 만드는 진행용 장표입니다.',

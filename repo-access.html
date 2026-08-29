@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,">
+<title>레포 접근 권한 신청 — 놀일</title>
+<style>
+  :root{
+    --ink:#1E2B22; --muted:#4e5c54; --soft:#6e827a;
+    --teal:#015E5C; --mint:#8FC7B3; --ember:#D0573B; --yellow:#F2DF6A;
+    --line:rgba(30,43,34,.16);
+    --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(circle at 12% 8%,rgba(143,199,179,.28),transparent 34%),
+      radial-gradient(circle at 88% 4%,rgba(242,223,106,.22),transparent 30%),
+      linear-gradient(160deg,#FBF8F0 0%,#F2F7F1 52%,#E9F2EC 100%);
+  }
+  a{color:inherit}
+  button,input,textarea{font:inherit}
+  .shell{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) clamp(18px,5vw,40px) clamp(48px,8vw,88px)}
+  .k{font-size:12px;font-weight:900;letter-spacing:.22em;color:var(--teal);margin-bottom:14px}
+  h1{font-size:clamp(32px,5.4vw,60px);font-weight:900;line-height:1.12;letter-spacing:-.02em}
+  .lead{margin-top:20px;max-width:760px;color:var(--muted);font-size:clamp(16px,2vw,21px);font-weight:650;line-height:1.62}
+
+  .cols{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:22px;margin-top:clamp(28px,5vw,48px);align-items:start}
+  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3.4vw,30px);
+    box-shadow:0 20px 60px rgba(30,43,34,.07)}
+  .card h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;letter-spacing:-.01em}
+  .card p{margin-top:14px;color:var(--muted);font-size:15.5px;font-weight:650;line-height:1.66}
+  .why-list{list-style:none;margin-top:18px;display:grid;gap:11px}
+  .why-list li{position:relative;padding-left:24px;color:var(--ink);font-size:15px;font-weight:700;line-height:1.6}
+  .why-list li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;
+    background:var(--mint);border:2px solid var(--teal)}
+  .back{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:22px;
+    padding:0 20px;border:1.5px solid var(--teal);border-radius:999px;color:var(--teal);
+    font-weight:900;font-size:15px;text-decoration:none}
+  .back:hover{background:rgba(1,94,92,.07)}
+
+  form{display:grid;gap:15px;margin-top:22px}
+  label{display:grid;gap:7px;color:#173535;font-weight:800;font-size:15px}
+  .star{color:var(--ember);font-style:normal}
+  input[type=text],input[type=tel],input[type=email],textarea{
+    width:100%;border:1px solid rgba(30,43,34,.2);border-radius:13px;padding:13px 14px;
+    background:#fff;color:#173535}
+  textarea{min-height:96px;resize:vertical}
+  input:focus,textarea:focus{outline:3px solid rgba(1,94,92,.32);outline-offset:2px;border-color:var(--teal)}
+  .help{margin-top:-3px;color:var(--soft);font-size:13px;font-weight:650;line-height:1.6}
+  .check{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-weight:650;font-size:14.5px;line-height:1.6}
+  .check input{width:auto;margin-top:4px}
+  .check a{color:var(--teal);font-weight:800}
+  .submit{min-height:56px;border:0;border-radius:999px;background:#D0573B;color:#fff;
+    font-weight:900;font-size:17px;cursor:pointer;transition:transform .15s,filter .15s}
+  .submit:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .status{display:none;border-radius:14px;padding:14px 16px;font-weight:800;line-height:1.6;font-size:15px}
+  .status.ok{background:#e6f2e7;color:#015e5c}
+  .status.bad{background:#fff0e8;color:#9a3f21}
+  body.status-ok .status.ok,body.status-error .status.bad{display:block}
+
+  @media(max-width:820px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="k">PRIVATE REPOSITORY ACCESS</div>
+  <h1>레포 접근은<br>목적을 확인한 뒤<br>열겠습니다</h1>
+  <p class="lead">신청한다고 모두 제공되는 것은 아닙니다. 관심 레포, 사용 목적, 본인의 역할을 보고 필요한 범위만 승인합니다.</p>
+
+  <div class="cols">
+    <aside class="card">
+      <h2>왜 확인하나요?</h2>
+      <p>private 레포에는 코드뿐 아니라 실제 운영 과정, 판단 기준, 시행착오, 협업 맥락이 들어 있습니다.</p>
+      <ul class="why-list">
+        <li>이름, 이메일, 휴대폰, GitHub 아이디를 확인합니다.</li>
+        <li>관심 레포와 사용 목적을 함께 봅니다.</li>
+        <li>필요한 레포만 제한적으로 초대합니다.</li>
+      </ul>
+      <a class="back" href="deck/files/repo-worldview.html">발표자료로 돌아가기</a>
+    </aside>
+
+    <section class="card">
+      <h2>접근 권한 신청</h2>
+      <form method="post" action="https://app.playworkgrow.club/join_applications">
+        <p class="status ok">접근 신청이 접수됐습니다. 내용을 확인하고 직접 연락드리겠습니다.</p>
+        <p class="status bad">신청이 접수되지 않았습니다. 필수 항목과 개인정보 동의를 확인해 주세요.</p>
+
+        <input type="hidden" name="join_application[source]" value="repo_access_deck">
+        <input type="hidden" name="return_to" value="https://playworkgrow.club/repo-access.html">
+
+        <label for="ra_name"><span>성함 <i class="star">*</i></span>
+          <input id="ra_name" type="text" name="join_application[name]" autocomplete="name" required placeholder="이름">
+        </label>
+
+        <label for="ra_phone"><span>휴대폰 <i class="star">*</i></span>
+          <input id="ra_phone" type="tel" name="join_application[phone]" autocomplete="tel" inputmode="numeric" required placeholder="01012345678">
+          <span class="help">앱 초대나 확인 연락을 위해 받습니다. 번호만 입력해 주세요.</span>
+        </label>
+
+        <label for="ra_email"><span>이메일 <i class="star">*</i></span>
+          <input id="ra_email" type="email" name="join_application[email]" autocomplete="email" required placeholder="you@example.com">
+        </label>
+
+        <label for="ra_affiliation"><span>소속/역할/GitHub 아이디 <i class="star">*</i></span>
+          <input id="ra_affiliation" type="text" name="join_application[affiliation]" required placeholder="예: 독립 개발자 · @github-id / 회사·학교·단체">
+        </label>
+
+        <label for="ra_repos"><span>관심 레포 <i class="star">*</i></span>
+          <textarea id="ra_repos" name="join_application[interested_repos]" required placeholder="예: nolil-community, kr-doc-publisher, lazycodex, graphify. 모르겠으면 보고 싶은 목적을 적어주세요."></textarea>
+        </label>
+
+        <label for="ra_purpose"><span>사용 목적 <i class="star">*</i></span>
+          <textarea id="ra_purpose" name="join_application[purpose]" required placeholder="왜 필요한지, 어디에 쓰려는지, 어느 범위까지 보면 되는지 적어주세요."></textarea>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="join_application[privacy_consent]" value="1" required>
+          <span>접근 신청 확인과 연락을 위해 위 정보를 수집·이용하는 데 동의합니다. <a href="privacy.html">개인정보 처리방침</a></span>
+        </label>
+
+        <button class="submit" type="submit">접근 권한 신청하기</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script>
+  const s=new URLSearchParams(location.search).get('status');
+  if(s==='ok')document.body.classList.add('status-ok');
+  else if(s==='error')document.body.classList.add('status-error');
+</script>
+</body>
+</html>

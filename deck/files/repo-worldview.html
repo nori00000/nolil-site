@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,">
+<title>놀일 — 레포 세계관 · 접근 신청</title>
+<style>
+  :root{
+    --cream:#F7F3E8; --cream-2:#e8dcc5; --deep:#0a0d0b; --teal:#015E5C;
+    --yellow:#F2DF6A; --mint:#8FC7B3; --ember:#D0573B; --tan:#D8C9A4;
+    --line:rgba(247,243,232,.18);
+    --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--deep);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow:hidden}
+  .deck{height:100vh;height:100dvh;width:100vw;overflow:hidden;position:relative}
+  .slide{
+    position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;
+    padding:min(9vh,80px) min(8vw,92px) min(12vh,96px);
+    background-image:linear-gradient(102deg,
+      rgba(8,11,9,var(--sl,.88)) 0%, rgba(8,11,9,var(--sm,.62)) 46%, rgba(8,11,9,var(--sr,.26)) 100%),var(--bg);
+    background-size:cover;background-position:center;
+    opacity:0;visibility:hidden;transition:opacity .45s ease;color:var(--cream);
+  }
+  .slide.on{opacity:1;visibility:visible}
+  .content{width:100%;max-width:min(1080px,90vw);min-height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+  .slide.mid .content{justify-content:center}
+
+  .k{display:flex;align-items:center;gap:12px;margin-bottom:16px;color:var(--mint);
+    font-size:12px;font-weight:900;letter-spacing:.22em;text-transform:uppercase}
+  .k::before{content:"";width:30px;height:2px;background:var(--mint);flex:none}
+  h1{font-size:clamp(34px,5.6vw,72px);font-weight:900;line-height:1.08;letter-spacing:-.02em;word-break:keep-all}
+  h2{font-size:clamp(26px,4.2vw,52px);font-weight:900;line-height:1.15;letter-spacing:-.02em;word-break:keep-all}
+  .lead{font-size:clamp(16px,2.1vw,26px);font-weight:650;line-height:1.5;color:#efe9d8;margin-top:20px;max-width:940px}
+  .sub{font-size:clamp(13.5px,1.6vw,19px);font-weight:620;color:var(--cream-2);margin-top:14px;line-height:1.6;max-width:900px}
+  .em{color:var(--yellow)}
+
+  /* 2 — 신뢰 증거 */
+  .proofs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:26px}
+  .proof{background:rgba(1,94,92,.32);border:1px solid rgba(143,199,179,.34);border-radius:14px;padding:16px 18px}
+  .proof .num{font-size:clamp(24px,3.2vw,40px);font-weight:900;color:var(--yellow);line-height:1.05}
+  .proof .label{font-size:14px;font-weight:900;color:var(--mint);margin-top:10px}
+  .proof .desc{font-size:14px;font-weight:650;color:#e6e0cf;line-height:1.5;margin-top:8px}
+
+  /* 3 — 강조 바 */
+  .bar{margin-top:26px;border-left:4px solid var(--yellow);padding:6px 0 6px 20px;
+    color:var(--yellow);font-size:clamp(18px,2.6vw,32px);font-weight:900;letter-spacing:-.01em;line-height:1.3}
+
+  /* 4 · 13 — 번호 카드 */
+  .nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px}
+  .num-card{border:1px solid var(--line);border-radius:12px;background:rgba(247,243,232,.085);padding:16px 17px}
+  .num-card .n{font-size:13px;font-weight:900;letter-spacing:.14em;color:var(--yellow)}
+  .num-card .t{font-size:clamp(15px,1.8vw,21px);font-weight:900;color:#fff;margin-top:9px;word-break:keep-all}
+  .num-card .d{font-size:13.5px;font-weight:650;color:#e6e0cf;line-height:1.5;margin-top:7px;word-break:keep-all}
+
+  /* 5 — 여섯 가치 축 */
+  .axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px;max-width:1000px}
+  .axis{border:1px solid var(--line);border-radius:12px;background:rgba(247,243,232,.085);padding:14px 16px}
+  .axis .l{font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--mint)}
+  .axis .t{font-size:clamp(15px,1.7vw,20px);font-weight:900;color:#fff;margin-top:7px;word-break:keep-all}
+  .axis .d{font-size:13.5px;font-weight:650;color:#e6e0cf;line-height:1.48;margin-top:6px;word-break:keep-all}
+
+  /* 6 · 11 — 다이어그램 */
+  .map{display:flex;align-items:stretch;gap:10px;margin-top:24px}
+  .node{flex:1 1 0;min-width:0;background:rgba(1,94,92,.34);border:1px solid rgba(143,199,179,.4);
+    border-radius:12px;padding:13px 14px}
+  .node .t{font-size:clamp(13px,1.4vw,16px);font-weight:900;color:var(--yellow);margin-bottom:7px;word-break:keep-all}
+  .node .i{font-size:12.5px;font-weight:650;color:#e6e0cf;line-height:1.5;overflow-wrap:anywhere}
+  .arrow{flex:none;align-self:center;color:var(--yellow);font-size:22px;font-weight:900;line-height:1}
+  .branch{flex:1.2 1 0;min-width:0;display:flex;flex-direction:column;gap:10px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .pill{border:1px solid rgba(242,223,106,.45);background:rgba(242,223,106,.12);color:var(--yellow);
+    border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:850}
+
+  /* 7~10 — 가로 플로우 */
+  .flow{display:flex;align-items:stretch;gap:8px;margin-top:26px}
+  .step{flex:1 1 auto;border:1px solid var(--line);border-radius:12px;background:rgba(247,243,232,.085);padding:14px 13px}
+  .step .n{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--mint)}
+  .step .t{font-size:clamp(14px,1.5vw,18px);font-weight:900;color:var(--yellow);margin-top:8px;word-break:keep-all}
+  .step .d{font-size:12.5px;font-weight:650;color:#e6e0cf;line-height:1.5;margin-top:6px;word-break:keep-all}
+
+  /* 12 — 대표 레포 */
+  .repos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
+  .repo{border:1px solid var(--line);border-radius:12px;background:rgba(247,243,232,.085);padding:15px 16px}
+  .repo .l{font-size:11.5px;font-weight:900;letter-spacing:.12em;color:var(--mint);overflow-wrap:anywhere}
+  .repo .t{font-size:clamp(15px,1.7vw,20px);font-weight:900;color:#fff;margin-top:8px;word-break:keep-all}
+  .repo .d{font-size:13.5px;font-weight:650;color:#e6e0cf;line-height:1.5;margin-top:6px;word-break:keep-all}
+
+  /* 16 — 접근 신청 */
+  .access{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:26px;align-items:center;margin-top:26px;max-width:1000px}
+  .access-url{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:clamp(14px,1.7vw,20px);font-weight:800;color:var(--yellow);margin-top:18px;overflow-wrap:anywhere}
+  .request{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;
+    min-height:54px;padding:0 26px;margin-top:18px;border-radius:999px;background:var(--yellow);
+    color:#102016;font-weight:900;font-size:16px;text-decoration:none}
+  .request:hover{filter:brightness(1.05)}
+  .qr-card{position:relative;z-index:5;background:#fff;border-radius:18px;padding:14px;text-align:center}
+  .qr-card img{width:100%;max-width:200px;height:auto;display:block;margin:0 auto}
+  .qr-card .cap{margin-top:10px;color:#1E2B22;font-size:12.5px;font-weight:800;line-height:1.5}
+
+  /* 크롬 */
+  .dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:6px}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.26);cursor:pointer;transition:.2s}
+  .dot.on{background:var(--yellow);width:20px;border-radius:99px}
+  .count{position:fixed;bottom:18px;right:22px;z-index:20;color:rgba(255,255,255,.5);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+  .hint{position:fixed;bottom:18px;left:22px;z-index:20;color:rgba(255,255,255,.38);font-size:12px;font-weight:600}
+  .modebar{position:fixed;top:18px;right:20px;z-index:40;display:flex;gap:6px;padding:6px;
+    border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(10,13,11,.64);backdrop-filter:blur(14px)}
+  .modebar button{height:34px;padding:0 13px;border:0;border-radius:999px;background:transparent;
+    color:rgba(255,255,255,.72);font:850 14px var(--font);cursor:pointer}
+  .modebar button.on{background:var(--yellow);color:#102016}
+  .deck-return{position:fixed;top:18px;left:20px;z-index:40;display:inline-flex;align-items:center;justify-content:center;
+    height:40px;padding:0 14px;border-radius:999px;background:rgba(10,13,11,.64);color:#fff;text-decoration:none;
+    font:850 13px var(--font);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px)}
+  .deck-return:hover{background:rgba(10,13,11,.78)}
+
+  /* 6단계 플로우는 1200px 미만에서 세로 스택 + 회전 화살표 (가로 유지 시 토큰이 쪼개짐) */
+  @media(max-width:1200px){
+    .flow{flex-direction:column;gap:4px;margin-top:15px}
+    .step{flex:none;display:flex;align-items:flex-start;gap:9px;padding:9px 11px}
+    .step .n{flex:0 0 20px;font-size:11px;line-height:1.5}
+    .step .t{flex:0 0 96px;margin-top:0;font-size:12.5px;line-height:1.5}
+    .step .d{flex:1 1 auto;min-width:0;margin-top:0;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+    .flow .arrow{transform:rotate(90deg);align-self:center;font-size:15px}
+  }
+  @media(max-width:900px){
+    .repos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:600px){
+    .slide{padding:60px 20px 74px}
+    .content{max-width:92vw}
+    h1{font-size:34px}h2{font-size:27px}
+    .lead{font-size:17px}.sub{font-size:14.5px}
+    .proofs{grid-template-columns:1fr}
+    .nums,.axes,.repos{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .map{flex-direction:column;gap:6px;margin-top:18px}
+    .node{display:flex;gap:10px;align-items:flex-start;padding:10px 12px}
+    .node .t{flex:0 0 82px;margin-bottom:0;font-size:12.5px;line-height:1.42}
+    .node .i{flex:1;min-width:0;font-size:12px;line-height:1.42}
+    .arrow{transform:rotate(90deg);align-self:center;font-size:15px}
+    .branch{gap:6px}
+    .branch.pair{flex-direction:row;gap:6px}
+    .branch.pair .node{flex:1 1 0;display:block;padding:10px 11px}
+    .branch.pair .node .t{flex:none;width:auto;margin-bottom:5px}
+    .pills{gap:6px;margin-top:10px}
+    .pill{padding:6px 11px;font-size:12.5px}
+    .access{grid-template-columns:1fr}
+    .qr-card img{max-width:150px}
+    .hint{display:none}
+    .modebar{top:12px;right:12px}.modebar button{height:32px;padding:0 10px;font-size:12px}
+    .deck-return{top:12px;left:12px;height:34px;padding:0 12px}
+  }
+
+  body.mode-board .slide{padding:min(8vh,72px) min(7vw,84px) min(11vh,92px)}
+  body.mode-board .content{max-width:min(1180px,93vw)}
+  body.mode-board h1{font-size:clamp(42px,5.2vw,76px)}
+  body.mode-board h2{font-size:clamp(32px,4vw,56px)}
+  body.mode-board .lead{font-size:clamp(20px,2.1vw,29px)}
+  body.mode-board .sub{font-size:clamp(16px,1.6vw,22px)}
+  body.mode-board .step .t,body.mode-board .node .t{font-size:17px}
+  body.mode-board .step .d,body.mode-board .node .i{font-size:14px}
+  body.mode-board .num-card .d,body.mode-board .axis .d,body.mode-board .repo .d{font-size:15px}
+
+  body.mode-mobile .slide{padding:52px 22px 74px}
+  body.mode-mobile .content{max-width:92vw}
+  body.mode-mobile h1{font-size:34px}
+  body.mode-mobile h2{font-size:27px}
+  body.mode-mobile .lead{font-size:17px}
+  body.mode-mobile .sub{font-size:14.5px}
+  body.mode-mobile .proofs{grid-template-columns:1fr}
+  body.mode-mobile .nums,body.mode-mobile .axes,body.mode-mobile .repos{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.mode-mobile .repo .l{font-size:10px;letter-spacing:.05em}
+  body.mode-mobile .flow{flex-direction:column;gap:4px;margin-top:15px}
+  body.mode-mobile .step{flex:none;display:flex;align-items:flex-start;gap:9px;padding:9px 11px}
+  body.mode-mobile .step .n{flex:0 0 20px;font-size:11px;line-height:1.5}
+  body.mode-mobile .step .t{flex:0 0 96px;margin-top:0;font-size:12.5px;line-height:1.5}
+  body.mode-mobile .step .d{flex:1 1 auto;min-width:0;margin-top:0;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+  body.mode-mobile .flow .arrow{transform:rotate(90deg);align-self:center;font-size:15px}
+  body.mode-mobile .hint{display:none}
+  body.mode-mobile .map{flex-direction:column;gap:6px;margin-top:18px}
+  body.mode-mobile .node{display:flex;gap:10px;align-items:flex-start;padding:10px 12px}
+  body.mode-mobile .node .t{flex:0 0 82px;margin-bottom:0;font-size:12.5px;line-height:1.42}
+  body.mode-mobile .node .i{flex:1;min-width:0;font-size:12px;line-height:1.42}
+  body.mode-mobile .arrow{transform:rotate(90deg);align-self:center;font-size:15px}
+  body.mode-mobile .branch{gap:6px}
+  body.mode-mobile .branch.pair{flex-direction:row;gap:6px}
+  body.mode-mobile .branch.pair .node{flex:1 1 0;display:block;padding:10px 11px}
+  body.mode-mobile .branch.pair .node .t{flex:none;width:auto;margin-bottom:5px}
+  body.mode-mobile .pills{gap:6px;margin-top:10px}
+  body.mode-mobile .pill{padding:6px 11px;font-size:12.5px}
+  body.mode-mobile .access{grid-template-columns:1fr}
+  body.mode-mobile .qr-card img{max-width:150px}
+</style>
+</head>
+<body class="mode-board">
+<a class="deck-return" href="../">목록</a>
+<div class="modebar" id="modebar" aria-label="발표자료 보기 모드">
+  <button type="button" data-mode="board">발표용</button>
+  <button type="button" data-mode="mobile">휴대폰용</button>
+  <button type="button" data-mode="pc">PC용</button>
+</div>
+
+<main class="deck" id="deck">
+
+  <!-- 1 — 표지 -->
+  <section class="slide on" style="--bg:url('assets/open-field.jpg');--sl:.84;--sm:.56;--sr:.22">
+    <div class="content">
+      <div class="k">NOLIL REPOSITORY WORLDVIEW</div>
+      <h1>없는 자원으로<br><span class="em">현장을 만든 사람</span></h1>
+      <p class="lead">이 레포들은 포트폴리오가 아닙니다. 부족한 조건에서도 상상을 현실로 바꾸기 위해 만든 도구 상자입니다.</p>
+    </div>
+  </section>
+
+  <!-- 2 — 신뢰 -->
+  <section class="slide mid" style="--bg:url('assets/greenhouse-flowers.jpg');--sl:.88;--sm:.66;--sr:.3">
+    <div class="content">
+      <div class="k">TRUST BEFORE TOOLS</div>
+      <h2>신뢰는 조건이 좋을 때보다<br>조건이 없을 때 드러납니다</h2>
+      <div class="proofs">
+        <div class="proof"><div class="num">-3,000만</div><div class="label">마이너스에서 시작</div><div class="desc">플러스 자본이 아니라 빚에서 출발했습니다.</div></div>
+        <div class="proof"><div class="num">옥상</div><div class="label">첫 현장</div><div class="desc">사무실 없이 공공기관 옥상 하우스에서 식물을 키웠습니다.</div></div>
+        <div class="proof"><div class="num">한켠</div><div class="label">첫 운영</div><div class="desc">공용 공간 한켠에서 사업의 첫 흐름을 만들었습니다.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — 레포란 무엇인가 -->
+  <section class="slide" style="--bg:url('assets/elder-hands-craft.jpg');--sl:.88;--sm:.62;--sr:.26">
+    <div class="content">
+      <div class="k">WHAT THESE REPOS ARE</div>
+      <h2>레포는 코드 창고가 아니라<br><span class="em">실행 방식의 기록</span>입니다</h2>
+      <p class="lead">현장을 만들고, 문서를 남기고, AI가 일을 해도 사람이 판단할 수 있도록 과정을 구조화한 흔적입니다.</p>
+      <div class="bar">상상 → 현장 → 기록 → 시스템</div>
+    </div>
+  </section>
+
+  <!-- 4 — cmds 레퍼런스 -->
+  <section class="slide mid" style="--bg:url('assets/moss-macro.jpg');--sl:.9;--sm:.68;--sr:.32">
+    <div class="content">
+      <div class="k">REFERENCE FROM CMDS</div>
+      <h2>cmds 레퍼런스에서 가져온 것은<br>“앱 목록”이 아니라 <span style="white-space:nowrap"><span class="em">분류 방식</span>입니다</span></h2>
+      <div class="nums">
+        <div class="num-card"><div class="n">01</div><div class="t">짧은 제목</div><div class="d">처음 보는 사람도 한눈에 용도를 파악합니다.</div></div>
+        <div class="num-card"><div class="n">02</div><div class="t">의미 검색</div><div class="d">기술명보다 해결하려는 문제로 찾습니다.</div></div>
+        <div class="num-card"><div class="n">03</div><div class="t">상태 표시</div><div class="d">public/private와 접근 조건을 구분합니다.</div></div>
+        <div class="num-card"><div class="n">04</div><div class="t">신청 흐름</div><div class="d">누구에게 왜 필요한지 확인한 뒤 엽니다.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — 여섯 가치 축 -->
+  <section class="slide mid" style="--bg:url('assets/open-field.jpg');--sl:.93;--sm:.78;--sr:.5">
+    <div class="content">
+      <div class="k">SIX VALUE AXES</div>
+      <h2>57개 레포는 여섯 가지<br>가치 축으로 나뉩니다</h2>
+      <div class="axes">
+        <div class="axis"><div class="l">현장 돌봄</div><div class="t">사람이 머무는 공간을 돌본다</div><div class="d">놀일, 어반정글, 그린월, 커뮤니티 운영.</div></div>
+        <div class="axis"><div class="l">문서의 해방</div><div class="t">반복 문서 노동을 줄인다</div><div class="d">제안서, 공고, 채팅, 뉴스, 세금 자동화.</div></div>
+        <div class="axis"><div class="l">에이전트 운영</div><div class="t">AI 작업에도 기록을 남긴다</div><div class="d">Codex, Claude, 세션 기록, 지식 그래프.</div></div>
+        <div class="axis"><div class="l">생각의 자립</div><div class="t">내가 먼저 판단한다</div><div class="d">위키, 회고, 컨텍스트, 손코딩 훈련.</div></div>
+        <div class="axis"><div class="l">시뮬레이션</div><div class="t">규칙 있는 세계에서 실험한다</div><div class="d">게임, 포켓몬, 카트라이더, 추상화 실험.</div></div>
+        <div class="axis"><div class="l">생활 인프라</div><div class="t">작은 기관처럼 운영한다</div><div class="d">홈랩, 멀티머신, dotfiles, 원격 개발.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — 전체 지도 -->
+  <section class="slide mid" style="--bg:url('assets/elder-hands-craft.jpg');--sl:.92;--sm:.74;--sr:.42">
+    <div class="content">
+      <div class="k">WHOLE REPOSITORY MAP</div>
+      <h2>전체 방향은 하나입니다<br><span class="em">현장을 시스템으로 바꾸는 일</span></h2>
+      <div class="map">
+        <div class="node"><div class="t">출발점</div><div class="i">없는 자원<br>가치와 신뢰</div></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="t">현장 사업</div><div class="i">놀일·어반정글<br>그린월·정원</div></div>
+        <div class="arrow">→</div>
+        <div class="branch pair">
+          <div class="node"><div class="t">운영 OS</div><div class="i">예약·모임<br>후기·동의<br>위키</div></div>
+          <div class="node"><div class="t">실험/훈련</div><div class="i">게임·자동화<br>손코딩·회고</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="t">생산 엔진</div><div class="i">콘텐츠·문서<br>AI 에이전트<br>지식 그래프</div></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="t">외부 신뢰</div><div class="i">제안·발표<br>접근 승인·협업</div></div>
+      </div>
+      <div class="pills">
+        <span class="pill">핵심: 현장</span>
+        <span class="pill">증거: 기록</span>
+        <span class="pill">확장: 시스템</span>
+        <span class="pill">통제: 승인</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — WORKFLOW 01 -->
+  <section class="slide mid" style="--bg:url('assets/farm-hero.jpg');--sl:.9;--sm:.7;--sr:.36">
+    <div class="content">
+      <div class="k">WORKFLOW 01 · FIELD OPERATIONS</div>
+      <h2>현장 레포는<br>사람이 오는 흐름을 <span class="em">끝까지 붙잡습니다</span></h2>
+      <div class="flow">
+        <div class="step"><div class="n">01</div><div class="t">발견</div><div class="d">nolil-site<br>공개 접점</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">02</div><div class="t">예약·신청</div><div class="d">예약·모임<br>잔여석·마감</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">03</div><div class="t">현장 진행</div><div class="d">프로그램<br>공방·오픈데이</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">04</div><div class="t">후기·동의</div><div class="d">기록 남기기<br>사진·동의</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">05</div><div class="t">위키 축적</div><div class="d">nolil-wiki<br>운영 정본</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">06</div><div class="t">다음 회차</div><div class="d">개선 반영<br>재방문 설계</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — WORKFLOW 02 -->
+  <section class="slide mid" style="--bg:url('assets/moss-macro.jpg');--sl:.92;--sm:.72;--sr:.38">
+    <div class="content">
+      <div class="k">WORKFLOW 02 · CONTENT ENGINE</div>
+      <h2>콘텐츠 레포는<br>현장의 일을 <span class="em">사람이 이해하는 증거로 바꿉니다</span></h2>
+      <div class="flow">
+        <div class="step"><div class="t">1. 현장 원료</div><div class="d">사진·후기<br>대화·질문</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">2. 수집/정리</div><div class="d">chatharvest<br>talknote-ai</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">3. 초안/맥락</div><div class="d">content-marketing-team<br>ai-news-pipeline<br>gonggo-radar</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">4. 사람 승인</div><div class="d">동의 없는 원료는<br>발행 금지</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">5. 발행/측정</div><div class="d">블로그·유튜브·제안서<br>project-tracker</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">6. 다음 액션</div><div class="d">단체 리드<br>방문 신청<br>위키 보강</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 — WORKFLOW 03 -->
+  <section class="slide mid" style="--bg:url('assets/empty-office.jpg');--sl:.9;--sm:.7;--sr:.36">
+    <div class="content">
+      <div class="k">WORKFLOW 03 · DOCUMENT AUTOMATION</div>
+      <h2>문서 레포는<br>제안서 한 건의 <span class="em">반복 노동을 걷어냅니다</span></h2>
+      <div class="flow">
+        <div class="step"><div class="t">1. 요구 원문</div><div class="d">공고·양식<br>HWPX·PDF</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">2. 구조 추출</div><div class="d">kr-doc-publisher<br>서식 해석</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">3. 초안 생성</div><div class="d">본문·표·근거<br>템플릿 결합</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">4. 사람 검토</div><div class="d">사실 확인<br>판단 게이트</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">5. 서식 출력</div><div class="d">HWPX·PPTX·PDF<br>제출 형식 그대로</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">6. 제출·보관</div><div class="d">계약·정산<br>contract-forge</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — WORKFLOW 04 -->
+  <section class="slide mid" style="--bg:url('assets/factory-clock.jpg');--sl:.9;--sm:.7;--sr:.36">
+    <div class="content">
+      <div class="k">WORKFLOW 04 · AGENT HARNESS</div>
+      <h2>하네스 레포는<br>AI가 일해도 <span class="em">사람이 되돌릴 수 있게</span> 만듭니다</h2>
+      <div class="flow">
+        <div class="step"><div class="t">1. 지시</div><div class="d">계획·분담<br>범위 고정</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">2. 실행</div><div class="d">lazycodex<br>에이전트 작업</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">3. 기록</div><div class="d">세션 로그<br>핸드오프</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">4. 검증</div><div class="d">테스트·게이트<br>증거로 확인</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">5. 지식화</div><div class="d">graphify<br>지식 그래프</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="t">6. 복구</div><div class="d">되돌리기 가능<br>homelab 운영</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — WORKFLOW 05 -->
+  <section class="slide mid" style="--bg:url('assets/campfire.jpg');--sl:.93;--sm:.78;--sr:.48">
+    <div class="content">
+      <div class="k">WORKFLOW 05 · EXPERIMENTS AND TRAINING</div>
+      <h2>실험 레포는<br>사업 밖에서 <span class="em">판단 근육을 훈련합니다</span></h2>
+      <div class="map">
+        <div class="node"><div class="t">규칙 있는 세계</div><div class="i">게임·시뮬레이션<br>학습</div></div>
+        <div class="arrow">→</div>
+        <div class="branch">
+          <div class="node"><div class="t">에이전트</div><div class="i">pokemon-agent-os<br>pss-mgba</div></div>
+          <div class="node"><div class="t">사업가설</div><div class="i">kart-realworld</div></div>
+          <div class="node"><div class="t">사고훈련</div><div class="i">soncoding<br>Being-Map</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="t">공통 산출</div><div class="i">상태 외부화<br>복구·검증</div></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="t">본업 회수</div><div class="i">문서화<br>운영 자동화<br>판단 기준</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — 대표 레포 -->
+  <section class="slide mid" style="--bg:url('assets/hands-soil.jpg');--sl:.9;--sm:.7;--sr:.36">
+    <div class="content">
+      <div class="k">REPRESENTATIVE REPOS</div>
+      <h2>대표 레포는 이렇게 읽으면 됩니다</h2>
+      <div class="repos">
+        <div class="repo"><div class="l">NOLIL-SITE</div><div class="t">농장 모임의 첫 문</div><div class="d">방문자가 놀일을 이해하고 신청하는 공개 접점.</div></div>
+        <div class="repo"><div class="l">KR-DOC-PUBLISHER</div><div class="t">한국형 문서 자동화</div><div class="d">HWPX, PPTX, PDF, 제안서를 한 흐름으로 제작.</div></div>
+        <div class="repo"><div class="l">TALKNOTE-AI</div><div class="t">대화를 검색되는 노트로</div><div class="d">흘러가는 대화를 지식과 문서로 전환.</div></div>
+        <div class="repo"><div class="l">LAZYCODEX</div><div class="t">AI 작업 운영체계</div><div class="d">계획, 실행, 검증, 복구를 남기는 에이전트 하네스.</div></div>
+        <div class="repo"><div class="l">GRAPHIFY</div><div class="t">지식 그래프</div><div class="d">코드와 문서를 연결된 지식 지도로 변환.</div></div>
+        <div class="repo"><div class="l">HOMELAB</div><div class="t">개인의 작은 기관</div><div class="d">여러 Mac과 서버를 안정적인 작업 기반으로 묶음.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — 왜 private인가 -->
+  <section class="slide mid" style="--bg:url('assets/empty-office.jpg');--sl:.9;--sm:.7;--sr:.36">
+    <div class="content">
+      <div class="k">WHY PRIVATE ACCESS</div>
+      <h2>신청한다고<br>모두 열리지는 않습니다</h2>
+      <p class="lead">private 레포에는 코드뿐 아니라 실제 운영 과정, 판단 기준, 시행착오, 협업 맥락이 들어 있습니다.</p>
+      <div class="nums">
+        <div class="num-card"><div class="n">01</div><div class="t">누가 쓰나</div><div class="d">성함, 이메일, 소속, GitHub 아이디.</div></div>
+        <div class="num-card"><div class="n">02</div><div class="t">왜 쓰나</div><div class="d">관심 레포와 사용 목적.</div></div>
+        <div class="num-card"><div class="n">03</div><div class="t">어디까지 열까</div><div class="d">필요한 범위만 제한 승인.</div></div>
+        <div class="num-card"><div class="n">04</div><div class="t">어떻게 함께할까</div><div class="d">문서, 데모, 초대, 협업 안내.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 — 인덱스 위키 -->
+  <section class="slide" style="--bg:url('assets/mist-lake2.jpg');--sl:.88;--sm:.64;--sr:.3">
+    <div class="content">
+      <div class="k">INDEX WIKI</div>
+      <h2>낯선 용어는<br><span class="em">인덱스 대사전</span>으로 풉니다</h2>
+      <p class="lead">레포, private, 접근 권한, 맥락, 에이전트, 위키 같은 말을 중학생도 이해할 수 있게 다시 씁니다.</p>
+      <p class="sub">외부 사전은 복사하지 않습니다. 내부 정의를 먼저 쓰고, sociai.org·Wiki.js·Wikibase·Wikidata·KBpedia와 출처 링크로 연결합니다.</p>
+    </div>
+  </section>
+
+  <!-- 15 — 메시지 -->
+  <section class="slide" style="--bg:url('assets/fire-circle.jpg');--sl:.9;--sm:.72;--sr:.44">
+    <div class="content">
+      <div class="k">THE MESSAGE</div>
+      <h2>제가 보여주고 싶은 것은<br>기술력이 아니라 <span class="em">신뢰</span>입니다</h2>
+      <p class="lead">없는 조건에서도 현장을 만들었고, 그 과정을 레포와 문서와 시스템으로 남겼습니다. 이 도구들은 제가 바라보는 세계관을 현실로 만들기 위한 장비입니다.</p>
+    </div>
+  </section>
+
+  <!-- 16 — 접근 신청 (QR) -->
+  <section class="slide mid" style="--bg:url('assets/open-field.jpg');--sl:.9;--sm:.68;--sr:.3">
+    <div class="content">
+      <div class="k">ACCESS REQUEST</div>
+      <div class="access">
+        <div>
+          <h1>QR을 찍고<br><span class="em">목적을 적어</span><br><span class="em">신청하세요</span></h1>
+          <p class="lead">신청자의 이름, 휴대폰, 이메일, GitHub 아이디, 관심 레포, 사용 목적을 보고 필요한 범위만 승인합니다.</p>
+          <div class="access-url">playworkgrow.club/repo-access.html</div>
+          <a class="request" href="../../repo-access.html">신청폼 열기</a>
+        </div>
+        <div class="qr-card">
+          <img src="../../repo-access-qr.svg" alt="레포 접근 신청 QR">
+          <div class="cap">카메라로 스캔하면<br>접근 권한 신청폼이 열립니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="dots" id="dots"></div>
+<div class="count" id="count">1 / 16</div>
+<div class="hint">← → 또는 클릭 · F 전체화면</div>
+
+<script>
+  const modes=['board','mobile','pc'];
+  const params=new URLSearchParams(location.search);
+  function setMode(mode,replace){
+    const next=modes.includes(mode)?mode:'board';
+    document.body.classList.remove(...modes.map(v=>'mode-'+v));
+    document.body.classList.add('mode-'+next);
+    document.querySelectorAll('[data-mode]').forEach(btn=>btn.classList.toggle('on',btn.dataset.mode===next));
+    params.set('mode',next);
+    const url=location.pathname+'?'+params.toString()+location.hash;
+    if(replace)history.replaceState(null,'',url);else history.pushState(null,'',url);
+  }
+  setMode(params.get('mode')||'board',true);
+  document.getElementById('modebar').addEventListener('click',e=>{const btn=e.target.closest('[data-mode]');if(btn)setMode(btn.dataset.mode,false);});
+
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsWrap=document.getElementById('dots'),count=document.getElementById('count');
+  let i=0;
+  slides.forEach((_,k)=>{const d=document.createElement('div');d.className='dot'+(k?'':' on');d.onclick=()=>go(k);dotsWrap.appendChild(d);});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n===i)return;
+    slides[i].classList.remove('on');dots[i].classList.remove('on');
+    i=n;slides[i].classList.add('on');dots[i].classList.add('on');
+    slides[i].scrollTop=0;
+    count.textContent=(i+1)+' / '+slides.length;
+    const nx=slides[i+1];
+    if(nx){const m=/url\('([^']+)'\)/.exec(nx.getAttribute('style')||'');if(m){new Image().src=m[1];}}
+  }
+  const next=()=>go(i+1),prev=()=>go(i-1);
+  deck.addEventListener('click',e=>{
+    if(e.target.closest('a,button,input,textarea,select,label,.qr-card'))return;
+    e.clientX<innerWidth*.28?prev():next();
+  });
+  addEventListener('keydown',e=>{
+    const k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown')next();
+    else if(k==='ArrowLeft'||k==='PageUp')prev();
+    else if(k==='Home')go(0);
+    else if(k==='End')go(slides.length-1);
+    else if(k.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  let sx=0,sy=0;
+  deck.addEventListener('touchstart',e=>{const t=e.changedTouches[0];sx=t.clientX;sy=t.clientY;},{passive:true});
+  deck.addEventListener('touchend',e=>{
+    const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.4){dx<0?next():prev();}
+  },{passive:true});
+</script>
+</body>
+</html>
