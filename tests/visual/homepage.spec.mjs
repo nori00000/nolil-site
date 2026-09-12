@@ -75,13 +75,10 @@ test("homepage key conversion sections remain visible on mobile", async ({ page 
   await expect(page.locator("#weekly")).toContainText("가까운 무료 모임에서 먼저 만나세요");
   await expect(page.locator('#weekly a[href*="meetings?price=free"]')).toBeVisible();
 
-  await scrollToSelector(page, "#space");
-  await expect(page.locator('[data-testid="stay-note"]')).toBeVisible();
-  await expect(page).toHaveScreenshot("mobile-390-space-stay-viewport.png");
-
   await scrollToSelector(page, "#group-inquiry");
   await expect(page.locator("#group-inquiry")).toContainText("단체 대관은 개인 무료 모임과 분리");
   await expect(page.locator('#group-inquiry a[href="group.html"]')).toBeVisible();
+  await expect(page.locator('#group-inquiry [data-testid="stay-note"]')).toBeVisible();
   await expect(page).toHaveScreenshot("mobile-390-group-inquiry-viewport.png");
 });
 
