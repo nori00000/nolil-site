@@ -23,6 +23,16 @@
 	const MAX_CARDS = 6;
 	const TIMEOUT_MS = 3000;
 	const SLOT_LABELS = { morning: "출근 전", evening: "퇴근 후", weekend: "주말", day: "낮" };
+	const STATUSES = new Set(["open", "full"]);
+
+	// 카드 링크는 운영 앱 origin만 허용한다(계약 밖 도메인은 카드에서 제외).
+	const allowedOrigin = (() => {
+		try {
+			return new URL(appUrl).origin;
+		} catch {
+			return null;
+		}
+	})();
 
 	const when = new Intl.DateTimeFormat("ko-KR", {
 		timeZone: "Asia/Seoul",
@@ -41,41 +51,43 @@
 	};
 
 	const safeUrl = (value) => {
-		if (typeof value !== "string" || !value) return null;
+		if (typeof value !== "string" || !value || !allowedOrigin) return null;
 		try {
-			const url = new URL(value, window.location.href);
-			return url.protocol === "https:" || url.protocol === "http:" ? url.href : null;
+			const url = new URL(value);
+			if (url.protocol !== "https:" || url.origin !== allowedOrigin) return null;
+			return url.href;
 		} catch {
 			return null;
 		}
 	};
 
+	const count = (value) => Number.isInteger(value) && value >= 0;
+
 	const priceLabel = (price) => {
 		if (price === 0) return "무료";
-		return Number(price).toLocaleString("ko-KR") + "원";
+		return price.toLocaleString("ko-KR") + "원";
 	};
 
-	const seatLabel = (meeting) => {
-		if (meeting.status === "full") return "마감";
-		if (Number.isFinite(meeting.remaining)) return "남은 자리 " + meeting.remaining + "석";
-		return "잔여석은 앱에서 확인";
-	};
+	const seatLabel = (meeting) => (meeting.status === "full" ? "마감" : "남은 자리 " + meeting.remaining + "석");
 
+	// 계약을 벗어난 항목은 그 카드만 버린다. 전부 버려지면 폴백이 남는다.
 	const normalize = (raw) => {
 		if (!raw || typeof raw !== "object") return null;
 		const url = safeUrl(raw.url);
 		const title = typeof raw.title === "string" ? raw.title.trim() : "";
 		const startsAt = typeof raw.starts_at === "string" ? new Date(raw.starts_at) : null;
 		if (!url || !title || !startsAt || Number.isNaN(startsAt.getTime())) return null;
-		if (typeof raw.price !== "number" || !Number.isFinite(raw.price)) return null;
+		if (!count(raw.price) || !count(raw.remaining)) return null;
+		if (!STATUSES.has(raw.status)) return null;
+		if (!Object.prototype.hasOwnProperty.call(SLOT_LABELS, raw.slot)) return null;
 		return {
 			url,
 			title,
 			startsAt,
 			price: raw.price,
-			remaining: typeof raw.remaining === "number" ? raw.remaining : null,
-			status: raw.status === "full" ? "full" : "open",
-			slotLabel: SLOT_LABELS[raw.slot] || "회차",
+			remaining: raw.remaining,
+			status: raw.status,
+			slotLabel: SLOT_LABELS[raw.slot],
 		};
 	};
 

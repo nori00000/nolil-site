@@ -64,59 +64,121 @@ const contractMeetings = {
   ],
 };
 
-const jsonRoute = (body, status = 200) => (route) =>
-  route.fulfill({
-    status,
-    contentType: "application/json; charset=utf-8",
-    body: JSON.stringify(body),
+const jsonBody = (body, status = 200) => ({
+  status,
+  contentType: "application/json; charset=utf-8",
+  body: JSON.stringify(body),
+});
+
+const jsonRoute = (body, status = 200) => (route) => route.fulfill(jsonBody(body, status));
+
+test.describe("open rounds", () => {
+  // 브라우저 로캘·타임존이 한국이 아니어도 카드는 KST·한국어로 찍혀야 한다.
+  test.use({ timezoneId: "UTC", locale: "en-US" });
+
+  test("open rounds renders the public meetings contract as cards", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, jsonRoute(contractMeetings));
+    await scrollToSelector(page, "#open-rounds");
+
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(2);
+
+    const first = cards.nth(0);
+    await expect(first.locator('[data-testid="round-slot"]')).toHaveText("주말");
+    await expect(first).toContainText("마늘 밭 만들기");
+    await expect(first).toContainText("9월 19일");
+    await expect(first).toContainText("오전");
+    await expect(first).toContainText("10:00"); // +09:00 원문이 KST 그대로 보인다(UTC 브라우저에서도)
+    await expect(first).toContainText("10,000원");
+    await expect(first).toContainText("남은 자리 5석");
+    await expect(first).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/123");
+    await expect(first.locator(".next")).toContainText("신청하기");
+
+    const second = cards.nth(1);
+    await expect(second.locator('[data-testid="round-slot"]')).toHaveText("퇴근 후");
+    await expect(second).toContainText("9월 24일");
+    await expect(second).toContainText("07:00"); // 19:00 KST
+    await expect(second).toContainText("무료");
+    await expect(second).toContainText("마감");
+    await expect(second).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/124");
   });
 
-test("open rounds renders the public meetings contract as cards", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await prepareWithMeetings(page, jsonRoute(contractMeetings));
-  await scrollToSelector(page, "#open-rounds");
+  test("open rounds keeps the app-link fallback when the API fails", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, (route) =>
+      route.fulfill({ status: 500, contentType: "text/plain", body: "boom" }),
+    );
+    await scrollToSelector(page, "#open-rounds");
 
-  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
-  await expect(cards).toHaveCount(2);
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+    await expect(cards.first()).toContainText("앱에서 열린 모임 보기");
+  });
 
-  const first = cards.nth(0);
-  await expect(first.locator('[data-testid="round-slot"]')).toHaveText("주말");
-  await expect(first).toContainText("마늘 밭 만들기");
-  await expect(first).toContainText("9월 19일");
-  await expect(first).toContainText("10,000원");
-  await expect(first).toContainText("남은 자리 5석");
-  await expect(first).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/123");
-  await expect(first.locator(".next")).toContainText("신청하기");
+  test("open rounds keeps the fallback when the API is slower than the 3s timeout", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 3600));
+      try {
+        await route.fulfill(jsonBody(contractMeetings));
+      } catch {
+        // 클라이언트가 3초에 abort한 뒤라 fulfill이 실패하는 것이 정상이다.
+      }
+    });
+    await scrollToSelector(page, "#open-rounds");
 
-  const second = cards.nth(1);
-  await expect(second.locator('[data-testid="round-slot"]')).toHaveText("퇴근 후");
-  await expect(second).toContainText("무료");
-  await expect(second).toContainText("마감");
-  await expect(second).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/124");
-});
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("앱에서 열린 모임 보기");
+    await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+  });
 
-test("open rounds keeps the app-link fallback when the API fails", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await prepareWithMeetings(page, (route) =>
-    route.fulfill({ status: 500, contentType: "text/plain", body: "boom" }),
-  );
-  await scrollToSelector(page, "#open-rounds");
+  test("open rounds states the empty case instead of a blank section", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, jsonRoute({ generated_at: "2026-09-12T10:00:00+09:00", meetings: [] }));
+    await scrollToSelector(page, "#open-rounds");
 
-  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
-  await expect(cards).toHaveCount(1);
-  await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
-  await expect(cards.first()).toContainText("앱에서 열린 모임 보기");
-});
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("지금 열린 회차가 없습니다");
+    await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+  });
 
-test("open rounds states the empty case instead of a blank section", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await prepareWithMeetings(page, jsonRoute({ generated_at: "2026-09-12T10:00:00+09:00", meetings: [] }));
-  await scrollToSelector(page, "#open-rounds");
+  test("open rounds drops contract-violating meetings and keeps the valid one", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const base = {
+      summary: null,
+      category: "community",
+      ends_at: "2026-09-26T12:00:00+09:00",
+      slot: "weekend",
+      capacity: 8,
+      remaining: 3,
+      status: "open",
+    };
+    await prepareWithMeetings(
+      page,
+      jsonRoute({
+        generated_at: "2026-09-12T10:00:00+09:00",
+        meetings: [
+          // 취소 회차는 계약상 인덱스에 오면 안 된다 → 버린다
+          { ...base, id: 1, title: "취소된 회차", starts_at: "2026-09-26T10:00:00+09:00", price: 5000, status: "cancelled", url: "https://app.playworkgrow.club/meetings/1" },
+          // 앱 origin이 아니거나 https가 아닌 링크 → 버린다
+          { ...base, id: 2, title: "남의 도메인 회차", starts_at: "2026-09-26T10:00:00+09:00", price: 5000, url: "http://app.playworkgrow.club/meetings/2" },
+          // 음수 가격 → 버린다
+          { ...base, id: 3, title: "음수 가격 회차", starts_at: "2026-09-26T10:00:00+09:00", price: -1, url: "https://app.playworkgrow.club/meetings/3" },
+          { ...base, id: 4, title: "정상 회차", starts_at: "2026-09-26T10:00:00+09:00", price: 5000, url: "https://app.playworkgrow.club/meetings/4" },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#open-rounds");
 
-  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
-  await expect(cards).toHaveCount(1);
-  await expect(cards.first()).toContainText("지금 열린 회차가 없습니다");
-  await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("정상 회차");
+    await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/4");
+  });
 });
 
 for (const viewport of viewports) {
