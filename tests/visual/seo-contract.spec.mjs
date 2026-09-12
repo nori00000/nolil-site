@@ -58,3 +58,13 @@ test("homepage keywords cover the shared farm search terms", async ({ page }) =>
     expect(keywords).toContain(term);
   }
 });
+
+test("group page reframes the offer as a shared farm while keeping the real line items", async ({ page }) => {
+  await page.goto("/group.html", { waitUntil: "networkidle" });
+  await expect(page.locator("h1")).toHaveText("구획 없는 농장에서, 하루를 함께 짓습니다");
+  await expect(page.locator("#modules")).toContainText("그 절기의 농사에 손을 보태는 시간");
+  await expect(page.locator("#modules")).toContainText("1인 30,000원");
+  await expect(page.locator("#modules")).toContainText("바베큐 · 캠프파이어");
+  await expect(page.locator("#modules")).toContainText("카라반 최대 6명, 농막 최대 5명");
+  await expect(page.locator("body")).not.toContainText("길드하우스");
+});
