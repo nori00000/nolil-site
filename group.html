@@ -3,26 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>고양 일산 단체 워크샵·팀 모임 | 킨텍스 근처 공유농장 리트릿 — 놀일</title>
-<meta name="description" content="교회 모임, 회사 팀, 동호회가 고양 일산 공유농장에서 반나절이나 하루를 함께 보냅니다. 그날의 농사, 만들기 테이블, 품 경제 팀빌딩, AI 워크숍, 바베큐와 캠프파이어를 구성합니다.">
+<title>고양 일산 단체 모임·팀 워크숍 | 킨텍스 근처 공유농장 — 놀일</title>
+<meta name="description" content="교회 모임, 회사 팀, 동호회가 고양 일산 공유농장에서 반나절이나 하루를 함께 보냅니다. 그날의 농사, 만들기 테이블, 팀빌딩, AI 워크숍, 바베큐와 캠프파이어로 활동을 구성합니다.">
 <link rel="canonical" href="https://playworkgrow.club/group.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="고양 일산 단체 워크샵·팀 모임 — 놀일 공유농장">
-<meta property="og:description" content="킨텍스와 일산호수공원 가까운 공유농장에서 만드는 단체 리트릿. 구획 없는 농장에서 함께 짓고, 나누고, 불 앞에서 이야기합니다.">
+<meta property="og:title" content="고양 일산 단체 모임·팀 워크숍 — 놀일 공유농장">
+<meta property="og:description" content="킨텍스와 일산호수공원 가까운 공유농장에서 여는 단체 모임. 그날의 농사에 함께 참여하고, 만들고, 불 앞에서 이야기합니다.">
 <meta property="og:image" content="https://playworkgrow.club/og.jpg">
 <meta property="og:url" content="https://playworkgrow.club/group.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#015e5c">
 <link rel="stylesheet" href="tokens.css">
 <style>
-  :root{--teal:#015e5c;--teal-deep:#014140;--mint:#e6f2e7;--mint-strong:#dcefe0;--yellow:#f5e578;--coral:#d0573b;--paper:#fffaf1;--ink:#173535;--body:#4e5c54;--muted:#6e827a;--line:rgba(59,74,54,.16);--pad:clamp(22px,4vw,48px);--max:1120px}
+  :root{--teal:#015e5c;--teal-deep:#014140;--mint:#e6f2e7;--mint-strong:#dcefe0;--yellow:#f5e578;--coral:#a9432e;--paper:#fffaf1;--ink:#173535;--body:#4e5c54;--muted:#6e827a;--line:rgba(59,74,54,.16);--pad:clamp(22px,4vw,48px);--max:1120px}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{margin:0;background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:17px;line-height:1.8;word-break:keep-all;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible{outline:3px solid rgba(208,87,59,.86);outline-offset:4px}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-  .nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px var(--pad);color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.38),transparent)}
+  .nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px var(--pad);color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.38),transparent);transition:background .24s ease,box-shadow .24s ease}
+  .nav.scrolled{background:var(--teal-deep);box-shadow:0 10px 24px rgba(1,65,64,.22)}
   .brand{font-weight:900;letter-spacing:.14em}
   .nav-links{display:flex;gap:22px;font-size:14px;font-weight:900}
   .hero{position:relative;min-height:620px;display:grid;align-items:end;overflow:hidden;background:#062c2a;color:#fff;padding:128px 0 76px}
@@ -45,7 +46,9 @@
   .dark .section-head .eyebrow{color:var(--yellow)}
   .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border:1px solid transparent;border-radius:999px;padding:14px 24px;background:var(--coral);color:#fff;font-weight:900;transition:transform .16s ease,filter .16s ease}
   .btn:hover,.btn:focus-visible{transform:translateY(-2px);filter:brightness(1.04)}
-  .btn-line{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45);color:#fff}
+  .btn-line{background:#fff;border-color:var(--line);color:var(--teal)}
+  .hero .btn-line{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.66);color:#fff}
+  .btn-telegram{background:var(--teal);border-color:var(--teal);color:#fff}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
   .chips,.grid{display:grid;gap:18px}
   .chips{grid-template-columns:repeat(3,1fr)}
@@ -62,6 +65,7 @@
   .inquiry-box{border:1px solid var(--line);border-radius:20px;background:#fff;padding:22px}
   .inquiry-box strong{display:block;margin-bottom:8px;font-size:19px;line-height:1.45}
   .inquiry-box p{font-size:15px;line-height:1.7}
+  .template-label{display:block;margin-top:12px;font-size:15px;font-weight:900;color:var(--ink)}
   .template{width:100%;min-height:260px;margin:10px 0 14px;border:1px solid var(--line);border-radius:16px;background:#fffaf1;color:var(--ink);padding:14px;font:inherit;font-size:15px;line-height:1.7;resize:vertical}
   .template-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .template-actions .btn{min-height:50px;padding:12px 16px;font-size:15px}
@@ -72,22 +76,18 @@
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"Event",
-  "name":"놀일 단체·팀 농장 리트릿",
-  "description":"교회 모임, 회사 팀, 동호회가 고양 일산 농장에서 반나절이나 하루를 함께 보내는 단체·팀 모임입니다.",
-  "startDate":"2026-07-26T15:00:00+09:00",
-  "endDate":"2026-07-26T20:00:00+09:00",
-  "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
-  "eventStatus":"https://schema.org/EventScheduled",
-  "location":{"@type":"Place","name":"놀일 농장","address":{"@type":"PostalAddress","streetAddress":"대화동 1667-4","addressLocality":"고양시 일산서구","addressRegion":"경기도","addressCountry":"KR"}},
-  "image":["https://playworkgrow.club/og.jpg"],
-  "organizer":{"@type":"Organization","name":"놀일","url":"https://playworkgrow.club"},
-  "offers":{"@type":"Offer","url":"https://playworkgrow.club/group.html","availability":"https://schema.org/InStock","priceSpecification":{"@type":"PriceSpecification","price":30000,"priceCurrency":"KRW","description":"당일·숙박 포함 모두 1인 30,000원입니다."}}
+  "@type":"WebPage",
+  "name":"놀일 단체 모임·팀 워크숍",
+  "url":"https://playworkgrow.club/group.html",
+  "inLanguage":"ko",
+  "description":"교회 모임, 회사 팀, 동호회가 고양 일산 공유농장에서 반나절이나 하루를 함께 보내는 단체 모임 안내입니다.",
+  "isPartOf":{"@type":"WebSite","name":"놀일","url":"https://playworkgrow.club"},
+  "about":{"@type":"LocalBusiness","name":"놀일 농장","url":"https://playworkgrow.club","telephone":"+821022957100","address":{"@type":"PostalAddress","streetAddress":"대화동 1667-4","addressLocality":"고양시 일산서구","addressRegion":"경기도","addressCountry":"KR"},"image":["https://playworkgrow.club/og.jpg"]}
 }
 </script>
 </head>
 <body>
-<nav class="nav" aria-label="주요 이동">
+<nav class="nav" id="nav" aria-label="주요 이동">
   <a class="brand" href="./">PLAY WORK GROW</a>
   <div class="nav-links"><a href="shared-farm.html">공유농장</a><a href="#fit">대상</a><a href="#modules">구성</a><a href="#access">위치</a><a href="#contact">문의</a></div>
 </nav>
@@ -96,34 +96,45 @@
   <div class="wrap">
     <span class="kicker">단체 · 팀 · 모임</span>
     <h1>구획 없는 농장에서, 하루를 함께 짓습니다</h1>
-    <p>교회 모임, 회사 팀, 동호회 — 구역을 나눠 쓰는 밭이 아니라 회원들이 함께 돌보는 공유농장에서 반나절이나 하루를 보냅니다. 그날의 농사에 손을 보태고, 만들고, 불 앞에서 이야기합니다.</p>
+    <p>일산 호수공원·킨텍스 인근 공유농장에서 그날의 농사에 함께 참여하는 단체 모임입니다. 교회 모임, 회사 팀, 동호회가 반나절이나 하루를 보내며 농사에 손을 보태고, 만들고, 불 앞에서 이야기합니다.</p>
     <div class="cta-row">
-      <a class="btn js-kakao" href="#contact">카카오 ID 보기</a>
+      <a class="btn" href="#contact">전화로 문의하기</a>
+      <a class="btn btn-line js-kakao" href="#contact">카카오톡 ID 복사 후 친구 검색</a>
       <a class="btn btn-line" href="https://t.me/playworkgrow_bot" target="_blank" rel="noopener">텔레그램 문의</a>
     </div>
   </div>
 </header>
 
 <main>
+  <section id="price">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">PRICE</span><h2>비용은 구성에 따라 함께 정합니다</h2><p>인원, 시간, 식사, 만들기 재료, AI 워크숍 여부에 따라 달라집니다. 먼저 편하게 물어봐 주세요.</p></div>
+      <p class="note">당일·숙박 포함 모두 1인 30,000원입니다. 카라반 최대 6명, 농막 최대 5명, 캠핑사이트 최대 10곳이며 실내 하우스 캠핑 존 설치도 가능합니다. 일반 단체 모임은 목적과 구성에 맞춰 정합니다.</p>
+      <div class="grid">
+        <article class="card"><strong>확인해 드릴 것</strong><h3>포함 범위와 수용 인원</h3><p>기본 30,000원에 포함되는 것과 추가되는 것은 문의 시 표로 안내합니다. 예상 인원과 차량 대수를 알려주시면 수용 가능 여부를 확인해 드립니다.</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="fit">
     <div class="wrap">
-      <div class="section-head"><span class="eyebrow">WHO IT FITS</span><h2>이런 모임에 맞습니다</h2><p>장소만 빌려드리는 곳이 아닙니다. 놀일은 땅을 구역으로 나누지 않고 함께 짓는 공유농장이고, 단체 모임도 그날의 농사 위에 필요한 시간을 얹어 설계합니다.</p></div>
+      <div class="section-head"><span class="eyebrow">WHO IT FITS</span><h2>이런 모임에 맞습니다</h2><p>장소만 빌려드리는 곳이 아닙니다. 놀일은 회원들이 함께 돌보는 공유농장이고, 단체 모임도 그날의 농사에 함께 참여한 뒤 모임 목적에 맞는 활동을 정합니다.</p></div>
       <div class="chips">
         <article class="card"><strong>교회·공동체</strong><h3>소모임·구역 수련회</h3><p>예배와 식사 후, 그날의 농사와 재능 나눔·바베큐·캠프파이어로 하루를 이어갑니다.</p></article>
-        <article class="card"><strong>회사·조직</strong><h3>팀 워크샵·오프사이트</h3><p>회의실 밖 밭과 작업대에서 손을 쓰고, 팀이 가진 기준을 다시 이야기합니다.</p></article>
-        <article class="card"><strong>동호회·가족</strong><h3>작은 단체 모임</h3><p>아이와 어른이 함께 움직이고, 각자 나눌 수 있는 것을 테이블로 엽니다.</p></article>
+        <article class="card"><strong>회사·조직</strong><h3>팀 워크숍·단체 모임</h3><p>회의실 밖 밭과 작업대에서 손을 쓰고, 팀이 가진 기준을 다시 이야기합니다.</p></article>
+        <article class="card"><strong>동호회·가족</strong><h3>작은 단체 모임</h3><p>아이와 어른이 함께 움직이고, 각자 나눌 수 있는 것을 하나씩 꺼내 같이 해봅니다.</p></article>
       </div>
     </div>
   </section>
 
   <section id="modules" class="mint">
     <div class="wrap">
-      <div class="section-head"><span class="eyebrow">MODULES</span><h2>무엇을 하나요</h2><p>하루의 뼈대는 그 절기의 농사이고, 그 위에 인원, 시간, 날씨, 목적에 맞춰 아래 모듈을 조합합니다. 실내 교육장은 약 30평이며, 전체 모임 규모와 배치는 구성에 맞춰 함께 정합니다. 리트릿은 1인 30,000원입니다.</p></div>
+      <div class="section-head"><span class="eyebrow">MODULES</span><h2>무엇을 하나요</h2><p>하루의 뼈대는 그 절기의 농사이고, 그 위에 인원, 시간, 날씨, 목적에 맞춰 아래 활동을 구성합니다. 실내 교육장은 약 30평이며, 전체 모임 규모와 배치는 구성에 맞춰 함께 정합니다.</p></div>
       <div class="grid">
         <article class="card"><strong>농장 체험</strong><h3>그 절기의 농사에 손을 보태는 시간</h3><p>도착하면 그날 농장에 필요한 일을 함께 합니다. 심기·물주기·수확처럼 계절이 정하는 일이고, 닭과 오리를 보고 농장을 걷는 산책도 같이 있습니다. 몸을 쓰고 나면 처음 만난 사람도 말문을 열기 쉽습니다.</p></article>
-        <article class="card"><strong>만들기 테이블</strong><h3>테라리움·목공 소도구·조각</h3><p>20~40분 손작업으로 작은 결과물을 만듭니다. 그날 밭에서 나온 재료로 만드는 오브제부터 젓가락, 숟가락, 미니 테이블처럼 집에서 쓰는 물건까지 조합합니다.</p></article>
-        <article class="card signature"><strong>시그니처 팀빌딩</strong><h3>품 경제 환율회의</h3><p>팀이 노동과 행동의 값을 스스로 협상하는 게임입니다. 농구 1골은 이끼 몇 개인가요?</p></article>
-        <article class="card"><strong>선택 모듈</strong><h3>AI 워크숍</h3><p>실무에 바로 쓰는 AI 자동화 흐름을 짧게 경험합니다. 회사 팀은 업무 하나를 가져오면 좋습니다.</p></article>
+        <article class="card"><strong>만들기 테이블</strong><h3>테라리움·목공 소도구·조각</h3><p>농사에 참여한 뒤 모임 목적에 맞는 활동을 함께 정합니다. 활동은 회차마다 안내합니다. 20~40분 손작업으로 작은 결과물을 만듭니다. 그날 밭에서 나온 재료로 만드는 오브제부터 젓가락, 숟가락, 미니 테이블처럼 집에서 쓰는 물건까지 만듭니다. 불·공구 작업은 진행자가 맡고, 참가자가 직접 하는 작업 범위는 신청 전에 안내합니다.</p></article>
+        <article class="card signature"><strong>시그니처 팀빌딩</strong><h3>서로의 품값을 정해보는 시간</h3><p>농사에 참여한 뒤 모임 목적에 맞는 활동을 함께 정합니다. 활동은 회차마다 안내합니다. 팀이 일과 행동의 값을 스스로 정하고 서로 협상합니다. 농구 1골은 이끼 몇 개인가요?</p></article>
+        <article class="card"><strong>선택 모듈</strong><h3>업무에 쓰는 AI</h3><p>농사에 참여한 뒤 모임 목적에 맞는 활동을 함께 정합니다. 활동은 회차마다 안내합니다. 실무에 바로 쓰는 AI 자동화 흐름을 짧게 해봅니다. 회사 팀은 업무 하나를 가져오면 좋습니다.</p></article>
         <article class="card"><strong>저녁 선택</strong><h3>바베큐 · 캠프파이어</h3><p>하루의 마무리는 불 앞 대화로 엽니다. 식사 구성은 인원과 목적에 맞춰 조율합니다.</p></article>
         <article class="card"><strong>숙박 선택</strong><h3>숙박도 가능합니다</h3><p>당일·숙박 포함 모두 1인 30,000원입니다. 카라반 최대 6명, 농막 최대 5명, 캠핑사이트 최대 10곳을 이용할 수 있고 실내 하우스 캠핑 존도 설치할 수 있습니다.</p></article>
       </div>
@@ -147,16 +158,9 @@
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head"><span class="eyebrow">PRICE</span><h2>비용은 구성에 따라 함께 정합니다</h2><p>인원, 시간, 식사, 만들기 재료, AI 워크숍 여부에 따라 달라집니다. 먼저 편하게 물어봐 주세요.</p></div>
-      <p class="note">당일·숙박 포함 모두 1인 30,000원입니다. 카라반 최대 6명, 농막 최대 5명, 캠핑사이트 최대 10곳이며 실내 하우스 캠핑 존 설치도 가능합니다. 일반 단체 모임은 목적과 구성에 맞춰 정합니다.</p>
-    </div>
-  </section>
-
   <section class="mint">
     <div class="wrap">
-      <div class="section-head"><span class="eyebrow">FIRST RECORDS</span><h2>첫 모임들의 기록이 이곳에 남습니다</h2><p>아직 꾸며낸 후기는 없습니다. 7월 26일 교회 리트릿 이후 사진, 한 문장, 운영 기록을 실제로 남기겠습니다.</p></div>
+      <div class="section-head"><span class="eyebrow">FIRST RECORDS</span><h2>첫 모임들의 기록이 이곳에 남습니다</h2><p>아직 꾸며낸 후기는 없습니다. 모임이 끝나면 사진, 한 문장, 운영 기록을 실제로 남깁니다.</p></div>
     </div>
   </section>
 
@@ -166,6 +170,7 @@
       <div class="inquiry-box">
         <strong>보내주시면 바로 정리할 수 있는 내용</strong>
         <p>완벽히 정하지 않아도 괜찮습니다. 대략만 알려주시면 가능한 일정과 구성을 다시 질문드리겠습니다.</p>
+        <label class="template-label" for="inquiryTemplate">단체 모임 문의 문장</label>
         <textarea class="template" id="inquiryTemplate" readonly>놀일 단체 모임 문의합니다.
 모임 종류:
 예상 인원:
@@ -175,10 +180,10 @@
 숙박 필요 여부:
 연락 가능한 이름:</textarea>
         <div class="template-actions">
-          <button class="btn js-copy-template" type="button">문의 문장 복사</button>
-          <button class="btn js-copy-kakao" type="button" data-copy="mrleesangmin">카카오톡 ID 보기</button>
-          <a class="btn btn-line" style="background:#015e5c" href="https://t.me/playworkgrow_bot" target="_blank" rel="noopener">텔레그램 문의</a>
-          <a class="btn btn-line" href="tel:01022957100">전화 010-2295-7100</a>
+          <a class="btn" href="tel:01022957100">전화 010-2295-7100</a>
+          <button class="btn btn-line js-copy-template" type="button">문의 문장 복사</button>
+          <button class="btn btn-line js-copy-kakao" type="button" data-copy="mrleesangmin">카카오톡 ID 복사 후 친구 검색</button>
+          <a class="btn btn-telegram" href="https://t.me/playworkgrow_bot" target="_blank" rel="noopener">텔레그램 문의</a>
         </div>
       </div>
     </div>
@@ -204,9 +209,15 @@
     el.addEventListener("click", async (event) => {
       event.preventDefault();
       const value = "mrleesangmin";
-      await copyText(value, el, `복사됨: ${value}`, `카카오톡 ID: ${value}`);
+      await copyText(value, el, `복사됨: ${value} — 카카오톡에서 친구 검색`, `카카오톡 ID: ${value} — 카카오톡에서 친구 검색`);
     });
   });
+  const nav = document.getElementById("nav");
+  if (nav) {
+    const setNav = () => nav.classList.toggle("scrolled", window.scrollY > 34);
+    setNav();
+    window.addEventListener("scroll", setNav, { passive: true });
+  }
   document.querySelectorAll(".js-copy-template").forEach((el) => {
     el.addEventListener("click", async () => {
       const value = document.getElementById("inquiryTemplate").value;

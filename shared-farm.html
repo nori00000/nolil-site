@@ -24,7 +24,8 @@
   a:focus-visible,button:focus-visible{outline:3px solid rgba(208,87,59,.86);outline-offset:4px}
   img{max-width:100%}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-  .nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px var(--pad);color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.42),transparent)}
+  .nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px var(--pad);color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.42),transparent);transition:background .24s ease,box-shadow .24s ease}
+  .nav.scrolled{background:var(--teal-deep);box-shadow:0 10px 24px rgba(1,65,64,.22)}
   .brand{font-weight:900;letter-spacing:.14em}
   .nav-links{display:flex;gap:22px;font-size:14px;font-weight:900}
   .hero{position:relative;min-height:620px;display:grid;align-items:end;overflow:hidden;background:#062c2a;color:#fff;padding:128px 0 76px}
@@ -50,6 +51,7 @@
   .btn:hover,.btn:focus-visible{transform:translateY(-2px);filter:brightness(1.06)}
   .btn-line{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.55);color:#fff}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .hero .cta-note{margin:14px 0 0;color:rgba(255,255,255,.92);font-size:16px}
   .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:#fff}
   .table-scroll:focus-visible{outline:3px solid rgba(208,87,59,.86);outline-offset:4px}
   table{width:100%;min-width:560px;border-collapse:collapse;font-size:16px}
@@ -65,12 +67,10 @@
   .card strong{display:block;margin-bottom:8px;font-size:19px;line-height:1.4}
   .card p{margin:0;font-size:16px;line-height:1.7}
   .slot-grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-  .slot{display:block;border:1px solid var(--line);border-radius:20px;background:#fff;padding:24px;transition:transform .16s ease,border-color .16s ease}
-  .slot:hover,.slot:focus-visible{transform:translateY(-2px);border-color:var(--teal)}
+  .slot{display:block;border:1px solid var(--line);border-radius:20px;background:#fff;padding:24px}
   .slot small{display:block;color:var(--muted);font-size:13px;font-weight:900;letter-spacing:.1em;margin-bottom:10px}
   .slot strong{display:block;margin-bottom:8px;font-size:22px}
   .slot span{display:block;color:var(--body);font-size:16px;line-height:1.7}
-  .slot .next{margin-top:12px;color:var(--coral);font-weight:900}
   .steps{display:grid;gap:18px;grid-template-columns:repeat(4,1fr)}
   .step{border:1px solid rgba(255,255,255,.2);border-radius:20px;background:rgba(255,255,255,.06);padding:22px}
   .step small{display:block;color:var(--yellow);font-size:13px;font-weight:900;margin-bottom:10px}
@@ -156,7 +156,7 @@
 </script>
 </head>
 <body>
-<nav class="nav" aria-label="주요 이동">
+<nav class="nav" id="nav" aria-label="주요 이동">
   <a class="brand" href="./">PLAY WORK GROW</a>
   <div class="nav-links">
     <a href="#compare">주말농장과 다른 점</a>
@@ -172,11 +172,12 @@
     <span class="kicker">일산의 공유농장 · 호수공원·킨텍스 인근</span>
     <strong class="declare">구획을 나눠 드리지 않습니다.</strong>
     <h1>일산의 공유농장, 놀일</h1>
-    <p>땅을 구역으로 나눠 임대하는 곳이 아닙니다. 회원이 얻는 것은 구획이 아니라 농사 전체입니다. 심고, 가꾸고, 거두고, 만들어, 나눠 먹는 과정에 함께 참여합니다.</p>
+    <p>땅을 구역으로 나눠 임대하는 곳이 아닙니다. 신청한 회차에 참여해 그날 필요한 농사를 함께합니다. 심고, 가꾸고, 거두고, 만들어, 나눠 먹는 과정이 모두 그 안에 있습니다.</p>
     <div class="cta-row">
       <a class="btn" data-free-meeting href="https://app.playworkgrow.club/meetings?price=free" target="_blank" rel="noopener">가까운 무료 모임 보기</a>
       <a class="btn btn-line" href="#compare">주말농장과 무엇이 다른지 보기</a>
     </div>
+    <p class="cta-note">무료 모임은 농장을 둘러보고 사람을 만나는 자리입니다.</p>
   </div>
 </header>
 
@@ -218,7 +219,7 @@
           </tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:24px">한 줄로 줄이면 이렇습니다. 다른 곳은 땅을 나눠 빌려주고, 놀일은 땅을 나누지 않고 농사를 함께 짓습니다.</p>
+      <p class="note" style="margin-top:24px">한 줄로 줄이면 이렇습니다. 구획을 빌리는 방식과 달리, 놀일에서는 농장 하나를 회원이 함께 돌봅니다.</p>
     </div>
   </section>
 
@@ -230,11 +231,11 @@
         <p>다른 농장과 다른 점은 프로그램 종류가 아니라 땅을 쓰는 방식입니다. 기본 룰은 일곱 가지입니다.</p>
       </div>
       <div class="grid">
-        <article class="card"><small>규칙 1</small><strong>땅은 공유, 구역은 없다</strong><p>회원이 나눠 갖는 것은 땅이 아니라 농사와 그 결과물입니다. 구획·분양·평당으로 쪼개지 않고, 함께 돌보는 농장 하나를 같이 짓습니다.</p></article>
-        <article class="card"><small>규칙 2</small><strong>농사가 뼈대다</strong><p>모든 회원 활동은 그 절기의 작물에서 시작합니다. 심기·가꾸기·수확·가공·나눠 먹기 어딘가에 붙고, 어떤 작물에서 시작했는지 기록으로 남깁니다.</p></article>
+        <article class="card"><small>규칙 1</small><strong>땅은 공유, 구역은 없다</strong><p>회원이 나누는 것은 땅이 아니라 농사 전체입니다. 수확·가공물은 나눌 수 있을 때 함께 나누고, 수확량과 수령은 보장하지 않습니다. 구획·분양·평당으로 쪼개지 않고, 함께 돌보는 농장 하나를 같이 짓습니다.</p></article>
+        <article class="card"><small>규칙 2</small><strong>농사가 뼈대다</strong><p>모든 회원 활동은 그 절기의 작물에서 시작합니다. 심기·가꾸기·수확·가공·나눠 먹기 어딘가에 붙고, 회차를 열기 전에 어떤 작물에서 이어지는 활동인지 기록합니다.</p></article>
         <article class="card"><small>규칙 3</small><strong>나머지는 회원 활동이다</strong><p>수리·목공·화덕·요리·사진·AI는 상품이 아니라 회원 활동입니다. 농사에서 이어져 나온 일이라 그 앞에는 늘 작물이 있습니다.</p></article>
         <article class="card"><small>규칙 4</small><strong>프로그램은 시간대다</strong><p>출근 전·퇴근 후·주말로 엽니다. 먼저 정해지는 것은 시간이고, 그날 할 일은 그 절기의 농사가 정합니다.</p></article>
-        <article class="card"><small>규칙 5</small><strong>결과물은 나눠 먹는다</strong><p>수확·가공물은 함께 먹고 나눕니다. 수량이나 수령을 보장하는 상품이 아닙니다.</p></article>
+        <article class="card"><small>규칙 5</small><strong>결과물은 나눠 먹는다</strong><p>수확·가공물은 나눌 수 있을 때 그날 참여한 회원과 함께 나눕니다. 수확량과 수령은 보장하지 않습니다.</p></article>
         <article class="card"><small>규칙 6</small><strong>참여자를 구분한다</strong><p>회원, 회원이 데려온 방문객, 첫걸음 체험객, 단체 대관 이용자, 외부 진행자를 구분합니다. 불과 공구를 다루는 일은 회원과 외부 진행자만 맡습니다.</p></article>
         <article class="card"><small>규칙 7</small><strong>위험한 일은 미리 정하고 연다</strong><p>불·공구·가공·조리가 있는 활동은 현장 책임자를 정하고, 안전 안내와 미성년자 동반 조건을 먼저 알린 뒤에 엽니다.</p></article>
       </div>
@@ -249,9 +250,12 @@
         <p>시간대는 상품이 아니라 회차를 찾는 기준입니다. 실제 신청 단위는 날짜·활동·정원·가격이 있는 회차이고, 그 내용은 그 절기의 농사가 정합니다.</p>
       </div>
       <div class="slot-grid">
-        <a class="slot" data-timeslot href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>첫 회차 준비 중</small><strong>출근 전</strong><span>출근 전에 열리는 회차를 앱에서 고릅니다. 물을 주고 솎아내는 밭일로 하루를 엽니다.</span><span class="next">열리는 모임 보기 →</span></a>
-        <a class="slot" data-timeslot href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>첫 회차 준비 중</small><strong>퇴근 후</strong><span>퇴근 후에 열리는 회차를 앱에서 고릅니다. 해 질 무렵 밭과 작업대에서 만납니다.</span><span class="next">열리는 모임 보기 →</span></a>
-        <a class="slot" data-timeslot href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>첫 회차 준비 중</small><strong>주말</strong><span>주말에 열리는 회차를 앱에서 고릅니다. 심기·수확처럼 손이 많이 가는 일을 함께 합니다.</span><span class="next">열리는 모임 보기 →</span></a>
+        <div class="slot"><small>첫 회차 준비 중</small><strong>출근 전</strong><span>물을 주고 솎아내는 밭일로 하루를 엽니다.</span></div>
+        <div class="slot"><small>첫 회차 준비 중</small><strong>퇴근 후</strong><span>해 질 무렵 밭과 작업대에서 만납니다.</span></div>
+        <div class="slot"><small>첫 회차 준비 중</small><strong>주말</strong><span>심기·수확처럼 손이 많이 가는 일을 함께 합니다.</span></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn" data-timeslot href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener">전체 회차의 날짜와 시간 보기</a>
       </div>
     </div>
   </section>
@@ -370,6 +374,12 @@
     consentPanel.hidden = false;
     document.getElementById("analyticsReject")?.focus();
   });
+  const nav = document.getElementById("nav");
+  if (nav) {
+    const setNav = () => nav.classList.toggle("scrolled", window.scrollY > 34);
+    setNav();
+    window.addEventListener("scroll", setNav, { passive: true });
+  }
   const meetingsUrl = C.meetingsUrl || "https://app.playworkgrow.club/meetings";
   const freeMeetingsUrl = C.freeMeetingsUrl || `${meetingsUrl}?price=free`;
   document.querySelectorAll("a[data-timeslot]").forEach(a => { a.href = meetingsUrl; });
