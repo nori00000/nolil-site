@@ -324,6 +324,7 @@
   .wedge-panel h2{color:#fff;margin:8px 0 12px}
   .wedge-panel p{color:rgba(255,255,255,.78);font-size:18px;line-height:1.75}
   .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:30px}
+  .rounds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:30px}
   .week-card{border:1px solid rgba(59,74,54,.1);border-radius:16px;background:#fff;padding:20px}
   .week-card small{display:block;color:var(--teal);font-weight:900;margin-bottom:8px}
   .week-card strong{display:block;color:var(--text);font-size:19px;line-height:1.4;margin-bottom:8px}
@@ -930,7 +931,7 @@
     .hero-card{display:none}
     h1{font-size:54px}
     .hero-title{font-size:34px}
-    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel,.wedge-panel,.week-grid,.channel-grid,.funnel-bridge{grid-template-columns:1fr}
+    .program-grid,.choice-strip,.people-grid,.outcome-grid,.host-panel,.stats,.asset-links,.addr-row,.subscribe-panel,.wedge-panel,.week-grid,.rounds-grid,.channel-grid,.funnel-bridge{grid-template-columns:1fr}
     .choice{padding:16px}
     .choice strong{font-size:17px}
     .person-card,.outcome-card{padding:20px}
@@ -1201,6 +1202,21 @@
       </div>
     </div>
   </section>
+
+  <section id="open-rounds" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">OPEN ROUNDS</div>
+        <h2>지금 열린 회차</h2>
+        <p>일정·가격·잔여석은 운영앱이 기준입니다. 여기서는 열린 회차를 보고 바로 신청으로 갑니다.</p>
+      </div>
+      <div class="rounds-grid" data-testid="open-rounds-list">
+        <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>열린 회차</small><strong>앱에서 열린 모임 보기</strong><span>날짜·정원·가격·잔여석은 운영 앱에서 확인하고 신청합니다.</span><span class="next">앱에서 열린 모임 보기 →</span></a>
+      </div>
+    </div>
+  </section>
+
   <section class="story-intro" id="proof">
     <div class="wrap">
       <h2>이미 매주 사람들이 오고 있습니다</h2>
@@ -1345,6 +1361,7 @@
 </footer>
 
 <script src="config.js"></script>
+<script src="open-rounds.js" defer></script>
 <script>
 (() => {
   "use strict";

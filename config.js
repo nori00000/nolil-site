@@ -13,6 +13,8 @@ window.NOLIL_CONFIG = {
 	daangnUrl: "", // 당근마켓 프로필/글 링크. 없으면 빈칸 → 버튼 숨겨짐
 	meetingsUrl: "https://app.playworkgrow.club/meetings",
 	freeMeetingsUrl: "https://app.playworkgrow.club/meetings?price=free",
+	// 홈 "지금 열린 회차" 섹션이 읽는 공개 모임 JSON. 비우면 섹션은 앱 링크 폴백만 남습니다.
+	publicMeetingsUrl: "https://app.playworkgrow.club/api/public/meetings",
 	// 수리수리공방 회원 설문. 회차가 바뀌면 여기 slug만 고치면 됩니다.
 	// 비우면 index.html에 하드코딩된 기본 링크가 그대로 쓰입니다.
 	repairSurveyUrl: "https://app.playworkgrow.club/s/repair-2026-08",

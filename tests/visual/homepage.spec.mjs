@@ -22,6 +22,103 @@ async function scrollToSelector(page, selector) {
   await page.waitForTimeout(100);
 }
 
+// prepare()가 app.playworkgrow.club/** 를 abort 하므로, 공개 모임 API만 나중에 덮어쓰고
+// 다시 로드한다(나중에 등록된 route가 우선).
+async function prepareWithMeetings(page, handler) {
+  await prepare(page);
+  await page.route("**/api/public/meetings", handler);
+  await page.reload({ waitUntil: "networkidle" });
+}
+
+const contractMeetings = {
+  generated_at: "2026-09-12T10:00:00+09:00",
+  meetings: [
+    {
+      id: 123,
+      title: "마늘 밭 만들기",
+      summary: null,
+      category: "community",
+      starts_at: "2026-09-19T10:00:00+09:00",
+      ends_at: "2026-09-19T12:00:00+09:00",
+      slot: "weekend",
+      price: 10000,
+      capacity: 8,
+      remaining: 5,
+      status: "open",
+      url: "https://app.playworkgrow.club/meetings/123",
+    },
+    {
+      id: 124,
+      title: "흑마늘 첫 시험",
+      summary: null,
+      category: "community",
+      starts_at: "2026-09-24T19:00:00+09:00",
+      ends_at: "2026-09-24T21:00:00+09:00",
+      slot: "evening",
+      price: 0,
+      capacity: 6,
+      remaining: 0,
+      status: "full",
+      url: "https://app.playworkgrow.club/meetings/124",
+    },
+  ],
+};
+
+const jsonRoute = (body, status = 200) => (route) =>
+  route.fulfill({
+    status,
+    contentType: "application/json; charset=utf-8",
+    body: JSON.stringify(body),
+  });
+
+test("open rounds renders the public meetings contract as cards", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepareWithMeetings(page, jsonRoute(contractMeetings));
+  await scrollToSelector(page, "#open-rounds");
+
+  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+  await expect(cards).toHaveCount(2);
+
+  const first = cards.nth(0);
+  await expect(first.locator('[data-testid="round-slot"]')).toHaveText("주말");
+  await expect(first).toContainText("마늘 밭 만들기");
+  await expect(first).toContainText("9월 19일");
+  await expect(first).toContainText("10,000원");
+  await expect(first).toContainText("남은 자리 5석");
+  await expect(first).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/123");
+  await expect(first.locator(".next")).toContainText("신청하기");
+
+  const second = cards.nth(1);
+  await expect(second.locator('[data-testid="round-slot"]')).toHaveText("퇴근 후");
+  await expect(second).toContainText("무료");
+  await expect(second).toContainText("마감");
+  await expect(second).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/124");
+});
+
+test("open rounds keeps the app-link fallback when the API fails", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepareWithMeetings(page, (route) =>
+    route.fulfill({ status: 500, contentType: "text/plain", body: "boom" }),
+  );
+  await scrollToSelector(page, "#open-rounds");
+
+  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+  await expect(cards.first()).toContainText("앱에서 열린 모임 보기");
+});
+
+test("open rounds states the empty case instead of a blank section", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepareWithMeetings(page, jsonRoute({ generated_at: "2026-09-12T10:00:00+09:00", meetings: [] }));
+  await scrollToSelector(page, "#open-rounds");
+
+  const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toContainText("지금 열린 회차가 없습니다");
+  await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings");
+});
+
 for (const viewport of viewports) {
   test(`homepage layout contract: ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
