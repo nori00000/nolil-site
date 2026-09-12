@@ -25,7 +25,8 @@ export default defineConfig({
   webServer: {
     command: "python3 -m http.server 4173",
     url: "http://127.0.0.1:4173/index.html",
-    reuseExistingServer: true,
+    // Tests must own their server: a listener on 4173 could serve another checkout.
+    reuseExistingServer: false,
     timeout: 10_000,
   },
 });
