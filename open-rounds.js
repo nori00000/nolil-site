@@ -142,24 +142,37 @@
 		list.appendChild(fragment);
 	};
 
-	// 칩은 카드를 DOM에서 지우지 않고 hidden만 토글한다.
-	const applyFilter = (slot) => {
-		list.querySelectorAll(".week-card").forEach((card) => {
-			card.hidden = slot !== "all" && card.dataset.slot !== slot;
-		});
-	};
-
 	const enableFilter = (cardCount) => {
 		if (!filter) return;
 		const buttons = Array.from(filter.querySelectorAll("button[data-slot]"));
 		if (cardCount < FILTER_MIN_CARDS || buttons.length === 0) return;
 		filter.hidden = false;
-		buttons.forEach((button) => {
-			button.addEventListener("click", () => {
-				buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
-				applyFilter(button.dataset.slot);
+
+		// 고른 시간대에 회차가 없을 때 빈 그리드만 남지 않도록 안내 한 장을 붙여 둔다.
+		const notice = el("div", "week-note");
+		notice.setAttribute("role", "status");
+		notice.setAttribute("data-testid", "round-filter-empty");
+		notice.hidden = true;
+		notice.appendChild(el("span", null, "이 시간대에 열린 회차가 없습니다."));
+		const reset = el("button", "chip chip-filter", "전체 보기");
+		reset.type = "button";
+		notice.appendChild(reset);
+		list.appendChild(notice);
+
+		// 칩은 카드를 DOM에서 지우지 않고 hidden만 토글한다.
+		const select = (slot) => {
+			buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.slot === slot)));
+			let shown = 0;
+			list.querySelectorAll(".week-card").forEach((card) => {
+				const hidden = slot !== "all" && card.dataset.slot !== slot;
+				card.hidden = hidden;
+				if (!hidden) shown += 1;
 			});
-		});
+			notice.hidden = shown > 0;
+		};
+
+		buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.slot)));
+		reset.addEventListener("click", () => select("all"));
 	};
 
 	const render = (data) => {

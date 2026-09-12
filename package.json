@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test:visual": "playwright test",
-    "test:contract": "playwright test --grep \"homepage layout contract|group inquiry\"",
+    "test:contract": "playwright test --grep \"homepage layout contract|group inquiry|open rounds|records\"",
     "test:a11y": "playwright test tests/accessibility/homepage.a11y.spec.mjs"
   },
   "devDependencies": {

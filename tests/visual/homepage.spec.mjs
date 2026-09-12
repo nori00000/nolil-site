@@ -186,6 +186,28 @@ test.describe("open rounds", () => {
     await expect(page.locator('[data-testid="open-rounds-list"] .week-card:visible')).toHaveCount(5);
   });
 
+  test("open rounds explains an empty time-slot instead of showing a blank grid", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, jsonRoute(meetingsWithSlots(["weekend", "day", "weekend", "day"])));
+    await scrollToSelector(page, "#open-rounds");
+
+    const filter = page.locator('[data-testid="round-filter"]');
+    const notice = page.locator('[data-testid="round-filter-empty"]');
+    await expect(filter).toBeVisible();
+    await expect(notice).toBeHidden();
+
+    await filter.getByRole("button", { name: "출근 전" }).click();
+    await expect(page.locator('[data-testid="open-rounds-list"] .week-card:visible')).toHaveCount(0);
+    await expect(notice).toBeVisible();
+    await expect(notice).toHaveAttribute("role", "status");
+    await expect(notice).toContainText("이 시간대에 열린 회차가 없습니다");
+
+    await notice.getByRole("button", { name: "전체 보기" }).click();
+    await expect(page.locator('[data-testid="open-rounds-list"] .week-card:visible')).toHaveCount(4);
+    await expect(notice).toBeHidden();
+    await expect(filter.getByRole("button", { name: "전체" })).toHaveAttribute("aria-pressed", "true");
+  });
+
   test("open rounds hides the chips when three or fewer rounds are open", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await prepareWithMeetings(page, jsonRoute(meetingsWithSlots(["weekend", "morning", "evening"])));
@@ -273,7 +295,7 @@ test.describe("open rounds", () => {
 });
 
 test.describe("records", () => {
-  // 기록 카드의 날짜도 브라우저 타임존과 무관하게 KST로 찍혀야 한다.
+  // 날짜만 있는 값이므로 브라우저 타임존이 UTC여도 KST여도 같은 날짜가 찍혀야 한다.
   test.use({ timezoneId: "UTC" });
 
   async function prepareWithRecords(page, handler) {
@@ -288,8 +310,8 @@ test.describe("records", () => {
       page,
       jsonRoute({
         records: [
-          { date: "2026-09-19", title: "마늘 밭 만들기", crop: "마늘", summary: "여섯 명이 이랑을 세우고 마늘 200쪽을 심었습니다." },
-          { date: "2026-10-04", title: "흑마늘 첫 시험", crop: "마늘", summary: "숙성기 온도를 맞추며 흑마늘 첫 판을 걸었습니다." },
+          { meeting_id: 123, date: "2026-09-19", title: "마늘 밭 만들기", crop: "마늘", summary: "여섯 명이 이랑을 세우고 마늘 200쪽을 심었습니다." },
+          { meeting_id: 124, date: "2026-10-04", title: "흑마늘 첫 시험", crop: "마늘", summary: "숙성기 온도를 맞추며 흑마늘 첫 판을 걸었습니다." },
         ],
       }),
     );
@@ -303,9 +325,76 @@ test.describe("records", () => {
     await expect(first.locator('[data-testid="record-date"]')).toContainText("10월 4일");
     await expect(first.locator('[data-testid="record-crop"]')).toHaveText("작물: 마늘");
     await expect(first).toContainText("숙성기 온도를 맞추며");
+    // url이 없으면 원천 회차 링크가 기본값이다.
+    await expect(first).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/124");
 
     await expect(cards.nth(1)).toContainText("마늘 밭 만들기");
     await expect(cards.nth(1).locator('[data-testid="record-date"]')).toContainText("9월 19일");
+    await expect(cards.nth(1)).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/123");
+  });
+
+  test("records requires a source meeting id and a real calendar date", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(
+      page,
+      jsonRoute({
+        records: [
+          { date: "2026-09-19", title: "원천 회차 없는 기록" },
+          { meeting_id: "7", date: "2026-09-19", title: "id가 문자열인 기록" },
+          { meeting_id: 0, date: "2026-09-19", title: "id가 0인 기록" },
+          { meeting_id: 8, date: "2026-02-30", title: "존재하지 않는 날짜" },
+          { meeting_id: 9, date: "2026-09", title: "날짜가 아닌 값" },
+          { meeting_id: 10, date: "2026-09-19T10:00:00+09:00", title: "datetime 문자열" },
+          { meeting_id: 11, date: "2026-09-19", title: "정상 기록" },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("정상 기록");
+    await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/11");
+  });
+
+  test("records keeps only the newest entry per source meeting", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(
+      page,
+      jsonRoute({
+        records: [
+          { meeting_id: 55, date: "2026-09-19", title: "옛 기록" },
+          { meeting_id: 55, date: "2026-10-04", title: "고쳐 쓴 기록" },
+          { meeting_id: 56, date: "2026-09-01", title: "다른 회차 기록" },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(2);
+    await expect(cards.nth(0)).toContainText("고쳐 쓴 기록");
+    await expect(cards.nth(1)).toContainText("다른 회차 기록");
+    await expect(page.locator('[data-testid="records-list"]')).not.toContainText("옛 기록");
+  });
+
+  test("records drops images that escape the records image folder", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(
+      page,
+      jsonRoute({
+        records: [
+          { meeting_id: 1, date: "2026-09-19", title: "경로 탈출 사진", image: "images/records/%2e%2e/%2e%2e/config.js" },
+          { meeting_id: 2, date: "2026-09-18", title: "외부 도메인 사진", image: "https://evil.example.com/images/records/x.webp" },
+          { meeting_id: 3, date: "2026-09-17", title: "상대 경로 탈출 사진", image: "images/records/../../config.js" },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(3);
+    await expect(page.locator('[data-testid="records-list"] img')).toHaveCount(0);
   });
 
   test("records keeps the empty-state card when there is nothing recorded yet", async ({ page }) => {
