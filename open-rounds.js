@@ -10,6 +10,7 @@
 
 	const list = document.querySelector('[data-testid="open-rounds-list"]');
 	if (!list) return;
+	const filter = document.querySelector('[data-testid="round-filter"]');
 
 	const C = window.NOLIL_CONFIG || {};
 	const appUrl = C.meetingsUrl || "https://app.playworkgrow.club/meetings";
@@ -22,6 +23,7 @@
 
 	const MAX_CARDS = 6;
 	const TIMEOUT_MS = 3000;
+	const FILTER_MIN_CARDS = 4; // 카드가 이만큼 쌓여야 시간대 칩이 의미 있다.
 	const SLOT_LABELS = { morning: "출근 전", evening: "퇴근 후", weekend: "주말", day: "낮" };
 	const STATUSES = new Set(["open", "full"]);
 
@@ -63,6 +65,9 @@
 
 	const count = (value) => Number.isInteger(value) && value >= 0;
 
+	// 문자열 아닌 타입(숫자·객체 등)은 그 필드만 버린다 — 카드는 살린다.
+	const text = (value) => (typeof value === "string" && value.trim() ? value.trim() : null);
+
 	const priceLabel = (price) => {
 		if (price === 0) return "무료";
 		return price.toLocaleString("ko-KR") + "원";
@@ -80,6 +85,7 @@
 		if (!count(raw.price) || !count(raw.remaining)) return null;
 		if (!STATUSES.has(raw.status)) return null;
 		if (!Object.prototype.hasOwnProperty.call(SLOT_LABELS, raw.slot)) return null;
+		const crop = text(raw.crop);
 		return {
 			url,
 			title,
@@ -87,7 +93,10 @@
 			price: raw.price,
 			remaining: raw.remaining,
 			status: raw.status,
+			slot: raw.slot,
 			slotLabel: SLOT_LABELS[raw.slot],
+			// 계약 v1.1: crop이 있어야 배지를 단다. crop_outcome은 crop 뒤에만 붙는다.
+			cropLabel: crop ? "작물: " + crop + (text(raw.crop_outcome) ? " → " + text(raw.crop_outcome) : "") : null,
 		};
 	};
 
@@ -96,9 +105,17 @@
 		card.href = meeting.url;
 		card.target = "_blank";
 		card.rel = "noopener";
+		card.dataset.slot = meeting.slot;
+		const badges = el("div", "card-badges");
 		const slot = el("small", null, meeting.slotLabel);
 		slot.setAttribute("data-testid", "round-slot");
-		card.appendChild(slot);
+		badges.appendChild(slot);
+		if (meeting.cropLabel) {
+			const crop = el("small", null, meeting.cropLabel);
+			crop.setAttribute("data-testid", "round-crop");
+			badges.appendChild(crop);
+		}
+		card.appendChild(badges);
 		card.appendChild(el("strong", null, meeting.title));
 		card.appendChild(el("span", null, when.format(meeting.startsAt)));
 		card.appendChild(el("span", null, priceLabel(meeting.price) + " · " + seatLabel(meeting)));
@@ -125,6 +142,26 @@
 		list.appendChild(fragment);
 	};
 
+	// 칩은 카드를 DOM에서 지우지 않고 hidden만 토글한다.
+	const applyFilter = (slot) => {
+		list.querySelectorAll(".week-card").forEach((card) => {
+			card.hidden = slot !== "all" && card.dataset.slot !== slot;
+		});
+	};
+
+	const enableFilter = (cardCount) => {
+		if (!filter) return;
+		const buttons = Array.from(filter.querySelectorAll("button[data-slot]"));
+		if (cardCount < FILTER_MIN_CARDS || buttons.length === 0) return;
+		filter.hidden = false;
+		buttons.forEach((button) => {
+			button.addEventListener("click", () => {
+				buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
+				applyFilter(button.dataset.slot);
+			});
+		});
+	};
+
 	const render = (data) => {
 		if (!data || typeof data !== "object" || !Array.isArray(data.meetings)) return; // 스키마 불일치 → 폴백 유지
 		if (data.meetings.length === 0) {
@@ -134,6 +171,7 @@
 		const meetings = data.meetings.map(normalize).filter(Boolean).slice(0, MAX_CARDS);
 		if (meetings.length === 0) return; // 전부 스키마 불일치 → 폴백 유지
 		replaceWith(meetings.map(buildCard));
+		enableFilter(meetings.length);
 	};
 
 	const controller = new AbortController();

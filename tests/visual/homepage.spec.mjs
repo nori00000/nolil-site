@@ -72,6 +72,24 @@ const jsonBody = (body, status = 200) => ({
 
 const jsonRoute = (body, status = 200) => (route) => route.fulfill(jsonBody(body, status));
 
+const meetingsWithSlots = (slots) => ({
+  generated_at: "2026-09-12T10:00:00+09:00",
+  meetings: slots.map((slot, index) => ({
+    id: index + 1,
+    title: `${slot} 회차 ${index + 1}`,
+    summary: null,
+    category: "community",
+    starts_at: "2026-09-26T10:00:00+09:00",
+    ends_at: "2026-09-26T12:00:00+09:00",
+    slot,
+    price: 5000,
+    capacity: 8,
+    remaining: 3,
+    status: "open",
+    url: `https://app.playworkgrow.club/meetings/${index + 1}`,
+  })),
+});
+
 test.describe("open rounds", () => {
   // 브라우저 로캘·타임존이 한국이 아니어도 카드는 KST·한국어로 찍혀야 한다.
   test.use({ timezoneId: "UTC", locale: "en-US" });
@@ -102,6 +120,79 @@ test.describe("open rounds", () => {
     await expect(second).toContainText("무료");
     await expect(second).toContainText("마감");
     await expect(second).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/124");
+
+    // crop/crop_outcome이 없는 계약 fixture → 작물 배지는 달리지 않는다.
+    await expect(page.locator('[data-testid="round-crop"]')).toHaveCount(0);
+  });
+
+  test("open rounds badges the crop only when the contract carries one", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const base = {
+      summary: null,
+      category: "community",
+      slot: "weekend",
+      capacity: 8,
+      remaining: 3,
+      price: 5000,
+      status: "open",
+      starts_at: "2026-09-26T10:00:00+09:00",
+      ends_at: "2026-09-26T12:00:00+09:00",
+    };
+    await prepareWithMeetings(
+      page,
+      jsonRoute({
+        generated_at: "2026-09-12T10:00:00+09:00",
+        meetings: [
+          { ...base, id: 1, title: "마늘 심기", crop: "마늘", url: "https://app.playworkgrow.club/meetings/1" },
+          { ...base, id: 2, title: "흑마늘 만들기", crop: "마늘", crop_outcome: "흑마늘", url: "https://app.playworkgrow.club/meetings/2" },
+          // 문자열이 아닌 작물 필드는 그 필드만 무시한다(카드는 남는다).
+          { ...base, id: 3, title: "타입 깨진 회차", crop: 42, crop_outcome: {}, url: "https://app.playworkgrow.club/meetings/3" },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#open-rounds");
+
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(3);
+    await expect(cards.nth(0).locator('[data-testid="round-crop"]')).toHaveText("작물: 마늘");
+    await expect(cards.nth(1).locator('[data-testid="round-crop"]')).toHaveText("작물: 마늘 → 흑마늘");
+    await expect(cards.nth(2)).toContainText("타입 깨진 회차");
+    await expect(cards.nth(2).locator('[data-testid="round-crop"]')).toHaveCount(0);
+  });
+
+  test("open rounds offers time-slot chips once four rounds are open", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, jsonRoute(meetingsWithSlots(["weekend", "morning", "evening", "weekend", "day"])));
+    await scrollToSelector(page, "#open-rounds");
+
+    const filter = page.locator('[data-testid="round-filter"]');
+    await expect(filter).toBeVisible();
+
+    const cards = page.locator('[data-testid="open-rounds-list"] .week-card');
+    await expect(cards).toHaveCount(5);
+
+    await filter.getByRole("button", { name: "주말" }).click();
+    await expect(filter.getByRole("button", { name: "주말" })).toHaveAttribute("aria-pressed", "true");
+    await expect(filter.getByRole("button", { name: "전체" })).toHaveAttribute("aria-pressed", "false");
+
+    // 카드는 DOM에 남고 hidden만 토글된다.
+    await expect(cards).toHaveCount(5);
+    const visible = page.locator('[data-testid="open-rounds-list"] .week-card:visible');
+    await expect(visible).toHaveCount(2);
+    await expect(visible.nth(0).locator('[data-testid="round-slot"]')).toHaveText("주말");
+    await expect(visible.nth(1).locator('[data-testid="round-slot"]')).toHaveText("주말");
+
+    await filter.getByRole("button", { name: "전체" }).click();
+    await expect(page.locator('[data-testid="open-rounds-list"] .week-card:visible')).toHaveCount(5);
+  });
+
+  test("open rounds hides the chips when three or fewer rounds are open", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithMeetings(page, jsonRoute(meetingsWithSlots(["weekend", "morning", "evening"])));
+    await scrollToSelector(page, "#open-rounds");
+
+    await expect(page.locator('[data-testid="open-rounds-list"] .week-card')).toHaveCount(3);
+    await expect(page.locator('[data-testid="round-filter"]')).toBeHidden();
   });
 
   test("open rounds keeps the app-link fallback when the API fails", async ({ page }) => {
@@ -178,6 +269,67 @@ test.describe("open rounds", () => {
     await expect(cards).toHaveCount(1);
     await expect(cards.first()).toContainText("정상 회차");
     await expect(cards.first()).toHaveAttribute("href", "https://app.playworkgrow.club/meetings/4");
+  });
+});
+
+test.describe("records", () => {
+  // 기록 카드의 날짜도 브라우저 타임존과 무관하게 KST로 찍혀야 한다.
+  test.use({ timezoneId: "UTC" });
+
+  async function prepareWithRecords(page, handler) {
+    await prepare(page);
+    await page.route("**/records/records.json", handler);
+    await page.reload({ waitUntil: "networkidle" });
+  }
+
+  test("records renders member activity cards newest first", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(
+      page,
+      jsonRoute({
+        records: [
+          { date: "2026-09-19", title: "마늘 밭 만들기", crop: "마늘", summary: "여섯 명이 이랑을 세우고 마늘 200쪽을 심었습니다." },
+          { date: "2026-10-04", title: "흑마늘 첫 시험", crop: "마늘", summary: "숙성기 온도를 맞추며 흑마늘 첫 판을 걸었습니다." },
+        ],
+      }),
+    );
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(2);
+
+    const first = cards.nth(0);
+    await expect(first).toContainText("흑마늘 첫 시험");
+    await expect(first.locator('[data-testid="record-date"]')).toContainText("10월 4일");
+    await expect(first.locator('[data-testid="record-crop"]')).toHaveText("작물: 마늘");
+    await expect(first).toContainText("숙성기 온도를 맞추며");
+
+    await expect(cards.nth(1)).toContainText("마늘 밭 만들기");
+    await expect(cards.nth(1).locator('[data-testid="record-date"]')).toContainText("9월 19일");
+  });
+
+  test("records keeps the empty-state card when there is nothing recorded yet", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(page, jsonRoute({ records: [] }));
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("첫 회차가 열리면 첫 기록이 여기 올라옵니다");
+    await expect(cards.first()).toHaveAttribute("href", "#open-rounds");
+  });
+
+  test("records keeps the empty-state card when the data file fails", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await prepareWithRecords(page, (route) =>
+      route.fulfill({ status: 500, contentType: "text/plain", body: "boom" }),
+    );
+    await scrollToSelector(page, "#records");
+
+    const cards = page.locator('[data-testid="records-list"] .week-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText("첫 회차가 열리면 첫 기록이 여기 올라옵니다");
+    await expect(cards.first()).toHaveAttribute("href", "#open-rounds");
   });
 });
 

@@ -328,6 +328,11 @@
   .week-card small{display:block;color:var(--teal);font-weight:900;margin-bottom:8px}
   .week-card strong{display:block;color:var(--text);font-size:19px;line-height:1.4;margin-bottom:8px}
   .week-card span{display:block;color:var(--body);font-size:14px;line-height:1.55}
+  .card-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .card-badges small{margin-bottom:0}
+  .chips[hidden]{display:none}
+  .chip-filter{border:0;cursor:pointer;font-family:inherit}
+  .chip-filter[aria-pressed="true"]{background:var(--teal);color:#fff}
   .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:42px}
   .program-card{
     display:flex;
@@ -1210,8 +1215,28 @@
         <h2>지금 열린 회차</h2>
         <p>일정·가격·잔여석은 운영앱이 기준입니다. 여기서는 열린 회차를 보고 바로 신청으로 갑니다.</p>
       </div>
+      <div class="chips" data-testid="round-filter" role="group" aria-label="시간대로 회차 거르기" hidden>
+        <button class="chip chip-filter" type="button" data-slot="all" aria-pressed="true">전체</button>
+        <button class="chip chip-filter" type="button" data-slot="morning" aria-pressed="false">출근 전</button>
+        <button class="chip chip-filter" type="button" data-slot="evening" aria-pressed="false">퇴근 후</button>
+        <button class="chip chip-filter" type="button" data-slot="weekend" aria-pressed="false">주말</button>
+      </div>
       <div class="week-grid" data-testid="open-rounds-list">
         <a class="week-card" href="https://app.playworkgrow.club/meetings" target="_blank" rel="noopener"><small>열린 회차</small><strong>앱에서 열린 모임 보기</strong><span>날짜·정원·가격·잔여석은 운영 앱에서 확인하고 신청합니다.</span><span class="next">앱에서 열린 모임 보기 →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="records" data-reveal>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="bar"></div>
+        <div class="eyebrow">RECORDS</div>
+        <h2>회원 활동 기록</h2>
+        <p>회차가 끝나면 그날 무엇을 심고 만들고 나눴는지 한 장으로 남깁니다. 실제로 일어난 것만 올립니다.</p>
+      </div>
+      <div class="week-grid" data-testid="records-list">
+        <a class="week-card" href="#open-rounds"><small>기록</small><strong>첫 회차가 열리면 첫 기록이 여기 올라옵니다</strong><span>지어낸 사례 대신, 실제로 열린 회차의 기록만 이 자리에 올립니다.</span><span class="next">열린 회차 보기 →</span></a>
       </div>
     </div>
   </section>
@@ -1361,6 +1386,7 @@
 
 <script src="config.js"></script>
 <script src="open-rounds.js" defer></script>
+<script src="records.js" defer></script>
 <script>
 (() => {
   "use strict";
