@@ -61,7 +61,7 @@ window.NOLIL_CONFIG = {
 		enabled: true,
 		ga4: "G-RQBVMTZLN5",
 		clarity: "y5v1ct4nun",
-		naverVerify: "39ad44e87fb5281b7a3fed3e76f5d54efb1519a7",
+		naverVerify: "6bf3bbc26179b5468e8d43a22064091939a5d33e",
 		naverWcs: "",
 	},
 };
