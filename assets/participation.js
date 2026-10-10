@@ -70,7 +70,7 @@ if(projectSelect) {
     try {
       const blob=new Blob([cardText(current.project,current.role,note.value,lang)],{type:'text/plain;charset=utf-8'});
       url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;
-      link.download=`${lang==='en'?'HackerFarm_StartNote':'해커팜_시작메모'}_${current.project.slug}_${current.role.id}_20261010_v08.txt`;
+      link.download=`${lang==='en'?'HackerFarm_StartNote':'해커팜_시작메모'}_${current.project.slug}_${current.role.id}_20261010_v09.txt`;
       document.body.append(link);link.click();link.remove();
       $('export-message').textContent=t('파일 저장을 요청했어요. 브라우저 다운로드 목록에서 확인해 주세요.');
     } catch {

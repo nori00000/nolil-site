@@ -29,7 +29,7 @@ export function selectionURL(href, project, role, share = false) {
   return url.href;
 }
 export function cardText(project, role, note = '', lang = 'ko') {
-  if(lang==='en')return ['Hacker Farm / STUDIO — My starting note','Issued 2026-10-10 · v08','A personal preparation note, not an application or reservation.','',
+  if(lang==='en')return ['Hacker Farm / STUDIO — My starting note','Issued 2026-10-10 · v09','A personal preparation note, not an application or reservation.','',
     `Project: ${project.title}`,`Role: ${role.title}`,`Starting experience: ${role.experience}`,'',
     `Try on your own now: ${role.prepare_now}`,`What to keep: ${role.personal_output}`,`Next question: ${role.next_question}`,
     `My question: ${note.trim().slice(0,500)||'(not written yet)'}`,'',
@@ -37,7 +37,7 @@ export function cardText(project, role, note = '', lang = 'ko') {
     'First-season plan: 12 places, KRW 360,000 per person for 12 weeks, six three-hour sessions. Dates and detailed terms are being prepared; applications and payments are not open.',
     'We are developing a shared farm membership fee model, without property rental revenue.'
   ].join('\n');
-  return ['해커팜 — 나의 시작 메모','발행일 2026-10-10 · v08','개인 준비 메모 · 신청·예약이 아닙니다.', '',
+  return ['해커팜 — 나의 시작 메모','발행일 2026-10-10 · v09','개인 준비 메모 · 신청·예약이 아닙니다.', '',
     `프로젝트: ${project.title}`,`역할: ${role.title}`,`시작 경험: ${role.experience}`,'',
     `지금 혼자 해 볼 준비: ${role.prepare_now}`,`남길 것: ${role.personal_output}`,`다음 질문: ${role.next_question}`,
     `내 질문: ${note.trim().slice(0,500) || '(아직 적지 않음)'}`,'',
