@@ -1,0 +1,131 @@
+{
+  "issued_on": "2026-10-10",
+  "version": "v06",
+  "change_log": [
+    "v06 이음 H·브랜드 색 체계·로고 자산·대비와 선택 상태 개선"
+  ],
+  "mode": "public",
+  "publication": {
+    "origin": "https://playworkgrow.club",
+    "version": "v06"
+  },
+  "pages": 9,
+  "files": [
+    {
+      "path": ".nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "404.html",
+      "sha256": "74ba311fd8a0640d43e149ce3b272bda14bf690a5a3b6eb652a24955a61dc85c"
+    },
+    {
+      "path": "assets/brand/avatar.svg",
+      "sha256": "e3263d599a68215c12c37027e9db133b3a132d7ea45069e20780c8a83c1d75ad"
+    },
+    {
+      "path": "assets/brand/lockup-mono.svg",
+      "sha256": "cfef3a968448d8ed40177db7c2e848c2564122c37c66258c8c2bfc9d6e2a99e9"
+    },
+    {
+      "path": "assets/brand/lockup-primary.svg",
+      "sha256": "d37e7c6cd4e4a1ef0a329d9eaa1e85a12b1fd13be9df9c039aa1b682f7b94e9c"
+    },
+    {
+      "path": "assets/brand/lockup-reverse.svg",
+      "sha256": "d06f95d746736508469a1b588db4e69ab8450c5be949d1870359f6f09dfea516"
+    },
+    {
+      "path": "assets/brand/symbol-mono.svg",
+      "sha256": "32d1ebf4c0b69647906b0ace773facb1a0813ca664db237037ad40e3dcc1dc51"
+    },
+    {
+      "path": "assets/brand/symbol-primary.svg",
+      "sha256": "e1a107d5aa0a03faff25c583be127928ab86d62123fa7504fc8e5a240c9b0132"
+    },
+    {
+      "path": "assets/brand/symbol-reverse.svg",
+      "sha256": "bed01f268256bf22196145ef8929ebee03ef9be96cb5ef21de4cdcef1a6dcf03"
+    },
+    {
+      "path": "assets/fonts/SUIT-LICENSE.txt",
+      "sha256": "30d101ee3c35ef629d622d933d261a27b2f60223e0a3b0f36791e569c2b9daa9"
+    },
+    {
+      "path": "assets/fonts/SUIT-Variable.woff2",
+      "sha256": "aa894a204d5a6fbae259dac6868d350cbd373a390caee0313f92946af741df23"
+    },
+    {
+      "path": "assets/journey.js",
+      "sha256": "98aab1be732af601bfc5f34b98127421fc405e12cfc6ad303ecde88504a60d6e"
+    },
+    {
+      "path": "assets/mark.svg",
+      "sha256": "a65b20a3f76c295cc5bb852deb5864463bfba8ffc2e8a4002430075ce64b0038"
+    },
+    {
+      "path": "assets/participation.js",
+      "sha256": "6acfb36c19900eb2ebc7267e7c418c552010a7a2197ca89abed6bb719fe2239b"
+    },
+    {
+      "path": "assets/photos/farm-moss.webp",
+      "sha256": "f75bca92a444dc59f622c86512997e97aa72ef66a5310aed7c657753a14f724d"
+    },
+    {
+      "path": "assets/site.css",
+      "sha256": "6c2f1466e860e0dcef5218fcfc96f64cd7063bc3e9106cd734af85078fc6b2cd"
+    },
+    {
+      "path": "assets/studio.js",
+      "sha256": "27485b25f987f9dcbc759beafbd7f18c8718045848c08c6086ff83e17b44f573"
+    },
+    {
+      "path": "CNAME",
+      "sha256": "9471e888c317b83639603ecb0be7051d6a9a872c22bd7ff6252488f60a70cb7b"
+    },
+    {
+      "path": "data/participation.json",
+      "sha256": "49b0dc86b204bd97d1b6228d751cca478cdb2bb9f70f485aab7193578f7e38dc"
+    },
+    {
+      "path": "index.html",
+      "sha256": "8d006731e41c0b5c430ea9fa4bf2e2e3966d228d33353c4a18dff0b189b84ea2"
+    },
+    {
+      "path": "library/index.html",
+      "sha256": "ee8ccd866205dbefaff89525106ea81746d0ef850582e681b40f5fdf39bc1dd2"
+    },
+    {
+      "path": "principles/index.html",
+      "sha256": "0b8005ff64c512ee272935f1c0fc696c4371fec73e7b3d8f9fa96ab9f7899e7b"
+    },
+    {
+      "path": "projects/farm-light/index.html",
+      "sha256": "fa821ffddcba51f33813b2931446a1a4a2c0d78073f4e7516c58787e2b7e3f46"
+    },
+    {
+      "path": "projects/farm-observation/index.html",
+      "sha256": "3fba0a743f23cf0c544a7fb4ea69bd48bca2c32a2d264aefe2eb6001a0a6b646"
+    },
+    {
+      "path": "projects/index.html",
+      "sha256": "304573318c303f1b7156e125751d6c3e51afdb26a3d250130804bc1aeb55c46c"
+    },
+    {
+      "path": "projects/tools-and-stories/index.html",
+      "sha256": "3d255342a9e50af857ba9d8cb71151e91d26f76565fd100d4c9885af7db708da"
+    },
+    {
+      "path": "robots.txt",
+      "sha256": "f22c70d1224c6a3253184fd6e2fbffd7d9fa0e4eae02f21ec6f582a35e8a6e52"
+    },
+    {
+      "path": "sitemap.xml",
+      "sha256": "c676156c540e058cd9ce8dbc63e9b3172452a662d09aaecf8d2160fc9cd63d3b"
+    },
+    {
+      "path": "start/index.html",
+      "sha256": "f37430ea6ffcfed424f50a246599bd2afa915351c96792eedca8ac177faf7d32"
+    }
+  ]
+}
