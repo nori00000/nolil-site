@@ -1,8 +1,8 @@
 {
   "issued_on": "2026-10-10",
-  "version": "v09",
+  "version": "v10",
   "change_log": [
-    "v09 photo-led large-type presentation and italic website"
+    "v10 search discovery, six-language facts, structured metadata; v09 research and materials retained"
   ],
   "legacy_routes": [
     "shared-farm.html",
@@ -36,7 +36,7 @@
   "mode": "public",
   "publication": {
     "origin": "https://playworkgrow.club",
-    "version": "v09"
+    "version": "v10"
   },
   "preserved_route": {
     "prefix": "sangmin/",
@@ -252,15 +252,19 @@
       }
     ]
   },
-  "pages": 72,
+  "pages": 78,
   "files": [
     {
       "path": ".nojekyll",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
+      "path": "3789248b2acf6d8f21ded43ff1e0334e.txt",
+      "sha256": "85ee45869964c0e1b084d2e1c094f6510a6d978c296a95257d75579bac67c843"
+    },
+    {
       "path": "404.html",
-      "sha256": "915b19c8dc3d08484a231f8faded66fdfd1a591a260c3c55b0c1b912450473e8"
+      "sha256": "3f7b2c52a7fbb4c0d6e0fb610f2dba9909248504370c98fb81ac821382c34470"
     },
     {
       "path": "apple-touch-icon.png",
@@ -372,7 +376,7 @@
     },
     {
       "path": "assets/site.css",
-      "sha256": "9274590e74a9ebc721e20323b538697ea045ccf3c722e1dd6fc6cf4ac61a84ba"
+      "sha256": "ec2eaae9cf457ff4061ce86ded7ab81a8dcf029d2402702d3bc5e4de49987686"
     },
     {
       "path": "assets/studio.js",
@@ -412,107 +416,119 @@
     },
     {
       "path": "en/404.html",
-      "sha256": "8c178e519006ed06fccf8909753868fc27f0f74f9567f5e77ba5666c60454356"
+      "sha256": "b1a62f6c9bf4a4fba04476b46383ef8ae825c5abbd32a05b57a21051e22d5613"
     },
     {
       "path": "en/data/participation.json",
       "sha256": "2bab453503215912a30ee740c972dfbdd60bb13e31321ef44e364d21eaf069f7"
     },
     {
+      "path": "en/facts/index.html",
+      "sha256": "5ca92670e123ad5ccf63721df765d0bce733c22744ba18d1a0901d6c8be7d6f3"
+    },
+    {
       "path": "en/index.html",
-      "sha256": "dc654c10e31e53a4c6862d433d30e43377e7e19a86b71484aaf736cb8e82c6fc"
+      "sha256": "8641df7d5c6aec7ca0f81dbcb911b630f176cf928af8ec3987afa8bc47ddd837"
     },
     {
       "path": "en/introduction/index.html",
-      "sha256": "d583819f7b936b468c4c65fa28a2bc8a4714845cb8ea7a7520bf22c8f3565441"
+      "sha256": "cf0ac841acc860220d7d8b38ece25b589dcc0d52cd88e497b6b1d9dbc8b3482e"
     },
     {
       "path": "en/library/index.html",
-      "sha256": "fdd27e467d9bbd51c9e7a660efdfbdc83c716c425b92a47c3ca5dd50a913f1db"
+      "sha256": "ffad23f2b42ea76c4f8f967994a0b16efe0a379348f92716c5442fe20ea8b6fc"
     },
     {
       "path": "en/presentation/index.html",
-      "sha256": "e78dc72795197aa2c45153ac6535e13a2e135899524724ca5718f78fba0511d4"
+      "sha256": "be65cff9968eb19978296e21de67cf3669d6de0c87db406c75a14b1bb84a3291"
     },
     {
       "path": "en/principles/index.html",
-      "sha256": "e5d330ef82c18ead8e85c3cf513947140ced9217608e296f659a6dd3601c2540"
+      "sha256": "da09ea32661a6ee5967abbda8d26f41a67acc2da6ee099c264e710a629339151"
     },
     {
       "path": "en/projects/farm-light/index.html",
-      "sha256": "cb7b8610949a74114174191ff9a6af1b25ced8c2a275a222901101665fde716d"
+      "sha256": "8bf4b30edde6383d9a16546a885d97d26e427b7142d4e939d588febb0ca661ba"
     },
     {
       "path": "en/projects/farm-observation/index.html",
-      "sha256": "2f6ca85e6a45b6453a9330350b81110ec721fc6abc97d29cb4e48f56ce534006"
+      "sha256": "31dc7d46af99259717f28d36414183ff98789c94688c4443a0669b02ea067ede"
     },
     {
       "path": "en/projects/index.html",
-      "sha256": "b32f56266515ed1d8937755dc089ceabe72f9cd6c6422af92c8912ffa7020dc6"
+      "sha256": "cbfe1df8f8c44d891af58d7093e2209d61e782124d59378ba2dee862239a34c2"
     },
     {
       "path": "en/projects/tools-and-stories/index.html",
-      "sha256": "e866adfdd59cf6bd1989da2f7a586d5b3086674626ef7da53c50ebd2ba1a7a62"
+      "sha256": "093059c3d2e54d81513833f2104f5b88bc9c7ccb3f0d555b24745b37573e94c9"
     },
     {
       "path": "en/start/index.html",
-      "sha256": "b14310d0b72ff856e488b4e03b2bd91400c612daa20f51b288b4244b79680904"
+      "sha256": "18d65e05f110bdd5eddff8f1439ddb56c2e846444586bd39fc10eda4b4558806"
     },
     {
       "path": "en/wiki/index.html",
-      "sha256": "9a1dc8c8207468fe24c75427f9cde67af94de393dc45e87ae2fe42f114d30219"
+      "sha256": "112cde827f11c2b165ec6a28b27e5f97b377f331cd556bab6541c40974eb94be"
     },
     {
       "path": "es/404.html",
-      "sha256": "dc2d89f953ddae9a2a24650830be88a9128138ebea72166c4a5deaa172f90b77"
+      "sha256": "a059b068c9ee8f23d9153bf56283b8b174ff6123c3af1d4648f4b3c82c3f17e0"
     },
     {
       "path": "es/data/participation.json",
       "sha256": "52156c07f92bb4d6592edab6afa4e767307ff8f76fe649c3e8cb866f6bf629b7"
     },
     {
+      "path": "es/facts/index.html",
+      "sha256": "e875aa913a2777d3a9f09e8173a43a27e8abb5f13779c3a30c33b2da8732ea93"
+    },
+    {
       "path": "es/index.html",
-      "sha256": "4d2e271a002117058c49b45a62ec771771b1b161250ca3583db80b0cd80d75b9"
+      "sha256": "2a7af73672efc42a5df3eef78feb4c75188ab84fa512540a64770ee7a1efb909"
     },
     {
       "path": "es/introduction/index.html",
-      "sha256": "b1285249029b4c313c2982889eab2b7bdf2739558cc9bf62391174a45149e89d"
+      "sha256": "2363c61d0fde01260f27b758f41099f832a823ed249d7efd2d06684716c0a4d8"
     },
     {
       "path": "es/library/index.html",
-      "sha256": "0754a2b1fed97e5cf768b9b80a3f82d6ac5b1cc8e0eff649336c8a729c28b1e5"
+      "sha256": "d017f49971e212d29fef4252a65f56deca573900d1492e46fcbdf30c3bd9dfc9"
     },
     {
       "path": "es/presentation/index.html",
-      "sha256": "d9bc00034fa523f75cc2caa19bb6294b972aa106a6224642b985b603cb2a6b45"
+      "sha256": "296d93d9b722451abc1b84bbb8fd00c754195666af4610112bea3d8c52a67d73"
     },
     {
       "path": "es/principles/index.html",
-      "sha256": "686aa1a46142b94dc552a4f97937e972dcac28c4a745b941f4bb2498c54838a0"
+      "sha256": "845ac66ab2a074ad57f9dd865ac5c803715ba25cff655ca3a036d963220d2b57"
     },
     {
       "path": "es/projects/farm-light/index.html",
-      "sha256": "40debc55a6bcf4130dfd3093584486c1119b3c89b418a80f6d660f7c56b799e8"
+      "sha256": "fc4c4cc0c05ce5e19940d191187ab85d33fcca89a5e55aaea4bede8521a782c2"
     },
     {
       "path": "es/projects/farm-observation/index.html",
-      "sha256": "715b6ea6733bce1b64377f9994e921206606d0d608750634e644245e791aeb72"
+      "sha256": "b17d228cbba3145ad0e3432ce94aeff2a560aea7c6235eec7d0aa355318d57de"
     },
     {
       "path": "es/projects/index.html",
-      "sha256": "080448e9827ca77d171ff06b1cff59e27009ad306b4fa9298100c9526daf4f3b"
+      "sha256": "b212924480db6a81ccd0af770a64df100301280ef554d9c78be389caf2446249"
     },
     {
       "path": "es/projects/tools-and-stories/index.html",
-      "sha256": "aa11ded98eaaec4d55152d1c3326f85ca25992c16175ac659683e3f9bf36dd15"
+      "sha256": "6bc9a6287867c198002446458a61725b33235afcb0ca62401ada1c2d4eb80d4e"
     },
     {
       "path": "es/start/index.html",
-      "sha256": "280ea5238f841c4f4ad70c9179df6131429ea58f800aaf813f93a7bac78d1772"
+      "sha256": "d49469e61f320f1f2b49e6116f38262a5eb60b50c3e4b87054e0b6f47736e077"
     },
     {
       "path": "es/wiki/index.html",
-      "sha256": "c3d36fb10d394d8a1e51f00d2727ceac40fb532d22dc4bac797070366437e754"
+      "sha256": "c4d456d9c53fb8035d97b55ffb05c270e85a6385d3422761a34d4cbffd63e169"
+    },
+    {
+      "path": "facts/index.html",
+      "sha256": "495d5e3733cc17cc449b415c342dc06065558b0f13dff39027a7a83da29f7d92"
     },
     {
       "path": "favicon.png",
@@ -520,135 +536,143 @@
     },
     {
       "path": "fr/404.html",
-      "sha256": "0ba286f9c03a96bf49b2e85eace038831dc11145fe3bc29fbd338bb4ab9e0580"
+      "sha256": "bb38e214c50c6f6248df6550000100d5c2efefaafa0817c43e8dbe5a14e01f4c"
     },
     {
       "path": "fr/data/participation.json",
       "sha256": "b61671a2f71c9d776adc2ebeea3b58c360db2ec896e51b7e8107a19c64b6fed8"
     },
     {
+      "path": "fr/facts/index.html",
+      "sha256": "6da28ea660b169e97b5a0a189f9fc781682046bd43a93af8c9d07d6c04ebbe5e"
+    },
+    {
       "path": "fr/index.html",
-      "sha256": "f8e4f162bdaf0beed4bafcfc183f730e95797b919c96b9bcf6cd34d5f0431bc9"
+      "sha256": "4830dee84c907453157597b8bf2c63c008ec98f3ba5fb11d135ec486f8b5a022"
     },
     {
       "path": "fr/introduction/index.html",
-      "sha256": "1916fec9bcb29a8fda1147626c97e90280a1a3fc6c0c60c225793ec0215c10a1"
+      "sha256": "e1c86e3766b726844fd293e4070e3fe874002997f05a281045d065b79e8b617f"
     },
     {
       "path": "fr/library/index.html",
-      "sha256": "aea91eb08e0f4d328a2adddf346e70a60a64535c2fb9e0d3a715b3a024b7806f"
+      "sha256": "ff487cf22099a26682483031ba1b0d3d77581e7b6d2ac6f18f34b4019fa5ee1f"
     },
     {
       "path": "fr/presentation/index.html",
-      "sha256": "7f95f718e845d4ffc236b517f4371d984f44f193588454dc995c1c45d1a92831"
+      "sha256": "de9ef16ee3cb4538f5e445069be4772bf22b16f6f6447d5e45172c179bad2a67"
     },
     {
       "path": "fr/principles/index.html",
-      "sha256": "e675a580bdce107c39d3b3289a482b23c5bdb3b43af29a94a0e11f45eadb0616"
+      "sha256": "9e3a268054e28fa864b23dc728d8642bd2713b774ae88cb93e18496c61e63521"
     },
     {
       "path": "fr/projects/farm-light/index.html",
-      "sha256": "d715cb4941a6c34dda8fc58c480f5386ac9d2890852c548b2294314992b301de"
+      "sha256": "77d681d5f65356b427f833ad5a3067160cac0998b9c60a2928c9b91b3f1dbda9"
     },
     {
       "path": "fr/projects/farm-observation/index.html",
-      "sha256": "8cb88b60436e1d89487606275c9d569a72e343ff202f0232950910e706231668"
+      "sha256": "d8c9bdb1be75719a96bcb7bbce8dd23c2dc4687fcabbde06b1bacd06c34c4697"
     },
     {
       "path": "fr/projects/index.html",
-      "sha256": "52d058b68a46852a49ac2fc387638e073a698455fe07e98de97faa9587bddc6e"
+      "sha256": "393b042cc53fcd83f863f9c33e654993894db67cb321168b4a9384bc912a40e8"
     },
     {
       "path": "fr/projects/tools-and-stories/index.html",
-      "sha256": "bb4207eaa96058836ad3382a8fedf24bc887153588a6bf8c6a867402193f56bb"
+      "sha256": "25745a19839da2097e80386ed3e8592788fd160d9b1faeeaaeae35d2989e0f46"
     },
     {
       "path": "fr/start/index.html",
-      "sha256": "976f5339093fe1b17263e477282177c7796ba8bee4a6d98f3dd9e0d24f952feb"
+      "sha256": "9a2559df9a6085ad7f2c0cdd6838a5a10f7b5758a1b1c4c5e6f026bba66cf4f7"
     },
     {
       "path": "fr/wiki/index.html",
-      "sha256": "be36038ab6054eac6fd75511973ba6a83e6d79ee8c394356b300fcb5e31580b1"
+      "sha256": "4a59400851830c1234e021de33dc6030979fe8534bf5dd80b40d22ebf448dd9b"
     },
     {
       "path": "group.html",
-      "sha256": "3a25dbc1ed822fb36e1355f432234ac15bbd594e760d8017a8995717da7c077f"
+      "sha256": "1849d9c13350951a8d82f4cba89153c128e6128ba6d0a59018c1056fe777b05e"
     },
     {
       "path": "index.html",
-      "sha256": "6829053afe476d7ec1f7fe267c40f75ae07e75dea97a6bf455551f05ffa515d5"
+      "sha256": "5a596731558686289db1ba5bd92867d835b18ab8c950d92b5d51777b462333b6"
     },
     {
       "path": "introduction/index.html",
-      "sha256": "831084290a985972356c9e029703bfe9b43cf5a971fc57290204e6a998e43b00"
+      "sha256": "ab1f2adaf05a73428e75c621fb25d02d0a6be02f20c837ed48b8cdf77db8a8cc"
     },
     {
       "path": "ja/404.html",
-      "sha256": "6f8db13b1ff7ff68382105d3c59ad08ab677b2ef40b068367c3003d86502b308"
+      "sha256": "289bc76108b01ad78226241a752b3ee798cf11aab891309c9ef423c12f991f77"
     },
     {
       "path": "ja/data/participation.json",
       "sha256": "1b15b1bcf0aed1ef5188297eec79ed1d88d1754d571abe039794dbf454553f8c"
     },
     {
+      "path": "ja/facts/index.html",
+      "sha256": "711fc710d0d8c3f920e084718de4cfe344a4e3e95b11b4f885620beb0811254f"
+    },
+    {
       "path": "ja/index.html",
-      "sha256": "eed711f5abe9a472f88c02f7d5a453d0d23470cb9edc4dd19e17923463278c0b"
+      "sha256": "9ff634b9d3e4962724fbf99194829b9f31162b6ecf3cbfdb49be2d63f378dfdf"
     },
     {
       "path": "ja/introduction/index.html",
-      "sha256": "622d2a2309470948983ae23613412e5628b736ade427f94f663db664d3712f04"
+      "sha256": "c8ee4e6f2506e0c7f7f2b452ccc222d31fe4fd7f4e9e12ee3d7da913e75adf87"
     },
     {
       "path": "ja/library/index.html",
-      "sha256": "9df64535aa7c1b840960d14536c0f24af9585ad27fd73c375ee395998969eda7"
+      "sha256": "ee721866da2c1ef000d1d74ea26c5e4fb690c427386db2a86dee9dd524e1ed48"
     },
     {
       "path": "ja/presentation/index.html",
-      "sha256": "cb0448127de189027299576e574fda91290470ce179e2a44d5747c1596926abb"
+      "sha256": "800166582505c7b70983de1da2b3cd2558516f88c8bf5a7533498aa0873fdc38"
     },
     {
       "path": "ja/principles/index.html",
-      "sha256": "b5a70e894038fae2923d197f73f60cdd5e34c33f52cae9042ceca3bfb83a9a93"
+      "sha256": "828780bdc8ab0417fd57ce30643088307cd11d2b7313ce9e33d5b2ce89426d0d"
     },
     {
       "path": "ja/projects/farm-light/index.html",
-      "sha256": "b50004dba175457542783a73c0ca70478d47173ed64bb31cff0651d6dbdecc17"
+      "sha256": "faada0df11f47a13d9b9477126d98ecbc89328b730b5b142d47391abdf2b082f"
     },
     {
       "path": "ja/projects/farm-observation/index.html",
-      "sha256": "53a53cf36760f6db1e0275d6d71d432f48e8e7bacdfa732fbad602e8df552934"
+      "sha256": "3f3bd28ea4be1976bb9b6af085efda44cbc432f402726aec5bf40dc79bff55e9"
     },
     {
       "path": "ja/projects/index.html",
-      "sha256": "e1d7f7c3ba1bab06670ce869bd8483618f654b4403fbd654886ddbdd689a6f8d"
+      "sha256": "75b080afb36826ebac7b50a0285f49d3be3b13f8132032dbc31e6074a030c700"
     },
     {
       "path": "ja/projects/tools-and-stories/index.html",
-      "sha256": "d5df6897f8bf42ef943c7b3829e500c898154f20cad543e9ec9fe816496e1b1c"
+      "sha256": "2ea78faed5e088e77702db015d58c696702aee4ba139e6a6ba74c1fb1109502b"
     },
     {
       "path": "ja/start/index.html",
-      "sha256": "450deb13a1b0987a081fe5b65798c6b046ce1037f4b91453c527034ea077d9e4"
+      "sha256": "6e9ae4b2fe491b67e969efc6867d4f7d4a52b1f433d41e05ee8e7ecd841ccf97"
     },
     {
       "path": "ja/wiki/index.html",
-      "sha256": "c091b98bb60ef274449e1c366f1b8b49f81fc9b811557a38c583c6d10fae5683"
+      "sha256": "ffba9311dcba0972b11447a882afd613e94c3b034bb113520f580f400b36c496"
     },
     {
       "path": "lead.html",
-      "sha256": "195c3561d33ffc78cca86b7f5b42621cc9103b6c083da6c21194365db2981706"
+      "sha256": "449d0322ea905205d11957fcb3697999847067b2d6a39a6c9e5b48d0cd32878c"
     },
     {
       "path": "letter/index.html",
-      "sha256": "6bf7b06f25535d592216ac674c6446676a77864a1312d0177189d14258bf6f51"
+      "sha256": "e2335f4cbe72835f765df1971388dead4d7fe14fd9c9abad08be3855b514f901"
     },
     {
       "path": "library/index.html",
-      "sha256": "5404a52ac11bf086276730a1ce94114d0fa37eaf2cf9e2b369c33272d64aa2f9"
+      "sha256": "3867d6889b45b3d85495b391746def7ea385e4ec001ff02f93ea6dec3bc293f5"
     },
     {
       "path": "moim/index.html",
-      "sha256": "195c3561d33ffc78cca86b7f5b42621cc9103b6c083da6c21194365db2981706"
+      "sha256": "449d0322ea905205d11957fcb3697999847067b2d6a39a6c9e5b48d0cd32878c"
     },
     {
       "path": "og.jpg",
@@ -656,95 +680,95 @@
     },
     {
       "path": "presentation/index.html",
-      "sha256": "c9c06cf0198276a56120e7723d9cc8699ee00d1dcca6dc90ce883da0d69c64d9"
+      "sha256": "e338ab3be82603d968e9fefbfc347225d655c74ac914c1d7471e4c98a9238f19"
     },
     {
       "path": "principles/index.html",
-      "sha256": "efe4b6d0efc14e985341180739e1d0abb9168ef85924d6c499c904a69950dd5e"
+      "sha256": "86b6f460da380215a486dc3dbb86cdc52d41ea751f40488633714772934e775e"
     },
     {
       "path": "privacy.html",
-      "sha256": "7f541722b51d5747f1f02717d0dfb224743c4dbc47c81d23944f35bce20b214e"
+      "sha256": "1b9f4bc2c9c4dee97a7b328cb073881543ccb6cb168a0548349ca06ac38bf62b"
     },
     {
       "path": "program/agri-village.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/being-map.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/builders-camp.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/dawn-library.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/family-story.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/half-year-reset.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/liberation-oneday.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/morning-reboot.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/one-sentence-english.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/owner-ai.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/screen-off-day.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/vacation-log.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "program/wallet-check.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "projects/farm-light/index.html",
-      "sha256": "9506127933462c6419bb505d3622b0fb1b7889dc1dd359f3271d8f24d0d5c884"
+      "sha256": "9f7e559d0a5d6bd3f32094d4b135c648846d1e1abe5e9cca067189c6ada8b7b9"
     },
     {
       "path": "projects/farm-observation/index.html",
-      "sha256": "67f7b10701276d09291924749ede963b96ca8e811733e0f0994133f0fa8a1417"
+      "sha256": "eaa9c9ed74fe417996e941fcea0f00dc6943dbdcdc33744428e6414706eae824"
     },
     {
       "path": "projects/index.html",
-      "sha256": "253e3b49567c5bae7874c30c2fbc99847198654a4cf2165a13206120ee2dd8dd"
+      "sha256": "27b47fb7b9b2e4e2dadbe3f72b8b38946cf449769d131189c2fd9a29761c7df5"
     },
     {
       "path": "projects/tools-and-stories/index.html",
-      "sha256": "3066a794816553a65cc3d7ae1bf6baa6fbf3c7a3468a8fe37d2ae62874079050"
+      "sha256": "0e4cd1cce01d78891195a0f2b3634f662ac2e1488d351a1f381a3d3575e8ff5d"
     },
     {
       "path": "retreat-feedback.html",
-      "sha256": "020e9572b4b8c5da69e6764da7b6397f02df983a1c73d5887104c99e5658f6c5"
+      "sha256": "2d9fcfbbfd362ad914a41bf4f8d349e4887592074b6b0ccdc2e53d21d861c940"
     },
     {
       "path": "robots.txt",
-      "sha256": "f22c70d1224c6a3253184fd6e2fbffd7d9fa0e4eae02f21ec6f582a35e8a6e52"
+      "sha256": "13480652959ac318e8d81c77a47d28c09648e8121637d13376e7ec00be2fd468"
     },
     {
       "path": "rules.html",
-      "sha256": "2e522b1b473f3f022892187fd3535d7789c7c136ef1cf269ac2ace1d74a62e57"
+      "sha256": "bb5a497ddf606139b32fbd18e558cd5215dcce0316cdc65c98fc7b941a73e92e"
     },
     {
       "path": "sangmin/assets/boardgame-480.webp",
@@ -956,95 +980,99 @@
     },
     {
       "path": "shared-farm.html",
-      "sha256": "2e522b1b473f3f022892187fd3535d7789c7c136ef1cf269ac2ace1d74a62e57"
+      "sha256": "bb5a497ddf606139b32fbd18e558cd5215dcce0316cdc65c98fc7b941a73e92e"
     },
     {
       "path": "sitemap.xml",
-      "sha256": "7e9977cbe9caf09695d6bfca9c08a742b0a5d062b69a44364b38b844a9c6fc54"
+      "sha256": "6597c66f0570fb13513034daf801822c6c10ff7906d420aebcaa28ccff9731cc"
     },
     {
       "path": "start/index.html",
-      "sha256": "34eef1ec20be4fcb5d17dbad85af65a637ec96f61592055e5065073023c9ad59"
+      "sha256": "9a119a86c28d1c4388096ac3a96b96bfc79bfc50c327bcbddd208df6aebbafde"
     },
     {
       "path": "stories/deliberation-by-design.html",
-      "sha256": "7f835285015683c96833313ae976be866b2bccc8435ec8d5c8694db320b31f91"
+      "sha256": "24aa65ca1a549e7822935398f3b8afa3997b19927405b345a2f24f939740512f"
     },
     {
       "path": "stories/first-free-meeting.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "stories/index.html",
-      "sha256": "6bf7b06f25535d592216ac674c6446676a77864a1312d0177189d14258bf6f51"
+      "sha256": "e2335f4cbe72835f765df1971388dead4d7fe14fd9c9abad08be3855b514f901"
     },
     {
       "path": "stories/people-we-wait.html",
-      "sha256": "195c3561d33ffc78cca86b7f5b42621cc9103b6c083da6c21194365db2981706"
+      "sha256": "449d0322ea905205d11957fcb3697999847067b2d6a39a6c9e5b48d0cd32878c"
     },
     {
       "path": "stories/screen-off-day.html",
-      "sha256": "29c4fe2348079cc167e449f4b4a9d4258c1d5a62ccfe787b70aa6654ff9598d9"
+      "sha256": "33ff196703caaae38493f2a062e311e2deae37915dc073bf02e38d57c1318c10"
     },
     {
       "path": "stories/why-nolil.html",
-      "sha256": "18b241633615b52449dc3a7c72f058ea0893ec2a139f71fbe293f3a4913ab8bd"
+      "sha256": "d4563fedfb68bf2355a16b31e7cf15fd4eac1c85b9e42182a0fd276b2d999e30"
     },
     {
       "path": "wiki/index.html",
-      "sha256": "92fb2d436446b262e970925bc91a00a114396f45cc3fd795d63b46a8854922b6"
+      "sha256": "3aca908868531f6f7140fc19bebe09d07fa90490f98238c57f594983f5b72688"
     },
     {
       "path": "zh/404.html",
-      "sha256": "f1cff6b81f1e1d208c965306fc84f81aee70c65c51b96c98772e0c8c70a7ed8f"
+      "sha256": "0f95562a6eeb373aeee01e51eb86b7904f28349f4daff010e54d59369d062eba"
     },
     {
       "path": "zh/data/participation.json",
       "sha256": "1d52171623dc76524b48bb841512b4afa1cb6ec3d940f83b7aed913c4cb830b9"
     },
     {
+      "path": "zh/facts/index.html",
+      "sha256": "961b1a036d9598b1249cfd5d9a5c2bb7726a77865e429dfa37d8425a385fa941"
+    },
+    {
       "path": "zh/index.html",
-      "sha256": "a07f8b00e1c9cd44af92712950f6c918f7a9e1d834ea33eafbac9dd3c8f2820b"
+      "sha256": "a82725594662045b0369b145ada2ac571896af3770c460523b1235a339b44ad9"
     },
     {
       "path": "zh/introduction/index.html",
-      "sha256": "a62930d876a5278edc203546567bb962653db9b30b80b2b790fd63471ef67cc9"
+      "sha256": "d8f4c3c14fac11c933fb418b6dac11c2391bc778e2bb2ef39c232e82c39e1d7d"
     },
     {
       "path": "zh/library/index.html",
-      "sha256": "5dc8243aa10efeb4e5bd8b2ddf1487c31bcad9ba03ce57935daf53246091cf79"
+      "sha256": "e44bebe977b2adc5e01b1faf76eaacf9ef0a39cf3f7e5da146542c6d2cb318cd"
     },
     {
       "path": "zh/presentation/index.html",
-      "sha256": "d6f81ca37ba2413291f9ec77dc743a1f77168c2febe3ec83fe0e5f5d88bdfca9"
+      "sha256": "b2c8737838e1be8d60ffd15ede633f94eb27c0b97f767196ca90278c80e05a8a"
     },
     {
       "path": "zh/principles/index.html",
-      "sha256": "0e36f79a163717ab04565a67770644f374f768553757b14da95cde25c8e68141"
+      "sha256": "e38abef3c98297996f28c205e9ee935806c52970f3e65c71d8648d39453ab957"
     },
     {
       "path": "zh/projects/farm-light/index.html",
-      "sha256": "a8112c1b45141c313c6031843dc6c8b738f788503bbe09cd16d7a3135010c7e0"
+      "sha256": "c7505c39199d0c74e0b2bcea343acf412ad5a564912a761a2412fe83d6751b82"
     },
     {
       "path": "zh/projects/farm-observation/index.html",
-      "sha256": "e65c0ae74bf738838bf0913c50e7541ed14e35b89c836b409d472f428bef2a27"
+      "sha256": "b15c353423df1030a6e20cd3b6585ba9eca211cf8b3ee81406b5206a27f1a636"
     },
     {
       "path": "zh/projects/index.html",
-      "sha256": "1ca59f57a8b6542048f96603ba89d30f9c6181405c53e446ca87f4d7c745f9ae"
+      "sha256": "44838f0f85b1527fb9c375c9f6a6449996dff5439634dab4c5dcd914bb6d578b"
     },
     {
       "path": "zh/projects/tools-and-stories/index.html",
-      "sha256": "7b0ff253f2c50a98a69b5e5250928800bbf9c296eed5a2290e1f09fba475c509"
+      "sha256": "c7f48a0ca4988ac6a497cb7beaca990eae17c1edc915e9bd3466f46dc9290bdd"
     },
     {
       "path": "zh/start/index.html",
-      "sha256": "448b9de469c7a5e87e0abbc6c758101f123ef1dcefa45195de0c335ca1e1f66a"
+      "sha256": "cfd8638617b7f53d1ec147ef496d0c3bcd1e128a7f2d8c29d5a9ee6c52bb4874"
     },
     {
       "path": "zh/wiki/index.html",
-      "sha256": "3a704612606f4444188cb41963794a21eb8f7fb42a687f62882daf3001ee3e18"
+      "sha256": "b06a239d8660777f0ff5531e5367241107afe9c6a3f8bba6e78436ca171df27a"
     }
   ]
 }
