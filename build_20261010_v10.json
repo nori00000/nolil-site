@@ -40,7 +40,7 @@
   },
   "preserved_route": {
     "prefix": "sangmin/",
-    "source_commit": "459e4a204cd511e9bb884cee4db295fe985ccd3f",
+    "source_commit": "e02f4638d8aedf69d10a6c9b7f309a457830bac7",
     "files": [
       {
         "path": "sangmin/assets/boardgame-480.webp",
@@ -219,7 +219,43 @@
         "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
       },
       {
+        "path": "sangmin/assets/sangmin-introduction_20261010_v09.mp4",
+        "sha256": "723e922606dfb2f0925dbd1c15f1098aef9b054073bd6be73d6a379b0d77910b"
+      },
+      {
+        "path": "sangmin/assets/sangmin-introduction_20261010_v09_en.vtt",
+        "sha256": "4967c505ec499f5fb93deeeda7d26770af856cd0a1a2a40e03dc2561c59099ac"
+      },
+      {
+        "path": "sangmin/assets/sangmin-introduction_20261010_v09_ko.vtt",
+        "sha256": "e7af1ac2fe0e68b920d7879c67c9af0428f4c4e4dfa2cfb8f0f11e198a38a2d8"
+      },
+      {
+        "path": "sangmin/assets/sangmin-introduction_20261010_v09_poster.jpg",
+        "sha256": "408c04a9789767073731b319648bdf4a1e7c1a0bb5b66b7cf606906fc854314e"
+      },
+      {
         "path": "sangmin/assets/share_20261010_v05.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v06.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v07.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v08.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v09.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v10.jpg",
         "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
       },
       {
@@ -240,15 +276,31 @@
       },
       {
         "path": "sangmin/index.html",
-        "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+        "sha256": "25251a96b828a5120d312857e6f6da0eaee6b6ff44a177ac05e53b9baf1d60aa"
       },
       {
         "path": "sangmin/sangmin-lee_20261010_v05.vcf",
         "sha256": "ddce2c469aefbd2caac2af9268020acdcbb4ca05d673a2d80359fa9d8a5f1bbc"
       },
       {
+        "path": "sangmin/sangmin-lee_20261010_v09.vcf",
+        "sha256": "5895ba1ca37f5aff03095f13c094b28dcd0b9546da1b75aa162ebeee4d87602e"
+      },
+      {
+        "path": "sangmin/sangmin-lee_20261010_v10.vcf",
+        "sha256": "432a1a6cf75bb23846493d846edc152b31b2a2fda68d21707b63d50e1e5186ac"
+      },
+      {
         "path": "sangmin/이상민-소개_국제협력_20261010_v05.html",
         "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+      },
+      {
+        "path": "sangmin/이상민-소개_국제협력_20261010_v09.html",
+        "sha256": "def2e302e30f49b99af4de0c3812a134e3eb4e97a0d67eec8bdd5e0ff9704898"
+      },
+      {
+        "path": "sangmin/이상민-소개_국제협력_20261010_v10.html",
+        "sha256": "25251a96b828a5120d312857e6f6da0eaee6b6ff44a177ac05e53b9baf1d60aa"
       }
     ]
   },
@@ -947,7 +999,43 @@
       "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
     },
     {
+      "path": "sangmin/assets/sangmin-introduction_20261010_v09_en.vtt",
+      "sha256": "4967c505ec499f5fb93deeeda7d26770af856cd0a1a2a40e03dc2561c59099ac"
+    },
+    {
+      "path": "sangmin/assets/sangmin-introduction_20261010_v09_ko.vtt",
+      "sha256": "e7af1ac2fe0e68b920d7879c67c9af0428f4c4e4dfa2cfb8f0f11e198a38a2d8"
+    },
+    {
+      "path": "sangmin/assets/sangmin-introduction_20261010_v09_poster.jpg",
+      "sha256": "408c04a9789767073731b319648bdf4a1e7c1a0bb5b66b7cf606906fc854314e"
+    },
+    {
+      "path": "sangmin/assets/sangmin-introduction_20261010_v09.mp4",
+      "sha256": "723e922606dfb2f0925dbd1c15f1098aef9b054073bd6be73d6a379b0d77910b"
+    },
+    {
       "path": "sangmin/assets/share_20261010_v05.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v06.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v07.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v08.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v09.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v10.jpg",
       "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
     },
     {
@@ -968,15 +1056,31 @@
     },
     {
       "path": "sangmin/index.html",
-      "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+      "sha256": "25251a96b828a5120d312857e6f6da0eaee6b6ff44a177ac05e53b9baf1d60aa"
     },
     {
       "path": "sangmin/sangmin-lee_20261010_v05.vcf",
       "sha256": "ddce2c469aefbd2caac2af9268020acdcbb4ca05d673a2d80359fa9d8a5f1bbc"
     },
     {
+      "path": "sangmin/sangmin-lee_20261010_v09.vcf",
+      "sha256": "5895ba1ca37f5aff03095f13c094b28dcd0b9546da1b75aa162ebeee4d87602e"
+    },
+    {
+      "path": "sangmin/sangmin-lee_20261010_v10.vcf",
+      "sha256": "432a1a6cf75bb23846493d846edc152b31b2a2fda68d21707b63d50e1e5186ac"
+    },
+    {
       "path": "sangmin/이상민-소개_국제협력_20261010_v05.html",
       "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+    },
+    {
+      "path": "sangmin/이상민-소개_국제협력_20261010_v09.html",
+      "sha256": "def2e302e30f49b99af4de0c3812a134e3eb4e97a0d67eec8bdd5e0ff9704898"
+    },
+    {
+      "path": "sangmin/이상민-소개_국제협력_20261010_v10.html",
+      "sha256": "25251a96b828a5120d312857e6f6da0eaee6b6ff44a177ac05e53b9baf1d60aa"
     },
     {
       "path": "shared-farm.html",
