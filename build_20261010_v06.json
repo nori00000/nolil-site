@@ -9,6 +9,220 @@
     "origin": "https://playworkgrow.club",
     "version": "v06"
   },
+  "preserved_route": {
+    "prefix": "sangmin/",
+    "source_commit": "459e4a204cd511e9bb884cee4db295fe985ccd3f",
+    "files": [
+      {
+        "path": "sangmin/assets/boardgame-480.webp",
+        "sha256": "a1029509e26d3fc6891a3bef332a79c29886442382189c947c21bc4ffc284b61"
+      },
+      {
+        "path": "sangmin/assets/boardgame-960.webp",
+        "sha256": "2cc1a2a92522bbf36c2b16f07db949baac0637497aa07337371d482a54995bee"
+      },
+      {
+        "path": "sangmin/assets/garden-atlas-480.webp",
+        "sha256": "bee64dd0a37671dc3d10b0aba8b21b9ecc547f7eaf0baf7f306c988369dbd615"
+      },
+      {
+        "path": "sangmin/assets/garden-atlas-960.webp",
+        "sha256": "741079de5dfc32ab4622d70d9ef4bebf4086a8f1b8216d0462e6173cabc4b41d"
+      },
+      {
+        "path": "sangmin/assets/garden-critique-480.webp",
+        "sha256": "c1f50ca8abe4d9ba867196e5db40de9c11b03dc593e79f48986552eda7bcc29b"
+      },
+      {
+        "path": "sangmin/assets/garden-critique-960.webp",
+        "sha256": "5d10dc29b280e60680966e1690b4815e4fd2b39f19e66cafbff62b28436e61c5"
+      },
+      {
+        "path": "sangmin/assets/moss-product-480.webp",
+        "sha256": "e015ac70f74d4b830747f51d6d50bff6935bb51bcc379393a05bfd06840794c6"
+      },
+      {
+        "path": "sangmin/assets/moss-product-960.webp",
+        "sha256": "e33208de4b6c11d33718d0f33a5e7eaedb3454f8b41fd9c76afc047979d87d1c"
+      },
+      {
+        "path": "sangmin/assets/photo-01-1014.webp",
+        "sha256": "467bfb511cd12bfe4a1b36248047b804494f44ccd5b12341eadabad898ceb03e"
+      },
+      {
+        "path": "sangmin/assets/photo-01-480.webp",
+        "sha256": "d981a78f16546e4e00d2a6c167507c46d1b32362be5b54a934ff2b415fe1fd5f"
+      },
+      {
+        "path": "sangmin/assets/photo-01-960.webp",
+        "sha256": "cdf3f72dd05a7ab685d50735324c84ef66cfc46ef7150f78491c47ed35641079"
+      },
+      {
+        "path": "sangmin/assets/photo-02-480.webp",
+        "sha256": "29586112ef1ac4176ff711dc802826a4ebb8242b887654941badc5826ef70b36"
+      },
+      {
+        "path": "sangmin/assets/photo-02-960.webp",
+        "sha256": "ab55b46cb2b2e2afc3acb66556a44cca9df974fe33b67e72d83994b0dbd3fc08"
+      },
+      {
+        "path": "sangmin/assets/photo-03-1084.webp",
+        "sha256": "f985f2e94070aee4d5801bc629087a2b14c8769ecce25a94231a3af588026b43"
+      },
+      {
+        "path": "sangmin/assets/photo-03-480.webp",
+        "sha256": "21cea829f3b031b6a2bb88af615f1950b92369e1c871f0b446cf1e179fd3344d"
+      },
+      {
+        "path": "sangmin/assets/photo-03-960.webp",
+        "sha256": "08ef594a8017495fafd4edd90d26a7efdf1402aad9a69c20dc857d0a23cdc84c"
+      },
+      {
+        "path": "sangmin/assets/photo-04-1014.webp",
+        "sha256": "ed2dc2ceb6b9c0da0662e5648ddd4e0ac6b15a9bd0d6e7672360d559dafdd2b0"
+      },
+      {
+        "path": "sangmin/assets/photo-04-480.webp",
+        "sha256": "7566b83eb72d94674221769c2ab0c2eb16317d0228c3c188964588e177af7c49"
+      },
+      {
+        "path": "sangmin/assets/photo-04-960.webp",
+        "sha256": "454771433002b5186da8f933412c894113f4d9857b7b93c9849f84b5e1ea1efc"
+      },
+      {
+        "path": "sangmin/assets/photo-05-1200.webp",
+        "sha256": "803f390bafd0186e26e0b46237d597aa05d86d55db0434247d7bd324b28bfb88"
+      },
+      {
+        "path": "sangmin/assets/photo-05-480.webp",
+        "sha256": "f0c7428d45165d9e4a451f56a10b9b7c1d97b31914c1f1b79c9156d8d17e1c3f"
+      },
+      {
+        "path": "sangmin/assets/photo-05-960.webp",
+        "sha256": "dc9a93f754b358f53e3bccef80be0ec43cde0e96340ecd4e7ffa2eadc7ab3dbc"
+      },
+      {
+        "path": "sangmin/assets/photo-06-1200.webp",
+        "sha256": "5d54315e7d119e67f3cd1a325b84b1aa6aee9630f2725c85acdfa12bcec5fc38"
+      },
+      {
+        "path": "sangmin/assets/photo-06-480.webp",
+        "sha256": "83a389f7127ae799be13b75e58f940ab05bdd3c9d37fb3cd7d99f3c79cde8b23"
+      },
+      {
+        "path": "sangmin/assets/photo-06-960.webp",
+        "sha256": "97dbfceeb36521ee7124afcd14849924cb7c3edd2b3d674a95be14597e64e8c6"
+      },
+      {
+        "path": "sangmin/assets/photo-07-1440.webp",
+        "sha256": "b6464f0ad5ea8882530d5349885680e35bf00e0d26a08b8e3c53b5e04b73509a"
+      },
+      {
+        "path": "sangmin/assets/photo-07-480.webp",
+        "sha256": "bd2db306453a412273c8894adbe679571c2515c5a6c54b101e5dcf4d7a43dc2f"
+      },
+      {
+        "path": "sangmin/assets/photo-07-960.webp",
+        "sha256": "d091d8f610ce59bed157e100ea4ab24322bb498321f8940f2c7fa0d224199407"
+      },
+      {
+        "path": "sangmin/assets/photo-08-1038.webp",
+        "sha256": "7e49dac2ce2fb7aa88ca7db6a266dd85df158993c57b00455d84967975653fb3"
+      },
+      {
+        "path": "sangmin/assets/photo-08-480.webp",
+        "sha256": "90cc9f87fde9fd64391af5acb8b45de2068b8ef8345f57cdf880e88d17a3fc36"
+      },
+      {
+        "path": "sangmin/assets/photo-08-960.webp",
+        "sha256": "8e888a58b10f92f16e5cf3230795e61ca320ce99e4ebb392880751b6341b4ec2"
+      },
+      {
+        "path": "sangmin/assets/photo-09-1000.webp",
+        "sha256": "9b7df283b356283c56c5bb5b65d10afe0e03d6b3b1a80e5fc6c2722f9166a8a1"
+      },
+      {
+        "path": "sangmin/assets/photo-09-480.webp",
+        "sha256": "0fa42eb51b932b3c9078ba86d07c705ae97df3488e1dc10cf1918fa10a0546b6"
+      },
+      {
+        "path": "sangmin/assets/photo-09-960.webp",
+        "sha256": "8dfd1fa65c887c81ea34216ff428fc19cfd89939b868b4082d2b982e78685ced"
+      },
+      {
+        "path": "sangmin/assets/photo-10-1127.webp",
+        "sha256": "3cd08ebf54043ecfbd48f7c0e09f80925b4e2f59a18ae13cc5f37dcbafc20851"
+      },
+      {
+        "path": "sangmin/assets/photo-10-480.webp",
+        "sha256": "e943d9652584a0a42962af22526fb2d20a16eff5dda64e8bf6a107d8061499e6"
+      },
+      {
+        "path": "sangmin/assets/photo-10-960.webp",
+        "sha256": "c2b901831d231f6cae1b7807d8283e1fd0864253cd3a6c1ca813ca438919b4ee"
+      },
+      {
+        "path": "sangmin/assets/photo-11-1008.webp",
+        "sha256": "ea45dade28c6cd7739b872c07689549b048372dd340adca35e460b928f11477b"
+      },
+      {
+        "path": "sangmin/assets/photo-11-480.webp",
+        "sha256": "2c904ab9b15e63a7018ac1b7c7532b68c6b3b1dd00c233484b5610a99dee70d4"
+      },
+      {
+        "path": "sangmin/assets/photo-11-960.webp",
+        "sha256": "6943721f10e6395444990bd418ecac27dbe2993d65513c5e0fbd1670b4c1c1e6"
+      },
+      {
+        "path": "sangmin/assets/photo-12-480.webp",
+        "sha256": "7cc506ea46b078070b0b1e9f06bc5fbb63f44978cb1363fba9034773f171c3c7"
+      },
+      {
+        "path": "sangmin/assets/photo-12-909.webp",
+        "sha256": "6446ac221c194dca45e55250957084abd1b3489a168258908a5cd16d51edf521"
+      },
+      {
+        "path": "sangmin/assets/published-book-480.webp",
+        "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
+      },
+      {
+        "path": "sangmin/assets/published-book-960.webp",
+        "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
+      },
+      {
+        "path": "sangmin/assets/share_20261010_v05.jpg",
+        "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+      },
+      {
+        "path": "sangmin/assets/summer-night-480.webp",
+        "sha256": "0f16331ec75892a1f89712db882d80a9433be8f51d7d708ad431430d28d7bf48"
+      },
+      {
+        "path": "sangmin/assets/summer-night-960.webp",
+        "sha256": "c31bffae7c0359ec369a2943760c4651f372fe8bfda9cc2b5c26a0893dbf5165"
+      },
+      {
+        "path": "sangmin/assets/winter-festival-480.webp",
+        "sha256": "998e73093b551ebc4b4c84db9c642731e5d880c641cfa736a7d9bd597acc61ae"
+      },
+      {
+        "path": "sangmin/assets/winter-festival-960.webp",
+        "sha256": "ff29f2882c3f2ee791beaff2305a40f7e37a7f7b951de16ce215eb8f28ec78e5"
+      },
+      {
+        "path": "sangmin/index.html",
+        "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+      },
+      {
+        "path": "sangmin/sangmin-lee_20261010_v05.vcf",
+        "sha256": "ddce2c469aefbd2caac2af9268020acdcbb4ca05d673a2d80359fa9d8a5f1bbc"
+      },
+      {
+        "path": "sangmin/이상민-소개_국제협력_20261010_v05.html",
+        "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+      }
+    ]
+  },
   "pages": 9,
   "files": [
     {
@@ -118,6 +332,214 @@
     {
       "path": "robots.txt",
       "sha256": "f22c70d1224c6a3253184fd6e2fbffd7d9fa0e4eae02f21ec6f582a35e8a6e52"
+    },
+    {
+      "path": "sangmin/assets/boardgame-480.webp",
+      "sha256": "a1029509e26d3fc6891a3bef332a79c29886442382189c947c21bc4ffc284b61"
+    },
+    {
+      "path": "sangmin/assets/boardgame-960.webp",
+      "sha256": "2cc1a2a92522bbf36c2b16f07db949baac0637497aa07337371d482a54995bee"
+    },
+    {
+      "path": "sangmin/assets/garden-atlas-480.webp",
+      "sha256": "bee64dd0a37671dc3d10b0aba8b21b9ecc547f7eaf0baf7f306c988369dbd615"
+    },
+    {
+      "path": "sangmin/assets/garden-atlas-960.webp",
+      "sha256": "741079de5dfc32ab4622d70d9ef4bebf4086a8f1b8216d0462e6173cabc4b41d"
+    },
+    {
+      "path": "sangmin/assets/garden-critique-480.webp",
+      "sha256": "c1f50ca8abe4d9ba867196e5db40de9c11b03dc593e79f48986552eda7bcc29b"
+    },
+    {
+      "path": "sangmin/assets/garden-critique-960.webp",
+      "sha256": "5d10dc29b280e60680966e1690b4815e4fd2b39f19e66cafbff62b28436e61c5"
+    },
+    {
+      "path": "sangmin/assets/moss-product-480.webp",
+      "sha256": "e015ac70f74d4b830747f51d6d50bff6935bb51bcc379393a05bfd06840794c6"
+    },
+    {
+      "path": "sangmin/assets/moss-product-960.webp",
+      "sha256": "e33208de4b6c11d33718d0f33a5e7eaedb3454f8b41fd9c76afc047979d87d1c"
+    },
+    {
+      "path": "sangmin/assets/photo-01-1014.webp",
+      "sha256": "467bfb511cd12bfe4a1b36248047b804494f44ccd5b12341eadabad898ceb03e"
+    },
+    {
+      "path": "sangmin/assets/photo-01-480.webp",
+      "sha256": "d981a78f16546e4e00d2a6c167507c46d1b32362be5b54a934ff2b415fe1fd5f"
+    },
+    {
+      "path": "sangmin/assets/photo-01-960.webp",
+      "sha256": "cdf3f72dd05a7ab685d50735324c84ef66cfc46ef7150f78491c47ed35641079"
+    },
+    {
+      "path": "sangmin/assets/photo-02-480.webp",
+      "sha256": "29586112ef1ac4176ff711dc802826a4ebb8242b887654941badc5826ef70b36"
+    },
+    {
+      "path": "sangmin/assets/photo-02-960.webp",
+      "sha256": "ab55b46cb2b2e2afc3acb66556a44cca9df974fe33b67e72d83994b0dbd3fc08"
+    },
+    {
+      "path": "sangmin/assets/photo-03-1084.webp",
+      "sha256": "f985f2e94070aee4d5801bc629087a2b14c8769ecce25a94231a3af588026b43"
+    },
+    {
+      "path": "sangmin/assets/photo-03-480.webp",
+      "sha256": "21cea829f3b031b6a2bb88af615f1950b92369e1c871f0b446cf1e179fd3344d"
+    },
+    {
+      "path": "sangmin/assets/photo-03-960.webp",
+      "sha256": "08ef594a8017495fafd4edd90d26a7efdf1402aad9a69c20dc857d0a23cdc84c"
+    },
+    {
+      "path": "sangmin/assets/photo-04-1014.webp",
+      "sha256": "ed2dc2ceb6b9c0da0662e5648ddd4e0ac6b15a9bd0d6e7672360d559dafdd2b0"
+    },
+    {
+      "path": "sangmin/assets/photo-04-480.webp",
+      "sha256": "7566b83eb72d94674221769c2ab0c2eb16317d0228c3c188964588e177af7c49"
+    },
+    {
+      "path": "sangmin/assets/photo-04-960.webp",
+      "sha256": "454771433002b5186da8f933412c894113f4d9857b7b93c9849f84b5e1ea1efc"
+    },
+    {
+      "path": "sangmin/assets/photo-05-1200.webp",
+      "sha256": "803f390bafd0186e26e0b46237d597aa05d86d55db0434247d7bd324b28bfb88"
+    },
+    {
+      "path": "sangmin/assets/photo-05-480.webp",
+      "sha256": "f0c7428d45165d9e4a451f56a10b9b7c1d97b31914c1f1b79c9156d8d17e1c3f"
+    },
+    {
+      "path": "sangmin/assets/photo-05-960.webp",
+      "sha256": "dc9a93f754b358f53e3bccef80be0ec43cde0e96340ecd4e7ffa2eadc7ab3dbc"
+    },
+    {
+      "path": "sangmin/assets/photo-06-1200.webp",
+      "sha256": "5d54315e7d119e67f3cd1a325b84b1aa6aee9630f2725c85acdfa12bcec5fc38"
+    },
+    {
+      "path": "sangmin/assets/photo-06-480.webp",
+      "sha256": "83a389f7127ae799be13b75e58f940ab05bdd3c9d37fb3cd7d99f3c79cde8b23"
+    },
+    {
+      "path": "sangmin/assets/photo-06-960.webp",
+      "sha256": "97dbfceeb36521ee7124afcd14849924cb7c3edd2b3d674a95be14597e64e8c6"
+    },
+    {
+      "path": "sangmin/assets/photo-07-1440.webp",
+      "sha256": "b6464f0ad5ea8882530d5349885680e35bf00e0d26a08b8e3c53b5e04b73509a"
+    },
+    {
+      "path": "sangmin/assets/photo-07-480.webp",
+      "sha256": "bd2db306453a412273c8894adbe679571c2515c5a6c54b101e5dcf4d7a43dc2f"
+    },
+    {
+      "path": "sangmin/assets/photo-07-960.webp",
+      "sha256": "d091d8f610ce59bed157e100ea4ab24322bb498321f8940f2c7fa0d224199407"
+    },
+    {
+      "path": "sangmin/assets/photo-08-1038.webp",
+      "sha256": "7e49dac2ce2fb7aa88ca7db6a266dd85df158993c57b00455d84967975653fb3"
+    },
+    {
+      "path": "sangmin/assets/photo-08-480.webp",
+      "sha256": "90cc9f87fde9fd64391af5acb8b45de2068b8ef8345f57cdf880e88d17a3fc36"
+    },
+    {
+      "path": "sangmin/assets/photo-08-960.webp",
+      "sha256": "8e888a58b10f92f16e5cf3230795e61ca320ce99e4ebb392880751b6341b4ec2"
+    },
+    {
+      "path": "sangmin/assets/photo-09-1000.webp",
+      "sha256": "9b7df283b356283c56c5bb5b65d10afe0e03d6b3b1a80e5fc6c2722f9166a8a1"
+    },
+    {
+      "path": "sangmin/assets/photo-09-480.webp",
+      "sha256": "0fa42eb51b932b3c9078ba86d07c705ae97df3488e1dc10cf1918fa10a0546b6"
+    },
+    {
+      "path": "sangmin/assets/photo-09-960.webp",
+      "sha256": "8dfd1fa65c887c81ea34216ff428fc19cfd89939b868b4082d2b982e78685ced"
+    },
+    {
+      "path": "sangmin/assets/photo-10-1127.webp",
+      "sha256": "3cd08ebf54043ecfbd48f7c0e09f80925b4e2f59a18ae13cc5f37dcbafc20851"
+    },
+    {
+      "path": "sangmin/assets/photo-10-480.webp",
+      "sha256": "e943d9652584a0a42962af22526fb2d20a16eff5dda64e8bf6a107d8061499e6"
+    },
+    {
+      "path": "sangmin/assets/photo-10-960.webp",
+      "sha256": "c2b901831d231f6cae1b7807d8283e1fd0864253cd3a6c1ca813ca438919b4ee"
+    },
+    {
+      "path": "sangmin/assets/photo-11-1008.webp",
+      "sha256": "ea45dade28c6cd7739b872c07689549b048372dd340adca35e460b928f11477b"
+    },
+    {
+      "path": "sangmin/assets/photo-11-480.webp",
+      "sha256": "2c904ab9b15e63a7018ac1b7c7532b68c6b3b1dd00c233484b5610a99dee70d4"
+    },
+    {
+      "path": "sangmin/assets/photo-11-960.webp",
+      "sha256": "6943721f10e6395444990bd418ecac27dbe2993d65513c5e0fbd1670b4c1c1e6"
+    },
+    {
+      "path": "sangmin/assets/photo-12-480.webp",
+      "sha256": "7cc506ea46b078070b0b1e9f06bc5fbb63f44978cb1363fba9034773f171c3c7"
+    },
+    {
+      "path": "sangmin/assets/photo-12-909.webp",
+      "sha256": "6446ac221c194dca45e55250957084abd1b3489a168258908a5cd16d51edf521"
+    },
+    {
+      "path": "sangmin/assets/published-book-480.webp",
+      "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
+    },
+    {
+      "path": "sangmin/assets/published-book-960.webp",
+      "sha256": "ff7f19ace7384006e7ebab81b2a7bc7495cb17db5475ef44a708cb71d4f736f7"
+    },
+    {
+      "path": "sangmin/assets/share_20261010_v05.jpg",
+      "sha256": "a97e9c3370bc1d3453ac62d25f6ffec35310f8976872164fe4dca75830925aae"
+    },
+    {
+      "path": "sangmin/assets/summer-night-480.webp",
+      "sha256": "0f16331ec75892a1f89712db882d80a9433be8f51d7d708ad431430d28d7bf48"
+    },
+    {
+      "path": "sangmin/assets/summer-night-960.webp",
+      "sha256": "c31bffae7c0359ec369a2943760c4651f372fe8bfda9cc2b5c26a0893dbf5165"
+    },
+    {
+      "path": "sangmin/assets/winter-festival-480.webp",
+      "sha256": "998e73093b551ebc4b4c84db9c642731e5d880c641cfa736a7d9bd597acc61ae"
+    },
+    {
+      "path": "sangmin/assets/winter-festival-960.webp",
+      "sha256": "ff29f2882c3f2ee791beaff2305a40f7e37a7f7b951de16ce215eb8f28ec78e5"
+    },
+    {
+      "path": "sangmin/index.html",
+      "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
+    },
+    {
+      "path": "sangmin/sangmin-lee_20261010_v05.vcf",
+      "sha256": "ddce2c469aefbd2caac2af9268020acdcbb4ca05d673a2d80359fa9d8a5f1bbc"
+    },
+    {
+      "path": "sangmin/이상민-소개_국제협력_20261010_v05.html",
+      "sha256": "85585a1127b4558f9fb22d6664c37ae217a361dc8b77c4adce218b9749cf0279"
     },
     {
       "path": "sitemap.xml",
