@@ -254,3 +254,12 @@ export const englishCopy = {
   '넓게 펼친 면 · 빛이 통과할 자리를 골라보세요.': 'A wider surface · choose where light could pass through.',
   '좁게 접힌 틈 · 어떤 부분을 열어두고 싶나요?': 'A narrower fold · which parts would you leave open?',
 };
+
+Object.assign(englishCopy,{
+ '첫 시즌 기준안 · 정원 12명 · 12주 가입비 36만 원':'First-season plan · 12 places · KRW 360,000 for 12 weeks',
+ '36만 원 / 12주 · 기준안':'KRW 360,000 / 12 weeks · planned',
+ '모집 정원':'Planned capacity','12명 · 모집 계획':'12 people · planned','정기 작업':'Scheduled sessions','격주 3시간 · 총 6회':'6 sessions · 3 hours, every other week',
+ '정기 작업 6회·기본 공용 도구와 소모품·기록 안내를 포함하는 기준안입니다. 개인 장비·특수 재료·식사·교통비는 별도입니다. 개시일·진행자·세부 지원·환급 조건은 모집 전에 안내합니다. 부동산 임대수익을 운영 기반으로 두지 않습니다.':'The plan includes six sessions, basic shared tools and consumables, and documentation guidance. Personal equipment, specialist materials, meals and transport are outside the plan. Start dates, facilitators, detailed support and refund terms will be published before enrolment. The model does not rely on property rental revenue.',
+ '첫 시즌은 정원 12명·12주 가입비 36만 원의 기준안입니다. 개시일·세부 지원·환급 조건과 효력 시점은 모집 전에 안내합니다.':'The first-season plan is for 12 people at KRW 360,000 each for 12 weeks. Start dates, detailed support, refunds and effective terms will be published before enrolment.',
+ '소개자료 보기':'Introduction','한눈에 읽기 · PDF 2쪽 ↗':'At a glance · 2-page PDF ↗','발표자료 보기':'Presentation','12슬라이드 · PPTX ↗':'12 slides · PPTX ↗'
+});

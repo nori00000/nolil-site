@@ -1,8 +1,8 @@
 {
   "issued_on": "2026-10-10",
-  "version": "v07",
+  "version": "v08",
   "change_log": [
-    "v07 short primary brand; separate Korean and English pages; wiki; search and share metadata; legacy URL migration"
+    "v08 six languages, introduction PDFs, editable presentations, first-season membership plan"
   ],
   "legacy_routes": [
     "shared-farm.html",
@@ -36,7 +36,7 @@
   "mode": "public",
   "publication": {
     "origin": "https://playworkgrow.club",
-    "version": "v07"
+    "version": "v08"
   },
   "preserved_route": {
     "prefix": "sangmin/",
@@ -252,7 +252,7 @@
       }
     ]
   },
-  "pages": 20,
+  "pages": 72,
   "files": [
     {
       "path": ".nojekyll",
@@ -260,7 +260,7 @@
     },
     {
       "path": "404.html",
-      "sha256": "562dd7ea41bedf4a7dbb2f1d6a2fa813b3e9799d5b0d9028f0dbaa8c25f6ce96"
+      "sha256": "8585f0b12cf66c5ce6b62a50ba52166293386b5737f07580039298ffdff40d3e"
     },
     {
       "path": "apple-touch-icon.png",
@@ -324,15 +324,23 @@
     },
     {
       "path": "assets/i18n-en.js",
-      "sha256": "3fd47ea264fd98a8403d8f57b67251e0c4bbfbf0c67b7ca6bec549bd96869981"
+      "sha256": "d441c43b2e3cf3fcde9bcecae5013e034ca2ff3ca7cf6794aeb3aebfd02c6f15"
     },
     {
       "path": "assets/i18n.js",
-      "sha256": "3f58d4eaeb7a39723c7644ea499db458174567dd0a84b10c4de662e3b7645695"
+      "sha256": "f70a09ea1581b39d71c8f3e9bb4674a2b78769190f8483b8db93056bcaca689b"
+    },
+    {
+      "path": "assets/international.js",
+      "sha256": "aa8b622dd7eba971f80937f7b53274fd217331b400f0bf458913843ffbb8e191"
     },
     {
       "path": "assets/journey.js",
-      "sha256": "55e59c8f1890f521944ad781a129e74d3a13757b8946bfb41da5f652e0256c7e"
+      "sha256": "8bded68716cbb3fcc3d787f298739782e005d71a79b189dbd837d826d331f410"
+    },
+    {
+      "path": "assets/languages.js",
+      "sha256": "9a2bf93ad1c561d50965e67460d10a5144d7c0a3b207ceafc87fe76d22f262e7"
     },
     {
       "path": "assets/mark.svg",
@@ -340,15 +348,19 @@
     },
     {
       "path": "assets/participation.js",
-      "sha256": "04254a4fdf7c17053db2d21d2b154d692e62276444161fd3f8c5c8e97699deb9"
+      "sha256": "2b4c18d1aca740e105a8771f0d86cc62ae218aa8acb890a41f321fc90c43c216"
     },
     {
       "path": "assets/photos/farm-moss.webp",
       "sha256": "f75bca92a444dc59f622c86512997e97aa72ef66a5310aed7c657753a14f724d"
     },
     {
+      "path": "assets/presentation.js",
+      "sha256": "8a93f693b56c8aef843b7d3ebf876a1b66c331f2055d2dc03818e32e778f8bf3"
+    },
+    {
       "path": "assets/site.css",
-      "sha256": "e6d97bf0d8b264805ae7e227b6419f6d0dab611ce16b8ac8170dfad9aa27ba09"
+      "sha256": "3a64cf5cc10d26448d1ed3e64fe21ba056956c40223f08b2fbf1cd5b85ef1686"
     },
     {
       "path": "assets/studio.js",
@@ -360,163 +372,359 @@
     },
     {
       "path": "data/participation.json",
-      "sha256": "866da0ad556a33c72ed00b8d9066a69ad4fa1d90898da8b0d1b72569012adea0"
+      "sha256": "03e67478e10f86c7fa2e56fb8442ba847f06399df891b6f9e7e3d8cca3b75de5"
+    },
+    {
+      "path": "downloads/hackerfarm-introduction-en_20261010_v08.pdf",
+      "sha256": "17fa3bd8ea48be08fbc9a2b1b93988b39c5ced235ef2e47dd46376265594bdb2"
+    },
+    {
+      "path": "downloads/hackerfarm-introduction-ko_20261010_v08.pdf",
+      "sha256": "4574b4812f52e4ac6e6a9017b2684a91c7de0f09d664001baae4a1858c2b5665"
+    },
+    {
+      "path": "downloads/hackerfarm-presentation-en_20261010_v08.pdf",
+      "sha256": "00c49bd4f41ab9717c6dcea86b0376a0c849c73e91a04ad8ee2566aabb5eb1d2"
+    },
+    {
+      "path": "downloads/hackerfarm-presentation-en_20261010_v08.pptx",
+      "sha256": "a56b52eeb8bf6d745ad5f0c3c94dec79acf68bc465a9030ad1374b09e850ebbd"
+    },
+    {
+      "path": "downloads/hackerfarm-presentation-ko_20261010_v08.pdf",
+      "sha256": "1b592df0e8282019a4bdf0da41b1c87f9c40d4b6a07d7e74b210030b6a85b347"
+    },
+    {
+      "path": "downloads/hackerfarm-presentation-ko_20261010_v08.pptx",
+      "sha256": "3d4d7a58b5fa02c4c1f9602e600dc7227219225e7e960fa7a0feb49bd70518fc"
     },
     {
       "path": "en/404.html",
-      "sha256": "5499ab5ac16cdbf74eae8d76e7a8df93496a61f36d4706ddeddef6527cd926bd"
+      "sha256": "1a3608213ff876d81295c274a3bdd2e13e1c8a26a0fa7050c2afb022be9a4c3e"
     },
     {
       "path": "en/data/participation.json",
-      "sha256": "df0aef1c6e0f951b71ce83aba9fe8a34f190923cbffd6b8b5bc1eff2594a7b7b"
+      "sha256": "68cc433f6013e8a66d70b0adaa227c40e608e06c74ccaa58879399df420f9e0a"
     },
     {
       "path": "en/index.html",
-      "sha256": "bc6a3bf058406bac78a330606b3a8f80017f08d60003126f7afbf595cd8acaa8"
+      "sha256": "c4c3245134cd8f83f51cc697267a925cfdc588fb8e860376fcd8f4aaf6d08055"
+    },
+    {
+      "path": "en/introduction/index.html",
+      "sha256": "a47ee09a12da0226e3cc4f6b1b42ec1758347b6018081daeab37833aeeba9d8b"
     },
     {
       "path": "en/library/index.html",
-      "sha256": "ff36144018fda623f11f4e37fe2ce801f5201c3020177a92c6ca27fa0ddce9f3"
+      "sha256": "8252db21159ebcf0c63dc088db6965d6820086a2356973c06b5df58ea0c5a901"
+    },
+    {
+      "path": "en/presentation/index.html",
+      "sha256": "b027b0992258d43334b6b3e00a1a0c37f173050c48f6d15e815240b4bbe55d24"
     },
     {
       "path": "en/principles/index.html",
-      "sha256": "b1b90e09db3feff3ce479a0a4a3421e7cd472f04fc7762da6dc0394c79410f7c"
+      "sha256": "0cdea000c5bb399767404d7ad2b8d7542caab9b5200ba2c897f6ec7d724e4abe"
     },
     {
       "path": "en/projects/farm-light/index.html",
-      "sha256": "284cb51721e09e329f63da8d704e9f06d1bb7c335a444ea3d3adb0ce9e55a63b"
+      "sha256": "48494afc43427d4b3ba37dd34e51be86ac0f7000e8297901d780aab07697894f"
     },
     {
       "path": "en/projects/farm-observation/index.html",
-      "sha256": "c0b60482272e78b78c04d27a4917a8e1f52d5c443ae66237dbdedbc0dccf8469"
+      "sha256": "1ff1295098e724e76f0374ca4c3be70543a140c5510adafa69ff67099701a064"
     },
     {
       "path": "en/projects/index.html",
-      "sha256": "89d7b22919be66a0ae102b431bcabe3e2f0aec20381a477794e7b3082e94b7e1"
+      "sha256": "276708f236aa723258cc161706f7d4508de12ae12fa07b1f6c3dca756d09fcc0"
     },
     {
       "path": "en/projects/tools-and-stories/index.html",
-      "sha256": "a050ee269fb7a91d1915dc97e2c9067ad416986d5bdd88450b21a57b8ba21d13"
+      "sha256": "6783a5d4d3ad3c615287f40e826f63ee7f9fba49c12abdf3eb1753e5e21d6e60"
     },
     {
       "path": "en/start/index.html",
-      "sha256": "d2609d7f89cd506eaa5e84890c8fe81373e29829c5eec01390f151a69390231e"
+      "sha256": "8772adadb6d226462605c74ef8b6e4ebc0d44f48d626ba6801524f20cf81728c"
     },
     {
       "path": "en/wiki/index.html",
-      "sha256": "a0d69ac45b14d0ab7f5bd0fa06615b7b8495a4c19e72bca29980ff1b51e08caa"
+      "sha256": "d29fdb598bee0a8fbf5bd61e905ed75a7865c7022d5ed6891264b5f07e26e410"
+    },
+    {
+      "path": "es/404.html",
+      "sha256": "8fcca9f7ff0aa21312e741a97ac700b70afbc7be70616a35ad3508cf301ee858"
+    },
+    {
+      "path": "es/data/participation.json",
+      "sha256": "48151de7c0990f32dabe2f36083d0e26dd4ad6185cd734567d38048f1f5f1ef7"
+    },
+    {
+      "path": "es/index.html",
+      "sha256": "d68fa5986f7d2593f4ebb6917c0d3f27a3021f4c1a1876b8df257bed02097c80"
+    },
+    {
+      "path": "es/introduction/index.html",
+      "sha256": "9bd0631d997ba20fad0c5118b82327089b4b1025d09694f27de9145eb16231cd"
+    },
+    {
+      "path": "es/library/index.html",
+      "sha256": "4ce4e84b16e220efd0a6dd16868ae33c72360aa9a4a36b67f5f54b1c4277af87"
+    },
+    {
+      "path": "es/presentation/index.html",
+      "sha256": "ca74dd472c50b226ae3c74258230b57320df62d4aca63d0ea3ee6e1a199a48a2"
+    },
+    {
+      "path": "es/principles/index.html",
+      "sha256": "97cef5aec9739cc408b272aeff9583a9ba90dc7dc9a295e98f49d819c38d5aa5"
+    },
+    {
+      "path": "es/projects/farm-light/index.html",
+      "sha256": "4114587f98f3c3cc473126ecefbd1ad14aabd7712519462313d388ea4ed5016b"
+    },
+    {
+      "path": "es/projects/farm-observation/index.html",
+      "sha256": "e0f2cbfca3a09987867e086b832c7082b85c560534b7b83ac2a967e2568e4500"
+    },
+    {
+      "path": "es/projects/index.html",
+      "sha256": "c5bfbf0f625ba0a059e202109748dec47eeebf8f8d2b75ccd55056206c558b57"
+    },
+    {
+      "path": "es/projects/tools-and-stories/index.html",
+      "sha256": "f8b10ec88391afac18c57d0a06c28d48cfa09c7e426fa9058e668261ee921ce8"
+    },
+    {
+      "path": "es/start/index.html",
+      "sha256": "8a77978b7814a0a1eb3b160c7b6eb30c714fe187e03a3f902cbbf9c82ac5bb8e"
+    },
+    {
+      "path": "es/wiki/index.html",
+      "sha256": "a1cca7a681da3e006c75c3ae31d0f86e1a00db1656b1c8b39fb270cf7574bfbd"
     },
     {
       "path": "favicon.png",
       "sha256": "0c0475850b6438d47ed1c22b3e0eb191b1a37189e91c272caef882e28af38b76"
     },
     {
+      "path": "fr/404.html",
+      "sha256": "cf93dc27b324edd0deb335dabebdfe3f141517fd82c91bb2c5ebab0760dd543d"
+    },
+    {
+      "path": "fr/data/participation.json",
+      "sha256": "022cbaf847bcbc2c770676f7c1a4b9c46e8c07ed5c55ff3918947c366e76a3a1"
+    },
+    {
+      "path": "fr/index.html",
+      "sha256": "2a9ff62b619ccd5496dd8eee2b2a0a13165a71b36289a2dde929ef1666393158"
+    },
+    {
+      "path": "fr/introduction/index.html",
+      "sha256": "41f426640583ecfe5a46c5f8467d902928990425173067fe32058a06de073d20"
+    },
+    {
+      "path": "fr/library/index.html",
+      "sha256": "2fbb0b597c91c82b8a88bcfbb237c3061f073c20bc9b573053d0f1cf4d96a319"
+    },
+    {
+      "path": "fr/presentation/index.html",
+      "sha256": "3faa61a4c30622acd12d22e5062cec56d7a9350b4689c011b90d2344bb9cd0f4"
+    },
+    {
+      "path": "fr/principles/index.html",
+      "sha256": "9f5d61c0172be1f2d9cbbcf0c6298bec353571609fef723d6bc6352a313527c2"
+    },
+    {
+      "path": "fr/projects/farm-light/index.html",
+      "sha256": "dd28d347ffd0bbd68cd782b61b39017e11d05cff499b482eb0131184ddc13b8a"
+    },
+    {
+      "path": "fr/projects/farm-observation/index.html",
+      "sha256": "140c627882f0fc72d1cfdf5afee1b2968ffd54288a476f2b50b8773ae3cc5d2a"
+    },
+    {
+      "path": "fr/projects/index.html",
+      "sha256": "226d8be5ad3c9e92a5277df07c9d735dc86cc33bd3f5034310c9245fa5d139a8"
+    },
+    {
+      "path": "fr/projects/tools-and-stories/index.html",
+      "sha256": "51fa47f5a22e2bde97f8c01065a267989affbc0e02ca3300d80633fd1397903d"
+    },
+    {
+      "path": "fr/start/index.html",
+      "sha256": "a8fb63beae932dd76a8862b0617b2e53e2e70b788ce78f48352235fa33210029"
+    },
+    {
+      "path": "fr/wiki/index.html",
+      "sha256": "b1086e0c71c2307258ac7bdef22635db36f6f708e746fa9045cfb05d17d24694"
+    },
+    {
       "path": "group.html",
-      "sha256": "a12e807210ed7fd029ed75c1047c8a7162dfa252560b7f0ce26cdf82f704e84c"
+      "sha256": "0b4e50f01994012ff8d8fa9802563fee830009fbd9ba483e424119991c01977e"
     },
     {
       "path": "index.html",
-      "sha256": "83c8dd8a53f0b0e694f250a6955dce29abe4f3bf17ebfc640641d6127edbd909"
+      "sha256": "b612c916f8c8cff8029e29ef54d7da4b7e7583055bba2f879f3a2cf4729a889b"
+    },
+    {
+      "path": "introduction/index.html",
+      "sha256": "54f5444f3f93f7c68752ea11dbbe25ef2dd6bb9bfd48121108d277e5fef75055"
+    },
+    {
+      "path": "ja/404.html",
+      "sha256": "0ab77f04619fbd161abcade056ba4b9522b2cb556a1b5fea63d935f92d1476a3"
+    },
+    {
+      "path": "ja/data/participation.json",
+      "sha256": "ff8e993e3e5f6ca8d6fa3281ee47940917ca8258aed829d2318454a11d45a6e4"
+    },
+    {
+      "path": "ja/index.html",
+      "sha256": "1f6f1ca0eacb442355e4565fef6632c1bf29663844d3cdffba2324797ed18313"
+    },
+    {
+      "path": "ja/introduction/index.html",
+      "sha256": "b623253b9166b6a4f11487dd7487a2df9b66451d2e249726bfbb9a8177686080"
+    },
+    {
+      "path": "ja/library/index.html",
+      "sha256": "084d5fe82d16dac5a19b0ad22d681e31a1c37d8bbac0577a800a32c2d0fccb47"
+    },
+    {
+      "path": "ja/presentation/index.html",
+      "sha256": "dbbe6293075f4df179932cf8ff98f66ebf409178a9bec61098f38b1a398632b5"
+    },
+    {
+      "path": "ja/principles/index.html",
+      "sha256": "85e01a97194430fe4d6511a8b16a85f9542101d24db6e34c760ef8fa71df58a6"
+    },
+    {
+      "path": "ja/projects/farm-light/index.html",
+      "sha256": "1afac4c192e7e10cdcd024ec3b43de5c619069ce54c1c22e2adad600019ccfc9"
+    },
+    {
+      "path": "ja/projects/farm-observation/index.html",
+      "sha256": "d07277fbbb4b670a94a9b3cfab0665026a3a3a8da07ff7781bf1bd4516c38d23"
+    },
+    {
+      "path": "ja/projects/index.html",
+      "sha256": "df0413d3ba15e38bec0be74eaab0d20b3e458dc23f21effe130f12147f3b1205"
+    },
+    {
+      "path": "ja/projects/tools-and-stories/index.html",
+      "sha256": "99c1599c4d9fd48a249219815ad0f7637c81a200ffa148bbdfe582f8407fcda1"
+    },
+    {
+      "path": "ja/start/index.html",
+      "sha256": "ddc321fcbde2c1bb4c6fe1e744d84da9fcd238f55db28ee753be957f04296999"
+    },
+    {
+      "path": "ja/wiki/index.html",
+      "sha256": "e9651b9f5d261c50b2c0521970527aef8107f931707f57c51c231042bdb6d392"
     },
     {
       "path": "lead.html",
-      "sha256": "214903502c81f75657eedba306211e7de68e8ddda6c3034deb373657a46a87b8"
+      "sha256": "3bd86ee5edb849f90ba90b3081b238f957a72c6be1327a052028430ba8accd09"
     },
     {
       "path": "letter/index.html",
-      "sha256": "30b0988e9b08187eb918019c2f7848cbb07a3a449064d846fe9c9234c02b8a6f"
+      "sha256": "6924b9d5018767433bfcb9fe8b811ce25313a7b212afa15f30b49c06399e1172"
     },
     {
       "path": "library/index.html",
-      "sha256": "bdd8b367c222c39b83141982ed10a39170a46ad7579abf57503298016e8de3ad"
+      "sha256": "80fc32a3fee95a9f526ce862067a6601b1d6e4c9f90a2b78167eb79862f48c3f"
     },
     {
       "path": "moim/index.html",
-      "sha256": "214903502c81f75657eedba306211e7de68e8ddda6c3034deb373657a46a87b8"
+      "sha256": "3bd86ee5edb849f90ba90b3081b238f957a72c6be1327a052028430ba8accd09"
     },
     {
       "path": "og.jpg",
       "sha256": "4459bb2dfec37c4e6ebb3264815a6ed915b6c9e1bdd8316c69739dff43300c02"
     },
     {
+      "path": "presentation/index.html",
+      "sha256": "4dc8b2173ad2d4643dc5adfa017d475f1a48b2693054b3e7ea4aaedd4a710494"
+    },
+    {
       "path": "principles/index.html",
-      "sha256": "adecdb071a97985cba87ef1fe86bb9a8bc42ac8e6fe1e512304d1bcebc008f4b"
+      "sha256": "c50b143548e0cd74f62814c465c725fb84f2d45788a681f2458a774c5285af76"
     },
     {
       "path": "privacy.html",
-      "sha256": "428e736df08d161e8ae8e386aa761fc4d14f0e61cb5ff6f5f637355d87af6ab5"
+      "sha256": "2f08f8b45a582803c0109e7317ec0536d32500c5e5df3ac998edbdc714deaf70"
     },
     {
       "path": "program/agri-village.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/being-map.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/builders-camp.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/dawn-library.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/family-story.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/half-year-reset.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/liberation-oneday.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/morning-reboot.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/one-sentence-english.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/owner-ai.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/screen-off-day.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/vacation-log.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "program/wallet-check.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "projects/farm-light/index.html",
-      "sha256": "a2799225280cd11e9e10c59bfe0c443079afc3889c429b039398756a6732ef24"
+      "sha256": "b3e678f90f22571fdad63a0ab515faf8d0b131de9957698d523162a8fd142eab"
     },
     {
       "path": "projects/farm-observation/index.html",
-      "sha256": "25fcae51435f02c74cba677c4142d5d1e04899c988a0b5857b193fde58bd57ce"
+      "sha256": "0135b9c7bb331776f171c01da7d568a7b75031cbee6aaa185818c5551adf5130"
     },
     {
       "path": "projects/index.html",
-      "sha256": "3b554b821a781b183f86fb870675993656da1200afaef233dfbe7d6c69959d29"
+      "sha256": "015d6707a09160d33137bbd8e81eb28f40a75d21fa0e580c4d71cba54c869ccf"
     },
     {
       "path": "projects/tools-and-stories/index.html",
-      "sha256": "9327c04b8c1cb519c735d930b0f9bc474eb1b9742429047fde77eef6efddc17d"
+      "sha256": "6a511afd5da991e0cb947b76b3523c09dff37dee925c4fba7d02b5e28675f35f"
     },
     {
       "path": "retreat-feedback.html",
-      "sha256": "1460e1bdcfb021d241fb2bf6ff4e3f6c75af4b43dc1b7d0dc406c131d442c470"
+      "sha256": "0708eae32d24ac9bca9c2f7953cfff92f92f7cd46794ecb73176b0f6d3485fe8"
     },
     {
       "path": "robots.txt",
@@ -524,7 +732,7 @@
     },
     {
       "path": "rules.html",
-      "sha256": "173c3f5d759e1f311ef10bf8259f55ec059f81d5f5765ccc2c48eb2e52815d62"
+      "sha256": "ea1081029d04ae6d60733e5b24e1839a3d0efcac65908fe1b7ba5f32ef05588b"
     },
     {
       "path": "sangmin/assets/boardgame-480.webp",
@@ -736,43 +944,95 @@
     },
     {
       "path": "shared-farm.html",
-      "sha256": "173c3f5d759e1f311ef10bf8259f55ec059f81d5f5765ccc2c48eb2e52815d62"
+      "sha256": "ea1081029d04ae6d60733e5b24e1839a3d0efcac65908fe1b7ba5f32ef05588b"
     },
     {
       "path": "sitemap.xml",
-      "sha256": "38878316eae7c21a6b5c2e35006ccfc5e330b2eaff60d396bf61dbaaad70a5d4"
+      "sha256": "7e9977cbe9caf09695d6bfca9c08a742b0a5d062b69a44364b38b844a9c6fc54"
     },
     {
       "path": "start/index.html",
-      "sha256": "c1bd515bace1f8c39d0ec7d5fd2e442d31091c264ecc4faebc8f353eeb7d3964"
+      "sha256": "439c1a593401b780a4bd1c6427efca5d47bfed615586201acfe17f521fc2a09e"
     },
     {
       "path": "stories/deliberation-by-design.html",
-      "sha256": "8c04a544d61a4fbaf404ee1d3a3a4c0d5276f1b9626145001929918381ac26d5"
+      "sha256": "0dbd9e77175b676eec2dd098f393f53818cc9fefa79043135ffbccd74ed51b37"
     },
     {
       "path": "stories/first-free-meeting.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "stories/index.html",
-      "sha256": "30b0988e9b08187eb918019c2f7848cbb07a3a449064d846fe9c9234c02b8a6f"
+      "sha256": "6924b9d5018767433bfcb9fe8b811ce25313a7b212afa15f30b49c06399e1172"
     },
     {
       "path": "stories/people-we-wait.html",
-      "sha256": "214903502c81f75657eedba306211e7de68e8ddda6c3034deb373657a46a87b8"
+      "sha256": "3bd86ee5edb849f90ba90b3081b238f957a72c6be1327a052028430ba8accd09"
     },
     {
       "path": "stories/screen-off-day.html",
-      "sha256": "2ef5d2be0b06df205ee50db35e53b19d540fdb1dabb44df9b479e0604e2ef2ab"
+      "sha256": "c1d1ec2117cc1f7a80247cff7cc862a8c0ad1ee07e0af990cde4c80160dfc2da"
     },
     {
       "path": "stories/why-nolil.html",
-      "sha256": "c46447958d4c85d559484e4d72de677b842655f77147d09cfa4635e908b4f9a8"
+      "sha256": "ef36e467f84147a5025c8b4ed1941218a1f89d311b6cf2323d47fd3855f00556"
     },
     {
       "path": "wiki/index.html",
-      "sha256": "b866f7850cb89c86053e7405c530ba2eaac6c895d2b532187904443d291c3596"
+      "sha256": "edcfa971fa6eef7bf201a70a3b59520c8714cb2900d4b02245fbf5df20ceda23"
+    },
+    {
+      "path": "zh/404.html",
+      "sha256": "876c4e317984fc17d5ffdc72b33a40a5e7175fa36b7d62cd2baa4581c92f6c40"
+    },
+    {
+      "path": "zh/data/participation.json",
+      "sha256": "efc42817fd9f255c8969e2c908a536d55877ba7ece12791b349cf7f4e385223e"
+    },
+    {
+      "path": "zh/index.html",
+      "sha256": "6943675f79c2d2103ef208953f64cb20c7d282ee58e1d04c6eae4aa41c7b4752"
+    },
+    {
+      "path": "zh/introduction/index.html",
+      "sha256": "feb16d00c4786e79967639c9b0177e4bed31a96bb1146fb6f04b74b0f7c93a97"
+    },
+    {
+      "path": "zh/library/index.html",
+      "sha256": "91467a43958ba793f3c402f571fa563d3aca83cab52c8e2d28c9d4a619a362f7"
+    },
+    {
+      "path": "zh/presentation/index.html",
+      "sha256": "1b1397c63e9de465d79bfce60070f9735e8f81829e22fb1eee928f2923f30831"
+    },
+    {
+      "path": "zh/principles/index.html",
+      "sha256": "9832bf200a26a92f7f70448ad0b548a238b9e147dbbdecbc24b94a5a78811742"
+    },
+    {
+      "path": "zh/projects/farm-light/index.html",
+      "sha256": "185791fdd5faa07ff28834bfd0cc8ad9744c2a0cc9dcec6d37fe1884ffcee8df"
+    },
+    {
+      "path": "zh/projects/farm-observation/index.html",
+      "sha256": "f9b75fb35d7a74354126a65c9c43dec1d77979c3c0246f92cd06979770d7e15a"
+    },
+    {
+      "path": "zh/projects/index.html",
+      "sha256": "127597749b4693aeec85d99c435a3d878b319a035ac6435aabc4e6fc7e9e4597"
+    },
+    {
+      "path": "zh/projects/tools-and-stories/index.html",
+      "sha256": "1f30d9a67ba6c1467d3b890c46cbc616ace3d560b983be09112cc71be1bc3642"
+    },
+    {
+      "path": "zh/start/index.html",
+      "sha256": "3455aaa61218b5b622a3ce6d27220ad17d833a8d367c27dd4f2e79bde45002b6"
+    },
+    {
+      "path": "zh/wiki/index.html",
+      "sha256": "5e34bd05c342c7a2d7cc143afe80ac7cf6efb3892d97b8001e94f438a4ea5b34"
     }
   ]
 }

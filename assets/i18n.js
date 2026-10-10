@@ -1,6 +1,7 @@
+import {languageCode,localePrefix} from './languages.js';
 import {englishCopy} from './i18n-en.js';
-export const lang=typeof document!=='undefined'&&document.documentElement.lang==='en'?'en':'ko';
-export const prefix=lang==='en'?'/en':'';
+export const lang=typeof document!=='undefined'?languageCode(document.documentElement.lang):'ko';
+export const prefix=localePrefix(lang);
 export const t=text=>lang==='en'?(englishCopy[text]??text):text;
 
 export function syncLanguageLinks(){

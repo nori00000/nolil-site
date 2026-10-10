@@ -22,27 +22,27 @@ export function resolveSelection(projects, href, lang = 'ko') {
   return {project, role, message:lang==='en'?(englishCopy[message]??message):message};
 }
 export function selectionURL(href, project, role, share = false) {
-  const url = new URL(share ? (new URL(href).pathname.startsWith('/en/')?'/en/start/':'/start/') : href, href);
+  const url = new URL(share ? ((new URL(href).pathname.match(/^\/(en|zh|ja|es|fr)\//)?.[0]||'/')+'start/') : href, href);
   url.searchParams.delete('project');url.searchParams.delete('role');
   if(project) url.searchParams.set('project', project.slug);
   if(role) url.searchParams.set('role', role.id);
   return url.href;
 }
 export function cardText(project, role, note = '', lang = 'ko') {
-  if(lang==='en')return ['Hacker Farm / STUDIO — My starting note','Issued 2026-10-10 · v07','A personal preparation note, not an application or reservation.','',
+  if(lang==='en')return ['Hacker Farm / STUDIO — My starting note','Issued 2026-10-10 · v08','A personal preparation note, not an application or reservation.','',
     `Project: ${project.title}`,`Role: ${role.title}`,`Starting experience: ${role.experience}`,'',
     `Try on your own now: ${role.prepare_now}`,`What to keep: ${role.personal_output}`,`Next question: ${role.next_question}`,
     `My question: ${note.trim().slice(0,500)||'(not written yet)'}`,'',
     `Possible on-site activity (planned): ${role.task}`,`Materials to consider: ${role.bring}`,`Possible support (unconfirmed): ${role.support}`,
-    'Dates, facilitators, fees and support are not yet confirmed. Applications and payments are not open.',
+    'First-season plan: 12 places, KRW 360,000 per person for 12 weeks, six three-hour sessions. Dates and detailed terms are being prepared; applications and payments are not open.',
     'We are developing a shared farm membership fee model, without property rental revenue.'
   ].join('\n');
-  return ['해커팜 — 나의 시작 메모','발행일 2026-10-10 · v07','개인 준비 메모 · 신청·예약이 아닙니다.', '',
+  return ['해커팜 — 나의 시작 메모','발행일 2026-10-10 · v08','개인 준비 메모 · 신청·예약이 아닙니다.', '',
     `프로젝트: ${project.title}`,`역할: ${role.title}`,`시작 경험: ${role.experience}`,'',
     `지금 혼자 해 볼 준비: ${role.prepare_now}`,`남길 것: ${role.personal_output}`,`다음 질문: ${role.next_question}`,
     `내 질문: ${note.trim().slice(0,500) || '(아직 적지 않음)'}`,'',
     `향후 현장에서 해 볼 일 (계획): ${role.task}`,`준비물 구상: ${role.bring}`,`지원 구상 (미확정): ${role.support}`,
-    '운영일·진행자·비용·지원 범위 미정. 현재 모집·가입·결제를 받지 않습니다.',
+    '첫 시즌 기준안: 정원 12명, 12주 가입비 36만 원, 3시간씩 6회. 개시일·세부 조건 준비 중. 현재 신청·결제를 받지 않습니다.',
     '공유 농장 회원 가입비 모델을 준비하며 부동산 임대수익을 기반으로 삼지 않습니다.'
   ].join('\n');
 }
