@@ -1,0 +1,138 @@
+{
+  "issued_on": "2026-10-10",
+  "version": "v07",
+  "projects": [
+    {
+      "slug": "farm-observation",
+      "title": "A day on the farm, seen differently",
+      "topic": "Observation",
+      "entry_verb": "Observe",
+      "roles": [
+        {
+          "id": "observe",
+          "title": "Observation and photography",
+          "task": "Observe the same place at different times, recording light, soil and changes with photos and short notes.",
+          "bring": "A phone and one question you are curious about.",
+          "support": "We are planning a way to choose observation locations and recording methods together.",
+          "prepare_now": "Choose a place nearby. Write three sentences about the light and colours you see right now.",
+          "experience": "Start with photos and notes; no experience with measuring equipment is needed.",
+          "personal_output": "An observation note with a location and time",
+          "next_question": "What might change if you return at a different time?",
+          "action_label": "Record the light in one place"
+        },
+        {
+          "id": "data",
+          "title": "Working with data",
+          "task": "Read existing logs, find dates, units and missing values, and write down rules for cleaning the data.",
+          "bring": "Check the activity announcement for laptop requirements and availability.",
+          "support": "We are preparing source data and step-by-step examples in Korean.",
+          "prepare_now": "Choose what you would like to record. Write a line for the date, time, units and a symbol for values you do not know.",
+          "experience": "Start by reading rows and columns; coding can come later if you choose.",
+          "personal_output": "Your own list of fields to record",
+          "next_question": "How will you distinguish a missing value from zero?",
+          "action_label": "Choose what to record"
+        },
+        {
+          "id": "express",
+          "title": "Creative interpretation",
+          "task": "Express the day you observed through photographs, colours or short writing, in a form that suits you.",
+          "bring": "Whatever you like to use for recording ideas.",
+          "support": "The form of expression and what to share will be agreed together.",
+          "prepare_now": "Think of the light on a day you remember. Express it in three colours or a short piece of writing.",
+          "experience": "Choose your own form; no experience with editing software is needed.",
+          "personal_output": "A first draft capturing light and sensory impressions",
+          "next_question": "What scene might someone else imagine from the same record?",
+          "action_label": "Capture a day in colour and words"
+        }
+      ]
+    },
+    {
+      "slug": "tools-and-stories",
+      "title": "Tools the next person can use",
+      "topic": "Tools",
+      "entry_verb": "Repair and reuse",
+      "roles": [
+        {
+          "id": "use",
+          "title": "Experience using tools",
+          "task": "Recall a time when finding or using a tool was difficult, and write down the instructions you needed.",
+          "bring": "An experience you would like to improve.",
+          "support": "We plan to choose the actual tool together.",
+          "prepare_now": "Recall one recent moment when you had trouble finding or using an object. Write down what happened and what explanation would have helped.",
+          "experience": "Start with your own experience; no repair skills are needed.",
+          "personal_output": "A note describing one difficulty and the missing explanation",
+          "next_question": "What is the first thing a new user should know?",
+          "action_label": "Find a point of confusion"
+        },
+        {
+          "id": "label",
+          "title": "Labels and instructions",
+          "task": "Write the name, location and conditions for use so that someone unfamiliar with the tool can understand them.",
+          "bring": "A pen and paper, or a phone.",
+          "support": "We plan to compare the content and design of labels.",
+          "prepare_now": "Choose an object at home. Write its name, where it belongs and any conditions for using it.",
+          "experience": "Start with short sentences; no experience making QR codes is needed.",
+          "personal_output": "Draft wording for a label",
+          "next_question": "Are there any words a first-time reader might not understand?",
+          "action_label": "Explain it to a first-time user"
+        },
+        {
+          "id": "repair",
+          "title": "Repair records",
+          "task": "Look at a tool’s condition and record what may need repair and what needs checking.",
+          "bring": "Share your experience and the kinds of work you can do before starting.",
+          "support": "Work will be limited to tasks agreed with the person responsible.",
+          "prepare_now": "Describe the appearance and symptoms of an object you would like to repair. You do not need to take it apart or test it.",
+          "experience": "Start by recording its condition. Practical repairs come later, after experience and the person responsible have been confirmed.",
+          "personal_output": "A description of the condition and a list of things to check",
+          "next_question": "Who should you consult, and what should you check, before a repair?",
+          "action_label": "Record its condition before repair"
+        }
+      ]
+    },
+    {
+      "slug": "farm-light",
+      "title": "Making light on the farm",
+      "topic": "Light",
+      "entry_verb": "Create",
+      "roles": [
+        {
+          "id": "shape",
+          "title": "Light and form",
+          "task": "Use sketches and words to explore a memorable patch of light or shade from the farm.",
+          "bring": "A scene you would like to draw or describe.",
+          "support": "We plan to begin by discussing the question behind the artwork.",
+          "prepare_now": "Record a memorable scene of light or shade with a sketch or a few words.",
+          "experience": "Draw or describe it in whichever way suits you; no making experience is needed.",
+          "personal_output": "A sketch or description of the scene and the feeling you want to express",
+          "next_question": "What quality of the light would you like to capture?",
+          "action_label": "Sketch light from memory"
+        },
+        {
+          "id": "paper",
+          "title": "Paper structures",
+          "task": "Fold and layer paper to try small forms that let light through.",
+          "bring": "Materials will be specified in the activity announcement.",
+          "support": "The plan is to start with a small model.",
+          "prepare_now": "Draw a folded or layered paper shape. Mark where light could pass through.",
+          "experience": "Start with a sketch; there is no need to buy materials.",
+          "personal_output": "A sketch of a structure that lets light through",
+          "next_question": "How might a change in shape change the shadow?",
+          "action_label": "Sketch a path for light"
+        },
+        {
+          "id": "power",
+          "title": "Electronics and records",
+          "task": "List what needs checking in the power and lighting setup, and record changes to the model.",
+          "bring": "Your making experience and areas of interest.",
+          "support": "Testing will begin only after the components and the person responsible have been confirmed.",
+          "prepare_now": "Write down how bright you want the light to be, where it would be used and how long it would stay on. Component connections will be considered later.",
+          "experience": "Start by defining requirements; circuit tests require confirmed components and a responsible person.",
+          "personal_output": "Lighting requirements and a list of things to check",
+          "next_question": "What conditions would help the light express your idea?",
+          "action_label": "Describe the light you need"
+        }
+      ]
+    }
+  ]
+}

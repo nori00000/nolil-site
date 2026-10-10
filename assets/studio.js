@@ -1,3 +1,4 @@
+import {t,lang,prefix,syncLanguageLinks} from './i18n.js';
 // Progressive interactions. All research remains readable without this module.
 for(const root of document.querySelectorAll('[data-tabs]')) {
  const list=root.querySelector('[data-tab-list]');
@@ -37,7 +38,7 @@ for(const figure of document.querySelectorAll('.light-exhibit')){
   figure.querySelector('[data-paper=right]').setAttribute('d',polygon([G,C,D,E]));
   figure.querySelector('[data-paper=fold]').setAttribute('d',`M${B.join(' ')} L${G.join(' ')} L${C.join(' ')} M${G.join(' ')} L${E.join(' ')}`);
   figure.querySelector('output').textContent=value+'%';
-  figure.querySelector('.fold-question').textContent=value<33?'넓게 펼친 면 · 빛이 통과할 자리를 골라보세요.':value>66?'좁게 접힌 틈 · 어떤 부분을 열어두고 싶나요?':'면과 틈 사이, 어디로 빛을 통과시키고 싶나요?';
+  figure.querySelector('.fold-question').textContent=value<33?t('넓게 펼친 면 · 빛이 통과할 자리를 골라보세요.'):value>66?t('좁게 접힌 틈 · 어떤 부분을 열어두고 싶나요?'):t('면과 틈 사이, 어디로 빛을 통과시키고 싶나요?');
  });
 }
 const library=document.querySelector('[data-library]');
@@ -49,9 +50,9 @@ if(library){
   const q=search.value.trim().normalize('NFKC').toLocaleLowerCase();let count=0;
   for(const row of families){const show=(group==='all'||row.dataset.group===group)&&row.dataset.search.normalize('NFKC').toLocaleLowerCase().includes(q);row.hidden=!show;if(show)count++;}
   for(const button of filters)button.setAttribute('aria-pressed',String(button.dataset.filter===group));
-  document.getElementById('library-count').textContent=`${families.length}개 조사군 중 ${count}개`;
+  document.getElementById('library-count').textContent=(lang==='en'?`${count} of ${families.length} research groups`:`${families.length}개 조사군 중 ${count}개`);
   document.getElementById('library-empty').hidden=count>0;
-  if(persist){const url=new URL(location.href);url.searchParams.delete('q');url.searchParams.delete('topic');if(q)url.searchParams.set('q',search.value.trim());if(group!=='all')url.searchParams.set('topic',group);history.replaceState(null,'',url);}
+  if(persist){const url=new URL(location.href);url.searchParams.delete('q');url.searchParams.delete('topic');if(q)url.searchParams.set('q',search.value.trim());if(group!=='all')url.searchParams.set('topic',group);history.replaceState(null,'',url);syncLanguageLinks();}
  }
  function restore(){const params=new URL(location.href).searchParams;search.value=params.get('q')||'';const desired=params.get('topic');group=filters.some(b=>b.dataset.filter===desired)?desired:'all';filter(false);}
  search.addEventListener('input',()=>filter());
@@ -60,3 +61,8 @@ if(library){
  document.getElementById('library-reset').addEventListener('click',reset);library.querySelector('[data-reset-library]').addEventListener('click',reset);
  addEventListener('popstate',restore);addEventListener('pageshow',restore);restore();
 }
+
+// Keep real anchor URLs current for keyboard, middle click and opening a new tab.
+syncLanguageLinks();
+for(const event of ['popstate','pageshow','hashchange'])addEventListener(event,syncLanguageLinks);
+for(const link of document.querySelectorAll('[data-language-link]'))for(const event of ['click','mousedown','contextmenu','focus'])link.addEventListener(event,syncLanguageLinks);

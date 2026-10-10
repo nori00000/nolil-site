@@ -72,3 +72,31 @@
 .brand-guide footer{padding:40px 0 70px;border-top:1px solid var(--ink);font-size:13px}
 @media(max-width:760px){.brand-lockup{width:164px}.guide-head{padding-top:28px}.guide-head>.inline-link{position:static;margin-bottom:14px}.guide-head h1{margin-top:15px}.guide-signature{padding:40px 22px;min-height:150px;margin-bottom:45px}.guide-columns{grid-template-columns:1fr;gap:28px}.guide-swatches{grid-template-columns:1fr 1fr}.guide-swatches article{padding:22px 15px;min-height:180px}.guide-logo-grid{grid-template-columns:1fr}.guide-small{gap:22px}.guide-small>div:last-child{display:none}.brand-guide section{padding:45px 0}.guide-lead{font-size:21px}}
 @media(max-width:360px){.brand-lockup{width:144px}}
+
+/* Korean and English edition · 2026-10-10 v07. */
+.site-header{height:auto;min-height:100px;display:grid;grid-template-columns:1fr auto auto;gap:32px;padding-block:16px}
+.site-header .brand-lockup{width:158px;height:auto}
+.site-header nav{gap:28px}
+.language-nav{display:flex;gap:4px;align-items:center;font-size:12px;font-weight:700;white-space:nowrap}
+.language-nav a,.language-nav>span{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.language-nav>span{border-bottom:2px solid var(--brand)}
+.language-nav a:hover{text-decoration:underline}
+.footer-name>span{display:block;font-size:.17em;letter-spacing:.15em;margin-top:18px}
+html[lang=en] body{word-break:normal;overflow-wrap:break-word}
+html[lang=en] h1,html[lang=en] h2,html[lang=en] h3{letter-spacing:-.04em;text-wrap:balance}
+html[lang=en] .brand-lockup{width:220px}
+html[lang=en] .cover-title h1{font-size:clamp(46px,6vw,86px)}
+html[lang=en] .desk-note h2{font-size:clamp(28px,3.4vw,48px)}
+html[lang=en] .project-options button{font-size:20px}
+html[lang=en] .work-side a{white-space:normal}
+.visitor-note{margin-top:16px;font-size:13px!important;max-width:650px;color:var(--muted)}
+.wiki-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:64px;padding-bottom:90px}
+.wiki-toc{display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:sticky;top:30px;height:max-content;font-size:14px;border-top:1px solid var(--ink);padding-top:20px}
+.wiki-toc a{padding-block:8px;text-decoration:underline;text-underline-offset:4px}
+.wiki-body section{padding:36px 0;border-top:1px solid var(--line);scroll-margin-top:30px}
+.wiki-body h2{font-size:32px;margin-bottom:24px}.wiki-body h3{font-size:25px;margin-bottom:18px}.wiki-body article{margin-top:34px}.wiki-body li{margin-bottom:12px}.wiki-body a:hover{text-decoration:underline}
+.wiki-research{list-style:none;padding:0;columns:2;column-gap:30px}.wiki-research li{break-inside:avoid}.wiki-research span{font-size:12px;color:var(--muted);margin-right:6px}
+.wiki-history dt{font-weight:750;margin-top:20px}.wiki-history dd{margin:8px 0 0}
+@media(max-width:1000px){.site-header{gap:20px}.site-header nav{gap:18px}}
+@media(max-width:760px){.site-header{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 20px 0;min-height:112px}.site-header .wordmark{grid-column:1;grid-row:1}.site-header .brand-lockup{width:144px}.site-header .language-nav{grid-column:2;grid-row:1}.site-header nav{grid-column:1/-1;grid-row:2;justify-content:space-between;gap:12px;font-size:13px}.site-header nav>a{min-height:44px;display:inline-flex;align-items:center;gap:5px}html[lang=en] .site-header .brand-lockup{width:190px}html[lang=en] .site-header nav{font-size:13px}html[lang=en] .cover-title h1{font-size:45px;line-height:1.08}html[lang=en] .project-options button{font-size:14px}html[lang=en] .cover-meta{align-items:flex-start;gap:14px;line-height:1.5}html[lang=en] .desk-note h2{font-size:30px}html[lang=en] .reading-nav{gap:14px;align-items:flex-start}html[lang=en] .light-controls{grid-template-columns:1fr 85px 28px;font-size:9px}html[lang=en] .sheet-title{font-size:30px}html[lang=en] .tool-sheet{padding:18px}.wiki-layout{display:block;padding-bottom:50px}.wiki-toc{position:static;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin-bottom:30px;font-size:13px}.wiki-body h2{font-size:28px}.wiki-body p,.wiki-body li,.wiki-history{font-size:15px}.wiki-research{columns:1}.footer-name>span{margin-top:10px}}
+@media(max-width:370px){.site-header{padding-inline:16px}html[lang=en] .site-header .brand-lockup{width:166px}.language-nav{gap:0;font-size:11px}html[lang=en] .cover-title h1{font-size:39px}html[lang=en] .project-heading h1{font-size:36px}html[lang=en] .sheet-title{font-size:25px}html[lang=en] .tool-fields{grid-template-columns:52px 1fr;font-size:8px}html[lang=en] .project-options{gap:6px}html[lang=en] .project-options button{font-size:12px}}

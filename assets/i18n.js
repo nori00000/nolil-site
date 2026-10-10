@@ -1,0 +1,12 @@
+import {englishCopy} from './i18n-en.js';
+export const lang=typeof document!=='undefined'&&document.documentElement.lang==='en'?'en':'ko';
+export const prefix=lang==='en'?'/en':'';
+export const t=text=>lang==='en'?(englishCopy[text]??text):text;
+
+export function syncLanguageLinks(){
+ for(const link of document.querySelectorAll('[data-language-link]')){
+  const next=new URL(link.href),here=new URL(location.href);
+  for(const key of ['project','role','topic','q']){next.searchParams.delete(key);if(here.searchParams.has(key))next.searchParams.set(key,here.searchParams.get(key));}
+  next.hash=here.hash;link.href=next.href;
+ }
+}
