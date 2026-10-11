@@ -11,3 +11,4 @@ User-agent: Claude-SearchBot
 Allow: /
 
 Sitemap: https://playworkgrow.club/sitemap.xml
+Sitemap: https://playworkgrow.club/sitemap.txt

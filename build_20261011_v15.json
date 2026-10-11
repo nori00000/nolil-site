@@ -1,8 +1,8 @@
 {
   "issued_on": "2026-10-11",
-  "version": "v13",
+  "version": "v15",
   "change_log": [
-    "v13 unifies proposed operating terms and homepage decisions in six languages; v09 archived materials retained; automatic email not enabled"
+    "v15 adds independent XML and text sitemap recovery routes; v13 page content and v09 archived materials retained"
   ],
   "legacy_routes": [
     "program/index.html",
@@ -43,7 +43,7 @@
   "mode": "public",
   "publication": {
     "origin": "https://playworkgrow.club",
-    "version": "v13"
+    "version": "v15"
   },
   "preserved_route": {
     "prefix": "sangmin/",
@@ -911,7 +911,7 @@
     },
     {
       "path": "robots.txt",
-      "sha256": "13480652959ac318e8d81c77a47d28c09648e8121637d13376e7ec00be2fd468"
+      "sha256": "16e163e5ef8f237cda252701d00c31d7175419f234b4a4bd4dfd90af3dd72571"
     },
     {
       "path": "rules.html",
@@ -1180,6 +1180,14 @@
     {
       "path": "shared-farm.html",
       "sha256": "bb5a497ddf606139b32fbd18e558cd5215dcce0316cdc65c98fc7b941a73e92e"
+    },
+    {
+      "path": "sitemap-hackerfarm.xml",
+      "sha256": "7470cf55c7b20bec279b2704d15b00a8c49b86ebe90109d8277a178a4ced2e8f"
+    },
+    {
+      "path": "sitemap.txt",
+      "sha256": "b0841138bd2f1d176c1389447f585af738c67c9e4c22ac237e999f7b0963ee43"
     },
     {
       "path": "sitemap.xml",
