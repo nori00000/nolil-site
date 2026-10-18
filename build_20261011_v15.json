@@ -699,7 +699,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "303701bf3bb3919bf0c8165e991494ad9a48bd2bd5b38c31b2560c0895df76fe"
+      "sha256": "b1de519ff86f8ed9525797cd32a1f88bd973781c0d196eb265987098230a845c"
     },
     {
       "path": "introduction/index.html",
@@ -799,7 +799,7 @@
     },
     {
       "path": "preparation/index.html",
-      "sha256": "a9d808844b604b8f7c65c4fb6038cb1bd3c06badd16d4b9d310bedf8e587d871"
+      "sha256": "dd1df49472e16f85db1a9890244305826287fa37583bffa5bfd36a851e776654"
     },
     {
       "path": "presentation/index.html",
