@@ -1,3 +1,4 @@
+import {updateNewsLinks} from './news-interest.js';
 import {t,lang,prefix,syncLanguageLinks} from './i18n.js';
 import {loadProjects,resolveSelection,selectionURL,cardText} from './journey.js';
 const $=id=>document.getElementById(id);
@@ -9,7 +10,7 @@ if(projectSelect) {
   const option=(value,label)=>{const node=document.createElement('option');node.value=value;node.textContent=label;return node;};
   const key=()=>current.role?`${current.project.slug}/${current.role.id}`:'';
   function render({project,role,message:notice=''}) {
-    exportGeneration++;current={project,role};projectSelect.value=project?.slug||'';
+    exportGeneration++;current={project,role};updateNewsLinks(document,location.href,project?.slug);projectSelect.value=project?.slug||'';
     roleSelect.replaceChildren(option('',project?t('역할을 골라주세요'):t('프로젝트를 먼저 골라주세요')));
     if(project) for(const r of project.roles)roleSelect.append(option(r.id,r.title));
     roleSelect.disabled=!project;roleSelect.value=role?.id||'';

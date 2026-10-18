@@ -1,3 +1,4 @@
+import {updateNewsLinks} from './news-interest.js';
 import {loadProjects,selectionURL} from './journey.js';
 import {syncLanguageLinks} from './i18n.js';
 const u=JSON.parse(document.querySelector('#interface-copy').textContent),$=id=>document.getElementById(id);
@@ -9,7 +10,7 @@ if(document.querySelector('[data-int-library]')){
 }
 if(document.querySelector('[data-int-participation]')){
  let projects=[],current={},generation=0;const notes=new Map();const note=$('personal-note');const key=()=>current.role?current.project.slug+'/'+current.role.id:'';
- function render(project,role,message=''){generation++;current={project,role};$('role-choice-section').hidden=!project;$('role-preview').hidden=!role;$('role-options').replaceChildren();
+ function render(project,role,message=''){generation++;current={project,role};updateNewsLinks(document,location.href,project?.slug);$('role-choice-section').hidden=!project;$('role-preview').hidden=!role;$('role-options').replaceChildren();
  for(const r of project?.roles||[]){const b=document.createElement('button');b.type='button';b.dataset.role=r.id;b.textContent=r.title;b.setAttribute('aria-pressed',String(r===role));b.addEventListener('click',()=>change(project,r));$('role-options').append(b);}
  for(const b of $('project-options').children)b.setAttribute('aria-pressed',String(b.dataset.project===project?.slug));
  for(const [id,value] of [['role-title',role?.title],['role-task',role?.prepare_now],['role-output',role?.personal_output],['role-question',role?.next_question]])$(id).textContent=value||'';
