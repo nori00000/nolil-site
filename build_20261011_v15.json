@@ -443,7 +443,7 @@
     },
     {
       "path": "assets/site.css",
-      "sha256": "719d1a231de0a340feb34c9300f43e90e5d5010f9186a72e1772b1043e6c28c3"
+      "sha256": "8a6e99cf1fb69c65af469490ae43373f1b23185f0a2c9284c37303e76f93b5ad"
     },
     {
       "path": "assets/studio.js",
@@ -895,11 +895,11 @@
     },
     {
       "path": "projects/farm-light/index.html",
-      "sha256": "72e0f7aff91c42af431d5551398cd3d95d54c236da15c6d945a33208c7455b92"
+      "sha256": "48a89008379cd2689d9426bd521c4c3f70f707015815c79bd20f62834269a7a1"
     },
     {
       "path": "projects/farm-observation/index.html",
-      "sha256": "303c2023d80105051a855f03437cb72ce50d272f13c3377303998cfb26539fee"
+      "sha256": "84d719aa712d5281ccb52a6b61a74a125d56442e4aef719dc89417f4cbf34396"
     },
     {
       "path": "projects/index.html",
@@ -907,7 +907,7 @@
     },
     {
       "path": "projects/tools-and-stories/index.html",
-      "sha256": "8e7d4eaf127445c94680db50d3c78e299a7fd30a2b6ff58db6d65c44894c9190"
+      "sha256": "2f43c152c3b3be7e0a5107793cb25bc3b695dcee56b8e04ba9a7eeb97af89a32"
     },
     {
       "path": "retreat-feedback.html",
