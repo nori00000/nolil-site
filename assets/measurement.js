@@ -13,7 +13,7 @@ export function eventFor(href,origin){
 }
 export function mountMeasurement(w,d){
  const panel=d.querySelector('[data-analytics]');if(!panel)return;
- const allowed=w.location.hostname==='playworkgrow.club'&&measurablePath(w.location.pathname)&&w.top===w.self;
+ const allowed=w.location.hostname==='hackerfarm.kr'&&measurablePath(w.location.pathname)&&w.top===w.self;
  let active=false,loaded=false;
  const key=consentKey;
  const read=()=>{try{const v=JSON.parse(w.localStorage.getItem(key));return v&&v.expires>Date.now()?v.allowed:null;}catch{return null;}};

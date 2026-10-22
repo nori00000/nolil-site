@@ -10,5 +10,5 @@ Allow: /
 User-agent: Claude-SearchBot
 Allow: /
 
-Sitemap: https://playworkgrow.club/sitemap.xml
-Sitemap: https://playworkgrow.club/sitemap.txt
+Sitemap: https://hackerfarm.kr/sitemap.xml
+Sitemap: https://hackerfarm.kr/sitemap.txt
