@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
-import { mkdtempSync, writeFileSync, readFileSync, existsSync } from "node:fs";
+import { spawnSync, execFileSync } from "node:child_process";
+import { mkdtempSync, writeFileSync, readFileSync, existsSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -45,7 +45,7 @@ test("compareWarnings reports added and removed fingerprints", () => {
   assert.deepEqual(removed, [{ fingerprint: "c::z", count: 0, baseline: 1 }]);
 });
 
-test("CLI: missing baseline fails, update writes it, new warnings fail, fewer warnings pass with a note", () => {
+test("CLI: missing baseline fails, update writes it, new warnings fail, fewer warnings fail as stale-baseline until updated", () => {
   const dir = mkdtempSync(join(tmpdir(), "lint-ratchet-"));
   const base = report([warning("orphaned-tokens", "colors.mint")]);
   const missing = run(dir, base);
@@ -60,8 +60,10 @@ test("CLI: missing baseline fails, update writes it, new warnings fail, fewer wa
   assert.match(worse.out, /NEW WARNING contrast-ratio::components.x/);
 
   const better = run(dir, report([]));
-  assert.equal(better.code, 0);
-  assert.match(better.out, /tighten/);
+  assert.equal(better.code, 1);
+  assert.match(better.out, /stale-baseline/);
+  assert.equal(run(dir, report([]), "--update-baseline").code, 0);
+  assert.equal(run(dir, report([])).code, 0);
 });
 
 test("CLI: linter errors and unreadable reports fail; unknown flags exit 2", () => {
@@ -87,4 +89,57 @@ test("CLI: runs the real linter on the repository DESIGN.md", () => {
   assert.equal(r.status, 0, r.stdout + r.stderr);
   const saved = JSON.parse(readFileSync(join(dir, "b.json"), "utf8"));
   assert.ok(Object.keys(saved.warnings).length > 0);
+});
+
+function gitRepo() {
+  const dir = mkdtempSync(join(tmpdir(), "lint-ratchet-git-"));
+  mkdirSync(join(dir, "design"));
+  execFileSync("git", ["init", "-q"], { cwd: dir });
+  return dir;
+}
+function commitAll(dir, message) {
+  const git = (...a) => execFileSync("git", ["-c", "user.name=test", "-c", "user.email=test@example.invalid", ...a], { cwd: dir });
+  git("add", "-A");
+  git("commit", "-q", "--allow-empty", "-m", message);
+}
+function runIn(dir, reportObj, ...args) {
+  const reportPath = join(dir, "report.json");
+  writeFileSync(reportPath, JSON.stringify(reportObj));
+  const r = spawnSync(process.execPath, [TOOL, "--report", reportPath, ...args], { cwd: dir, encoding: "utf8" });
+  return { code: r.status, out: r.stdout + r.stderr };
+}
+
+test("CLI --against: skips when the ref has no lint baseline, fails when the baseline was loosened", () => {
+  const dir = gitRepo();
+  commitAll(dir, "empty");
+  const one = report([warning("orphaned-tokens", "colors.mint")]);
+  assert.equal(runIn(dir, one, "--update-baseline").code, 0);
+  const first = runIn(dir, one, "--against", "HEAD");
+  assert.equal(first.code, 0, first.out);
+  assert.match(first.out, /has no design\/lint-baseline\.json; skipping/);
+
+  commitAll(dir, "baseline");
+  const two = report([warning("orphaned-tokens", "colors.mint"), warning("contrast-ratio", "components.x")]);
+  assert.equal(runIn(dir, two, "--update-baseline").code, 0);
+  assert.equal(runIn(dir, two).code, 0);
+  const loosened = runIn(dir, two, "--against", "HEAD");
+  assert.equal(loosened.code, 1);
+  assert.match(loosened.out, /baseline-loosened contrast-ratio::components.x/);
+});
+
+test("CLI --against: git failures and schema mismatches fail", () => {
+  const plain = mkdtempSync(join(tmpdir(), "lint-ratchet-nogit-"));
+  const r0 = report([]);
+  assert.equal(runIn(plain, r0, "--baseline", join(plain, "b.json"), "--update-baseline").code, 0);
+  const noGit = runIn(plain, r0, "--baseline", join(plain, "b.json"), "--against", "HEAD");
+  assert.equal(noGit.code, 1);
+  assert.match(noGit.out, /git/);
+
+  const dir = gitRepo();
+  writeFileSync(join(dir, "design/lint-baseline.json"), JSON.stringify({ warnings: {} }));
+  commitAll(dir, "unversioned lint baseline");
+  assert.equal(runIn(dir, r0, "--update-baseline").code, 0);
+  const mismatch = runIn(dir, r0, "--against", "HEAD");
+  assert.equal(mismatch.code, 1);
+  assert.match(mismatch.out, /baseline-schema-mismatch/);
 });

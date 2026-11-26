@@ -4,7 +4,7 @@ name: Nolil Site
 description: >-
   Farm-first community site for Nolil (PLAY WORK GROW). Deep teal and mint
   color fields, serif section headings over a Pretendard body, pill buttons.
-  Document v04, issued 2026-11-26. Values are the computed styles measured in
+  Document v05, issued 2026-11-26. Values are the computed styles measured in
   Chromium at 1280x800, 768x1024 and 375x812 by
   tests/design/design-contract.spec.mjs.
 colors:
@@ -275,12 +275,13 @@ components:
 
 # Nolil Site Design System
 
-Document version v04, issued 2026-11-26. This file follows the Google Labs
+Document version v05, issued 2026-11-26. This file follows the Google Labs
 DESIGN.md format (spec version `alpha`). The YAML front matter is the normative
 token set. Three checks keep it honest:
 
-- `npm run design:lint` validates the format and fails on lint errors or on any
-  warning (rule and path) that is not in `design/lint-baseline.json`.
+- `npm run design:lint` validates the format and fails on lint errors, on any
+  warning (rule and path) that is not in `design/lint-baseline.json`, and on a
+  fixed warning that is still in the baseline (stale baseline).
 - `npm run test:design-contract` loads `index.html` in Chromium at 1280x800,
   768x1024 and 375x812 and compares every component below with the browser's
   computed styles on a real element of the page (hidden elements such as the
@@ -293,9 +294,11 @@ token set. Three checks keep it honest:
 - `npm run design:audit` statically checks the CSS of every tracked HTML page
   and `tokens.css` against the tokens and a per-occurrence ratchet baseline.
 
-These checks run on pull requests and pushes, not on a schedule: their result
-depends only on the repository contents, so a week without changes cannot
-change it.
+These checks run on pull requests and pushes to `main`, comparing the baselines
+with the base (`--against`) so that a change cannot loosen them. They also run
+weekly and on demand; the weekly run is not for detecting new results (those
+depend only on the repository) but for confirming that the audit itself still
+runs after action, runner, or dependency changes.
 
 The pinned linter (0.4.0) does not yet read the `motion` key that the current
 spec defines, so it reports that key as ignored; the contract test and the audit
@@ -499,6 +502,11 @@ publishing.
 
 ## Change Log
 
+- v05 (2026-11-26): the QA workflow also runs the lint, unit tests, and audit
+  weekly and on demand to confirm the checks are still alive; the lint
+  baseline is compared with the base ref and must be tightened when warnings
+  are fixed; audit fingerprints keep attribute values, strings, and letter case
+  verbatim.
 - v04 (2026-11-26): every component is now measured on a real element of
   `index.html`, and 768x1024 was added. Section lead (`section-lead`, 18px) and
   the card title (`card-title`, Pretendard 20px/700/1.45) replace the injected

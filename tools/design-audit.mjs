@@ -17,6 +17,7 @@ import { dirname } from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
+import { readJsonAtRef } from "./git-ref.mjs";
 
 export const SCHEMA_VERSION = 3;
 export const CATEGORIES = ["color-literal", "radius", "duration", "delay", "easing", "font-size", "undocumented-token", "page-token-mismatch", "undefined-var"];
@@ -276,24 +277,55 @@ function rootKind(selector) {
 }
 
 // Fingerprint contexts must not change with formatting: whitespace around
-// commas and combinators, comma order, and the case of type selectors,
-// pseudo-classes and at-rule preludes are normalised.
+// commas and combinators and the order of comma-separated selectors are
+// normalised. Quoted strings and [attribute] selectors are kept verbatim.
+// Only HTML type selectors (case-insensitive in HTML) are lower-cased.
+function protect(text) {
+  const kept = [];
+  let out = "";
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '"' || c === "'" || c === "[") {
+      const close = c === "[" ? "]" : c;
+      let j = i + 1;
+      let quote = null;
+      for (; j < text.length; j++) {
+        const d = text[j];
+        if (d === "\\") j++;
+        else if (quote) {
+          if (d === quote) quote = null;
+        } else if (c === "[" && (d === '"' || d === "'")) quote = d;
+        else if (d === close) break;
+      }
+      kept.push(text.slice(i, j + 1));
+      out += `\u0000${kept.length - 1}\u0000`;
+      i = j;
+    } else out += c;
+  }
+  return { out, restore: (t) => t.replace(/\u0000(\d+)\u0000/g, (m, n) => kept[Number(n)]) };
+}
+
 export function normalizeSelector(selector) {
-  return splitTopLevel(selector, ",")
+  const { out, restore } = protect(selector);
+  return splitTopLevel(out, ",")
     .map((part) =>
-      part
-        .trim()
-        .replace(/\s+/g, " ")
-        .replace(/\s*([>+~])\s*/g, "$1")
-        .replace(/(::?)([a-zA-Z-]+)/g, (m, colon, name) => colon + name.toLowerCase())
-        .replace(/(^|[\s>+~(])([a-zA-Z][\w-]*)/g, (m, before, tag) => before + tag.toLowerCase()),
+      restore(
+        part
+          .trim()
+          .replace(/\s+/g, " ")
+          .replace(/\s*([>+~])\s*/g, "$1")
+          // HTML type selectors are case-insensitive; classes, ids, attribute
+          // values and names after "." "#" ":" keep their case.
+          .replace(/(^|[\s>+~(,])([A-Za-z][A-Za-z0-9]*)(?![\w-])/g, (m, lead, tag) => lead + tag.toLowerCase()),
+      ),
     )
     .sort()
     .join(",");
 }
 
 export function normalizeAtRule(prelude) {
-  return prelude.trim().toLowerCase().replace(/\s+/g, " ").replace(/\s*([:(),])\s*/g, "$1");
+  const { out, restore } = protect(prelude);
+  return restore(out.trim().replace(/\s+/g, " ").replace(/\s*([:(),])\s*/g, "$1"));
 }
 
 // ---------- value scanners ----------
@@ -638,28 +670,6 @@ function readJson(path, label) {
   }
 }
 
-// Baseline at a git ref: undefined only when the ref has no such file. Any git
-// failure (no repository, unknown ref, unreadable object) throws.
-function baselineAtRef(ref, path) {
-  const git = (args) => {
-    const r = spawnSync("git", args, { encoding: "utf8" });
-    if (r.error) throw new Error(`--against: cannot run git: ${r.error.message}`);
-    return r;
-  };
-  const verify = git(["rev-parse", "--verify", `${ref}^{commit}`]);
-  if (verify.status !== 0) throw new Error(`--against: git could not resolve "${ref}": ${verify.stderr.trim().split("\n")[0]}`);
-  const listed = git(["ls-tree", "--name-only", ref, "--", path]);
-  if (listed.status !== 0) throw new Error(`--against: git ls-tree ${ref} failed: ${listed.stderr.trim().split("\n")[0]}`);
-  if (!listed.stdout.trim()) return undefined;
-  const show = git(["show", `${ref}:./${path}`]);
-  if (show.status !== 0) throw new Error(`--against: git show ${ref}:${path} failed: ${show.stderr.trim().split("\n")[0]}`);
-  try {
-    return JSON.parse(show.stdout);
-  } catch (err) {
-    throw new Error(`--against: ${ref}:${path} is not valid JSON: ${err.message}`);
-  }
-}
-
 export function run(argv) {
   const args = parseArgs(argv);
   if (args.help) return { code: 0, stdout: USAGE };
@@ -724,7 +734,7 @@ export function run(argv) {
   }
 
   if (args.against) {
-    const refBaseline = baselineAtRef(args.against, args.baseline);
+    const refBaseline = readJsonAtRef(args.against, args.baseline);
     if (refBaseline === undefined) {
       notes.push(`--against: ${args.against} has no ${args.baseline}; skipping the baseline-loosening check (first introduction).`);
     } else if (refBaseline.schemaVersion !== SCHEMA_VERSION) {

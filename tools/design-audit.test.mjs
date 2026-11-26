@@ -238,11 +238,33 @@ test("other pages: token/alias drift and undefined variables are ratcheted, not 
 });
 
 test("fingerprints ignore selector and at-rule formatting, declaration order and rule order", () => {
-  const a = audit(page(`.btn-kakao,.btn-copy{background:#fee500;color:#191600} @media (max-width:559px){.x > .y{border-radius:3px}} P:HOVER{font-size:13px}`));
+  const a = audit(page(`.btn-kakao,.btn-copy{background:#fee500;color:#191600} @media (max-width:559px){.x > .y{border-radius:3px}} p:hover{font-size:13px}`));
   const b = audit(page(`\n\n@media (max-width: 559px) {\n  .x>.y { border-radius: 3px }\n}\np:hover{font-size:13px}\n.btn-copy , .btn-kakao {\n  color: #191600;\n  background: #FEE500;\n}`));
   assert.deepEqual(a.errors, []);
   assert.deepEqual(b.deviations, a.deviations);
   assert.ok(Object.keys(a.deviations["color-literal"]).includes("index.html::.btn-copy,.btn-kakao::color::#191600"));
+});
+
+test("selector normalisation leaves attribute values, strings and letter case untouched", () => {
+  const spaced = audit(page(`[data-label="A + B"]{font-size:90rem}`));
+  const tight = audit(page(`[data-label="A+B"]{font-size:90rem}`));
+  assert.deepEqual(Object.keys(spaced.deviations["font-size"]), ['index.html::[data-label="A + B"]::font-size::90rem']);
+  const { regressions, improvements } = compareToBaseline(tight.deviations, spaced.deviations);
+  assert.equal(regressions.length, 1);
+  assert.equal(improvements.length, 1);
+  const upper = audit(page(`@container Farm (min-width:400px){.Card{font-size:90rem}}`));
+  const lower = audit(page(`@container farm (min-width:400px){.card{font-size:90rem}}`));
+  assert.notDeepEqual(Object.keys(upper.deviations["font-size"]), Object.keys(lower.deviations["font-size"]));
+  assert.deepEqual(Object.keys(upper.deviations["font-size"]), ["index.html::@container Farm(min-width:400px) > .Card::font-size::90rem"]);
+});
+
+test("type selector case does not change fingerprints, class and id case does", () => {
+  const lower = audit(page(`input[type=text], div > p:hover{border-radius:3px}`));
+  const upper = audit(page(`INPUT[type=text], DIV > P:hover{border-radius:3px}`));
+  assert.deepEqual(upper.deviations, lower.deviations);
+  assert.deepEqual(Object.keys(lower.deviations.radius), ["index.html::div>p:hover,input[type=text]::border-radius::3px"]);
+  const cls = audit(page(`.Card #Main{border-radius:3px}`));
+  assert.deepEqual(Object.keys(cls.deviations.radius), ["index.html::.Card #Main::border-radius::3px"]);
 });
 
 test("named colours count as colour values for new custom properties", () => {
