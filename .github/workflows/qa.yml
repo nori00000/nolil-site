@@ -57,8 +57,16 @@ jobs:
         run: npm run design:audit -- --against "origin/$BASE_REF"
         env:
           BASE_REF: ${{ github.base_ref }}
-      - if: github.event_name != 'pull_request'
-        run: npm run design:audit
+      - if: github.event_name == 'push'
+        run: |
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "design:audit --against skipped: push has no previous commit (event.before=$BEFORE)"
+            npm run design:audit
+          else
+            npm run design:audit -- --against "$BEFORE"
+          fi
+        env:
+          BEFORE: ${{ github.event.before }}
 
   lighthouse-mobile:
     runs-on: ubuntu-latest

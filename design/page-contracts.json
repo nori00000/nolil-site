@@ -1,0 +1,21 @@
+{
+  "description": "Linked pages that already differ from DESIGN.md. Values are the computed styles measured in Chromium by tests/design/design-contract.spec.mjs on 2026-11-26 and are frozen as-is (existing per-page deviations, not design tokens). Change a value here only together with a deliberate page change.",
+  "pages": {
+    "group.html": {
+      "viewports": ["desktop-1280", "tablet-768", "mobile-375"],
+      "checks": [
+        { "name": "page-container", "selector": ".wrap", "expected": { "maxWidth": "1120px" } },
+        { "name": "body", "selector": "body", "expected": { "color": "rgb(23, 53, 53)", "fontSize": "17px" } },
+        { "name": "primary-button", "selector": "a.btn[href='#contact']", "expected": { "backgroundColor": "rgb(169, 67, 46)" } }
+      ]
+    },
+    "program/index.html": {
+      "viewports": ["desktop-1280", "tablet-768", "mobile-375"],
+      "checks": [
+        { "name": "page-container", "selector": ".wrap", "expected": { "maxWidth": "960px" } },
+        { "name": "body", "selector": "body", "expected": { "color": "rgb(17, 17, 17)", "fontSize": "17px" } },
+        { "name": "primary-button", "selector": "a.btn.btn-primary", "expected": { "backgroundColor": "oklch(0.68 0.17 55)" } }
+      ]
+    }
+  }
+}

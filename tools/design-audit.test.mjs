@@ -46,6 +46,7 @@ spacing:
 motion:
   state-change:
     duration: 160ms
+    delay: 0ms
     timingFunction: ease
   state-change-emphasis:
     duration: 160ms
@@ -181,7 +182,7 @@ test("font-size covers px values, font shorthand and clamp() bounds", () => {
   const r = audit(
     page(`a{font-size:17px} b{font-size:14.5px} c{font-size:clamp(40px,7vw,760px)} d{font-size:1.2rem} e{font:800 99px/1.2 serif} f{font-size:clamp(40px,7vw,76px)}`),
   );
-  assert.deepEqual(values(r.deviations, "font-size").sort(), [["14.5px", 1], ["760px", 1], ["99px", 1]]);
+  assert.deepEqual(values(r.deviations, "font-size").sort(), [["1.2rem", 1], ["14.5px", 1], ["760px", 1], ["99px", 1]]);
 });
 
 test("token-mismatch compares values numerically and flags real differences", () => {
@@ -234,6 +235,41 @@ test("other pages: token/alias drift and undefined variables are ratcheted, not 
   ]);
   assert.deepEqual(Object.keys(r.deviations["undefined-var"]), ["group.html::.c::accent-color::--moss-600"]);
   assert.equal(r.pageTotals["group.html"], 3);
+});
+
+test("fingerprints ignore selector and at-rule formatting, declaration order and rule order", () => {
+  const a = audit(page(`.btn-kakao,.btn-copy{background:#fee500;color:#191600} @media (max-width:559px){.x > .y{border-radius:3px}} P:HOVER{font-size:13px}`));
+  const b = audit(page(`\n\n@media (max-width: 559px) {\n  .x>.y { border-radius: 3px }\n}\np:hover{font-size:13px}\n.btn-copy , .btn-kakao {\n  color: #191600;\n  background: #FEE500;\n}`));
+  assert.deepEqual(a.errors, []);
+  assert.deepEqual(b.deviations, a.deviations);
+  assert.ok(Object.keys(a.deviations["color-literal"]).includes("index.html::.btn-copy,.btn-kakao::color::#191600"));
+});
+
+test("named colours count as colour values for new custom properties", () => {
+  const html = audit(page(`:root{--new:red}`));
+  assert.deepEqual(errorTypes(html), ["undocumented-token:new"]);
+  const css = auditSources(design(), [
+    { file: "index.html", text: page("") },
+    { file: "tokens.css", text: `${TOKENS_OK}:root{--new:red}` },
+  ], CONFIG);
+  assert.deepEqual(css.errors, []);
+  assert.deepEqual(Object.keys(css.deviations["undocumented-token"]), ["tokens.css:::root::--new::red"]);
+});
+
+test("font-size also records rem and em sizes, including font shorthand and clamp() bounds", () => {
+  const r = audit(page(`a{font-size:90rem} b{font:700 2em/1.2 serif} c{font-size:clamp(1rem,2vw,48px)} d{font-size:50%}`));
+  assert.deepEqual(values(r.deviations, "font-size").sort(), [["1rem", 1], ["2em", 1], ["48px", 1], ["90rem", 1]]);
+});
+
+test("delay compares transition/animation delays with motion token delays", () => {
+  const r = audit(
+    page(
+      `a{transition:opacity .16s ease .5s} b{transition-delay:9s} c{transition:opacity .16s ease 0ms} d{animation-delay:0s,250ms}` +
+        `e{transition:opacity .16s ease}`,
+    ),
+  );
+  assert.deepEqual(values(r.deviations, "delay").sort(), [["250ms", 1], ["500ms", 1], ["9000ms", 1]]);
+  assert.deepEqual(values(r.deviations, "duration"), []);
 });
 
 test("compareToBaseline works on occurrence fingerprints, so moving a violation is a regression", () => {
@@ -341,6 +377,44 @@ test("CLI: hard errors refuse to write a baseline", () => {
   assert.equal(r.code, 1);
   assert.match(r.out, /token-mismatch/);
   assert.equal(existsSync(join(dir, "design/audit-baseline.json")), false);
+});
+
+test("CLI: --against fails on git errors, and on a schema change unless --allow-schema-migration", () => {
+  const plain = mkdtempSync(join(tmpdir(), "design-audit-nogit-"));
+  mkdirSync(join(plain, "design"));
+  writeFileSync(join(plain, "DESIGN.md"), DESIGN);
+  writeFileSync(join(plain, "design/audit-config.json"), JSON.stringify(CONFIG));
+  writeFileSync(join(plain, "index.html"), page(""));
+  writeFileSync(join(plain, "tokens.css"), TOKENS_OK);
+  assert.equal(cli(plain, "--css", "index.html", "--css", "tokens.css", "--update-baseline").code, 0);
+  const noGit = cli(plain, "--css", "index.html", "--css", "tokens.css", "--against", "HEAD");
+  assert.equal(noGit.code, 1);
+  assert.match(noGit.out, /git/);
+
+  const dir = fixtureRepo();
+  cli(dir, "--update-baseline");
+  const path = join(dir, "design/audit-baseline.json");
+  const current = JSON.parse(readFileSync(path, "utf8"));
+  writeFileSync(path, JSON.stringify({ ...current, schemaVersion: 2 }));
+  commitAll(dir, "old schema baseline");
+  writeFileSync(path, JSON.stringify(current));
+  const mismatch = cli(dir, "--against", "HEAD");
+  assert.equal(mismatch.code, 1);
+  assert.match(mismatch.out, /baseline-schema-mismatch/);
+  assert.match(mismatch.out, /--allow-schema-migration/);
+  const migrated = cli(dir, "--against", "HEAD", "--allow-schema-migration");
+  assert.equal(migrated.code, 0, migrated.out);
+  assert.match(migrated.out, /형식 이관: 비교 생략/);
+});
+
+test("CLI: a baseline written by another schema version must be regenerated", () => {
+  const dir = fixtureRepo();
+  cli(dir, "--update-baseline");
+  const path = join(dir, "design/audit-baseline.json");
+  writeFileSync(path, JSON.stringify({ ...JSON.parse(readFileSync(path, "utf8")), schemaVersion: 2 }));
+  const r = cli(dir);
+  assert.equal(r.code, 1);
+  assert.match(r.out, /baseline-schema-mismatch/);
 });
 
 test("CLI: --against fails when the baseline was loosened relative to the ref, and skips when the ref has none", () => {

@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-11-26",
+  "warnings": {
+    "contrast-ratio::components.button-hero": 1,
+    "contrast-ratio::components.button-hero-primary": 1,
+    "orphaned-tokens::colors.coral": 1,
+    "orphaned-tokens::colors.ember-100": 1,
+    "orphaned-tokens::colors.ink": 1,
+    "orphaned-tokens::colors.line": 1,
+    "orphaned-tokens::colors.mint": 1,
+    "orphaned-tokens::colors.mint-strong": 1,
+    "orphaned-tokens::colors.moss-100": 1,
+    "orphaned-tokens::colors.photo-veil": 1,
+    "orphaned-tokens::colors.soft": 1,
+    "token-like-ignored::motion": 1
+  }
+}

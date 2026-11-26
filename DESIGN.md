@@ -4,8 +4,9 @@ name: Nolil Site
 description: >-
   Farm-first community site for Nolil (PLAY WORK GROW). Deep teal and mint
   color fields, serif section headings over a Pretendard body, pill buttons.
-  Document v03, issued 2026-11-26. Values are the computed styles measured in
-  Chromium at 1280x800 and 375x812 by tests/design/design-contract.spec.mjs.
+  Document v04, issued 2026-11-26. Values are the computed styles measured in
+  Chromium at 1280x800, 768x1024 and 375x812 by
+  tests/design/design-contract.spec.mjs.
 colors:
   primary: "{colors.teal}"
   teal: "#015e5c"
@@ -22,7 +23,6 @@ colors:
   white: "#ffffff"
   transparent: "transparent"
   band-dark: "#062c2a"
-  deck-text: "#143b34"
   nav-text: "rgba(255,255,255,.86)"
   ember-500: "oklch(0.68 0.17 55)"
   ember-100: "oklch(0.94 0.05 70)"
@@ -50,6 +50,16 @@ typography:
     fontSize: 24px
     fontWeight: 500
     lineHeight: 1.35
+  title-card:
+    fontFamily: Pretendard
+    fontSize: 20px
+    fontWeight: 700
+    lineHeight: 1.45
+  body-card:
+    fontFamily: Pretendard
+    fontSize: 15px
+    fontWeight: 400
+    lineHeight: 1.72
   label-eyebrow:
     fontFamily: Georgia
     fontSize: 15px
@@ -66,6 +76,11 @@ typography:
     fontSize: 18px
     fontWeight: 800
     lineHeight: 1.35
+  label-button-consent:
+    fontFamily: Pretendard
+    fontSize: 14px
+    fontWeight: 800
+    lineHeight: 1.8
   label-button-bar:
     fontFamily: Pretendard
     fontSize: 16px
@@ -86,6 +101,12 @@ typography:
   headline-display:
     fontFamily: Pretendard
     fontSize: 76px
+    fontWeight: 800
+    lineHeight: 0.96
+    letterSpacing: 0.02em
+  headline-display-md:
+    fontFamily: Pretendard
+    fontSize: 53.76px
     fontWeight: 800
     lineHeight: 0.96
     letterSpacing: 0.02em
@@ -118,7 +139,9 @@ spacing:
   hero-min-sm: 0px
   control-height: 56px
   control-height-hero: 58px
+  control-height-consent: 46px
   page-pad-sm: 22px
+  page-pad-md: 30.72px
   page-pad-lg: 48px
 motion:
   state-change:
@@ -138,9 +161,15 @@ components:
     backgroundColor: "{colors.white}"
     textColor: "{colors.text}"
     typography: "{typography.body-md}"
-  paragraph:
+  section-lead:
     textColor: "{colors.body}"
-    typography: "{typography.body-md}"
+    typography: "{typography.body-lg}"
+  card-title:
+    textColor: "{colors.text}"
+    typography: "{typography.title-card}"
+  card-text:
+    textColor: "{colors.body}"
+    typography: "{typography.body-card}"
   hero:
     backgroundColor: "{colors.teal}"
     textColor: "{colors.cream}"
@@ -152,6 +181,9 @@ components:
   hero-title:
     textColor: "{colors.cream}"
     typography: "{typography.headline-display}"
+  hero-title-tablet:
+    textColor: "{colors.cream}"
+    typography: "{typography.headline-display-md}"
   hero-title-mobile:
     textColor: "{colors.cream}"
     typography: "{typography.headline-display-sm}"
@@ -167,9 +199,6 @@ components:
   section-heading-on-dark-mobile:
     textColor: "{colors.white}"
     typography: "{typography.headline-lg-sm}"
-  card-title:
-    textColor: "{colors.text}"
-    typography: "{typography.title-md}"
   eyebrow:
     textColor: "{colors.teal}"
     typography: "{typography.label-eyebrow}"
@@ -189,13 +218,6 @@ components:
   button-primary-hover:
     backgroundColor: "{colors.teal-deep}"
     textColor: "{colors.white}"
-  button-line:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.teal}"
-    typography: "{typography.label-button}"
-    rounded: "{rounded.full}"
-    height: "{spacing.control-height}"
-    padding: 14px 28px
   button-contact:
     backgroundColor: "{colors.white}"
     textColor: "{colors.teal}"
@@ -203,6 +225,20 @@ components:
     rounded: "{rounded.control}"
     height: "{spacing.control-height}"
     padding: 16px 22px
+  button-consent:
+    backgroundColor: "{colors.teal}"
+    textColor: "{colors.white}"
+    typography: "{typography.label-button-consent}"
+    rounded: "{rounded.full}"
+    height: "{spacing.control-height-consent}"
+    padding: 10px 16px
+  button-consent-line:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.teal}"
+    typography: "{typography.label-button-consent}"
+    rounded: "{rounded.full}"
+    height: "{spacing.control-height-consent}"
+    padding: 10px 16px
   button-hero:
     backgroundColor: "{colors.ember-500}"
     textColor: "{colors.white}"
@@ -213,20 +249,6 @@ components:
   button-hero-primary:
     backgroundColor: "{colors.ember-500}"
     textColor: "{colors.white}"
-    typography: "{typography.label-button-hero}"
-    rounded: "{rounded.full}"
-    height: "{spacing.control-height-hero}"
-    padding: 14px 20px
-  button-hero-line:
-    backgroundColor: "{colors.transparent}"
-    textColor: "{colors.cream}"
-    typography: "{typography.label-button-hero}"
-    rounded: "{rounded.full}"
-    height: "{spacing.control-height-hero}"
-    padding: 14px 20px
-  button-hero-deck:
-    backgroundColor: "{colors.yellow}"
-    textColor: "{colors.deck-text}"
     typography: "{typography.label-button-hero}"
     rounded: "{rounded.full}"
     height: "{spacing.control-height-hero}"
@@ -243,6 +265,9 @@ components:
   page-container:
     width: "{spacing.page-max}"
     padding: "{spacing.page-pad-lg}"
+  page-container-tablet:
+    width: "{spacing.page-max}"
+    padding: "{spacing.page-pad-md}"
   page-container-mobile:
     width: "{spacing.page-max}"
     padding: "{spacing.page-pad-sm}"
@@ -250,18 +275,27 @@ components:
 
 # Nolil Site Design System
 
-Document version v03, issued 2026-11-26. This file follows the Google Labs
+Document version v04, issued 2026-11-26. This file follows the Google Labs
 DESIGN.md format (spec version `alpha`). The YAML front matter is the normative
 token set. Three checks keep it honest:
 
-- `npm run design:lint` validates the format.
-- `npm run test:design-contract` loads `index.html` in Chromium at 1280x800 and
-  375x812 and compares every component below with the browser's computed
-  styles. Every component and motion token must be mapped to a page target in
-  that spec. In components, `height` means `min-height` and `width` means
-  `max-width`; `page-container` padding is the left/right padding.
+- `npm run design:lint` validates the format and fails on lint errors or on any
+  warning (rule and path) that is not in `design/lint-baseline.json`.
+- `npm run test:design-contract` loads `index.html` in Chromium at 1280x800,
+  768x1024 and 375x812 and compares every component below with the browser's
+  computed styles on a real element of the page (hidden elements such as the
+  consent buttons included; nothing is injected). Every component and motion
+  token must be mapped to a page target in that spec. In components, `height`
+  means `min-height` and `width` means `max-width`; `page-container` padding is
+  the left/right padding. Linked pages (`group.html`, `program/index.html`)
+  already differ from this file; their current values are frozen separately in
+  `design/page-contracts.json`.
 - `npm run design:audit` statically checks the CSS of every tracked HTML page
-  and `tokens.css` against the tokens and a ratchet baseline.
+  and `tokens.css` against the tokens and a per-occurrence ratchet baseline.
+
+These checks run on pull requests and pushes, not on a schedule: their result
+depends only on the repository contents, so a week without changes cannot
+change it.
 
 The pinned linter (0.4.0) does not yet read the `motion` key that the current
 spec defines, so it reports that key as ignored; the contract test and the audit
@@ -287,8 +321,8 @@ text stays large and line spacing stays open.
   dark-band step.
 - **Mint (`mint`, `mint-strong`)** fills soft section backgrounds and the
   program map.
-- **Yellow (`yellow`)** is a warm, low-volume highlight band and the deck
-  button.
+- **Yellow (`yellow`)** is a warm, low-volume highlight band, the eyebrow on
+  dark bands, and the mobile navigation call to action.
 - **Coral (`coral`)** marks small emphasis and warnings in text.
 - **Ember (`ember-500`, `ember-100`)** is inherited from `tokens.css` and is the
   campfire signature. It fills the hero call to action and the mobile bottom
@@ -299,9 +333,8 @@ text stays large and line spacing stays open.
   with `cream` text; `photo-veil` is the overlay that keeps text readable over
   photos. `band-dark` is the dark group-inquiry band, with white headings and a
   `yellow` eyebrow.
-- **Supporting values**: `deck-text` is the ink on the yellow deck button,
-  `nav-text` is the top navigation link colour over the hero, and `transparent`
-  records the unfilled line, nav, and hero line buttons.
+- **Supporting values**: `nav-text` is the top navigation link colour over the
+  hero, and `transparent` records the unfilled navigation links.
 
 Rules:
 
@@ -314,32 +347,40 @@ Rules:
 ## Typography
 
 Pretendard carries the Korean body and the hero display line. Georgia (with
-Times New Roman and AppleMyungjo as fallbacks) carries section headings, card
-titles, and uppercase eyebrow labels.
+Times New Roman and AppleMyungjo as fallbacks) carries section headings and
+uppercase eyebrow labels.
 
 - **Display (`headline-display`)** is the hero line, uppercase, weight 800,
   line height 0.96 and 0.02em tracking. The applied rule is `.hero h1` with
-  `clamp(40px, 7vw, 76px)`: 76px at 1280px (`headline-display`) and 40px at
-  375px (`headline-display-sm`). The generic `h1` rules (84px/900, and
+  `clamp(40px, 7vw, 76px)`: 76px at 1280px (`headline-display`), 53.76px at
+  768px (`headline-display-md`, the fluid middle) and 40px at 375px
+  (`headline-display-sm`). The generic `h1` rules (84px/900, and
   1.08 line height on mobile) are overridden by `.hero h1` and do not apply to
   the hero.
 - **Section heading (`headline-lg`)** is serif at weight 400, fluid between
-  34px and 56px.
-- **Card title (`title-md`)** is serif at 24px.
+  34px (`headline-lg-sm`, measured at 768px and 375px) and 56px (1280px).
+- **Section lead (`body-lg`)**: the paragraph under a section heading is 18px
+  with a 1.8 line height.
+- **Card title (`title-card`)**: the person and outcome card titles are
+  Pretendard 20px, weight 700, line height 1.45; card text (`body-card`) is
+  15px with a 1.72 line height. `title-md` (serif 24px) is the base `h3` style;
+  the homepage markup has no static `h3`, so no component uses it.
 - **Body (`body-md`)** is 17px with a 1.8 line height. This is a floor, not a
   default to shrink from.
 - **Eyebrow (`label-eyebrow`)** is uppercase serif at 15px with 0.24em tracking;
   it inherits the 1.8 body line height.
 - **Buttons** use `label-button` (17px/800). Hero buttons use
   `label-button-hero` (18px/800, line height 1.35) and the mobile bottom bar
-  uses `label-button-bar` (16px/800). Navigation links use `label-nav` (14px)
+  uses `label-button-bar` (16px/800). The analytics consent buttons use
+  `label-button-consent` (14px/800). Navigation links use `label-nav` (14px)
   and, on mobile, `label-nav-sm` (12px).
 
 ## Layout
 
 Hero and color bands are full width; content is constrained to `page-max`
 (1180px) with a fluid page edge of `clamp(22px, 4vw, 48px)`, recorded as the
-`page-pad-sm` and `page-pad-lg` tokens (22px at 375px, 48px at 1280px). Long
+`page-pad-sm`, `page-pad-md` and `page-pad-lg` tokens (22px at 375px, 30.72px
+at 768px, 48px at 1280px). Long
 text uses `narrow-max` (820px). From 560px up the hero is at least `hero-min`
 (620px) tall; below 560px it has no minimum height (`hero-min-sm`, 0px) and the
 photo is shown as a full frame above the text.
@@ -347,7 +388,8 @@ photo is shown as a full frame above the text.
 - Directory groups use simple grids that collapse to one column on mobile.
 - Cards are not nested. Cards are for individual program and link items only.
 - Interactive controls are at least `control-height` (56px) tall; hero buttons
-  are at least `control-height-hero` (58px).
+  are at least `control-height-hero` (58px). The analytics consent buttons are
+  the exception at `control-height-consent` (46px).
 
 ## Elevation & Depth
 
@@ -369,6 +411,8 @@ Cards and photo frames use `rounded.md` (16px). Large feature panels use
 - Hero buttons and the mobile bottom bar use `state-change-emphasis` (160ms,
   ease-out).
 - Content revealing on scroll uses `reveal` (720ms, ease).
+- All motion tokens have a 0ms delay; the contract test reads
+  `transition-delay` and the audit records any other delay.
 - The top navigation has no transition in the applied CSS. The `.nav` rule with
   a 240ms transition targets a class the markup does not use, so v02's
   `surface-shift` token was removed.
@@ -392,12 +436,15 @@ setting.
 - **Hero** (`hero`, `hero-title`): teal field with the farm photo and a veil
   overlay, a yellow kicker, the H1, and one constrained Korean explanation
   below. Text contrast over the image must not depend on image details.
-- **Button**: `button-primary` (teal fill), `button-line` (white with teal
-  text), `button-contact` (line button in the contact list, 14px corners). In
-  the hero, `.btn-primary` becomes `button-hero-primary` (ember fill), and the
-  hero line and deck styles are `button-hero-line` (transparent, cream text)
-  and `button-hero-deck` (yellow, `deck-text`). `button-hero` is the ember
-  `.btn-hero` in the mobile bottom bar. Hover lifts by 2px.
+- **Button**: `button-primary` (teal fill), `button-contact` (white line
+  button in the contact list, 14px corners), and the smaller consent pair
+  `button-consent` / `button-consent-line` (46px, 10px 16px padding). In the
+  hero, `.btn-primary` becomes `button-hero-primary` (ember fill).
+  `button-hero` is the ember `.btn-hero` in the mobile bottom bar. Hover lifts
+  by 2px. The CSS also styles `.hero .btn-line` and `.hero .btn-deck`, but no
+  markup uses them, so they are not components.
+- **Cards** (`card-title`, `card-text`): person and outcome cards with a
+  Pretendard title over body-coloured text.
 - **Program Card**: title, description, tag, optional link. Linked cards lift
   by 2px and switch border and ink color on hover and focus. The entire linked
   card is a real anchor.
@@ -452,6 +499,13 @@ publishing.
 
 ## Change Log
 
+- v04 (2026-11-26): every component is now measured on a real element of
+  `index.html`, and 768x1024 was added. Section lead (`section-lead`, 18px) and
+  the card title (`card-title`, Pretendard 20px/700/1.45) replace the injected
+  17px paragraph and serif 24px `h3` samples; added `card-text`, the consent
+  buttons, `hero-title-tablet` (53.76px), and `page-container-tablet`
+  (30.72px padding). Removed `button-line`, `button-hero-line`,
+  `button-hero-deck` and `deck-text`, which no markup uses.
 - v03 (2026-11-26): re-measured every component from Chromium computed styles
   (1280x800 and 375x812) instead of counting CSS declarations, because later
   rules override earlier ones. Hero is teal with cream text (was `hero-base`

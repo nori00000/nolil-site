@@ -18,11 +18,12 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
 
-export const CATEGORIES = ["color-literal", "radius", "duration", "easing", "font-size", "undocumented-token", "page-token-mismatch", "undefined-var"];
+export const SCHEMA_VERSION = 3;
+export const CATEGORIES = ["color-literal", "radius", "duration", "delay", "easing", "font-size", "undocumented-token", "page-token-mismatch", "undefined-var"];
 const REQUIRED_KEYS = ["colors", "typography", "rounded"];
 const DEFAULTS = { baseline: "design/audit-baseline.json", design: "DESIGN.md", config: "design/audit-config.json" };
 const COLOR_FUNCTIONS = ["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch", "oklab", "oklch", "color"];
-const COLOR_VALUE = new RegExp(`^(#[0-9a-f]{3,8}|(${COLOR_FUNCTIONS.join("|")})\\(.*\\))$`, "i");
+const COLOR_SYNTAX = new RegExp(`^(#[0-9a-f]{3,8}|(${COLOR_FUNCTIONS.join("|")})\\(.*\\))$`, "i");
 const HEX_LITERAL = /#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![0-9a-zA-Z_-])/g;
 const TIME = /^(\d*\.?\d+)(ms|s)$/i;
 const TIMING_KEYWORDS = new Set(["ease", "linear", "ease-in", "ease-out", "ease-in-out", "step-start", "step-end"]);
@@ -58,6 +59,8 @@ const NAMED_COLORS = Object.fromEntries(
     .split(/\s+/)
     .reduce((pairs, word, i, all) => (i % 2 === 0 ? [...pairs, [word, `#${all[i + 1]}`]] : pairs), []),
 );
+
+const isColorValue = (value) => COLOR_SYNTAX.test(value.trim()) || Object.hasOwn(NAMED_COLORS, value.trim().toLowerCase());
 
 // ---------- normalisation ----------
 
@@ -145,6 +148,7 @@ export function parseDesign(text) {
     rounded: uniq(Object.values(data.rounded).map(normalizeLength)),
     fontSizes: uniq(Object.values(data.typography).filter((t) => t && t.fontSize !== undefined).map((t) => normalizeLength(t.fontSize))),
     durations: uniq(motion.map((t) => normalizeDuration(t.duration))),
+    delays: uniq(motion.map((t) => normalizeDuration(t.delay ?? "0ms"))),
     motionPairs: new Set(motion.map((t) => `${normalizeDuration(t.duration)} ${String(t.timingFunction ?? "ease").trim()}`)),
   };
   return { design, errors: [] };
@@ -271,6 +275,27 @@ function rootKind(selector) {
   return null;
 }
 
+// Fingerprint contexts must not change with formatting: whitespace around
+// commas and combinators, comma order, and the case of type selectors,
+// pseudo-classes and at-rule preludes are normalised.
+export function normalizeSelector(selector) {
+  return splitTopLevel(selector, ",")
+    .map((part) =>
+      part
+        .trim()
+        .replace(/\s+/g, " ")
+        .replace(/\s*([>+~])\s*/g, "$1")
+        .replace(/(::?)([a-zA-Z-]+)/g, (m, colon, name) => colon + name.toLowerCase())
+        .replace(/(^|[\s>+~(])([a-zA-Z][\w-]*)/g, (m, before, tag) => before + tag.toLowerCase()),
+    )
+    .sort()
+    .join(",");
+}
+
+export function normalizeAtRule(prelude) {
+  return prelude.trim().toLowerCase().replace(/\s+/g, " ").replace(/\s*([:(),])\s*/g, "$1");
+}
+
 // ---------- value scanners ----------
 
 function stripUrlsAndStrings(value) {
@@ -321,30 +346,39 @@ function topLevelTokens(value) {
   return tokens;
 }
 
-function pxSizes(token) {
+const FONT_LENGTH = /^\d*\.?\d+(px|rem|em)$/;
+
+// px/rem/em sizes of a font-size value; clamp()/min()/max() contribute their
+// length arguments (viewport-relative middles are skipped).
+function fontSizes(token) {
   const t = token.trim().toLowerCase();
-  if (/^\d*\.?\d+px$/.test(t)) return [normalizeLength(t)];
+  if (FONT_LENGTH.test(t)) return [normalizeLength(t)];
   const fn = /^(clamp|min|max)\((.*)\)$/.exec(t);
-  if (fn) return splitTopLevel(fn[2], ",").map((s) => s.trim()).filter((s) => /^\d*\.?\d+px$/.test(s)).map(normalizeLength);
+  if (fn) return splitTopLevel(fn[2], ",").map((s) => s.trim()).filter((s) => FONT_LENGTH.test(s)).map(normalizeLength);
   return [];
 }
 
 function fontShorthandSize(value) {
   for (const token of value.split(/\s+/)) {
     const size = token.split("/")[0];
-    if (/^\d*\.?\d+px$/i.test(size) || /^(clamp|min|max)\(/i.test(size)) return pxSizes(size);
+    if (FONT_LENGTH.test(size.toLowerCase()) || /^(clamp|min|max)\(/i.test(size)) return fontSizes(size);
   }
   return [];
 }
 
+// Per layer: duration, delay and timing function. In a shorthand the first
+// time is the duration and the second the delay.
 function transitionLayers(prop, value) {
-  if (/-(duration)$/.test(prop)) return splitTopLevel(value, ",").map((s) => ({ times: [s.trim()].filter((t) => TIME.test(t)), timing: null }));
-  if (/-(delay|timing-function|property|name)$/.test(prop) || prop.endsWith("-iteration-count")) return [];
-  return splitTopLevel(value, ",").map((layer) => {
+  const items = splitTopLevel(value, ",").map((s) => s.trim());
+  const time = (t) => (TIME.test(t) ? t : null);
+  if (prop.endsWith("-duration")) return items.map((t) => ({ duration: time(t), delay: null, timing: null }));
+  if (prop.endsWith("-delay")) return items.map((t) => ({ duration: null, delay: time(t), timing: null }));
+  if (prop !== "transition" && prop !== "animation") return [];
+  return items.map((layer) => {
     const tokens = topLevelTokens(layer);
     const times = tokens.filter((t) => TIME.test(t));
     const timing = tokens.find((t) => TIMING_KEYWORDS.has(t.toLowerCase()) || /^(cubic-bezier|steps|linear)\(/i.test(t));
-    return { times, timing: timing ? timing.toLowerCase().replace(/\s+/g, "") : "ease" };
+    return { duration: times[0] ?? null, delay: times[1] ?? null, timing: timing ? timing.toLowerCase().replace(/\s+/g, "") : "ease" };
   });
 }
 
@@ -384,6 +418,7 @@ export function auditSources(design, rawSources, config) {
   };
   const roundedSet = new Set(design.rounded);
   const durationSet = new Set(design.durations);
+  const delaySet = new Set(design.delays);
   const fontSizeSet = new Set(design.fontSizes);
   const aliases = Object.entries(config.spacingAliases || {});
   // A page can use its own custom properties and those of the shared CSS files.
@@ -403,7 +438,7 @@ export function auditSources(design, rawSources, config) {
     const defined = new Set([...customProps(src), ...sharedProps]);
     for (const d of src.declarations) {
       const kind = rootKind(d.selector);
-      const context = [...d.atRules, d.selector].join(" > ");
+      const context = [...d.atRules.map(normalizeAtRule), normalizeSelector(d.selector)].join(" > ");
       for (const use of varUses(d.value)) {
         if (!use.fallback && !defined.has(use.name)) {
           if (strict) hard({ type: "undefined-var", variable: use.name.slice(2), message: `${src.file} ${context} { ${d.prop}: ${d.value} } uses ${use.name}, which neither the page nor a shared CSS file defines` });
@@ -444,7 +479,7 @@ export function auditSources(design, rawSources, config) {
           }
           continue;
         }
-        if (COLOR_VALUE.test(d.value.trim())) {
+        if (isColorValue(d.value)) {
           if (src.file === config.primaryPage) {
             hard({ type: "undocumented-token", token: name, cssValue: d.value, message: `--${name}: ${d.value} in ${src.file} ${context} has no colors.${name} token in DESIGN.md` });
           } else if (src.kind === "css") {
@@ -469,13 +504,17 @@ export function auditSources(design, rawSources, config) {
       }
       if (/^(transition|animation)(-|$)/.test(d.prop)) {
         for (const layer of transitionLayers(d.prop, d.value)) {
-          if (!layer.times.length) continue;
-          const duration = normalizeDuration(layer.times[0]);
+          if (layer.delay) {
+            const delay = normalizeDuration(layer.delay);
+            if (!delaySet.has(delay)) record("delay", src.file, context, d.prop, delay);
+          }
+          if (!layer.duration) continue;
+          const duration = normalizeDuration(layer.duration);
           if (!durationSet.has(duration)) record("duration", src.file, context, d.prop, duration);
           else if (layer.timing && !design.motionPairs.has(`${duration} ${layer.timing}`)) record("easing", src.file, context, d.prop, `${duration} ${layer.timing}`);
         }
       }
-      const sizes = d.prop === "font-size" ? pxSizes(d.value) : d.prop === "font" ? fontShorthandSize(d.value) : [];
+      const sizes = d.prop === "font-size" ? fontSizes(d.value) : d.prop === "font" ? fontShorthandSize(d.value) : [];
       for (const size of sizes) if (!fontSizeSet.has(size)) record("font-size", src.file, context, d.prop, size);
     }
 
@@ -533,7 +572,7 @@ export function validateBaseline(baseline) {
 class UsageError extends Error {}
 
 export function parseArgs(argv) {
-  const args = { css: [], replace: {}, ...DEFAULTS, json: false, updateBaseline: false, against: null, help: false };
+  const args = { css: [], replace: {}, ...DEFAULTS, json: false, updateBaseline: false, against: null, allowSchemaMigration: false, help: false };
   for (let i = 0; i < argv.length; i++) {
     const eq = argv[i].startsWith("--") ? argv[i].indexOf("=") : -1;
     const flag = eq === -1 ? argv[i] : argv[i].slice(0, eq);
@@ -557,6 +596,7 @@ export function parseArgs(argv) {
       case "--design": args.design = takeValue(); break;
       case "--config": args.config = takeValue(); break;
       case "--against": args.against = takeValue(); break;
+      case "--allow-schema-migration": args.allowSchemaMigration = true; break;
       case "--json": args.json = true; break;
       case "--update-baseline": args.updateBaseline = true; break;
       case "--help": case "-h": args.help = true; break;
@@ -566,7 +606,7 @@ export function parseArgs(argv) {
   return args;
 }
 
-const USAGE = `Usage: node tools/design-audit.mjs [--css <path>]... [--replace <name>=<path>]... [--baseline <path>] [--design <path>] [--config <path>] [--against <git-ref>] [--json] [--update-baseline]`;
+const USAGE = `Usage: node tools/design-audit.mjs [--css <path>]... [--replace <name>=<path>]... [--baseline <path>] [--design <path>] [--config <path>] [--against <git-ref> [--allow-schema-migration]] [--json] [--update-baseline]`;
 
 function discoverFiles(config) {
   let listed;
@@ -598,12 +638,21 @@ function readJson(path, label) {
   }
 }
 
-// Baseline at a git ref: undefined when the ref has no baseline file yet.
+// Baseline at a git ref: undefined only when the ref has no such file. Any git
+// failure (no repository, unknown ref, unreadable object) throws.
 function baselineAtRef(ref, path) {
-  const verify = spawnSync("git", ["rev-parse", "--verify", "--quiet", `${ref}^{commit}`], { encoding: "utf8" });
-  if (verify.status !== 0) throw new Error(`--against: git ref "${ref}" does not exist`);
-  const show = spawnSync("git", ["show", `${ref}:${path}`], { encoding: "utf8" });
-  if (show.status !== 0) return undefined;
+  const git = (args) => {
+    const r = spawnSync("git", args, { encoding: "utf8" });
+    if (r.error) throw new Error(`--against: cannot run git: ${r.error.message}`);
+    return r;
+  };
+  const verify = git(["rev-parse", "--verify", `${ref}^{commit}`]);
+  if (verify.status !== 0) throw new Error(`--against: git could not resolve "${ref}": ${verify.stderr.trim().split("\n")[0]}`);
+  const listed = git(["ls-tree", "--name-only", ref, "--", path]);
+  if (listed.status !== 0) throw new Error(`--against: git ls-tree ${ref} failed: ${listed.stderr.trim().split("\n")[0]}`);
+  if (!listed.stdout.trim()) return undefined;
+  const show = git(["show", `${ref}:./${path}`]);
+  if (show.status !== 0) throw new Error(`--against: git show ${ref}:${path} failed: ${show.stderr.trim().split("\n")[0]}`);
   try {
     return JSON.parse(show.stdout);
   } catch (err) {
@@ -638,7 +687,7 @@ export function run(argv) {
       notes.push("Baseline not written: hard errors must be fixed first (they are never baselined).");
     } else {
       const baseline = {
-        schemaVersion: 2,
+        schemaVersion: SCHEMA_VERSION,
         generatedAt: new Date().toISOString().slice(0, 10),
         commit: gitCommit(),
         cssFiles: files,
@@ -657,7 +706,12 @@ export function run(argv) {
     } else {
       const problems = validateBaseline(baseline);
       for (const p of problems) errors.push({ type: "baseline-invalid", message: `${args.baseline}: ${p}` });
-      if (!problems.length) {
+      if (!problems.length && baseline.schemaVersion !== SCHEMA_VERSION) {
+        errors.push({
+          type: "baseline-schema-mismatch",
+          message: `${args.baseline} has schemaVersion ${baseline.schemaVersion}, this tool writes ${SCHEMA_VERSION}; regenerate it with: npm run design:audit -- --update-baseline`,
+        });
+      } else if (!problems.length) {
         ({ regressions, improvements } = compareToBaseline(deviations, baseline.deviations));
         if (improvements.length) {
           errors.push({
@@ -673,6 +727,16 @@ export function run(argv) {
     const refBaseline = baselineAtRef(args.against, args.baseline);
     if (refBaseline === undefined) {
       notes.push(`--against: ${args.against} has no ${args.baseline}; skipping the baseline-loosening check (first introduction).`);
+    } else if (refBaseline.schemaVersion !== SCHEMA_VERSION) {
+      const change = `${args.against} schemaVersion ${refBaseline.schemaVersion ?? "(none)"} -> current ${SCHEMA_VERSION}`;
+      if (args.allowSchemaMigration) {
+        notes.push(`--against: 형식 이관: 비교 생략 (${change}). Fingerprints of different schema versions cannot be compared.`);
+      } else {
+        errors.push({
+          type: "baseline-schema-mismatch",
+          message: `--against: ${change}; fingerprints cannot be compared. Review the baseline diff by hand, then rerun with --allow-schema-migration (deliberately not used in CI).`,
+        });
+      }
     } else {
       const refProblems = validateBaseline(refBaseline);
       if (refProblems.length) throw new Error(`--against: ${args.against}:${args.baseline} is invalid: ${refProblems.join("; ")}`);
