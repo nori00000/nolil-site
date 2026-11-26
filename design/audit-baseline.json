@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-11-26",
+  "commit": "195a1ed05ff2fb50a47d464fc61e2ce127f61aa6",
+  "cssFiles": [
+    "index.html",
+    "tokens.css"
+  ],
+  "totals": {
+    "color-literal": 18,
+    "radius": 15,
+    "duration": 5,
+    "font-size": 53
+  },
+  "deviations": {
+    "color-literal": {
+      "#061f1e": 1,
+      "#086b96": 1,
+      "#111111": 1,
+      "#143b34": 1,
+      "#191600": 1,
+      "#3e6f56": 1,
+      "#3e8a6e": 1,
+      "#5ec0b2": 1,
+      "#9a3f21": 1,
+      "#d2ead6": 1,
+      "#d97b2e": 1,
+      "#e7f0e7": 1,
+      "#eef0ec": 2,
+      "#fbe8d2": 2,
+      "#fee500": 1,
+      "#fff2db": 1
+    },
+    "radius": {
+      "12px": 1,
+      "14px": 4,
+      "18px": 4,
+      "20px": 2,
+      "24px": 1,
+      "2px": 2,
+      "3px": 1
+    },
+    "duration": {
+      "140ms": 2,
+      "1500ms": 1,
+      "200ms": 1,
+      "280ms": 1
+    },
+    "font-size": {
+      "11.5px": 1,
+      "12px": 11,
+      "13px": 8,
+      "14.5px": 3,
+      "14px": 16,
+      "16.5px": 1,
+      "16px": 3,
+      "19px": 1,
+      "20px": 5,
+      "22px": 1,
+      "31px": 1,
+      "38px": 1,
+      "54px": 1
+    }
+  }
+}

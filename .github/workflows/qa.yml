@@ -35,6 +35,20 @@ jobs:
             test-results/
           retention-days: 5
 
+  design-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run design:lint
+      - run: npm run test:design
+      - run: npm run design:audit
+
   lighthouse-mobile:
     runs-on: ubuntu-latest
     timeout-minutes: 10
