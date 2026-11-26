@@ -26,6 +26,9 @@ jobs:
       - run: npm run test:a11y
         env:
           PW_CHANNEL: chromium
+      - run: npm run test:design-contract
+        env:
+          PW_CHANNEL: chromium
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -40,6 +43,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
+        with:
+          # --against needs the base branch's baseline file.
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: 22
@@ -47,7 +53,12 @@ jobs:
       - run: npm ci
       - run: npm run design:lint
       - run: npm run test:design
-      - run: npm run design:audit
+      - if: github.event_name == 'pull_request'
+        run: npm run design:audit -- --against "origin/$BASE_REF"
+        env:
+          BASE_REF: ${{ github.base_ref }}
+      - if: github.event_name != 'pull_request'
+        run: npm run design:audit
 
   lighthouse-mobile:
     runs-on: ubuntu-latest

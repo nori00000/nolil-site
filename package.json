@@ -7,7 +7,8 @@
     "test:a11y": "playwright test tests/accessibility/homepage.a11y.spec.mjs",
     "design:lint": "designmd lint DESIGN.md",
     "design:audit": "node tools/design-audit.mjs",
-    "test:design": "node --test tools/design-audit.test.mjs"
+    "test:design": "node --test tools/design-audit.test.mjs",
+    "test:design-contract": "playwright test tests/design/design-contract.spec.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
