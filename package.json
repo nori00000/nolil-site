@@ -4,10 +4,16 @@
   "scripts": {
     "test:visual": "playwright test",
     "test:contract": "playwright test --grep \"homepage layout contract|group inquiry|open rounds|records\"",
-    "test:a11y": "playwright test tests/accessibility/homepage.a11y.spec.mjs"
+    "test:a11y": "playwright test tests/accessibility/homepage.a11y.spec.mjs",
+    "design:lint": "node tools/design-lint-ratchet.mjs",
+    "design:audit": "node tools/design-audit.mjs",
+    "test:design": "node --test tools/design-audit.test.mjs tools/design-lint-ratchet.test.mjs tools/qa-workflow.test.mjs",
+    "test:design-contract": "playwright test tests/design/design-contract.spec.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.62.1"
+    "@google/design.md": "0.4.0",
+    "@playwright/test": "^1.62.1",
+    "yaml": "2.9.1"
   }
 }

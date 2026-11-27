@@ -1,0 +1,12 @@
+{
+  "primaryPage": "index.html",
+  "extraCss": ["tokens.css"],
+  "exclude": ["node_modules/", "playwright-report/", "test-results/"],
+  "requiredColorVars": {
+    "index.html": ["teal", "teal-deep", "mint", "mint-strong", "yellow", "coral", "text", "body", "soft", "line", "photo-veil"],
+    "tokens.css": ["ember-500", "ember-100", "cream", "moss-100", "ink"]
+  },
+  "spacingAliases": {
+    "page-max": "max"
+  }
+}

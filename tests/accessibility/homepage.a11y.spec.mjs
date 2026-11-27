@@ -35,7 +35,7 @@ test("homepage has no automated WCAG violations", async ({ page }) => {
 });
 
 test("Naver ownership verification is present in the source HTML", () => {
-  expect(REAL_HOMEPAGE).toContain('<meta name="naver-site-verification" content="39ad44e87fb5281b7a3fed3e76f5d54efb1519a7">');
+  expect(REAL_HOMEPAGE).toContain('<meta name="naver-site-verification" content="6bf3bbc26179b5468e8d43a22064091939a5d33e">');
 });
 
 test("analytics stays fail-closed without consent", async ({ page }) => {
@@ -60,7 +60,7 @@ test("Naver ownership verification is available without analytics consent", asyn
 
   const verification = page.locator('meta[name="naver-site-verification"]');
   await expect(verification).toHaveCount(1);
-  await expect(verification).toHaveAttribute("content", "39ad44e87fb5281b7a3fed3e76f5d54efb1519a7");
+  await expect(verification).toHaveAttribute("content", "6bf3bbc26179b5468e8d43a22064091939a5d33e");
 });
 
 test("analytics does not load before consent even when IDs are configured", async ({ page }) => {
